@@ -1,12 +1,13 @@
 language: python
 python:
-  - "3.5"
-  - "3.6"
+  - 3.5
+  - 3.6
 
 # command to install dependencies
 install:
-  - "pip install pipenv"
-  - "pipenv install --dev --skip-lock"
+  - pip install --upgrade setuptools # https://github.com/labgrid-project/labgrid/pull/119/files
+  - pip install pipenv
+  - pipenv install --dev --skip-lock
 
 # command to run tests
 script:
