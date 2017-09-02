@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "57407ca122706dfe3ea52b872ce500ba9f34b0f1d3f0869ef36d747351b59396"
+            "sha256": "7756aed1570f6834d0b7c8b28f7f06f560b49b5201f7f77224c7ad1948ab3b61"
         },
         "requires": {
             "python_version": "3.5"
@@ -39,5 +39,15 @@
             "version": "==1.10.0"
         }
     },
-    "develop": {}
+    "develop": {
+        "py": {
+            "version": "==1.4.34"
+        },
+        "pytest": {
+            "version": "==3.2.1"
+        },
+        "setuptools": {
+            "version": "==36.3.0"
+        }
+    }
 }

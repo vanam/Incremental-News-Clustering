@@ -22,7 +22,7 @@ $ pip3 install --user pipenv
 ### Project dependencies
 
 ```bash
-$ pipenv install
+$ pipenv install --dev
 ```
 
 ## Development

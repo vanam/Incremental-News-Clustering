@@ -1,11 +1,11 @@
 import argparse
 import itertools
+import sys
 
 import matplotlib.pyplot as plt
 import numpy as np
-import sys
 
-from readData import read_data
+from clustering.readData import read_data
 
 COLORS = "bgrcmykw"
 POINTS = ".,ov^<>12348spP*hH+xXDd|_"
