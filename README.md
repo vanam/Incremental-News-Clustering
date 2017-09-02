@@ -1,5 +1,6 @@
 # Clustering
 
+[![Build Status](https://travis-ci.org/vanam/clustering.svg?branch=master)](https://travis-ci.org/vanam/clustering)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
 
 A source code for my thesis
