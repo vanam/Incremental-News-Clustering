@@ -26,14 +26,27 @@ $ pip3 install --user pipenv
 $ pipenv install --dev
 ```
 
+### ~/.bashrc
+
+```bash
+export PATH=$PATH:~/.local/bin/
+export PYTHONPATH='.'
+```
+
 ## Development
 
 ### Configure PyCharm
 
 * [Configure PyCharm to use virtualenv](http://exponential.io/blog/2015/02/10/configure-pycharm-to-use-virtualenv/)
 
-## Run
+### Run script
 
 ```bash
 $ pipenv run python <script_name>.py
+```
+
+### Run tests
+
+```bash
+$ pipenv run pytest tests
 ```

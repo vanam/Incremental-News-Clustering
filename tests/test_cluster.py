@@ -15,6 +15,27 @@ class TestCluster:
         c = clustering.cluster.Cluster(self.data)
         assert c.centroid == [-0.5, 0.5]
 
+    def test_distance_to_centroid1(self):
+        c = clustering.cluster.Cluster(self.data)
+        assert c.distance_to_centroid([-0.5, 0.5]) == 0.0
+
+    def test_distance_to_centroid2(self):
+        c = clustering.cluster.Cluster(self.data)
+        assert c.distance_to_centroid([2.5, -3.5]) == 5.0
+
+    def test_update1(self):
+        c = clustering.cluster.Cluster(self.data)
+        assert c.update(self.data) == 0.0
+
+    def test_update2(self):
+        c = clustering.cluster.Cluster(self.data)
+        assert c.update([[0, 0.5]]) == 0.5
+
+    def test_update_exception(self):
+        with pytest.raises(ValueError):
+            c = clustering.cluster.Cluster(self.data)
+            c.update([])
+
     def test_variability(self):
         c = clustering.cluster.Cluster(self.data)
         metric = getattr(scipy.spatial.distance, c.metric)

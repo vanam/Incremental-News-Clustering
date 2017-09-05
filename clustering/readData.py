@@ -3,6 +3,10 @@ import argparse
 import numpy as np
 
 
+def extract_points(data):
+    return [point for d in data for point in d]
+
+
 def read_data(file):
     return np.load(file)
 
