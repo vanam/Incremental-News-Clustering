@@ -8,10 +8,10 @@ class Cluster:
             raise ValueError("Cluster must contain data")
         self.data = np.array(data)
         self.metric = metric
-        self.centroid = self.compute_centroid()
+        self.centroid = self._compute_centroid()
 
-    def compute_centroid(self):
-        return list(map(lambda d: d / self.size(), np.sum(self.data, axis=0)))
+    def _compute_centroid(self):
+        return np.mean(self.data, axis=0)
 
     def distance_to_centroid(self, point):
         return cdist(np.array([self.centroid]), np.array([point]), metric=self.metric)[0][0]
@@ -29,7 +29,7 @@ class Cluster:
 
         old_centroid = self.centroid
         self.data = np.array(data)
-        self.centroid = self.compute_centroid()
+        self.centroid = self._compute_centroid()
 
         return self.distance_to_centroid(old_centroid)
 
@@ -43,7 +43,7 @@ class Cluster:
         string = 'Cluster {\n'
         string += '  centroid    = ' + str(self.centroid) + ',\n'
         string += '  data        = ' + str(self.data) + ',\n'
-        string += '  size        = ' + str(self.size()) + '\n'
+        string += '  size        = ' + str(self.size()) + ',\n'
         string += '  variability = ' + str(self.variability()) + '\n'
         string += '}'
         return string

@@ -1,3 +1,4 @@
+import numpy as np
 import pytest
 import scipy.spatial.distance
 
@@ -13,7 +14,7 @@ class TestCluster:
 
     def test_centroid(self):
         c = clustering.cluster.Cluster(self.data)
-        assert c.centroid == [-0.5, 0.5]
+        assert np.array_equal(c.centroid, [-0.5, 0.5])
 
     def test_distance_to_centroid1(self):
         c = clustering.cluster.Cluster(self.data)

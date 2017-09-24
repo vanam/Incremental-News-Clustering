@@ -5,7 +5,7 @@ from operator import itemgetter
 import numpy as np
 
 import clustering.cluster as cluster
-from clustering.plot import plot_clusters
+from clustering.plot import plot_clusters, plot_show
 from clustering.readData import read_data, extract_points
 
 
@@ -107,5 +107,5 @@ if __name__ == "__main__":
 
     # Plot clusters if desired
     if args.plot:
-        # plot_clusters(clusters)
-        plot_clusters(None)
+        plot_clusters(clusters)
+        plot_show()

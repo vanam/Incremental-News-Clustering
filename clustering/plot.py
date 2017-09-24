@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 from clustering.cluster import Cluster
+from clustering.gaussianMixture import GaussianMixture
 from clustering.readData import read_data
 
 COLORS = "bgrcmykw"
@@ -44,7 +45,7 @@ def _plot(data):
 
 def plot_clusters(clusters):
     if clusters is None:
-        print("Nothing to print.", file=sys.stderr)
+        print("Nothing to plot.", file=sys.stderr)
         return
 
     if not all(isinstance(o, Cluster) for o in clusters):
@@ -59,7 +60,31 @@ def plot_clusters(clusters):
     # Plot centroids
     _plot(centroids)
 
+
+def plot_show():
     plt.show()
+
+
+def plot_gaussian_mixture(mixture):
+    if not isinstance(mixture, GaussianMixture):
+        print(isinstance(mixture, GaussianMixture))
+        print(type(mixture))
+        raise TypeError("Mixture must be instance of GaussianMixture class")
+
+    # Plot clusters
+    plot_clusters(mixture.get_clusters())
+
+    x, y = np.transpose(mixture.data)
+
+    x = np.linspace(min(x), max(x))
+    y = np.linspace(min(y), max(y))
+    X, Y = np.meshgrid(x, y)
+    XX = np.array([X.ravel(), Y.ravel()]).T
+    Z = mixture.score_samples(XX)
+    Z = Z.reshape(X.shape)
+
+    CS = plt.contour(X, Y, Z)
+    CB = plt.colorbar(CS, shrink=0.8, extend='both')
 
 
 def plot_data_file(file):
