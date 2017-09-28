@@ -3,7 +3,7 @@ import argparse
 import numpy as np
 from scipy import linalg
 
-from clustering.normalization import std_scaling, mean_normalization
+from clustering.normalization import std_scaling, mean_normalization, std_descaling, mean_denormalization
 from clustering.plot import plot_show, _plot
 from clustering.readData import read_data, extract_points
 
@@ -53,20 +53,32 @@ if __name__ == "__main__":
         np.random.shuffle(data)
 
     # Normalize and scale data
-    data = std_scaling(mean_normalization(data))
+    normalized_data, mean = mean_normalization(data)
+    normalized_data, std = std_scaling(normalized_data)
 
     # Run PCA
-    E, V = pca(data, k=1)
+    E, V = pca(normalized_data, k=1)
 
     # Plot data if desired
     if args.plot:
-        # Plot original (but normalized and scaled) data
+        # Plot original data
         _plot(data)
 
+        # Plot original (but normalized and scaled) data
+        _plot(normalized_data)
+
         # Plot transformed data
-        _plot(pca_transform(data, V))
+        transformed_data = pca_transform(normalized_data, V)
+        _plot(transformed_data)
 
         # Plot reverse transformed data
-        _plot(pca_transform(pca_transform(data, V), V.T))
+        reversed_data = pca_transform(transformed_data, V.T)
+        _plot(reversed_data)
+
+        denormalized_data = std_descaling(reversed_data, std)
+        denormalized_data = mean_denormalization(denormalized_data, mean)
+
+        # Plot reverse transformed and denormalized data
+        _plot(denormalized_data)
 
         plot_show()
