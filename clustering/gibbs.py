@@ -71,7 +71,7 @@ def gibbs(data, k, tries, prior):
     cache = Cache(n, prior)
 
     # Randomly initiate a priori probabilities (a.k.a. weights)
-    pi = np.random.dirichlet(np.full(k, prior.alpha / k))
+    pi = np.random.dirichlet(np.full(k, prior.alpha))
 
     # Randomly initiate cluster indicator for each sample
     # Format: [..., [0, 0, 1, 0], ...]
@@ -128,9 +128,6 @@ def gibbs(data, k, tries, prior):
         weights[c] = w_c
         means.append(mu_c)
         covariances.append(S_c)
-        print(mu_c)
-        print(S_c)
-        print(np.linalg.det(S_c))
 
     return GaussianMixture(data, k, weights, means, covariances, z)
 
@@ -160,7 +157,7 @@ def _log_posterior_predictive(data, z, i, c, prior, z_n, cache):
     v_N = prior.v_0 + z_n[c]
 
     data_k = [data[i] for i in range(len(data)) if z[i][c] == 1]
-    m_N = (prior.k_0 * prior.m_0 + z_n[c] * np.sum(data_k, axis=0)) / k_N
+    m_N = (prior.k_0 * prior.m_0 + np.sum(data_k, axis=0)) / k_N
     mu = m_N
     D = len(prior.m_0)
     v = v_N - D + 1
@@ -214,7 +211,7 @@ def _map(data, c, prior, z, z_n):
     v_N = prior.v_0 + z_n[c]
     D = len(prior.m_0)
     data_k = [data[i] for i in range(len(data)) if z[i][c] == 1]
-    m_N = (prior.k_0 * prior.m_0 + z_n[c] * np.sum(data_k, axis=0)) / k_N
+    m_N = (prior.k_0 * prior.m_0 + np.sum(data_k, axis=0)) / k_N
 
     # (4.214) in Murphy, p. 134
     S = np.sum([np.outer(_, _) for _ in data_k], axis=0)
@@ -233,13 +230,15 @@ if __name__ == "__main__":
                         help='the number of clusters (default: 2)')
     parser.add_argument('-t, --tries', dest='tries', type=int,
                         help='the number of tries (default: 20)')
-    parser.add_argument('--threshold', dest='threshold', type=float,
-                        help='threshold (default: 1e-5)')
+    parser.add_argument('-a, --alpha', dest='alpha', type=float,
+                        help='alpha (default: 3.0)')
+    parser.add_argument('-b, --believe', dest='k_0', type=float,
+                        help='believe (default: 0.01)')
     parser.add_argument('-p, --plot', dest='plot', action='store_true',
                         help='plot found clusters')
     parser.add_argument('-s, --shuffle', dest='shuffle', action='store_true',
                         help='randomly shuffle data points')
-    parser.set_defaults(k=2, tries=20, threshold=1e-5, plot=False, shuffle=False)
+    parser.set_defaults(k=2, tries=20, alpha=3.0, k_0=0.01, plot=False, shuffle=False)
 
     args = parser.parse_args()
 
@@ -252,8 +251,15 @@ if __name__ == "__main__":
     # Calculate clusters
     D = 2
 
-    prior = HyperParameters(alpha=3.0, m_0=np.array([0.0, 0.0]), k_0=0.05, v_0=D + 3, s_0=5.0 * np.eye(2))
+    alpha = args.alpha
+    m_0 = np.zeros(D)
+    k_0 = args.k_0
+    v_0 = D + 3
+    S_0 = v_0 * np.eye(D)
+
+    prior = HyperParameters(alpha, m_0, k_0, S_0, v_0)
     mixture = gibbs(data, args.k, args.tries, prior)
+    print(mixture)
 
     # Plot mixture if desired
     if args.plot:
