@@ -249,7 +249,7 @@ if __name__ == "__main__":
         np.random.shuffle(data)
 
     # Calculate clusters
-    D = 2
+    D = np.shape(data)[1]
 
     alpha = args.alpha
     m_0 = np.zeros(D)
