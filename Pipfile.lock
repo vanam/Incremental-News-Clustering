@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "7756aed1570f6834d0b7c8b28f7f06f560b49b5201f7f77224c7ad1948ab3b61"
+            "sha256": "c9875fc7e6fe92b07d863d5c336cd2dc8fb1b8436cb95f00b374dcd26eba4ee5"
         },
         "requires": {
             "python_version": "3.5"
@@ -18,10 +18,13 @@
             "version": "==0.10.0"
         },
         "matplotlib": {
-            "version": "==2.0.2"
+            "version": "==2.1.0"
         },
         "numpy": {
-            "version": "==1.13.1"
+            "version": "==1.13.3"
+        },
+        "pandas": {
+            "version": "==0.21.0"
         },
         "pyparsing": {
             "version": "==2.2.0"
@@ -32,11 +35,14 @@
         "pytz": {
             "version": "==2017.2"
         },
-        "scipy": {
+        "scikit-learn": {
             "version": "==0.19.1"
         },
+        "scipy": {
+            "version": "==1.0.0"
+        },
         "six": {
-            "version": "==1.10.0"
+            "version": "==1.11.0"
         }
     },
     "develop": {
@@ -44,10 +50,10 @@
             "version": "==1.4.34"
         },
         "pytest": {
-            "version": "==3.2.1"
+            "version": "==3.2.3"
         },
         "setuptools": {
-            "version": "==36.3.0"
+            "version": "==36.6.0"
         }
     }
 }
