@@ -222,7 +222,7 @@ def _map(data, c, prior, z, z_n):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Run GMM clustering on data.')
+    parser = argparse.ArgumentParser(description='Run finite GMM clustering on data.')
 
     parser.add_argument('file', metavar='file', type=argparse.FileType('rb'),
                         help='a data file')
