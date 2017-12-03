@@ -238,7 +238,7 @@ if __name__ == "__main__":
                         help='plot found clusters')
     parser.add_argument('-s, --shuffle', dest='shuffle', action='store_true',
                         help='randomly shuffle data points')
-    parser.set_defaults(k=2, tries=20, alpha=3.0, k_0=0.01, plot=False, shuffle=False)
+    parser.set_defaults(k=2, tries=20, alpha=1, k_0=0.01, plot=False, shuffle=False)
 
     args = parser.parse_args()
 
@@ -263,5 +263,5 @@ if __name__ == "__main__":
 
     # Plot mixture if desired
     if args.plot:
-        plot_gaussian_mixture(mixture)
+        plot_gaussian_mixture(mixture, title='Finite GMM (collapsed) \'%s\'' % args.file.name)
         plot_show()

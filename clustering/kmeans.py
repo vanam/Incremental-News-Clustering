@@ -107,5 +107,5 @@ if __name__ == "__main__":
 
     # Plot clusters if desired
     if args.plot:
-        plot_clusters(clusters)
+        plot_clusters(clusters, title='k-means \'%s\'' % args.file.name)
         plot_show()

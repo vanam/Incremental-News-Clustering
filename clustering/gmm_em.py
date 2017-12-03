@@ -162,5 +162,5 @@ if __name__ == "__main__":
 
     # Plot mixture if desired
     if args.plot:
-        plot_gaussian_mixture(mixture)
+        plot_gaussian_mixture(mixture, title='EM \'%s\'' % args.file.name)
         plot_show()
