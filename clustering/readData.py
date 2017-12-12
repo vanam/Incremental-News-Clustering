@@ -11,6 +11,20 @@ def read_data(file):
     return np.load(file)
 
 
+def read_data2(file):
+    data = np.load(file)
+
+    X = []
+    classes = []
+
+    for i, d in enumerate(data):
+        for point in d:
+            X.append(point)
+            classes.append(i)
+
+    return X, classes
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Read binary data.')
 

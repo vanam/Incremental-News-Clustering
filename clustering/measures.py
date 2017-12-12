@@ -6,6 +6,67 @@ from pandas import crosstab
 from scipy.special import comb
 
 
+class Evaluation:
+
+    def __init__(self, clusters, likelihood):
+        self.likelihood = likelihood
+        self.K = len(np.unique(clusters))
+        self.cluster_entropy = entropy(clusters)
+
+    def __repr__(self):
+        return self.__str__()
+
+    def __str__(self):
+        string = 'Evaluation {\n'
+        string += "  likelihood         = %f,\n" % self.likelihood
+        string += "  number of clusters = %d,\n" % self.K
+        string += "  entropy (clusters) = %f \n" % self.cluster_entropy
+        string += '}'
+        return string
+
+
+class TrainingEvaluation(Evaluation):
+
+    def __init__(self, clusters, classes, likelihood):
+        super().__init__(clusters, likelihood)
+
+        self.N = len(classes)
+        self.C = len(np.unique(classes))
+        self.purity = purity(clusters, classes)
+        self.purity2 = purity2(clusters, classes)
+        self.rand_index = rand_index(clusters, classes)
+        self.class_entropy = entropy(classes)
+        self.homogeneity = homogeneity(clusters, classes)
+        self.completeness = completeness(clusters, classes)
+        self.v_measure = v_measure(clusters, classes)
+        self.mutual_information = mutual_information(clusters, classes)
+        self.normalized_mutual_information = normalized_mutual_information(clusters, classes)
+        self.normalized_mutual_information2 = normalized_mutual_information2(clusters, classes)
+
+    def __repr__(self):
+        return self.__str__()
+
+    def __str__(self):
+        string = 'TrainingEvaluation {\n'
+        string += "  likelihood                      = %f,\n" % self.likelihood
+        string += "  number of observations          = %d,\n" % self.N
+        string += "  number of classes               = %d,\n" % self.C
+        string += "  number of clusters              = %d,\n" % self.K
+        string += "  purity                          = %f,\n" % self.purity
+        string += "  purity2                         = %s,\n" % self.purity2
+        string += "  rand index                      = %f,\n" % self.rand_index
+        string += "  entropy (clusters)              = %f,\n" % self.cluster_entropy
+        string += "  entropy (classes)               = %f,\n" % self.class_entropy
+        string += "  homogeneity                     = %f,\n" % self.homogeneity
+        string += "  completeness                    = %f,\n" % self.completeness
+        string += "  V-Measure                       = %f,\n" % self.v_measure
+        string += "  mutual Information              = %f,\n" % self.mutual_information
+        string += "  normalized Mutual Information   = %f,\n" % self.normalized_mutual_information
+        string += "  normalized Mutual Information 2 = %f \n" % self.normalized_mutual_information2
+        string += '}'
+        return string
+
+
 def purity(clusters, classes):
     """
     The purity ranges between 0 (bad) and 1 (good). However, we can trivially achieve a purity of 1
@@ -224,6 +285,25 @@ def entropy(labels):
     return -np.sum((pi / N) * (np.log(pi) - np.log(N)))
 
 
+def evaluate(clusters, classes):
+    print("Evaluation")
+    print("==========")
+    print("Number of observations:          %d" % len(classes))
+    print("Number of classes:               %d" % len(np.unique(classes)))
+    print("Number of clusters:              %d" % len(np.unique(clusters)))
+    print("Purity:                          %f" % purity(clusters, classes))
+    print("Purity2:                         %s" % purity2(clusters, classes))
+    print("Rand index:                      %f" % rand_index(clusters, classes))
+    print("Entropy (clusters):              %f" % entropy(clusters))
+    print("Entropy (classes):               %f" % entropy(classes))
+    print("Homogeneity:                     %f" % homogeneity(clusters, classes))
+    print("Completeness:                    %f" % completeness(clusters, classes))
+    print("V-Measure:                       %f" % v_measure(clusters, classes))
+    print("Mutual Information:              %f" % mutual_information(clusters, classes))
+    print("Normalized Mutual Information:   %f" % normalized_mutual_information(clusters, classes))
+    print("Normalized Mutual Information 2: %f" % normalized_mutual_information2(clusters, classes))
+
+
 if __name__ == "__main__":
     #  Based on Figure 16.4 of (Manning et al. 2008)
     # clusters = [
@@ -262,14 +342,4 @@ if __name__ == "__main__":
         3, 3, 3,
     ])
 
-    print("Purity:                          %f" % purity(clusters, classes))
-    print("Purity2:                         %s" % purity2(clusters, classes))
-    print("Rand index:                      %f" % rand_index(clusters, classes))
-    print("Entropy (clusters):              %f" % entropy(clusters))
-    print("Entropy (classes):               %f" % entropy(classes))
-    print("Homogeneity:                     %f" % homogeneity(clusters, classes))
-    print("Completeness:                    %f" % completeness(clusters, classes))
-    print("V-Measure:                       %f" % v_measure(clusters, classes))
-    print("Mutual Information:              %f" % mutual_information(clusters, classes))
-    print("Normalized Mutual Information:   %f" % normalized_mutual_information(clusters, classes))
-    print("Normalized Mutual Information 2: %f" % normalized_mutual_information2(clusters, classes))
+    evaluate(clusters, classes)
