@@ -3,52 +3,53 @@ import random
 from operator import itemgetter
 
 import numpy as np
+from scipy.spatial.distance import euclidean
 
-import clustering.cluster as cluster
+import clustering.measures as measures
 from clustering.plot import plot_clusters, plot_show
 from clustering.readData import read_data, extract_points
 
 
-def _kmeans(data, k, threshold=1e-5):
-    # Pick k points at random in data
-    initial_centroids = random.sample(data, k)
+def _kmeans(X, k, threshold=1e-5):
+    N = len(X)
 
-    # Create clusters containing only centroids
-    clusters = []
-    for c in initial_centroids:
-        clusters.append(cluster.Cluster([c]))
+    # Cluster indicator for each observation
+    z = np.empty(N, dtype=int)
+
+    # Pick k points at random in data
+    centroids = random.sample(list(X), k)
 
     # Iterate while distance change is significant
     dist_change = 2*threshold + 1
     while dist_change > threshold:
-        # Initialize array for clusters data
-        clusters_data = [[] for _ in range(k)]
-
         # Associate each observation with closest centroid
-        for d in data:
+        for i, d in enumerate(X):
             # Find cluster index to closest centroid
-            cluster_index = min(enumerate(c.distance_to_centroid(d) for c in clusters), key=itemgetter(1))[0]
+            z[i] = min(enumerate(euclidean(c, d) for c in centroids), key=itemgetter(1))[0]
 
-            # Assign observation to cluster
-            clusters_data[cluster_index].append(d)
-
-        # Keep track of change between new and old centroids
+        # Calculate new centroids and keep track of change between new and old centroids
         dist_change = 0
-        for i in range(len(clusters)):
-            try:
-                dist_change += clusters[i].update(clusters_data[i])
-            except ValueError:
-                # Return nothing if some cluster is empty
+        new_centroids = np.empty(k, dtype=list)
+        for i in range(k):
+            data_in_cluster = X[z == i]
+            new_centroids[i] = np.mean(data_in_cluster, axis=0)
+            dist_change += euclidean(centroids[i], new_centroids[i])
+
+            # Restart k-means if some cluster has no observations
+            if len(data_in_cluster) == 0:
                 return None
 
-    return clusters
+        # Set new centroid
+        centroids = new_centroids
+
+    return z
 
 
-def kmeans(data, k, tries=20, threshold=1e-5):
+def kmeans(X, k, tries=20, threshold=1e-5):
     if int(k) < 1:
         raise ValueError('the number of clusters must be at least 1.')
 
-    if int(k) > len(data):
+    if int(k) > len(X):
         raise ValueError('not enough data.')
 
     if int(tries) < 1:
@@ -64,10 +65,13 @@ def kmeans(data, k, tries=20, threshold=1e-5):
     # Run k-means algorithm several times
     for i in range(tries):
         # Run k-means
-        clusters = _kmeans(data, k, threshold=threshold)
+        clusters = _kmeans(X, k, threshold=threshold)
+
+        if clusters is None:
+            continue
 
         # Compute dissimilarity
-        dissimilarity = cluster.dissimilarity(clusters)
+        dissimilarity = measures.dissimilarity(X, clusters)
 
         # Accept best result
         if dissimilarity < best_dissimilarity:

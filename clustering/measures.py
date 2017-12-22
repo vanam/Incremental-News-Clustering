@@ -1,16 +1,18 @@
 from collections import Counter
 
 import numpy as np
-import pandas as pd
+# import pandas as pd
 from pandas import crosstab
+from scipy.spatial.distance import cdist
 from scipy.special import comb
 
 
 class Evaluation:
 
-    def __init__(self, clusters, likelihood):
+    def __init__(self, X: np.ndarray, clusters: np.ndarray, likelihood: float):
         self.likelihood = likelihood
         self.K = len(np.unique(clusters))
+        self.dissimilarity = dissimilarity(X, clusters)
         self.cluster_entropy = entropy(clusters)
 
     def __repr__(self):
@@ -19,6 +21,7 @@ class Evaluation:
     def __str__(self):
         string = 'Evaluation {\n'
         string += "  likelihood         = %f,\n" % self.likelihood
+        string += "  dissimilarity      = %f,\n" % self.dissimilarity
         string += "  number of clusters = %d,\n" % self.K
         string += "  entropy (clusters) = %f \n" % self.cluster_entropy
         string += '}'
@@ -27,8 +30,8 @@ class Evaluation:
 
 class TrainingEvaluation(Evaluation):
 
-    def __init__(self, clusters, classes, likelihood):
-        super().__init__(clusters, likelihood)
+    def __init__(self, X: np.ndarray, clusters: np.ndarray, classes: np.ndarray, likelihood: float):
+        super().__init__(X, clusters, likelihood)
 
         self.N = len(classes)
         self.C = len(np.unique(classes))
@@ -49,6 +52,7 @@ class TrainingEvaluation(Evaluation):
     def __str__(self):
         string = 'TrainingEvaluation {\n'
         string += "  likelihood                      = %f,\n" % self.likelihood
+        string += "  dissimilarity                   = %f,\n" % self.dissimilarity
         string += "  number of observations          = %d,\n" % self.N
         string += "  number of classes               = %d,\n" % self.C
         string += "  number of clusters              = %d,\n" % self.K
@@ -65,6 +69,16 @@ class TrainingEvaluation(Evaluation):
         string += "  normalized Mutual Information 2 = %f \n" % self.normalized_mutual_information2
         string += '}'
         return string
+
+
+def variability(X: np.ndarray):
+    centroid = np.mean(X, axis=0)
+
+    return sum(np.square(cdist(np.array([centroid]), X, metric='euclidean'))[0])
+
+
+def dissimilarity(X: np.ndarray, clusters: np.ndarray):
+    return sum(map(lambda i: variability(X[clusters == i]), np.unique(clusters)))
 
 
 def purity(clusters, classes):

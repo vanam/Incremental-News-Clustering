@@ -128,6 +128,30 @@ def plot_clusters(clusters, title=None):
     _plot(centroids)
 
 
+def plot_clusters2(X, clusters, title=''):
+    if clusters is None:
+        print("Nothing to plot.", file=sys.stderr)
+        return
+
+    plt.figure()
+
+    # Set figure title
+    plt.title(title)
+
+    # Plot clusters and collect centroids
+    plt.axis('equal')
+    centroids = []
+    for c in np.unique(clusters):
+        cluster_data = X[clusters == c]
+        _plot(cluster_data, ellipse=True)
+        centroids.append(np.mean(cluster_data, axis=0))
+
+    # Plot centroids
+    _plot(centroids)
+
+    return plt
+
+
 def plot_show():
     plt.show()
 

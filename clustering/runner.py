@@ -1,33 +1,28 @@
 import argparse
 import logging
-
 import os
-
 import sys
 from time import sleep
 
-import numpy as np
-
+from clustering import kmeans
 from clustering.measures import Evaluation, TrainingEvaluation
+from clustering.plot import plot_clusters2
 from clustering.readData import read_data2
 
 RESULT_DIR_NAME = 'results'
 
 
-def kmeans(k, X, output_directory):
+def run_kmeans(k, X, output_directory):
     # Store parameters to a file
     with open(os.path.join(output_directory, 'kmeans.par'), 'w') as f:
         f.write("k: %d\n" % k)
 
-
-    sleep(1)
-
-    clusters = []
+    clusters = kmeans.kmeans(X, k)
     likelihood = [0]
     return likelihood, clusters
 
 
-def em(k, X, output_directory):
+def run_em(k, X, output_directory):
     # TODO Store parameters to a file
 
     sleep(1)
@@ -38,7 +33,7 @@ def em(k, X, output_directory):
     return likelihood, clusters
 
 
-def fbgmm(k, X, output_directory):
+def run_fbgmm(k, X, output_directory):
     # TODO Store parameters to a file
 
     sleep(1)
@@ -49,7 +44,7 @@ def fbgmm(k, X, output_directory):
     return likelihood, clusters
 
 
-def ibgmm(k, X, output_directory):
+def run_ibgmm(k, X, output_directory):
     # TODO Store parameters to a file
 
     sleep(1)
@@ -60,7 +55,7 @@ def ibgmm(k, X, output_directory):
     return likelihood, clusters
 
 
-def ddibgmm(k, X, output_directory):
+def run_ddibgmm(k, X, output_directory):
     # TODO Store parameters to a file
 
     sleep(1)
@@ -98,12 +93,12 @@ def print_progress(iteration, total, prefix='', suffix='', decimals=1, bar_lengt
 
 def run(args, X, output_directory, classes=None):
     # Define algorithm functions to run
-    function_lable = [
-        (kmeans,  'k-means'),
-        (em,      'finite bayesian GMM using EM algorithm'),
-        (fbgmm,   'finite bayesian GMM using Gibbs algorithm'),
-        (ibgmm,   'infinite bayesian GMM (CRP) using Gibbs algorithm'),
-        (ddibgmm, 'distance dependent infinite bayesian GMM (ddCRP) using Gibbs algorithm')
+    function_label = [
+        (run_kmeans,  'k-means'),
+        (run_em,      'finite bayesian GMM using EM algorithm'),
+        (run_fbgmm,   'finite bayesian GMM using Gibbs algorithm'),
+        (run_ibgmm,   'infinite bayesian GMM (CRP) using Gibbs algorithm'),
+        (run_ddibgmm, 'distance dependent infinite bayesian GMM (ddCRP) using Gibbs algorithm')
     ]
 
     # Load algorithm flags
@@ -115,10 +110,16 @@ def run(args, X, output_directory, classes=None):
     # Number of finished clustering algorithm runs
     finished = 0
 
-    print("Running clustering algorithms")
-    evaluations = np.empty(len(flags), dtype=Evaluation)
+    print("[*] Running clustering algorithms")
 
-    for i, pair in enumerate(function_lable):
+    if alg_count == 0:
+        print(' ! No clustering algorithms selected. Aborting.', file=sys.stderr)
+        return
+
+    # evaluations = np.empty(len(flags), dtype=Evaluation)
+    evaluations = {}
+
+    for i, pair in enumerate(function_label):
         if not flags[i]:
             continue
 
@@ -131,13 +132,17 @@ def run(args, X, output_directory, classes=None):
         likelihood, clusters = f(args.c, X, output_directory)
 
         # TODO Plot and save likelihood
-        # TODO Plot and save clusters
+        f_name = f.__name__[4:]
+
+        # Plot and save clusters
+        fig = plot_clusters2(X, clusters, title=label)
+        fig.savefig(os.path.join(output_directory, 'clusters_%s.png' % f_name), format='png')
 
         # Evaluate clustering method
         if classes is None:
-            evaluations[i] = Evaluation(clusters, likelihood[0])
+            evaluations[label] = Evaluation(X, clusters, likelihood[0])
         else:
-            evaluations[i] = TrainingEvaluation(clusters, classes, likelihood[0])
+            evaluations[label] = TrainingEvaluation(X, clusters, classes, likelihood[0])
 
         # Update number of finished algorithm runs
         finished += 1
@@ -146,9 +151,12 @@ def run(args, X, output_directory, classes=None):
     print_progress(finished, alg_count, bar_length=50)
 
     # TODO Process evaluation results using Evaluation objects and likelihoods for all clustering methods
-    for e in evaluations:
+    print("[*] Evaluation")
+    for l, e in evaluations.items():
         if e is not None:
-            print(e)
+            print(' * ' + l)
+            for l in str(e).splitlines():
+                print("     " + l)
 
 if __name__ == "__main__":
     # Default values
@@ -217,4 +225,4 @@ if __name__ == "__main__":
     # TODO read data without class assignment
 
     # Run selected clustering algorithms using flags
-    run(args, X, output_directory, classes=None)
+    run(args, X, output_directory, classes=classes)

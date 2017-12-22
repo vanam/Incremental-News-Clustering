@@ -22,7 +22,7 @@ def read_data2(file):
             X.append(point)
             classes.append(i)
 
-    return X, classes
+    return np.array(X), np.array(classes)
 
 
 if __name__ == "__main__":
