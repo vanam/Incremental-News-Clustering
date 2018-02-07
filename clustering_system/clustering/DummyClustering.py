@@ -2,7 +2,7 @@ import random
 
 import numpy as np
 
-from clustering_system.IClustering import IClustering
+from clustering_system.clustering.IClustering import IClustering
 
 
 class DummyClustering(IClustering):

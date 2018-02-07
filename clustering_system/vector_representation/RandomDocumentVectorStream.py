@@ -1,7 +1,7 @@
 import numpy as np
 
-from clustering_system.IDocumentStream import IDocumentStream
-from clustering_system.IDocumentVectorStream import IDocumentVectorStream
+from clustering_system.input.IDocumentStream import IDocumentStream
+from clustering_system.vector_representation.IDocumentVectorStream import IDocumentVectorStream
 
 
 class RandomDocumentVectorStream(IDocumentVectorStream):
@@ -21,4 +21,5 @@ class RandomDocumentVectorStream(IDocumentVectorStream):
         Return random vector representation for each document.
         """
         for doc in self.document_stream:
+            print(doc)
             yield np.random.random_sample(self.length)

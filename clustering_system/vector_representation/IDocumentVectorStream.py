@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from clustering_system.IDocumentStream import IDocumentStream
+from clustering_system.input.IDocumentStream import IDocumentStream
 
 
 class IDocumentVectorStream(ABC):
