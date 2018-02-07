@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gexf xmlns="http://www.gexf.net/1.3" version="1.3" xmlns:viz="http://www.gexf.net/1.3/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.3 http://www.gexf.net/1.3/gexf.xsd">
+  <meta lastmodifieddate="2018-02-06">
+    <creator>Gephi 0.9</creator>
+    <description>...</description>
+  </meta>
+  <graph defaultedgetype="directed" timeformat="double" timerepresentation="interval" mode="dynamic">
+    <attributes class="node" mode="dynamic">
+      <attribute id="cluster" title="cluster" type="integer"/>
+    </attributes>
+    <attributes class="node" mode="static">
+      <attribute id="title" title="title" type="string"/>
+      <attribute id="description" title="description" type="string"/>
+    </attributes>
+    <nodes>
+      <node id="doc1" label="1" start="1.0" end="5.0">
+        <attvalues>
+          <attvalue for="title" value="Title for doc1"/>
+          <attvalue for="description" value="Description for doc1"/>
+          <attvalue for="cluster" value="1" start="1.0" end="1.0"/>
+          <attvalue for="cluster" value="2" start="2.0" end="2.0"/>
+          <attvalue for="cluster" value="2" start="3.0" end="3.0"/>
+          <attvalue for="cluster" value="2" start="4.0" end="4.0"/>
+          <attvalue for="cluster" value="1" start="5.0" end="5.0"/>
+        </attvalues>
+        <viz:size value="50.0"/>
+        <viz:position x="0.0" y="500.0"/>
+      </node>
+      <node id="doc2" label="2" start="3.0" end="5.0">
+        <attvalues>
+          <attvalue for="title" value="Title for doc2"/>
+          <attvalue for="description" value="Description for doc2"/>
+          <attvalue for="cluster" value="1" start="3.0" end="3.0"/>
+          <attvalue for="cluster" value="2" start="4.0" end="4.0"/>
+          <attvalue for="cluster" value="2" start="5.0" end="5.0"/>
+        </attvalues>
+        <viz:size value="50.0"/>
+        <viz:position x="0.0" y="-500.0"/>
+      </node>
+    </nodes>
+    <edges>
+      <edge id="0" source="doc2" target="doc1" start="3.0" end="5.0"/>
+    </edges>
+  </graph>
+</gexf>
