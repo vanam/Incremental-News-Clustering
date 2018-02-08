@@ -2,12 +2,6 @@
 url = "https://pypi.python.org/simple"
 verify_ssl = true
 
-[dev-packages]
-pytest = "*"
-
-[requires]
-python_version = "3.5"
-
 [packages]
 scipy = "*"
 numpy = "*"
@@ -15,3 +9,10 @@ matplotlib = "*"
 pandas = "*"
 scikit-learn = "*"
 gensim = "*"
+nltk = "*"
+
+[dev-packages]
+pytest = "*"
+
+[requires]
+python_version = "3.5"

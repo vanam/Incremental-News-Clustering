@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "32b4012ca191137bd7c0ba49f738f06b02c50b9f73edde0ad24fbe80dee49954"
+            "sha256": "d25e53d2683f5a865c441e754e91617777eca3f10709fdf483629eca6e7672cf"
         },
         "requires": {
             "python_version": "3.5"
@@ -49,6 +49,9 @@
         },
         "matplotlib": {
             "version": "==2.1.2"
+        },
+        "nltk": {
+            "version": "==3.2.5"
         },
         "numpy": {
             "version": "==1.14.0"

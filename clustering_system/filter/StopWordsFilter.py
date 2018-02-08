@@ -3,7 +3,7 @@ from typing import Sequence
 
 class StopWordsFilter:
 
-    def __init__(self, stop_list: list):
+    def __init__(self, stop_list: frozenset):
         self.stop_list = stop_list
 
     def filter(self, doc: Sequence[str]) -> Sequence[str]:
