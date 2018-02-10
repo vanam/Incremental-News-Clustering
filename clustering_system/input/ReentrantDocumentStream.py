@@ -8,6 +8,7 @@ class ReentrantDocumentStream(IDocumentStream):
     def __init__(self, documents: Sequence[str]):
         super().__init__()
         self.documents = documents
+        self.len = len(documents)
 
     def __iter__(self):
         """
@@ -16,3 +17,6 @@ class ReentrantDocumentStream(IDocumentStream):
         for line in self.documents:
             # assume there's one document per line, tokens separated by whitespace
             yield self._process(line)
+
+    def __len__(self):
+        return self.len

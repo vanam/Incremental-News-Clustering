@@ -1,10 +1,12 @@
 import logging
 
 from gensim.corpora import Dictionary
-from gensim.models import TfidfModel, LsiModel, LdaModel
+from gensim.models import TfidfModel, LsiModel, LdaModel, Doc2Vec
+from gensim.models.deprecated.doc2vec import TaggedDocument
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 import nltk
+from sklearn.decomposition import IncrementalPCA
 
 from clustering_system.clustering.DummyClustering import DummyClustering
 from clustering_system.filter.StopWordsFilter import StopWordsFilter
@@ -23,7 +25,8 @@ nltk.download('averaged_perceptron_tagger')  # Needed for POS tagging
 nltk.download('wordnet')                     # Needed for lemmatization
 
 if __name__ == "__main__":
-    D = 6
+    size = 6
+    D = 2
     decay = 0.9
 
     initialization_documents = [
@@ -96,33 +99,99 @@ if __name__ == "__main__":
     ##################################
     # dvs = RandomDocumentVectorStream(dictionary, ds, length=D)
 
+    # Init dictionary beforehead
     dictionary = Dictionary(ids)
 
     ibowdvs = BowDocumentVectorStream(dictionary, ids)
     bowdvs = BowDocumentVectorStream(dictionary, ds)
 
-    tfidf = TfidfModel(dictionary=dictionary)
-    corpus_tfidf = tfidf[bowdvs]
+    # LSI
+    #####
 
-    lsi = LsiModel(corpus=tfidf[ibowdvs], id2word=dictionary, num_topics=D, onepass=True, decay=decay)
+    # tfidf = TfidfModel(dictionary=dictionary)
+    # corpus_tfidf = tfidf[bowdvs]
+    #
+    # lsi = LsiModel(corpus=tfidf[ibowdvs], id2word=dictionary, num_topics=size, onepass=True, decay=decay)
+
+    # LDA
+    #####
+
+    # extract 6 LDA topics
+    lda = LdaModel(corpus=ibowdvs, id2word=dictionary, num_topics=size, passes=1)
+
+    # doc2vec
+    #########
+    # class TaggedLineSentence(object):
+    #     def __init__(self, documents):
+    #         self.documents = documents
+    #         self.len = len(documents)
+    #
+    #     def __iter__(self):
+    #         for uid, line in enumerate(self.documents):
+    #             print("@@@@@@@@@@ %s" % uid)
+    #             print("@@@@@@@@@@ %s" % line)
+    #             yield TaggedDocument(words=line, tags=['%d' % uid])
+    #
+    #     def __len__(self):
+    #         return self.len
+    #
+    # sentences = TaggedLineSentence(ids)
+    #
+    # d2v = Doc2Vec(vector_size=size)
+    # d2v.build_vocab(sentences)
+    # d2v.train(sentences, total_examples=len(sentences), epochs=10)
 
     #####################
     # Clustering method #
     #####################
     cl = DummyClustering(K=3, D=D)
 
+    #######################
+    # Dimension reduction #
+    #######################
+    # iX = [unwrap_vector(vec) for vec in lsi[tfidf[ibowdvs]]]  # LSI
+    iX = [unwrap_vector(vec) for vec in lda[ibowdvs]]  # LDA
+    # iX = [d2v.infer_vector(doc) for doc in ids]  # doc2vec
+
+    ipca = IncrementalPCA(n_components=D, batch_size=10)
+    ipca.fit_transform(iX)
+
     ##############################
     # Online document clustering #
     ##############################
     i = 0
-    for i, vec in enumerate(corpus_tfidf):
+    # for i, vec in enumerate(corpus_tfidf):  # LSI
+    for i, vec in enumerate(bowdvs):        # LDA
+    # for i, vec in enumerate(ds):            # doc2vec
         print("")
         print("Adding document %d" % i)
-        # print(vec)
-        lsi.add_documents([vec])
-        vec = unwrap_vector(lsi[vec])
-        # print(vec)
+        print(vec)
 
+        # LSI
+        #####
+
+        # lsi.add_documents([vec])
+        # vec = unwrap_vector(lsi[vec])
+
+        # LDA
+        #####
+
+        lda.update([vec])
+        vec = unwrap_vector(lda[vec])
+
+        # doc2vec
+        #########
+        # vec = d2v.infer_vector(vec)
+
+        print(vec)
+
+        # Reduce dimmension
+        ipca.partial_fit([vec])
+        vec = ipca.transform([vec])[0]
+        print("iPCA")
+        print(vec)
+
+        # Cluster document
         cl.add_document(vec)
 
         # Remove every second document
