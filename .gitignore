@@ -1,3 +1,8 @@
 .idea/
 __pycache__/
 .cache
+
+# Ignore genuine data
+data/genuine/
+!data/genuine/data_transform.py
+!data/genuine/.gitignore
