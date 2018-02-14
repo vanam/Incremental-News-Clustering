@@ -15,6 +15,7 @@ class DummyClustering(IClustering):
         """
         super().__init__()
         self.K = K
+        self.ids = np.empty(0, str)
         self.X = np.empty((0, D), float)
         self.z = np.empty(0, int)
 
@@ -25,29 +26,42 @@ class DummyClustering(IClustering):
     #     """
     #     return random.random * 50
 
-    def add_document(self, vector: np.ndarray):
+    def add_documents(self, ids, vectors: np.ndarray):
+        for doc_id, vector in zip(ids, vectors):
+            self.add_document(doc_id, vector)
+
+    def add_document(self, doc_id, vector: np.ndarray):
         """
         Add document represented by a vector.
         """
         self.X = np.vstack((self.X, np.array([vector])))
         self.z = np.append(self.z, random.randint(0, self.K - 1))
+        self.ids = np.append(self.ids, doc_id)
 
-    def remove_document(self, vector: np.ndarray):
+    def update(self):
         """
-        Remove document represented by a vector.
-
-        Note: All occurences of the document are deleted
+        There is nothing to update
+        :return:
         """
-        vector_position = np.all(self.X != np.array(vector), axis=1)
+        pass
 
-        self.X = self.X[vector_position]
-        self.z = self.z[vector_position]
+    # def remove_document(self, vector: np.ndarray):
+    #     """
+    #     Remove document represented by a vector.
+    #
+    #     Note: All occurences of the document are deleted
+    #     """
+    #     vector_position = np.all(self.X != np.array(vector), axis=1)
+    #
+    #     self.X = self.X[vector_position]
+    #     self.z = self.z[vector_position]
 
     def __iter__(self):
         """
         Iterate over clusters.
         """
-        raise NotImplementedError
+        for doc_id, cluster_id in zip(self.ids, self.z):
+            yield doc_id, cluster_id
 
     def __str__(self):
         """

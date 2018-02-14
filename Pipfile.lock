@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "d25e53d2683f5a865c441e754e91617777eca3f10709fdf483629eca6e7672cf"
+            "sha256": "737a914f7fbcf0f344d683b3933a08909dd4231572bfb739f574341bca61fd6f"
         },
         "requires": {
             "python_version": "3.5"
@@ -14,14 +14,18 @@
         ]
     },
     "default": {
+        "2.1-1": {
+            "git": "https://github.com/vanam/networkx.git",
+            "ref": "issue-1797"
+        },
         "boto": {
             "version": "==2.48.0"
         },
         "boto3": {
-            "version": "==1.5.24"
+            "version": "==1.5.28"
         },
         "botocore": {
-            "version": "==1.8.38"
+            "version": "==1.8.42"
         },
         "bz2file": {
             "version": "==0.98"
@@ -66,7 +70,7 @@
             "version": "==2.6.1"
         },
         "pytz": {
-            "version": "==2017.3"
+            "version": "==2018.3"
         },
         "requests": {
             "version": "==2.18.4"

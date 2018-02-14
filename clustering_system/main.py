@@ -1,206 +1,133 @@
-import logging
+#!/usr/bin/env python3
 
-from gensim.corpora import Dictionary
-from gensim.models import TfidfModel, LsiModel, LdaModel, Doc2Vec
-from gensim.models.deprecated.doc2vec import TaggedDocument
-from nltk.corpus import stopwords
-from nltk.stem import WordNetLemmatizer
-import nltk
+import logging
+import os
+from pathlib import Path
+
+from gensim.corpora import Dictionary, MmCorpus
 from sklearn.decomposition import IncrementalPCA
 
 from clustering_system.clustering.DummyClustering import DummyClustering
-from clustering_system.filter.StopWordsFilter import StopWordsFilter
-from clustering_system.filter.filters import lower, split
-from clustering_system.input.DummyDocumentStream import DummyDocumentStream
-from clustering_system.input.ReentrantDocumentStream import ReentrantDocumentStream
-from clustering_system.utils import nltk_pos2wn_pos, unwrap_vector
-from clustering_system.vector_representation.BowDocumentVectorStream import BowDocumentVectorStream
-from clustering_system.vector_representation.RandomDocumentVectorStream import RandomDocumentVectorStream
+from clustering_system.corpus.ArtificialCorpus import ArtificialCorpus
+from clustering_system.corpus.MetaMmCorpusWrapper import MetaMmCorpusWrapper
+from clustering_system.corpus.NewsCorpus import NewsCorpus
+from clustering_system.corpus.SinglePassCorpusWrapper import SinglePassCorpusWrapper
+from clustering_system.model.Identity import Identity
+from clustering_system.visualization.Visualizer import Visualizer
 
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
-nltk.download('stopwords')                   # Needed for stop word removal
-nltk.download('punkt')                       # Needed for POS tagging
-nltk.download('averaged_perceptron_tagger')  # Needed for POS tagging
-nltk.download('wordnet')                     # Needed for lemmatization
-
 if __name__ == "__main__":
-    size = 6
-    D = 2
-    decay = 0.9
+    # Constants
+    K = 3     # Number of clusters
+    size = 2  # Size of a feature vector
 
-    initialization_documents = [
-            "Human machine interface for lab abc computer applications",
-            "A survey of user opinion of computer system response time",
-            "The generation of random binary unordered trees",
-            "The intersection graph of paths in trees",
-            "Graph minors A survey",
-            "Human machine interface for lab abc computer applications",
-            "A survey of user opinion of computer system response time The generaation of random binary unordered trees",
-            "The intersection graph of paths in trees Graph minors A survey",
-            "Human machine interface for lab abc computer applications A suarvey of user opinion of computer system response time",
-            "The generation of random binary unordered trees",
-            "The intersection graph of paths in trees",
-            "Graph minors A survey Human machine interface for lab abc compuater applications",
-            "A survey of user opinion of computer system response time",
-            "The generastion of random binary unorsdered trees",
-            "The interssection graph of paths in trees",
-            "Graph minosrs A survey"
-        ]
+    # Current directory
+    dir_path = os.path.dirname(os.path.realpath(__file__))
 
-    documents = [
-        "Human machine interface for lab abc computer applications",
-        "A survey of user opinion of computer system response time",
-        "The EPS user interface management system",
-        "System and human system engineering testing of EPS",
-        "Relation of user perceived response time to error measurement",
-        "The generation of random binary unordered trees",
-        "The intersection graph of paths in trees",
-        "Graph minors IV Widths of trees and well quasi ordering",
-        "Graph minors A survey"
-    ]
+    # Useful directories
+    data_dir = os.path.join(dir_path, "..", "data")
+    temp_dir = os.path.join(dir_path, "..", "temp")
+    temp_corpus_dir = os.path.join(temp_dir, 'corpus')
+    temp_visualization_dir = os.path.join(temp_dir, 'visualization')
 
-    ##################################
-    # Pre-process incoming documents #
-    ##################################
-    ids = ReentrantDocumentStream(initialization_documents)
-    ds = DummyDocumentStream(documents)
+    # Make sure temp directories exist
+    Path(temp_corpus_dir).mkdir(parents=True, exist_ok=True)
+    Path(temp_visualization_dir).mkdir(parents=True, exist_ok=True)
 
-    # Lowercase documents
-    ids.add_filter(lower)
-    ds.add_filter(lower)
+    # Paths to data
+    training_dir = os.path.join(data_dir, "genuine", "training")
+    test_dir = os.path.join(data_dir, "genuine", "test")
+    artificial_file = os.path.join(data_dir, "artificial", "06.dat")
+    visualization_file = os.path.join(temp_visualization_dir, 'visualization.gexf')
 
-    # Tokenize
-    ids.add_filter(nltk.word_tokenize)
-    ds.add_filter(nltk.word_tokenize)
+    temp_dictionary_file = os.path.join(temp_corpus_dir, 'dictionary.dict')
+    temp_training_corpus_file = os.path.join(temp_corpus_dir, 'training_corpus.mm')
+    temp_test_corpus_file = os.path.join(temp_corpus_dir, 'test_corpus.mm')
 
-    # POS tagging
-    ids.add_filter(nltk.pos_tag)
-    ds.add_filter(nltk.pos_tag)
+    ########################
+    # Initialization phase #
+    ########################
 
-    # Lemmatize
-    wnl = WordNetLemmatizer()
+    # Select model
 
-    def lemmatize(line):
-        return [wnl.lemmatize(word, pos=nltk_pos2wn_pos(tag)) for word, tag in line]
+    # Artificial data
+    training_corpus = ArtificialCorpus(input=artificial_file, metadata=True)
+    test_corpus = SinglePassCorpusWrapper(ArtificialCorpus(input=artificial_file, metadata=True))
+    model = Identity()
 
-    ids.add_filter(lemmatize)
-    ds.add_filter(lemmatize)
+    # News data
+    # model = ...
 
-    # Remove stop words
-    stop_list = frozenset(stopwords.words('english'))  # nltk stopwords list
-    swf = StopWordsFilter(stop_list)
+    # Identity model does not have to be trained
+    if not isinstance(model, Identity):
+        # Check if we have already pre-processed the corpus
+        if not os.path.exists(temp_training_corpus_file):
+            # Load and pre-process corpus
+            training_corpus = NewsCorpus(input=training_dir, metadata=True, language='en')
 
-    ids.add_filter(swf.filter)
-    ds.add_filter(swf.filter)
+            # Serialize pre-processed corpus and dictionary to temp files
+            # training_corpus.dictionary.save(temp_dictionary_file)
+            MmCorpus.serialize(temp_training_corpus_file, training_corpus, metadata=True)
 
-    ##################################
-    # Document vector representation #
-    ##################################
-    # dvs = RandomDocumentVectorStream(dictionary, ds, length=D)
+        # Load corpus and dictionary from temp file
+        dictionary = Dictionary.load(temp_dictionary_file)
+        training_corpus = MetaMmCorpusWrapper(temp_training_corpus_file)
 
-    # Init dictionary beforehead
-    dictionary = Dictionary(ids)
+    # Instead
+    # training_corpus = ArtificialCorpus(input=artificial_file, metadata=True)
 
-    ibowdvs = BowDocumentVectorStream(dictionary, ids)
-    bowdvs = BowDocumentVectorStream(dictionary, ds)
-
-    # LSI
-    #####
-
-    # tfidf = TfidfModel(dictionary=dictionary)
-    # corpus_tfidf = tfidf[bowdvs]
-    #
-    # lsi = LsiModel(corpus=tfidf[ibowdvs], id2word=dictionary, num_topics=size, onepass=True, decay=decay)
-
-    # LDA
-    #####
-
-    # extract 6 LDA topics
-    lda = LdaModel(corpus=ibowdvs, id2word=dictionary, num_topics=size, passes=1)
-
-    # doc2vec
-    #########
-    # class TaggedLineSentence(object):
-    #     def __init__(self, documents):
-    #         self.documents = documents
-    #         self.len = len(documents)
-    #
-    #     def __iter__(self):
-    #         for uid, line in enumerate(self.documents):
-    #             print("@@@@@@@@@@ %s" % uid)
-    #             print("@@@@@@@@@@ %s" % line)
-    #             yield TaggedDocument(words=line, tags=['%d' % uid])
-    #
-    #     def __len__(self):
-    #         return self.len
-    #
-    # sentences = TaggedLineSentence(ids)
-    #
-    # d2v = Doc2Vec(vector_size=size)
-    # d2v.build_vocab(sentences)
-    # d2v.train(sentences, total_examples=len(sentences), epochs=10)
-
-    #####################
-    # Clustering method #
-    #####################
-    cl = DummyClustering(K=3, D=D)
-
-    #######################
-    # Dimension reduction #
-    #######################
-    # iX = [unwrap_vector(vec) for vec in lsi[tfidf[ibowdvs]]]  # LSI
-    iX = [unwrap_vector(vec) for vec in lda[ibowdvs]]  # LDA
-    # iX = [d2v.infer_vector(doc) for doc in ids]  # doc2vec
-
-    ipca = IncrementalPCA(n_components=D, batch_size=10)
-    ipca.fit_transform(iX)
+    # Select clustering method
+    clustering = DummyClustering(K, size)
 
     ##############################
     # Online document clustering #
     ##############################
-    i = 0
-    # for i, vec in enumerate(corpus_tfidf):  # LSI
-    for i, vec in enumerate(bowdvs):        # LDA
-    # for i, vec in enumerate(ds):            # doc2vec
-        print("")
-        print("Adding document %d" % i)
-        print(vec)
 
-        # LSI
-        #####
+    test_corpus = ArtificialCorpus(input=artificial_file, metadata=True)
 
-        # lsi.add_documents([vec])
-        # vec = unwrap_vector(lsi[vec])
+    # You cannot use Identity model on news data
+    if not isinstance(model, Identity):
+        # Check if we have already pre-processed the corpus
+        if not os.path.exists(temp_test_corpus_file):
+            # Load and pre-process corpus
+            test_corpus = NewsCorpus(input=test_dir, dictionary=dictionary, metadata=True, language='en')
 
-        # LDA
-        #####
+            # Serialize pre-processed corpus and dictionary to temp files
+            MmCorpus.serialize(temp_test_corpus_file, test_corpus, metadata=True)
 
-        lda.update([vec])
-        vec = unwrap_vector(lda[vec])
+        test_corpus = MetaMmCorpusWrapper(temp_test_corpus_file)
 
-        # doc2vec
-        #########
-        # vec = d2v.infer_vector(vec)
+    # Reduce dimension for visualization
+    ipca = IncrementalPCA(n_components=2, batch_size=10)
+    ipca.fit_transform([vec for vec, metadata in model[training_corpus]])
 
-        print(vec)
+    # Init visualizer
+    visualizer = Visualizer()
 
-        # Reduce dimmension
-        ipca.partial_fit([vec])
-        vec = ipca.transform([vec])[0]
-        print("iPCA")
-        print(vec)
+    # TODO Iterate over weeks instead of single documents
+    for t, docs_metadata in enumerate([[_ for _ in test_corpus]]):
+        docs, metadata = zip(*docs_metadata)
+        ids = list(zip(*metadata))[0]
 
-        # Cluster document
-        cl.add_document(vec)
+        # Update model
+        model.update(docs)
 
-        # Remove every second document
-        if i % 2 == 0:
-            print("Removing document %d" % i)
-            cl.remove_document(vec)
-        i += 1
+        # Get vector representation
+        docs = model[docs]
 
-        # Print information about clusters
-        print(cl)
+        # Cluster new data
+        clustering.add_documents(ids, docs)
+        clustering.update()
 
-        # TODO cluster evaluation
+        # Reduce vector dimension for visualization
+        ipca.partial_fit(docs)
+        reduced_docs = ipca.transform(docs)
+
+        # Visualization
+        visualizer.add_documents(reduced_docs, metadata, t)
+
+        for doc_id, cluster_id in clustering:
+            visualizer.set_cluster_for_doc(t, doc_id, cluster_id)
+
+    visualizer.save(visualization_file)

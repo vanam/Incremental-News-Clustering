@@ -17,22 +17,22 @@ class IClustering(ABC):
     #     pass
 
     @abstractmethod
-    def add_document(self, vector: np.ndarray):
+    def add_documents(self, ids, vectors: np.ndarray):
         """
-        Add document represented by a vector.
+        Add documents represented by a list of vectors.
         """
         pass
 
     @abstractmethod
-    def remove_document(self, vector: np.ndarray):
+    def update(self):
         """
-        Remove document represented by a vector.
+        Update clustering after adding/removing documents
         """
         pass
 
     @abstractmethod
     def __iter__(self):
         """
-        Iterate over clusters.
+        Iterate over documents to see how they were clustered
         """
         pass
