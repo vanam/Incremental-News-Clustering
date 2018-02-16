@@ -16,11 +16,10 @@ class FolderAggregatedCorpora:
     def __init__(self, directory, temp_directory, dictionary: Dictionary, language=None):
         self.directory = directory
         self.temp_directory = os.path.join(temp_directory, 'folder-aggregated-corpora')
+        Path(self.temp_directory).mkdir(parents=True, exist_ok=True)
         self.dictionary = dictionary
         self.language = language
         self.group_corpora = self.get_group_corpora()
-
-        Path(self.temp_directory).mkdir(parents=True, exist_ok=True)
 
     def get_group_corpora(self):
         root = self.directory
@@ -60,5 +59,5 @@ class FolderAggregatedCorpora:
         """
         Iterating over the corpora yields corpus
         """
-        for corpus in self.group_corpora:
+        for _, corpus in self.group_corpora:
             yield corpus

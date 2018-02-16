@@ -7,11 +7,9 @@ from xml.dom import minidom
 from gensim.corpora import TextCorpus
 
 
-def get_docs_in_folder(self, root, language=None):
+def get_docs_in_folder(root, language=None):
     if language is None:
         language = "[a-z]{2}"
-    else:
-        language = self.language
 
     english_filename_pattern = re.compile("[0-9]{10}.[0-9]-%s-[0-9A-Fa-f]{32}.q.job.xml" % language)
     all_files = []
@@ -71,7 +69,7 @@ class NewsCorpus(TextCorpus):
                 logging.warning("Title or text not found in '%s', file skipped." % file_path)
                 continue
 
-            title = title_raw[0].firstChild.nodeValue
+            title = title_raw[1].firstChild.nodeValue
             text = text_raw[0].firstChild.nodeValue
 
             # Get metadata from filename

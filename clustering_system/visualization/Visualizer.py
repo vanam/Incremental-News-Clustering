@@ -22,7 +22,7 @@ class Visualizer:
         for doc_id, doc in self.documents.items():
             graph.add_node(
                 doc_id,
-                label=doc_id,
+                label=doc_id[:7],
                 start=doc[0],
                 end=doc[1],
                 cluster=doc[3],  # [(value, start, end), ...]
