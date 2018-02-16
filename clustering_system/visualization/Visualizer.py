@@ -9,8 +9,8 @@ class Visualizer:
     def add_documents(self, docs: list, metadata: list, time: int):
         for doc, metadata in zip(docs, metadata):
             doc_id = metadata[0]
-            # TODO load title, description
-            self.documents[str(doc_id)] = [time, time, doc, []]  # (start_time, end_time, doc_vec, cluster_list)
+            title = metadata[2]
+            self.documents[str(doc_id)] = [time, time, doc, [], title]  # (start_time, end_time, doc_vec, cluster_list, title)
 
     def set_cluster_for_doc(self, t, doc_id, cluster_id):
         self.documents[doc_id][1] = t + 1
@@ -26,10 +26,9 @@ class Visualizer:
                 start=doc[0],
                 end=doc[1],
                 cluster=doc[3],  # [(value, start, end), ...]
-                # TODO save title, description
-                # title="tit 1",
-                # description="desc 1",
-                viz={"position": {"x": doc[2][0], "y": doc[2][1], "z": 0}})
+                title=doc[4],
+                viz={"position": {"x": doc[2][0], "y": doc[2][1], "z": 0}}
+            )
 
             # TODO add edges for dd-CRP
 

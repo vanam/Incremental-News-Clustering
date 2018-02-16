@@ -19,12 +19,13 @@ class DummyClustering(IClustering):
         self.X = np.empty((0, D), float)
         self.z = np.empty(0, int)
 
-    # def log_likelihood(self) -> float:
-    #     """
-    #     Return random log likelihood of data
-    #     L(theta | x) = f(x | theta)
-    #     """
-    #     return random.random * 50
+    @property
+    def log_likelihood(self) -> float:
+        """
+        Return random log likelihood of data
+        L(theta | x) = f(x | theta)
+        """
+        return random.random() * 50
 
     def add_documents(self, ids, vectors: np.ndarray):
         for doc_id, vector in zip(ids, vectors):

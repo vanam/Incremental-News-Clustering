@@ -76,6 +76,6 @@ class NewsCorpus(TextCorpus):
 
             # Get metadata from filename
             metadata = filename.split("-")
-            metadata = (metadata[2][:-10], metadata[0])  # (docId, timestamp)
+            metadata = (metadata[2][:-10], metadata[0], title)  # (docId, timestamp, title)
 
             yield "%s %s" % (title, text), metadata

@@ -28,5 +28,5 @@ class ArtificialCorpus(CorpusABC):
         i = 0
         for c, d in enumerate(self.data):
             for point in d:
-                yield point, (i, 1, c)  # (docId, timestamp, class)
+                yield point, (i, 1, "This artificial document represents class %d" % c)  # (docId, timestamp, title)
                 i += 1
