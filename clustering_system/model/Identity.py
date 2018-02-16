@@ -1,3 +1,5 @@
+from typing import Iterable
+
 from clustering_system.model.IModel import IModel
 
 
@@ -10,10 +12,21 @@ class Identity(IModel):
         """
         pass
 
-    def __getitem__(self, item):
+    def save(self, directory):
         """
-        Return item without any change.
-        :param item:
+        There is nothing to save
+        :param directory:
         :return:
         """
-        return item
+        pass
+
+    def _get_vector_representation(self, items: Iterable) -> Iterable:
+        raise NotImplementedError("This method is not implemented intentionally.")
+
+    def __getitem__(self, items):
+        """
+        Return item without any change.
+        :param items:
+        :return:
+        """
+        return items

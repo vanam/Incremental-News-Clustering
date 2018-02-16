@@ -83,8 +83,8 @@ if __name__ == "__main__":
         training_corpus = MmCorpus(temp_training_corpus_file)
 
         # Select model
-        model = Lsi(training_corpus, dictionary, temp_model_dir, size=size)
-        # model = Lda()
+        # model = Lsi(training_corpus, dictionary, temp_model_dir, size=size)
+        model = Lda(training_corpus, dictionary, temp_model_dir, size=size)
         # model = Doc2vec()
 
         # Save trained model to file(s)

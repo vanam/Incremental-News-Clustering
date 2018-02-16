@@ -1,16 +1,16 @@
 import os
+from typing import Iterable
 
 from gensim.corpora import Dictionary
 from gensim.models import TfidfModel, LsiModel
 
 from clustering_system.model.IModel import IModel
-from clustering_system.utils import unwrap_vector
 
 
 class Lsi(IModel):
 
     def __init__(self, corpus, dictionary: Dictionary, temp_directory, size: int = 200, decay: float = 1.0):
-        self.directory = temp_directory
+        super().__init__(size)
 
         # Check if we have already trained the Tfidf model
         tfidf_filename = self._get_tfidf_filename(temp_directory)
@@ -50,10 +50,5 @@ class Lsi(IModel):
         self.tfidf.save(self._get_tfidf_filename(directory))
         self.lsi.save(self._get_lsi_filename(directory))
 
-    def __getitem__(self, item):
-        """
-        Return LSI representation of an item.
-        :param item:
-        :return:
-        """
-        return unwrap_vector(self.lsi[self.tfidf[item]])
+    def _get_vector_representation(self, items: Iterable) -> Iterable:
+        return self.lsi[self.tfidf[items]]
