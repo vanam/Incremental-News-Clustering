@@ -5,15 +5,26 @@ import numpy as np
 from pandas import crosstab
 from scipy.spatial.distance import cdist
 from scipy.special import comb
+from scipy.stats import multivariate_normal
+from scipy.stats._multivariate import multivariate_normal_gen
 
 
-class Evaluation:
+class UnsupervisedEvaluation:
 
     def __init__(self, X: np.ndarray, clusters: np.ndarray, likelihood: float):
         self.likelihood = likelihood
         self.K = len(np.unique(clusters))
         self.dissimilarity = dissimilarity(X, clusters)
         self.cluster_entropy = entropy(clusters)
+
+    @staticmethod
+    def get_attribute_names():
+        return (
+            ('likelihood', 'likelihood'),
+            ('dissimilarity', 'dissimilarity'),
+            ('number of clusters', 'K'),
+            ('entropy (clusters)', 'cluster_entropy')
+         )
 
     def __repr__(self):
         return self.__str__()
@@ -28,7 +39,7 @@ class Evaluation:
         return string
 
 
-class TrainingEvaluation(Evaluation):
+class SupervisedEvaluation(UnsupervisedEvaluation):
 
     def __init__(self, X: np.ndarray, clusters: np.ndarray, classes: np.ndarray, likelihood: float):
         super().__init__(X, clusters, likelihood)
@@ -46,6 +57,27 @@ class TrainingEvaluation(Evaluation):
         self.normalized_mutual_information = normalized_mutual_information(clusters, classes)
         self.normalized_mutual_information2 = normalized_mutual_information2(clusters, classes)
 
+    @staticmethod
+    def get_attribute_names():
+        return [
+            ('likelihood', 'likelihood'),
+            ('dissimilarity', 'dissimilarity'),
+            ('number of observations', 'N'),
+            ('number of classes', 'C'),
+            ('number of clusters', 'K'),
+            ('purity', 'purity'),
+            ('purity 2', 'purity2'),
+            ('rand index', 'rand_index'),
+            ('entropy (clusters)', 'cluster_entropy'),
+            ('entropy (classes)', 'class_entropy'),
+            ('homogeneity', 'homogeneity'),
+            ('completeness', 'completeness'),
+            ('V-Measure', 'v_measure'),
+            ('mutual information', 'mutual_information'),
+            ('normalized mutual information', 'normalized_mutual_information'),
+            ('normalized mutual information 2', 'normalized_mutual_information2')
+        ]
+
     def __repr__(self):
         return self.__str__()
 
@@ -57,16 +89,16 @@ class TrainingEvaluation(Evaluation):
         string += "  number of classes               = %d,\n" % self.C
         string += "  number of clusters              = %d,\n" % self.K
         string += "  purity                          = %f,\n" % self.purity
-        string += "  purity2                         = %s,\n" % self.purity2
+        string += "  purity 2                        = %s,\n" % self.purity2
         string += "  rand index                      = %f,\n" % self.rand_index
         string += "  entropy (clusters)              = %f,\n" % self.cluster_entropy
         string += "  entropy (classes)               = %f,\n" % self.class_entropy
         string += "  homogeneity                     = %f,\n" % self.homogeneity
         string += "  completeness                    = %f,\n" % self.completeness
         string += "  V-Measure                       = %f,\n" % self.v_measure
-        string += "  mutual Information              = %f,\n" % self.mutual_information
-        string += "  normalized Mutual Information   = %f,\n" % self.normalized_mutual_information
-        string += "  normalized Mutual Information 2 = %f \n" % self.normalized_mutual_information2
+        string += "  mutual information              = %f,\n" % self.mutual_information
+        string += "  normalized mutual information   = %f,\n" % self.normalized_mutual_information
+        string += "  normalized mutual information 2 = %f \n" % self.normalized_mutual_information2
         string += '}'
         return string
 
@@ -297,6 +329,22 @@ def entropy(labels):
 
     # log(a / b) calculated as log(a) - log(b)
     return -np.sum((pi / N) * (np.log(pi) - np.log(N)))
+
+
+def log_likelihood(X: np.ndarray, k: int, alpha: list, mean: list, covariance: list):
+    """
+        Log likelihood for Gaussian Mixture Model
+
+        l(theta) = prod_i=1^N f(x_i; theta)
+        ll(theta) = sum_i=1^N f(x_i; theta) = sum_i=1^N log sum_k=1^K alpha_k * f(x_i; theta_k)
+    """
+    rv = np.empty(k, dtype=multivariate_normal_gen)
+    for i in range(k):
+        rv[i] = multivariate_normal(mean[i], covariance[i])
+
+    likelihood = sum(np.log([sum([alpha[j] * rv[j].pdf(d) for j in range(k)]) for d in X]))
+
+    return likelihood
 
 
 def evaluate(clusters, classes):

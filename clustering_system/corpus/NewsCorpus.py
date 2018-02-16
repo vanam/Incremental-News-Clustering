@@ -7,40 +7,41 @@ from xml.dom import minidom
 from gensim.corpora import TextCorpus
 
 
+def get_docs_in_folder(self, root, language=None):
+    if language is None:
+        language = "[a-z]{2}"
+    else:
+        language = self.language
+
+    english_filename_pattern = re.compile("[0-9]{10}.[0-9]-%s-[0-9A-Fa-f]{32}.q.job.xml" % language)
+    all_files = []
+    for dirpath, subdirs, files in os.walk(root):
+        for filename in files:
+            # Check if we already did process file
+            result = english_filename_pattern.match(filename)
+            if result is None:
+                continue
+
+            # Construct file path
+            file_path = os.path.join(dirpath, filename)
+
+            # Store filename and file path
+            all_files.append((filename, file_path))
+
+    # Sort by filename
+    all_files.sort(key=lambda x: x[0])
+    logging.info("Found %d files." % len(all_files))
+
+    return all_files
+
+
 class NewsCorpus(TextCorpus):
     def __init__(self, input=None, dictionary=None, metadata=False, character_filters=None, tokenizer=None,
                  token_filters=None, language=None):
         self.language = language
-        self.documents = self.get_docs(input) if input is not None else []
+        self.documents = get_docs_in_folder(input, language) if input is not None else []
 
         super().__init__(input, dictionary, metadata, character_filters, tokenizer, token_filters)
-
-    def get_docs(self, root):
-        if self.language is None:
-            language = "[a-z]{2}"
-        else:
-            language = self.language
-
-        english_filename_pattern = re.compile("[0-9]{10}.[0-9]-%s-[0-9A-Fa-f]{32}.q.job.xml" % language)
-        all_files = []
-        for dirpath, subdirs, files in os.walk(root):
-            for filename in files:
-                # Check if we already did process file
-                result = english_filename_pattern.match(filename)
-                if result is None:
-                    continue
-
-                # Construct file path
-                file_path = os.path.join(dirpath, filename)
-
-                # Store filename and file path
-                all_files.append((filename, file_path))
-
-        # Sort by filename
-        all_files.sort(key=lambda x: x[0])
-        logging.info("Found %d files." % len(all_files))
-
-        return all_files
 
     def get_texts(self):
         data = self.getstream()
