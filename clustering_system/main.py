@@ -23,6 +23,7 @@ from clustering_system.model.Doc2vec import Doc2vec
 from clustering_system.model.Identity import Identity
 from clustering_system.model.Lda import Lda
 from clustering_system.model.Lsi import Lsi
+from clustering_system.model.Random import Random
 from clustering_system.visualization.Visualizer import Visualizer
 
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
@@ -35,9 +36,10 @@ class Corpus(Enum):
 
 class Model(Enum):
     identity = 0
-    LSI = 1
-    LDA = 2
-    doc2vec = 3
+    random = 1
+    LSI = 2
+    LDA = 3
+    doc2vec = 4
 
 
 if __name__ == "__main__":
@@ -46,7 +48,8 @@ if __name__ == "__main__":
     model_type = Model.identity
 
     # Only the LSI/LDA/doc2vec models can be used with news corpus
-    # corpus_type = Corpus.news
+    corpus_type = Corpus.news
+    model_type = Model.random
     # model_type = Model.LSI
     # model_type = Model.LDA
     # model_type = Model.doc2vec
@@ -97,7 +100,7 @@ if __name__ == "__main__":
         model = Identity()
     else:
         # For LSI/LDA initialize bag of words corpus
-        if model_type in [Model.LSI, Model.LDA]:
+        if model_type in [Model.random, Model.LSI, Model.LDA]:
             # Check if we have already pre-processed the corpus
             if not os.path.exists(temp_training_mm_corpus_file):
                 # Load and pre-process corpus
@@ -112,7 +115,9 @@ if __name__ == "__main__":
             training_corpus = MmCorpus(temp_training_mm_corpus_file)
 
             # Initialize correct model
-            if model_type == Model.LSI:
+            if model_type == Model.random:
+                model = Random(size=size)
+            elif model_type == Model.LSI:
                 model = Lsi(training_corpus, dictionary, temp_model_dir, size=size)
             elif model_type == Model.LDA:
                 model = Lda(training_corpus, dictionary, temp_model_dir, size=size)
