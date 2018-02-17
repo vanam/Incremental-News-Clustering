@@ -1,6 +1,6 @@
 import numpy as np
 
-from clustering_system.evaluator.Evaluator import EvaluatorABC
+from clustering_system.evaluator.EvaluatorABC import EvaluatorABC
 
 
 class RandomEvaluator(EvaluatorABC):

@@ -1,9 +1,10 @@
-from typing import Iterable
-
-from clustering_system.model.IModel import IModel
+from clustering_system.model.ModelABC import ModelABC
 
 
-class Identity(IModel):
+class Identity(ModelABC):
+
+    def __init__(self):
+        super().__init__(-1)
 
     def update(self, documents):
         """
@@ -20,7 +21,7 @@ class Identity(IModel):
         """
         pass
 
-    def _get_vector_representation(self, items: Iterable) -> Iterable:
+    def _get_vector_representation(self, items):
         raise NotImplementedError("This method is not implemented intentionally.")
 
     def __getitem__(self, items):

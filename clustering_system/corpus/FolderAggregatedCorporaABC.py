@@ -1,14 +1,12 @@
 import logging
 import os
+from abc import ABC, abstractmethod
 from pathlib import Path
 
-from gensim.corpora import MmCorpus, Dictionary
-
-from clustering_system.corpus.MetaMmCorpusWrapper import MetaMmCorpusWrapper
-from clustering_system.corpus.NewsCorpus import NewsCorpus
+from gensim.corpora import Dictionary
 
 
-class FolderAggregatedCorpora:
+class FolderAggregatedCorporaABC(ABC):
     """
     Groups multiple news documents by folder
     """
@@ -20,6 +18,10 @@ class FolderAggregatedCorpora:
         self.dictionary = dictionary
         self.language = language
         self.group_corpora = self.get_group_corpora()
+
+    @abstractmethod
+    def _get_group_corpus(self, name, path):
+        pass
 
     def get_group_corpora(self):
         root = self.directory
@@ -39,16 +41,7 @@ class FolderAggregatedCorpora:
         corpora = []
         # For each group init corpus if not exists
         for group_name, group_path in groups:
-            temp_corpus_file = os.path.join(self.temp_directory, group_name + '.mm')
-            # Check if we have already pre-processed the corpus
-            if not os.path.exists(temp_corpus_file):
-                corpus = NewsCorpus(input=group_path, metadata=True, language=self.language, dictionary=self.dictionary)
-
-                # Serialize pre-processed corpus to temp files
-                MmCorpus.serialize(temp_corpus_file, corpus, metadata=True)
-
-            # Load corpus from temp file
-            corpus = MetaMmCorpusWrapper(temp_corpus_file)
+            corpus = self._get_group_corpus(group_name, group_path)
 
             # Add corpus to list
             corpora.append((group_path, corpus))

@@ -1,9 +1,9 @@
+import csv
+import os
 from abc import ABC, abstractmethod
 
-import csv
 import matplotlib.pyplot as plt
 import numpy as np
-import os
 
 from clustering.measures import SupervisedEvaluation
 

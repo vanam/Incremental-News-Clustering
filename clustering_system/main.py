@@ -2,6 +2,8 @@
 
 import logging
 import os
+import sys
+from enum import Enum
 from pathlib import Path
 
 from gensim.corpora import Dictionary, MmCorpus
@@ -9,9 +11,11 @@ from sklearn.decomposition import IncrementalPCA
 
 from clustering_system.clustering.DummyClustering import DummyClustering
 from clustering_system.corpus.ArtificialCorpus import ArtificialCorpus
-from clustering_system.corpus.FolderAggregatedCorpora import FolderAggregatedCorpora
-from clustering_system.corpus.MetaMmCorpusWrapper import MetaMmCorpusWrapper
-from clustering_system.corpus.NewsCorpus import NewsCorpus
+from clustering_system.corpus.BowNewsCorpus import BowNewsCorpus
+from clustering_system.corpus.FolderAggregatedBowNewsCorpora import FolderAggregatedBowNewsCorpora
+from clustering_system.corpus.FolderAggregatedLineNewsCorpora import FolderAggregatedLineNewsCorpora
+from clustering_system.corpus.LineCorpus import LineCorpus
+from clustering_system.corpus.LineNewsCorpus import LineNewsCorpus
 from clustering_system.corpus.SinglePassCorpusWrapper import SinglePassCorpusWrapper
 from clustering_system.corpus.SingletonCorpora import SingletonCorpora
 from clustering_system.evaluator.RandomEvaluator import RandomEvaluator
@@ -23,13 +27,34 @@ from clustering_system.visualization.Visualizer import Visualizer
 
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
+
+class Corpus(Enum):
+    artificial = 0
+    news = 1
+
+
+class Model(Enum):
+    identity = 0
+    LSI = 1
+    LDA = 2
+    doc2vec = 3
+
+
 if __name__ == "__main__":
+    # Only the identity model can be used with artificial corpus
+    corpus_type = Corpus.artificial
+    model_type = Model.identity
+
+    # Only the LSI/LDA/doc2vec models can be used with news corpus
+    # corpus_type = Corpus.news
+    # model_type = Model.LSI
+    # model_type = Model.LDA
+    # model_type = Model.doc2vec
+
     # Constants
-    # ARTIFICIAL = True
-    ARTIFICIAL = False
-    K = 3     # Number of clusters
-    size = 2  # Size of a feature vector
-    language = 'en'
+    K = 3            # Number of clusters
+    size = 2         # Size of a feature vector
+    language = 'en'  # Language of news
 
     # Current directory
     dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -53,7 +78,8 @@ if __name__ == "__main__":
     visualization_file = os.path.join(temp_visualization_dir, 'visualization.gexf')
 
     temp_dictionary_file = os.path.join(temp_corpus_dir, 'dictionary.dict')
-    temp_training_corpus_file = os.path.join(temp_corpus_dir, 'training_corpus.mm')
+    temp_training_mm_corpus_file = os.path.join(temp_corpus_dir, 'training_corpus.mm')
+    temp_training_low_corpus_file = os.path.join(temp_corpus_dir, 'training_corpus.line')
     temp_test_corpus_file = os.path.join(temp_corpus_dir, 'test_corpus.mm')
 
     ########################
@@ -62,36 +88,63 @@ if __name__ == "__main__":
 
     # Select clustering method
     clustering = DummyClustering(K, size)
+    # TODO clustering methods
 
-    # If artificial data
-    if ARTIFICIAL:
+    if corpus_type == Corpus.artificial:
+        # For artificial data initialize identity model
         training_corpus = ArtificialCorpus(input=artificial_file)
         test_corpora = SingletonCorpora(SinglePassCorpusWrapper(ArtificialCorpus(input=artificial_file, metadata=True)))
         model = Identity()
-    else:  # News data
-        # Check if we have already pre-processed the corpus
-        if not os.path.exists(temp_training_corpus_file):
-            # Load and pre-process corpus
-            training_corpus = NewsCorpus(input=training_dir, metadata=True, language=language)
+    else:
+        # For LSI/LDA initialize bag of words corpus
+        if model_type in [Model.LSI, Model.LDA]:
+            # Check if we have already pre-processed the corpus
+            if not os.path.exists(temp_training_mm_corpus_file):
+                # Load and pre-process corpus
+                training_corpus = BowNewsCorpus(input=training_dir, metadata=True, language=language)
 
-            # Serialize pre-processed corpus and dictionary to temp files
-            training_corpus.dictionary.save(temp_dictionary_file)
-            MmCorpus.serialize(temp_training_corpus_file, training_corpus, metadata=True)
+                # Serialize pre-processed corpus and dictionary to temp files
+                training_corpus.dictionary.save(temp_dictionary_file)
+                MmCorpus.serialize(temp_training_mm_corpus_file, training_corpus, id2word=training_corpus.dictionary, metadata=True)
 
-        # Load corpus and dictionary from temp file
-        dictionary = Dictionary.load(temp_dictionary_file)
-        training_corpus = MmCorpus(temp_training_corpus_file)
+            # Load corpus and dictionary from temp file
+            dictionary = Dictionary.load(temp_dictionary_file)
+            training_corpus = MmCorpus(temp_training_mm_corpus_file)
 
-        # Select model
-        # model = Lsi(training_corpus, dictionary, temp_model_dir, size=size)
-        model = Lda(training_corpus, dictionary, temp_model_dir, size=size)
-        # model = Doc2vec()
+            # Initialize correct model
+            if model_type == Model.LSI:
+                model = Lsi(training_corpus, dictionary, temp_model_dir, size=size)
+            elif model_type == Model.LDA:
+                model = Lda(training_corpus, dictionary, temp_model_dir, size=size)
+            else:
+                logging.error("Unknown model type '%s'" % model_type)
+                sys.exit(1)
+        else:
+            # For doc2vec initialize list of words corpus
+
+            # Check if we have already pre-processed the corpus
+            if not os.path.exists(temp_training_low_corpus_file):
+                # Load and pre-process corpus
+                training_corpus = LineNewsCorpus(input=training_dir, metadata=True, language=language)
+
+                # Serialize pre-processed corpus and dictionary to temp files
+                training_corpus.dictionary.save(temp_dictionary_file)
+                LineCorpus.serialize(temp_training_low_corpus_file, training_corpus, training_corpus.dictionary, metadata=True)
+
+            # Load corpus and dictionary from temp file
+            dictionary = Dictionary.load(temp_dictionary_file)
+            training_corpus = LineCorpus(temp_training_low_corpus_file)
+
+            model = Doc2vec(training_corpus, temp_model_dir, size=size)
 
         # Save trained model to file(s)
         model.save(temp_model_dir)
 
-        # Test corpora
-        test_corpora = FolderAggregatedCorpora(test_dir, temp_dir, dictionary, language=language)
+        # Load test corpora
+        if model_type == Model.doc2vec:
+            test_corpora = FolderAggregatedLineNewsCorpora(test_dir, temp_dir, dictionary, language=language)
+        else:
+            test_corpora = FolderAggregatedBowNewsCorpora(test_dir, temp_dir, dictionary, language=language)
 
     ##############################
     # Online document clustering #

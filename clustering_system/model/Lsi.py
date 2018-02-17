@@ -1,13 +1,12 @@
 import os
-from typing import Iterable
 
 from gensim.corpora import Dictionary
 from gensim.models import TfidfModel, LsiModel
 
-from clustering_system.model.IModel import IModel
+from clustering_system.model.ModelABC import ModelABC
 
 
-class Lsi(IModel):
+class Lsi(ModelABC):
 
     def __init__(self, corpus, dictionary: Dictionary, temp_directory, size: int = 200, decay: float = 1.0):
         super().__init__(size)
@@ -50,5 +49,5 @@ class Lsi(IModel):
         self.tfidf.save(self._get_tfidf_filename(directory))
         self.lsi.save(self._get_lsi_filename(directory))
 
-    def _get_vector_representation(self, items: Iterable) -> Iterable:
+    def _get_vector_representation(self, items):
         return self.lsi[self.tfidf[items]]

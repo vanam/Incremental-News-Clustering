@@ -1,13 +1,12 @@
 import os
-from typing import Iterable
 
 from gensim.corpora import Dictionary
 from gensim.models import LdaModel
 
-from clustering_system.model.IModel import IModel
+from clustering_system.model.ModelABC import ModelABC
 
 
-class Lda(IModel):
+class Lda(ModelABC):
 
     def __init__(self, corpus, dictionary: Dictionary, temp_directory, size: int = 100, decay=0.5):
         super().__init__(size)
@@ -30,5 +29,5 @@ class Lda(IModel):
     def save(self, directory):
         self.lda.save(self._get_lda_filename(directory))
 
-    def _get_vector_representation(self, items: Iterable) -> Iterable:
+    def _get_vector_representation(self, items):
         return self.lda[items]
