@@ -2,10 +2,10 @@ import random
 
 import numpy as np
 
-from clustering_system.clustering.IClustering import IClustering
+from clustering_system.clustering.ClusteringABC import ClusteringABC
 
 
-class DummyClustering(IClustering):
+class DummyClustering(ClusteringABC):
 
     def __init__(self, K: int, D: int):
         """

@@ -1,7 +1,7 @@
 from networkx import DiGraph, write_gexf
 
 
-class Visualizer:
+class GraphVisualizer:
 
     def __init__(self):
         self.documents = {}

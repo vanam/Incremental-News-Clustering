@@ -24,7 +24,7 @@ from clustering_system.model.Identity import Identity
 from clustering_system.model.Lda import Lda
 from clustering_system.model.Lsi import Lsi
 from clustering_system.model.Random import Random
-from clustering_system.visualization.Visualizer import Visualizer
+from clustering_system.visualization.GraphVisualizer import GraphVisualizer
 
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
@@ -160,7 +160,7 @@ if __name__ == "__main__":
     ipca.fit_transform([vec for vec in model[training_corpus]])
 
     # Init visualizer
-    visualizer = Visualizer()
+    visualizer = GraphVisualizer()
 
     # Init evaluator
     evaluator = RandomEvaluator(K, test_corpora)
