@@ -7,7 +7,9 @@ from clustering_system.clustering.gmm.GaussianMixtureABC import PriorABC, Gaussi
 
 class GaussianCustomerAssignment:
 
-    def __init__(self, prior: PriorABC, mixture: GaussianMixtureABC, probability_threshold: float):
+    def __init__(self, c: list, z: list, prior: PriorABC, mixture: GaussianMixtureABC, probability_threshold: float):
+        self.z = z
+        self.c = c
         self.prior = prior
         self.mixture = mixture
         self.probability_threshold = probability_threshold

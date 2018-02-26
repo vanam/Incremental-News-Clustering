@@ -1,5 +1,5 @@
 import random
-from typing import Tuple
+from typing import Tuple, List
 
 import numpy as np
 
@@ -50,7 +50,7 @@ def draw(probabilities: np.ndarray):
     return len(probabilities) - 1
 
 
-def draw_indexed(index_prob: np.ndarray):
+def draw_indexed(index_prob: List[Tuple[int, float]]):
     """
     Draw from a discrete random variable with mass at second position in tuple in list `index_prob`.
     Indices returned are at first position in tuples.

@@ -13,13 +13,14 @@ class CovarianceType(Enum):
 
 class ClusteringABC(ABC):
 
-    def __init__(self, K: int, D: int):
-        self.K = K  # (Initial) number of components
+    def __init__(self, D: int):
         self.D = D  # Length of a feature vector
+
         self.N = 0  # Number of documents
+        self.K = 0  # Current number of documents
 
     @abstractmethod
-    def add_documents(self, ids, vectors: np.ndarray):
+    def add_documents(self, vectors: np.ndarray, metadata: np.ndarray):
         """
         Add documents represented by a list of vectors.
         """
@@ -52,6 +53,7 @@ class ClusteringABC(ABC):
     #     """
     #     pass
 
+    @property
     @abstractmethod
     def likelihood(self) -> float:
         """

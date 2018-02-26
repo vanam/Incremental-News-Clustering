@@ -6,10 +6,13 @@ import sys
 from enum import Enum
 from pathlib import Path
 
+import numpy as np
 from gensim.corpora import Dictionary, MmCorpus
 from sklearn.decomposition import IncrementalPCA
 
 from clustering_system.clustering.DummyClustering import DummyClustering
+from clustering_system.clustering.gmm.GaussianMixtureABC import NormalInverseWishartPrior
+from clustering_system.clustering.igmm.DdCrpClustering import DdCrpClustering
 from clustering_system.corpus.ArtificialCorpus import ArtificialCorpus
 from clustering_system.corpus.BowNewsCorpus import BowNewsCorpus
 from clustering_system.corpus.FolderAggregatedBowNewsCorpora import FolderAggregatedBowNewsCorpora
@@ -25,6 +28,7 @@ from clustering_system.model.Lda import Lda
 from clustering_system.model.Lsi import Lsi
 from clustering_system.model.Random import Random
 from clustering_system.visualization.GraphVisualizer import GraphVisualizer
+from clustering_system.visualization.LikelihoodVisualizer import LikelihoodVisualizer
 
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
@@ -48,8 +52,8 @@ if __name__ == "__main__":
     model_type = Model.identity
 
     # Only the LSI/LDA/doc2vec models can be used with news corpus
-    corpus_type = Corpus.news
-    model_type = Model.random
+    # corpus_type = Corpus.news
+    # model_type = Model.random
     # model_type = Model.LSI
     # model_type = Model.LDA
     # model_type = Model.doc2vec
@@ -78,7 +82,8 @@ if __name__ == "__main__":
     training_dir = os.path.join(data_dir, "genuine", "training")
     test_dir = os.path.join(data_dir, "genuine", "test")
     artificial_file = os.path.join(data_dir, "artificial", "02.dat")
-    visualization_file = os.path.join(temp_visualization_dir, 'visualization.gexf')
+    graph_visualization_file = os.path.join(temp_visualization_dir, 'visualization.gexf')
+    likelihood_visualization_file = os.path.join(temp_visualization_dir, 'clustering_likelihood.png')
 
     temp_dictionary_file = os.path.join(temp_corpus_dir, 'dictionary.dict')
     temp_training_mm_corpus_file = os.path.join(temp_corpus_dir, 'training_corpus.mm')
@@ -88,10 +93,24 @@ if __name__ == "__main__":
     ########################
     # Initialization phase #
     ########################
+    likelihood_visualizer = LikelihoodVisualizer()
 
     # Select clustering method
+
+    # Dummy clustering
     clustering = DummyClustering(K, size)
-    # TODO clustering methods
+
+    # ddCRP clustering
+    prior = NormalInverseWishartPrior(
+        np.array([0, 0]),
+        0.01,
+        np.array([[0, 0], [0, 0]]),
+        size + 1
+    )
+    clustering = DdCrpClustering(size, 0.01, prior, 20, K_max=K, visualizer=likelihood_visualizer)
+
+    # TODO CRP clustering
+    # TODO FGMM clustering
 
     if corpus_type == Corpus.artificial:
         # For artificial data initialize identity model
@@ -160,7 +179,7 @@ if __name__ == "__main__":
     ipca.fit_transform([vec for vec in model[training_corpus]])
 
     # Init visualizer
-    visualizer = GraphVisualizer()
+    graph_visualizer = GraphVisualizer()
 
     # Init evaluator
     evaluator = RandomEvaluator(K, test_corpora)
@@ -170,7 +189,6 @@ if __name__ == "__main__":
         logging.info("Testing corpus #%d." % t)
 
         docs, metadata = zip(*docs_metadata)
-        ids = list(zip(*metadata))[0]
 
         # Update model
         model.update(docs)
@@ -179,7 +197,7 @@ if __name__ == "__main__":
         docs = model[docs]
 
         # Cluster new data
-        clustering.add_documents(ids, docs)
+        clustering.add_documents(docs, metadata)
         clustering.update()
 
         # Reduce vector dimension for visualization
@@ -187,19 +205,23 @@ if __name__ == "__main__":
         reduced_docs = ipca.transform(docs)
 
         # Visualization
-        visualizer.add_documents(reduced_docs, metadata, t)
+        graph_visualizer.add_documents(reduced_docs, metadata, t)
 
         ids_clusters = []
 
-        for doc_id, cluster_id in clustering:
+        # Iterate over clustered documents
+        for doc_id, cluster_id, *rest in clustering:
             ids_clusters.append((doc_id, cluster_id))
-            visualizer.set_cluster_for_doc(t, doc_id, cluster_id)
 
-        evaluator.evaluate(t, ids_clusters, clustering.X, clustering.log_likelihood)
+            linked_doc_id = rest[0] if rest else None
+            graph_visualizer.set_cluster_for_doc(t, doc_id, cluster_id, linked_doc_id=linked_doc_id)
+
+        evaluator.evaluate(t, ids_clusters, clustering.X, clustering.likelihood)
 
     # Store evaluation and visualization
     logging.info("Storing evaluation")
     evaluator.save(temp_visualization_dir)
 
     logging.info("Generating visualization")
-    visualizer.save(visualization_file)
+    graph_visualizer.save(graph_visualization_file)
+    likelihood_visualizer.save(likelihood_visualization_file)
