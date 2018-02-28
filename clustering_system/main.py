@@ -12,7 +12,7 @@ from sklearn.decomposition import IncrementalPCA
 
 from clustering_system.clustering.DummyClustering import DummyClustering
 from clustering_system.clustering.gmm.GaussianMixtureABC import NormalInverseWishartPrior
-from clustering_system.clustering.igmm.DdCrpClustering import DdCrpClustering
+from clustering_system.clustering.igmm.DdCrpClustering import DdCrpClustering, logistic_decay
 from clustering_system.corpus.ArtificialCorpus import ArtificialCorpus
 from clustering_system.corpus.BowNewsCorpus import BowNewsCorpus
 from clustering_system.corpus.FolderAggregatedBowNewsCorpora import FolderAggregatedBowNewsCorpora
@@ -101,13 +101,23 @@ if __name__ == "__main__":
     clustering = DummyClustering(K, size)
 
     # ddCRP clustering
+    v_0 = size + 1
+
     prior = NormalInverseWishartPrior(
         np.array([0, 0]),
         0.01,
-        np.array([[0, 0], [0, 0]]),
-        size + 1
+        v_0 * np.eye(size),
+        v_0
     )
-    clustering = DdCrpClustering(size, 0.01, prior, 20, K_max=K, visualizer=likelihood_visualizer)
+
+    # Decay function
+    # a = 3  # 3 days
+    a = 1  # 3 day
+
+    def f(d: float):
+        return logistic_decay(d, a)
+
+    clustering = DdCrpClustering(size, 0.01, prior, 20, f, K_max=K, visualizer=likelihood_visualizer)
 
     # TODO CRP clustering
     # TODO FGMM clustering
@@ -202,7 +212,7 @@ if __name__ == "__main__":
 
         # Reduce vector dimension for visualization
         ipca.partial_fit(docs)
-        reduced_docs = ipca.transform(docs)
+        reduced_docs = ipca.transform(docs) if corpus_type == Corpus.artificial else docs
 
         # Visualization
         graph_visualizer.add_documents(reduced_docs, metadata, t)

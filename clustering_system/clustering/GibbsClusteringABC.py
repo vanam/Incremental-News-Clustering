@@ -1,5 +1,7 @@
 import random
 from abc import abstractmethod
+from heapq import heappop
+from queue import PriorityQueue
 
 import numpy as np
 
@@ -24,18 +26,25 @@ class GibbsClusteringABC(ClusteringABC):
         self.X = np.empty((0, D), float)
         self.z = []  # -1 - unassigned, <0, K) assigned
 
+        # Maintain cluster numbers as concise as possible
+        self.counter = 0
+        self.reusable_numbers = PriorityQueue()
+
     def add_documents(self, vectors: np.ndarray, metadata: np.ndarray):
-        for md, vector in zip(metadata, vectors):
-            # Add document at the end of arrays
-            self.ids.append(md[0])
-            self.X = np.vstack((self.X, np.array([vector])))
-            self.z = -1  # customer is unassigned to a table
+        raise NotImplementedError
+        # for md, vector in zip(metadata, vectors):
+        #     # Add document at the end of arrays
+        #     self.ids.append(md[0])
+        #     self.X = np.vstack((self.X, np.array([vector])))
+        #     self.z = -1  # customer is unassigned to a table
 
     @abstractmethod
     def _sample_document(self, i: int):
         pass
 
     def update(self):
+        # TODO clear cache if necessary
+
         # Repeat Gibbs sampling iterations
         for _ in range(self.n_iterations):
 
@@ -48,3 +57,12 @@ class GibbsClusteringABC(ClusteringABC):
                 self.visualizer.add(self.likelihood, self.N)
 
         # TODO update cluster components if necessary
+
+    def _get_new_cluster_number(self):
+        if not self.reusable_numbers.empty():
+            z = self.reusable_numbers.get_nowait()
+        else:
+            z = self.counter
+            self.counter += 1
+
+        return z

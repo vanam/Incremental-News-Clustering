@@ -1,3 +1,5 @@
+from collections import defaultdict
+
 from networkx import DiGraph, write_gexf
 
 
@@ -10,13 +12,15 @@ class GraphVisualizer:
         for doc, metadata in zip(docs, metadata):
             doc_id = metadata[0]
             title = metadata[2]
-            # For each document store (start_time, end_time, doc_vec, cluster_list, title, linked_doc_id)
-            self.documents[str(doc_id)] = [time, time, doc, [], title, None]
+            # For each document store (start_time, end_time, doc_vec, cluster_list, title, linked_doc_id_list)
+            self.documents[str(doc_id)] = [time, time, doc, [], title, defaultdict(list)]
 
     def set_cluster_for_doc(self, t, doc_id, cluster_id, linked_doc_id: int = None):
         self.documents[doc_id][1] = t + 1
         self.documents[doc_id][3].append((int(cluster_id), t, t + 1))
-        self.documents[doc_id][5] = linked_doc_id
+
+        if linked_doc_id is not None:
+            self.documents[doc_id][5][int(linked_doc_id)].append((t, t + 1))
 
     def save(self, filename: str):
         graph = DiGraph(mode="dynamic")
@@ -33,6 +37,11 @@ class GraphVisualizer:
             )
 
             # Add edges (customer assignments in dd-CRP)
-            graph.add_edge(doc_id, doc[5])
+            for linked_doc_id, spells in doc[5].items():
+                graph.add_edge(
+                    doc_id,
+                    linked_doc_id,
+                    spells=spells  # [(start, end), ...]
+                )
 
         write_gexf(graph, filename)
