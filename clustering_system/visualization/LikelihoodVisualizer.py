@@ -36,3 +36,4 @@ class LikelihoodVisualizer:
         plt.tight_layout()
 
         fig.savefig(filename)
+        plt.close()

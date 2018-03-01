@@ -1,19 +1,16 @@
 import math
-import random
-from heapq import heappush
-
-from scipy.special import multigammaln
 from typing import List, Tuple, Callable
 
 import numpy as np
 import scipy.misc
-from scipy.stats._multivariate import multivariate_normal_gen, multivariate_normal
+from scipy.special import multigammaln
+from scipy.stats import multivariate_normal
 
 from clustering_system.clustering.ClusteringABC import CovarianceType
 from clustering_system.clustering.GibbsClusteringABC import GibbsClusteringABC
 from clustering_system.clustering.gmm.FullGaussianMixture import FullGaussianMixture
-from clustering_system.clustering.gmm.GaussianMixtureABC import PriorABC, NormalInverseWishartPrior
-from clustering_system.utils import draw_indexed, draw
+from clustering_system.clustering.gmm.GaussianMixtureABC import NormalInverseWishartPrior
+from clustering_system.utils import draw_indexed
 from clustering_system.visualization.LikelihoodVisualizer import LikelihoodVisualizer
 
 
@@ -101,9 +98,9 @@ class DdCrpClustering(GibbsClusteringABC):
         """
         :return: Return average log likelihood of data.
         """
-        k, alpha, mean, covariance = self._get_gaussian_params()
+        k, alpha, mean, covariance, _ = self._get_gaussian_params()
 
-        rv = np.empty(k, dtype=multivariate_normal_gen)
+        rv = [None] * k
         for i in range(k):
             rv[i] = multivariate_normal(mean[i], covariance[i])
 
@@ -111,20 +108,22 @@ class DdCrpClustering(GibbsClusteringABC):
 
         return likelihood / self.N
 
-    def _get_gaussian_params(self) -> Tuple[int, np.ndarray, np.ndarray, np.ndarray]:
+    def _get_gaussian_params(self) -> Tuple[int, np.ndarray, np.ndarray, np.ndarray, List[np.ndarray]]:
         cluster_numbers = np.unique(self.z)
 
         alpha = np.empty(self.K, dtype=float)
         mean = np.empty((self.K, self.D), dtype=float)
         covariance = np.empty((self.K, self.D, self.D), dtype=float)
+        X = []
 
         for i, cn in enumerate(cluster_numbers):
             a, m, c = self._map(cn)
             alpha[i] = a
             mean[i] = m
             covariance[i] = c
+            X.append(self.X[self.z == cn])
 
-        return self.K, alpha, mean, covariance
+        return self.K, alpha, mean, covariance, X
 
     def _map(self, c: int):
         """

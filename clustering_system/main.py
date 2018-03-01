@@ -5,6 +5,7 @@ import os
 import sys
 from enum import Enum
 from pathlib import Path
+from typing import Tuple
 
 import numpy as np
 from gensim.corpora import Dictionary, MmCorpus
@@ -27,6 +28,7 @@ from clustering_system.model.Identity import Identity
 from clustering_system.model.Lda import Lda
 from clustering_system.model.Lsi import Lsi
 from clustering_system.model.Random import Random
+from clustering_system.visualization.ClusterVisualizer import ClusterVisualizer
 from clustering_system.visualization.GraphVisualizer import GraphVisualizer
 from clustering_system.visualization.LikelihoodVisualizer import LikelihoodVisualizer
 
@@ -72,11 +74,13 @@ if __name__ == "__main__":
     temp_corpus_dir = os.path.join(temp_dir, 'corpus')
     temp_model_dir = os.path.join(temp_dir, 'model')
     temp_visualization_dir = os.path.join(temp_dir, 'visualization')
+    temp_cluster_visualization_dir = os.path.join(temp_visualization_dir, 'cluster')
 
     # Make sure temp directories exist
     Path(temp_corpus_dir).mkdir(parents=True, exist_ok=True)
     Path(temp_model_dir).mkdir(parents=True, exist_ok=True)
     Path(temp_visualization_dir).mkdir(parents=True, exist_ok=True)
+    Path(temp_cluster_visualization_dir).mkdir(parents=True, exist_ok=True)
 
     # Paths to data
     training_dir = os.path.join(data_dir, "genuine", "training")
@@ -106,18 +110,25 @@ if __name__ == "__main__":
     prior = NormalInverseWishartPrior(
         np.array([0, 0]),
         0.01,
-        v_0 * np.eye(size),
+        0.01*np.eye(size),
         v_0
     )
 
     # Decay function
     # a = 3  # 3 days
-    a = 1  # 1 day
+    #
+    # def f(d: float):
+    #     return logistic_decay(d, a)
 
-    def f(d: float):
+    # Decay function for artificial data
+    a = 10  # 1 day
+
+    def f(d):
+        # Hack distance to look like time
+        d = np.math.hypot(d[0], d[1]) * 60*60*24
         return logistic_decay(d, a)
 
-    clustering = DdCrpClustering(size, 0.01, prior, 20, f, visualizer=likelihood_visualizer)
+    clustering = DdCrpClustering(size, 0.0001, prior, 20, f, visualizer=likelihood_visualizer)
 
     # TODO CRP clustering
     # TODO FGMM clustering
@@ -188,8 +199,9 @@ if __name__ == "__main__":
     ipca = IncrementalPCA(n_components=2, batch_size=10)
     ipca.fit_transform([vec for vec in model[training_corpus]])
 
-    # Init visualizer
+    # Init visualizers
     graph_visualizer = GraphVisualizer()
+    cluster_visualizer = ClusterVisualizer()
 
     # Init evaluator
     evaluator = RandomEvaluator(K, test_corpora)
@@ -225,6 +237,23 @@ if __name__ == "__main__":
 
             linked_doc_id = rest[0] if rest else None
             graph_visualizer.set_cluster_for_doc(t, doc_id, cluster_id, linked_doc_id=linked_doc_id)
+
+        # Visualize clusters
+        k, _, mean, covariance, X = clustering._get_gaussian_params()
+
+        # Reduce vector dimension for visualization
+        reduced_X = []
+        for i in range(k):
+            reduced_X_k = ipca.transform(X[i]) if corpus_type == Corpus.artificial else docs
+            reduced_X.append(reduced_X_k)
+
+        cluster_visualizer.save(
+            os.path.join(temp_cluster_visualization_dir, '{:05d}.png'.format(t)),
+            k,
+            mean,
+            covariance,
+            reduced_X
+        )
 
         evaluator.evaluate(t, ids_clusters, clustering.X, clustering.likelihood)
 

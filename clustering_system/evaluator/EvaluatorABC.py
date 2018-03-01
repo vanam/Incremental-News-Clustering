@@ -83,6 +83,7 @@ class EvaluatorABC(ABC):
         plt.tight_layout()
 
         fig.savefig(filename)
+        plt.close()
 
     def _chart_2(self, filename: str):
         t = len(self.evaluations)
@@ -114,6 +115,7 @@ class EvaluatorABC(ABC):
         plt.tight_layout()
 
         fig.savefig(filename)
+        plt.close()
 
     def _chart_3(self, filename: str):
         t = len(self.evaluations)
@@ -143,6 +145,7 @@ class EvaluatorABC(ABC):
         plt.tight_layout()
 
         fig.savefig(filename)
+        plt.close()
 
     def _chart_4(self, filename: str):
         t = len(self.evaluations)
@@ -169,3 +172,4 @@ class EvaluatorABC(ABC):
         plt.tight_layout()
 
         fig.savefig(filename)
+        plt.close()
