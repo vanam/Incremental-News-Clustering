@@ -63,9 +63,9 @@ class DdCrpClustering(GibbsClusteringABC):
     def __init__(self, D: int, alpha: float, prior: NormalInverseWishartPrior, n_iterations: int,
                  decay_function: Callable[[float], float],
                  probability_threshold: float = 0.001,
-                 K_max: int = None, visualizer: LikelihoodVisualizer = None,
+                 visualizer: LikelihoodVisualizer = None,
                  covariance_type: CovarianceType = CovarianceType.full):
-        super().__init__(D, alpha, prior, n_iterations, K_max=K_max, visualizer=visualizer)
+        super().__init__(D, alpha, prior, n_iterations, visualizer=visualizer)
         self.f = decay_function
         self.threshold = probability_threshold
 
@@ -117,9 +117,6 @@ class DdCrpClustering(GibbsClusteringABC):
         alpha = np.empty(self.K, dtype=float)
         mean = np.empty((self.K, self.D), dtype=float)
         covariance = np.empty((self.K, self.D, self.D), dtype=float)
-
-        print("%d == %d" % (self.K, len(cluster_numbers)))
-        print(cluster_numbers)
 
         for i, cn in enumerate(cluster_numbers):
             a, m, c = self._map(cn)
@@ -232,8 +229,15 @@ class DdCrpClustering(GibbsClusteringABC):
 
         # Update undirected graph
         c = self.c[i]
-        self.g[i].discard(c)
-        self.g[c].discard(i)
+        c_c = self.c[c]
+
+        if c == i:  # If self assignment
+            self.g[i].remove(i)
+        elif c_c == i:  # If trivial cycle a <--> b breaks to a <-- b
+            pass  # Graph remains the same
+        else:
+            self.g[i].remove(c)
+            self.g[c].remove(i)
 
         # Remove customer assignment c_i
         self.c[i] = -1
@@ -299,15 +303,17 @@ class DdCrpClustering(GibbsClusteringABC):
         :param i:
         :return: Return False if c_i is on a cycle, True otherwise
         """
+        c = self.c[i]
+
         # If there is a trivial cycle a <--> a
-        if self.c[i] == i:
+        if c == i:
             return False
 
         # If there is a trivial cycle a <--> b
-        if self.c[i] == self.c[self.c[i]]:
+        if i == self.c[c]:
             return False
 
-        # Traverse directed graph in search for cycle which contains assignment c_i
+        # Traverse directed graph in search for a cycle which contains assignment c_i
         visited = {i}
         c = self.c[i]
         while c not in visited:
@@ -320,16 +326,13 @@ class DdCrpClustering(GibbsClusteringABC):
 
         return True
 
-    def _get_people_next_to(self, c):
+    def _get_people_next_to(self, c: int):
         """
         Get indices of customers siting with customer c at the same table
 
         :param c:
         :return:
         """
-        print("")
-        print("starting at %d" % c)
-
         # Traverse undirected graph from customer i
         visited = set()
         stack = [c]
@@ -339,9 +342,6 @@ class DdCrpClustering(GibbsClusteringABC):
                 visited.add(c)
                 stack.extend(self.g[c] - visited)
 
-        print(visited)
-        print(self.z)
-        print(self.g)
         return visited
 
     def _TMP_likelihood(self, i: int, c: int):
@@ -391,15 +391,6 @@ class DdCrpClustering(GibbsClusteringABC):
         logdet_0 = np.linalg.slogdet(self.prior.S_0)[1]
         S = np.sum([np.outer(_, _) for _ in X], axis=0)
         logdet_n = np.linalg.slogdet(self.prior.S_0 + S + k_0 * np.outer(m_0, m_0) - k_n * np.outer(m_n, m_n))[1]
-
-        # print("D = %d" % D)
-        # print("N = %d" % N)
-        # print("v_0 = %f" % v_0)
-        # print("v_n = %f" % v_n)
-        # print("k_0 = %f" % k_0)
-        # print("k_n = %f" % k_n)
-        # print("d_0 = %f" % logdet_0)
-        # print("d_n = %f" % logdet_n)
 
         return \
             - N * D / 2 * math.log(math.pi) \

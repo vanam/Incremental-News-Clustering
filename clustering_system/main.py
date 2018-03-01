@@ -112,12 +112,12 @@ if __name__ == "__main__":
 
     # Decay function
     # a = 3  # 3 days
-    a = 1  # 3 day
+    a = 1  # 1 day
 
     def f(d: float):
         return logistic_decay(d, a)
 
-    clustering = DdCrpClustering(size, 0.01, prior, 20, f, K_max=K, visualizer=likelihood_visualizer)
+    clustering = DdCrpClustering(size, 0.01, prior, 20, f, visualizer=likelihood_visualizer)
 
     # TODO CRP clustering
     # TODO FGMM clustering

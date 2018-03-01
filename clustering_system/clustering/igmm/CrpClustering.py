@@ -8,7 +8,7 @@ from clustering_system.clustering.gmm.GaussianMixtureABC import PriorABC
 from clustering_system.utils import draw
 
 
-class DdCrpClustering(GibbsClusteringABC):
+class CrpClustering(GibbsClusteringABC):
 
     def __init__(self, K: int, D: int, alpha: float, prior: PriorABC, n_iterations: int, covariance_type: CovarianceType):
         super().__init__(K, D, alpha, prior, n_iterations)
