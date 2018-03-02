@@ -1,13 +1,12 @@
 import random
 from abc import abstractmethod
-from heapq import heappop
 from queue import PriorityQueue
+from typing import Tuple, List
 
 import numpy as np
 
 from clustering_system.clustering.ClusteringABC import ClusteringABC, CovarianceType
 from clustering_system.clustering.gmm.FullGaussianMixture import FullGaussianMixture
-
 from clustering_system.clustering.gmm.GaussianMixtureABC import PriorABC
 from clustering_system.visualization.LikelihoodVisualizer import LikelihoodVisualizer
 
@@ -34,17 +33,22 @@ class GibbsClusteringABC(ClusteringABC):
         self.counter = 0
         self.reusable_numbers = PriorityQueue()
 
-    def add_documents(self, vectors: np.ndarray, metadata: np.ndarray):
-        raise NotImplementedError
-        # for md, vector in zip(metadata, vectors):
-        #     # Add document at the end of arrays
-        #     self.ids.append(md[0])
-        #     self.X = np.vstack((self.X, np.array([vector])))
-        #     self.z = -1  # customer is unassigned to a table
+    @property
+    def likelihood(self) -> float:
+        return self.mixture.likelihood
 
-    @abstractmethod
-    def _sample_document(self, i: int):
-        pass
+    @property
+    def parameters(self) -> Tuple[int, np.ndarray, np.ndarray, np.ndarray, List[np.ndarray]]:
+        return self.mixture.parameters
+
+    def add_documents(self, vectors: np.ndarray, metadata: np.ndarray):
+        for md, vector in zip(metadata, vectors):
+            doc_id, timestamp, *_ = md
+
+            # Add document at the end of arrays
+            self.ids.append(doc_id)
+            self.mixture.add(vector, -1)  # New customer waits outside of the restaurant
+            self.N += 1                   # Increment number of documents (customers)
 
     def update(self):
         # TODO clear cache if necessary
@@ -62,6 +66,13 @@ class GibbsClusteringABC(ClusteringABC):
 
         # TODO update cluster components if necessary
 
+    def __iter__(self):
+        """
+        For each document return (doc_id, cluster_id)
+        """
+        for doc_id, cluster_id in zip(self.ids, self.mixture.z):
+            yield doc_id, cluster_id
+
     def _get_new_cluster_number(self):
         if not self.reusable_numbers.empty():
             z = self.reusable_numbers.get_nowait()
@@ -70,3 +81,34 @@ class GibbsClusteringABC(ClusteringABC):
             self.counter += 1
 
         return z
+
+    def _remove_document(self, i: int):
+        """
+        Remove document from component z[i].
+
+        :param i: document index
+        """
+        z = self.mixture.z[i]
+        if z != -1:
+            self.mixture.z[i] = -1
+            self.mixture.N_k[z] -= 1
+
+            if self.mixture.N_k[z] == 0:
+                self.K -= 1
+
+    def _add_document(self, i: int, z: int):
+        """
+        Add document to component z[i] = z.
+
+        :param i: document id
+        :param z: component id
+        """
+        self.mixture.z[i] = z
+        self.mixture.N_k[z] += 1
+
+        if self.mixture.N_k[z] == 1:
+            self.K += 1
+
+    @abstractmethod
+    def _sample_document(self, i: int):
+        pass

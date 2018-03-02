@@ -2,7 +2,7 @@ import math
 from typing import Tuple, List
 
 import numpy as np
-from scipy.special import multigammaln
+from scipy.special import multigammaln, gammaln
 from scipy.stats import multivariate_normal
 
 from clustering_system.clustering.gmm.GaussianMixtureABC import GaussianMixtureABC
@@ -109,21 +109,68 @@ class FullGaussianMixture(GaussianMixtureABC):
         sigma = S_N / (v_N + D + 2)
         return N_k / N, m_N, sigma
 
-    #
-    # def get_posterior_predictive(self, i: int) -> np.ndarray:
-    #     """
-    #     Return the log posterior predictive probability of `X[i]` under component `k` for each component.
-    #
-    #     :param i: document index
-    #     :return: np.ndarray of K floats where K is number of components
-    #     """
-    #     raise NotImplementedError
-    #
-    # def get_prior_predictive(self, i: int) -> float:
-    #     """
-    #     Return the probability of `X[i]` under the prior alone.
-    #
-    #     :param i: document id
-    #     :return:
-    #     """
-    #     raise NotImplementedError
+    def get_posterior_predictive(self, i: int, cluster_numbers: List[int]) -> np.ndarray:
+        """
+        Return the log posterior predictive probability of `X[i]` under component `k` for each component.
+
+        :param i: document index
+        :return: np.ndarray of K floats where K is number of components
+        """
+        K = len(cluster_numbers)
+
+        probabilities = np.empty(K, float)
+        for j, cn in enumerate(cluster_numbers):
+            probabilities[j] = self._get_posterior_predictive_k(i, cn)
+
+        return probabilities
+
+    def _get_posterior_predictive_k(self, i: int, c: int) -> np.ndarray:
+
+        k_N = self.prior.k_0 + self.N_k[c]
+        v_N = self.prior.v_0 + self.N_k[c]
+
+        X_k = self.X[self.z == c]
+        m_N = (self.prior.k_0 * self.prior.m_0 + np.sum(X_k, axis=0)) / k_N
+        mu = m_N
+        v = v_N - self.D + 1
+
+        # (4.214) in Murphy, p. 134
+        S = np.sum([np.outer(_, _) for _ in X_k], axis=0)
+        S_N = self.prior.S_0 + S + self.prior.k_0 * np.outer(self.prior.m_0, self.prior.m_0) - k_N * np.outer(m_N, m_N)
+
+        cov = (k_N + 1.) / (k_N * (v_N - self.D + 1.)) * S_N
+        log_det_cov_k = np.linalg.slogdet(cov)[1]
+        inv_cov_k = np.linalg.inv(cov)
+
+        return self._multivariate_students_t(i, mu, log_det_cov_k, inv_cov_k, v)
+
+    def get_prior_predictive(self, i: int) -> float:
+        """
+        Return the probability of `X[i]` under the prior alone.
+
+        :param i: document id
+        :return:
+        """
+        mu = self.prior.m_0
+        v = self.prior.v_0 - self.D + 1
+
+        # Special case of _log_posterior_predictive with no data
+        # (4.214) in Murphy, p. 134
+        S_N = self.prior.S_0
+
+        cov = (self.prior.k_0 + 1) / (self.prior.k_0 * (self.prior.v_0 - self.D + 1)) * S_N
+        logdet_cov = np.linalg.slogdet(cov)[1]
+        inv_cov = np.linalg.inv(cov)
+
+        return self._multivariate_students_t(i, mu, logdet_cov, inv_cov, v)
+
+    def _multivariate_students_t(self, i, mu, logdet_cov, inv_cov, v):
+        delta = self.X[i] - mu
+        return (
+                + gammaln((v + self.D) / 2.)
+                - gammaln(v / 2.)
+                - self.D / 2. * math.log(v)
+                - self.D / 2. * math.log(np.pi)
+                - 0.5 * logdet_cov
+                - (v + self.D) / 2. * math.log(1 + 1. / v * np.dot(np.dot(delta, inv_cov), delta))
+        )

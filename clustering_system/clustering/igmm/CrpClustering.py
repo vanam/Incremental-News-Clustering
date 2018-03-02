@@ -1,29 +1,28 @@
+import math
+
 import numpy as np
 import scipy.misc
 
 from clustering_system.clustering.ClusteringABC import CovarianceType
 from clustering_system.clustering.GibbsClusteringABC import GibbsClusteringABC
-from clustering_system.clustering.gmm.FullGaussianMixture import FullGaussianMixture
 from clustering_system.clustering.gmm.GaussianMixtureABC import PriorABC
 from clustering_system.utils import draw
+from clustering_system.visualization.LikelihoodVisualizer import LikelihoodVisualizer
 
 
 class CrpClustering(GibbsClusteringABC):
 
-    def __init__(self, K: int, D: int, alpha: float, prior: PriorABC, n_iterations: int, covariance_type: CovarianceType):
-        super().__init__(K, D, alpha, prior, n_iterations)
-
-        if covariance_type == CovarianceType.full:
-            self.mixture = FullGaussianMixture(prior)
-        else:
-            raise NotImplementedError("Unsupported covariance type %s." % covariance_type)
+    def __init__(self, D: int, alpha: float, prior: PriorABC, n_iterations: int,
+                 visualizer: LikelihoodVisualizer = None,
+                 covariance_type: CovarianceType = CovarianceType.full):
+        super().__init__(D, alpha, prior, n_iterations, visualizer=visualizer, covariance_type=covariance_type)
 
     def _sample_document(self, i: int):
         # Remove component assignment for a document i
-        self.mixture.remove_assignment(i)
+        self._remove_document(i)
 
         # Calculate component assignment probabilities for each component
-        probabilities = self.mixture.get_posterior_predictive(i) + self._get_mixture_probability()
+        probabilities = self.mixture.get_posterior_predictive(i, cluster_numbers=np.unique(self.mixture.z)) + self._get_mixture_probability()
 
         # Calculate component assignment probabilities for new component
         probabilities = np.append(
@@ -35,26 +34,30 @@ class CrpClustering(GibbsClusteringABC):
         probabilities = np.exp(probabilities - scipy.misc.logsumexp(probabilities))
 
         # Sample new component assignment
-        k = draw(probabilities)
+        z = draw(probabilities)
 
         # Add document to new component
-        self.mixture.add_assignment(i, k)
-
-    def __iter__(self):
-        raise NotImplementedError
+        self._add_document(i, z)
 
     def _get_mixture_probability(self) -> np.ndarray:
         """
         Return the log mixture probability under component `k` for each component.
 
-        :return: np.ndarray of K floats where K is number of components
+        :return: np.ndarray of K floats where K is number of non-empty components sorted by cluster number
         """
-        raise NotImplementedError
+        cluster_numbers = np.unique(self.mixture.z)
+        K = len(cluster_numbers)
+
+        probabilities = np.empty(K, float)
+        for i, cn in enumerate(cluster_numbers):
+            probabilities[i] = self.mixture.N_k[cn]
+
+        return probabilities
 
     def _get_new_cluster_mixture_probability(self) -> float:
         """
-        Return the log mixture probability for new component
+        Return the log mixture probability for new component.
 
-        :return:
+        :return: log probability
         """
-        return self.alpha
+        return math.log(self.alpha)

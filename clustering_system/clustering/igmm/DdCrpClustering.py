@@ -84,14 +84,6 @@ class DdCrpClustering(GibbsClusteringABC):
             # Store timestamp of document (prior information)
             self.timestamps.append(timestamp / (60*60*24))  # Timestamp in days
 
-    @property
-    def likelihood(self) -> float:
-        return self.mixture.likelihood
-
-    @property
-    def parameters(self) -> Tuple[int, np.ndarray, np.ndarray, np.ndarray, List[np.ndarray]]:
-        return self.mixture.parameters
-
     def _sample_document(self, i: int):
         # Remove customer assignment for a document i
         self._remove_assignment(i)

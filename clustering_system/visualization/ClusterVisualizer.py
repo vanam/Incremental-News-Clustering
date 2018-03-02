@@ -1,4 +1,5 @@
 import itertools
+import logging
 from typing import List
 
 import matplotlib.pyplot as plt
@@ -10,7 +11,7 @@ from scipy.stats import f
 ALPHA = 0.005
 
 COLORS = "bgrcmykw"
-POINTS = ".,ov^<>12348spP*hH+xXDd|_"
+POINTS = "ov^<>12348spP*hH+xXDd|_"
 
 # Calculate all possible point-color combinations
 POINT_COLORS = list(map(lambda p: "".join(p), itertools.product(POINTS, COLORS)))
@@ -44,8 +45,20 @@ class ClusterVisualizer:
             plt.plot(x, y, POINT_COLORS[next(POINT_COLORS_INDEX_GENERATOR)], alpha=0.5)
 
         # Plot ellipse
+        # print(X)
         for i in range(k):
             n = len(X[i])
+            # print("N_k = %d" % n)
+
+            # if n < p:
+            #     logging.error('Not enough points to estimate covariance matrix, %d points given.' % n)
+            #     continue
+            #
+            # # Find mean
+            # mu = np.mean(X[i], axis=0)
+            #
+            # # Find covariance matrix
+            # C = np.cov(X[i], rowvar=False)  # np.dot(data.T, data) / (data.shape[0] - 1)
 
             # Mean, covariance
             mu, C = mean[i], covariance[i]

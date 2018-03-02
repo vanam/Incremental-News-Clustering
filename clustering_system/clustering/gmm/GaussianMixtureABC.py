@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from collections import Counter
 from typing import Tuple, List
 
 import numpy as np
@@ -37,16 +38,11 @@ class GaussianMixtureABC(ABC):
 
         self.X = np.empty((0, D), float)
         self.z = np.empty((0, 1), int)  # -1 - unassigned, <0, K) assigned
+        self.N_k = Counter()
 
     def add(self, vector: np.ndarray, z: int):
-        # print("add before")
-        # print(self.X)
-        # print(self.z)
         self.X = np.vstack((self.X, np.array([vector])))
         self.z = np.append(self.z, z)
-        # print("add aftrer")
-        # print(self.X)
-        # print(self.z)
 
     @property
     @abstractmethod
@@ -66,20 +62,23 @@ class GaussianMixtureABC(ABC):
         """
         pass
 
-    # def get_posterior_predictive(self, i: int) -> np.ndarray:
-    #     """
-    #     Return the log posterior predictive probability of `X[i]` under component `k` for each component.
-    #
-    #     :param i: document index
-    #     :return: np.ndarray of K floats where K is number of components
-    #     """
-    #     pass
-    #
-    # def get_prior_predictive(self, i: int) -> float:
-    #     """
-    #     Return the probability of `X[i]` under the prior alone.
-    #
-    #     :param i: document id
-    #     :return:
-    #     """
-    #     pass
+    @abstractmethod
+    def get_posterior_predictive(self, i: int, cluster_numbers: List[int]) -> np.ndarray:
+        """
+        Return the log posterior predictive probability of `X[i]` under component `k` for each component.
+
+        :param i: document index
+        :param cluster_numbers: list of component numbers
+        :return: np.ndarray of K floats where K is number of components
+        """
+        pass
+
+    @abstractmethod
+    def get_prior_predictive(self, i: int) -> float:
+        """
+        Return the probability of `X[i]` under the prior alone.
+
+        :param i: document id
+        :return:
+        """
+        pass
