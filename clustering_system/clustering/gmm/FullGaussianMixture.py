@@ -1,41 +1,129 @@
+import math
+from typing import Tuple, List
+
 import numpy as np
+from scipy.special import multigammaln
+from scipy.stats import multivariate_normal
 
 from clustering_system.clustering.gmm.GaussianMixtureABC import GaussianMixtureABC
 
 
 class FullGaussianMixture(GaussianMixtureABC):
 
-    def add_assignment(self, i: int, k: int):
+    @property
+    def likelihood(self) -> float:
         """
-        Add document i to a component k.
-
-        :param i: document index
-        :param k: component index
+        :return: Return average log likelihood of data.
         """
-        raise NotImplementedError
+        k, alpha, mean, covariance, _ = self.parameters
 
-    def remove_assignment(self, i: int):
+        rv = [None] * k
+        for i in range(k):
+            rv[i] = multivariate_normal(mean[i], covariance[i])
+
+        likelihood = sum(np.log([sum([alpha[j] * rv[j].pdf(d) for j in range(k)]) for d in self.X]))
+
+        return likelihood / len(self.X)
+
+    @property
+    def parameters(self) -> Tuple[int, np.ndarray, np.ndarray, np.ndarray, List[np.ndarray]]:
         """
-        Remove document i from its component.
+        Get parameters of the Gaussian components.
 
-        :param i: document index
+        :return: (number of components, component weights, means, covariance matrices, data for each component)
         """
-        raise NotImplementedError
+        cluster_numbers = np.unique(self.z)
+        K = len(cluster_numbers)
 
-    def get_posterior_predictive(self, i: int) -> np.ndarray:
+        alpha = np.empty(K, dtype=float)
+        mean = np.empty((K, self.D), dtype=float)
+        covariance = np.empty((K, self.D, self.D), dtype=float)
+        X = []
+
+        for i, cn in enumerate(cluster_numbers):
+            a, m, c = self._map(cn)
+            alpha[i] = a
+            mean[i] = m
+            covariance[i] = c
+            X.append(self.X[self.z == cn])
+
+        return K, alpha, mean, covariance, X
+
+    def get_marginal_likelihood(self, members: frozenset) -> float:
         """
-        Return the log posterior predictive probability of `X[i]` under component `k` for each component.
+        Compute marginal log likelihood p(X)
 
-        :param i: document index
-        :return: np.ndarray of K floats where K is number of components
-        """
-        raise NotImplementedError
 
-    def get_prior_predictive(self, i: int) -> float:
-        """
-        Return the probability of `X[i]` under the prior alone.
-
-        :param i: document id
+        :param members: set of document indices
         :return:
         """
-        raise NotImplementedError
+        D = self.D
+        N = len(members)
+
+        v_0 = self.prior.v_0
+        v_n = v_0 + N
+
+        k_0 = self.prior.k_0
+        k_n = k_0 + N
+
+        X = self.X[list(members)]
+
+        m_0 = self.prior.m_0
+        m_n = (k_0 * m_0 + np.sum(X, axis=0)) / k_n
+
+        logdet_0 = np.linalg.slogdet(self.prior.S_0)[1]
+        S = np.sum([np.outer(_, _) for _ in X], axis=0)
+        logdet_n = np.linalg.slogdet(self.prior.S_0 + S + k_0 * np.outer(m_0, m_0) - k_n * np.outer(m_n, m_n))[1]
+
+        return \
+            - N * D / 2 * math.log(math.pi) \
+            + multigammaln(v_n / 2, D) + \
+            + v_0 / 2 * logdet_0 + \
+            - multigammaln(v_0 / 2, D) \
+            - v_n / 2 * logdet_n \
+            + D / 2 * (math.log(k_0) - math.log(k_n))
+
+    def _map(self, c: int):
+        """
+        Return MAP estimate of the mean vector and covariance matrix of `k`.
+
+        See (4.215) in Murphy, p. 134.
+        The Dx1 mean vector and DxD covariance
+        matrix is returned.
+
+        :param c: cluster number
+        """
+        N = len(self.X)
+        X_k = self.X[self.z == c]
+        N_k = len(X_k)
+
+        k_N = self.prior.k_0 + N_k
+        v_N = self.prior.v_0 + N_k
+        D = len(self.prior.m_0)
+        m_N = (self.prior.k_0 * self.prior.m_0 + np.sum(X_k, axis=0)) / k_N
+
+        # (4.214) in Murphy, p. 134
+        S = np.sum([np.outer(_, _) for _ in X_k], axis=0)
+        S_N = self.prior.S_0 + S + self.prior.k_0 * np.outer(self.prior.m_0, self.prior.m_0) - k_N * np.outer(m_N, m_N)
+
+        sigma = S_N / (v_N + D + 2)
+        return N_k / N, m_N, sigma
+
+    #
+    # def get_posterior_predictive(self, i: int) -> np.ndarray:
+    #     """
+    #     Return the log posterior predictive probability of `X[i]` under component `k` for each component.
+    #
+    #     :param i: document index
+    #     :return: np.ndarray of K floats where K is number of components
+    #     """
+    #     raise NotImplementedError
+    #
+    # def get_prior_predictive(self, i: int) -> float:
+    #     """
+    #     Return the probability of `X[i]` under the prior alone.
+    #
+    #     :param i: document id
+    #     :return:
+    #     """
+    #     raise NotImplementedError

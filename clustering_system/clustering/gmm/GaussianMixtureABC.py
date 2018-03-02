@@ -1,4 +1,5 @@
-from abc import ABC
+from abc import ABC, abstractmethod
+from typing import Tuple, List
 
 import numpy as np
 
@@ -30,40 +31,55 @@ class NormalInverseWishartPrior(PriorABC):
 
 class GaussianMixtureABC(ABC):
 
-    def __init__(self, prior: PriorABC):
+    def __init__(self, D: int, prior: PriorABC):
+        self.D = D
         self.prior = prior
 
-    def add_assignment(self, i: int, k: int):
-        """
-        Add document i to a component k.
+        self.X = np.empty((0, D), float)
+        self.z = np.empty((0, 1), int)  # -1 - unassigned, <0, K) assigned
 
-        :param i: document index
-        :param k: component index
+    def add(self, vector: np.ndarray, z: int):
+        # print("add before")
+        # print(self.X)
+        # print(self.z)
+        self.X = np.vstack((self.X, np.array([vector])))
+        self.z = np.append(self.z, z)
+        # print("add aftrer")
+        # print(self.X)
+        # print(self.z)
+
+    @property
+    @abstractmethod
+    def likelihood(self) -> float:
+        """
+        :return: Return average log likelihood of data.
         """
         pass
 
-    def remove_assignment(self, i: int):
+    @property
+    @abstractmethod
+    def parameters(self) -> Tuple[int, np.ndarray, np.ndarray, np.ndarray, List[np.ndarray]]:
         """
-        Remove document i from its component.
+        Get parameters of the Gaussian components.
 
-        :param i: document index
+        :return: (number of components, component weights, means, covariance matrices, data for each component)
         """
         pass
 
-    def get_posterior_predictive(self, i: int) -> np.ndarray:
-        """
-        Return the log posterior predictive probability of `X[i]` under component `k` for each component.
-
-        :param i: document index
-        :return: np.ndarray of K floats where K is number of components
-        """
-        pass
-
-    def get_prior_predictive(self, i: int) -> float:
-        """
-        Return the probability of `X[i]` under the prior alone.
-
-        :param i: document id
-        :return:
-        """
-        pass
+    # def get_posterior_predictive(self, i: int) -> np.ndarray:
+    #     """
+    #     Return the log posterior predictive probability of `X[i]` under component `k` for each component.
+    #
+    #     :param i: document index
+    #     :return: np.ndarray of K floats where K is number of components
+    #     """
+    #     pass
+    #
+    # def get_prior_predictive(self, i: int) -> float:
+    #     """
+    #     Return the probability of `X[i]` under the prior alone.
+    #
+    #     :param i: document id
+    #     :return:
+    #     """
+    #     pass

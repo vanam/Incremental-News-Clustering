@@ -5,7 +5,8 @@ from queue import PriorityQueue
 
 import numpy as np
 
-from clustering_system.clustering.ClusteringABC import ClusteringABC
+from clustering_system.clustering.ClusteringABC import ClusteringABC, CovarianceType
+from clustering_system.clustering.gmm.FullGaussianMixture import FullGaussianMixture
 
 from clustering_system.clustering.gmm.GaussianMixtureABC import PriorABC
 from clustering_system.visualization.LikelihoodVisualizer import LikelihoodVisualizer
@@ -13,7 +14,8 @@ from clustering_system.visualization.LikelihoodVisualizer import LikelihoodVisua
 
 class GibbsClusteringABC(ClusteringABC):
 
-    def __init__(self, D: int, alpha: float, prior: PriorABC, n_iterations: int, K_max: int = None, visualizer: LikelihoodVisualizer = None):
+    def __init__(self, D: int, alpha: float, prior: PriorABC, n_iterations: int, K_max: int = None,
+                 visualizer: LikelihoodVisualizer = None, covariance_type: CovarianceType = CovarianceType.full):
         super().__init__(D)
         self.K_max = K_max
         self.alpha = alpha
@@ -23,8 +25,10 @@ class GibbsClusteringABC(ClusteringABC):
 
         # Each document has its id, feature vector, table assignment
         self.ids = []
-        self.X = np.empty((0, D), float)
-        self.z = []  # -1 - unassigned, <0, K) assigned
+        if covariance_type == CovarianceType.full:
+            self.mixture = FullGaussianMixture(D, prior)
+        else:
+            raise NotImplementedError("Unsupported covariance type %s." % covariance_type)
 
         # Maintain cluster numbers as concise as possible
         self.counter = 0

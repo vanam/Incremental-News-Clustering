@@ -5,7 +5,6 @@ import os
 import sys
 from enum import Enum
 from pathlib import Path
-from typing import Tuple
 
 import numpy as np
 from gensim.corpora import Dictionary, MmCorpus
@@ -49,6 +48,9 @@ class Model(Enum):
 
 
 if __name__ == "__main__":
+    # import random
+    # random.seed(0)
+
     # Only the identity model can be used with artificial corpus
     corpus_type = Corpus.artificial
     model_type = Model.identity
@@ -121,7 +123,7 @@ if __name__ == "__main__":
     #     return logistic_decay(d, a)
 
     # Decay function for artificial data
-    a = 10  # 1 day
+    a = 1  # 1 day
 
     def f(d):
         # Hack distance to look like time
@@ -239,12 +241,13 @@ if __name__ == "__main__":
             graph_visualizer.set_cluster_for_doc(t, doc_id, cluster_id, linked_doc_id=linked_doc_id)
 
         # Visualize clusters
-        k, _, mean, covariance, X = clustering._get_gaussian_params()
+        k, _, mean, covariance, X = clustering.parameters
 
         # Reduce vector dimension for visualization
+        # TODO mean and cov should be reduced as well
         reduced_X = []
         for i in range(k):
-            reduced_X_k = ipca.transform(X[i]) if corpus_type == Corpus.artificial else docs
+            reduced_X_k = ipca.transform(X[i]) if corpus_type != Corpus.artificial else X[i]
             reduced_X.append(reduced_X_k)
 
         cluster_visualizer.save(
@@ -255,7 +258,7 @@ if __name__ == "__main__":
             reduced_X
         )
 
-        evaluator.evaluate(t, ids_clusters, clustering.X, clustering.likelihood)
+        evaluator.evaluate(t, ids_clusters, clustering.mixture.X, clustering.likelihood)
 
     # Store evaluation and visualization
     logging.info("Storing evaluation")
