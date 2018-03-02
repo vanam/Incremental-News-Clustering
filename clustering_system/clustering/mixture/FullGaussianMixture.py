@@ -5,7 +5,7 @@ import numpy as np
 from scipy.special import multigammaln, gammaln
 from scipy.stats import multivariate_normal
 
-from clustering_system.clustering.gmm.GaussianMixtureABC import GaussianMixtureABC
+from clustering_system.clustering.mixture.GaussianMixtureABC import GaussianMixtureABC
 
 
 class FullGaussianMixture(GaussianMixtureABC):

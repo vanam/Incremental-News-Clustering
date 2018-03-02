@@ -12,7 +12,7 @@ from sklearn.decomposition import IncrementalPCA
 
 from clustering_system.clustering.DummyClustering import DummyClustering
 from clustering_system.clustering.fgmm.GibbsClustering import GibbsClustering
-from clustering_system.clustering.gmm.GaussianMixtureABC import NormalInverseWishartPrior
+from clustering_system.clustering.mixture.GaussianMixtureABC import NormalInverseWishartPrior
 from clustering_system.clustering.igmm.CrpClustering import CrpClustering
 from clustering_system.clustering.igmm.DdCrpClustering import DdCrpClustering, logistic_decay
 from clustering_system.corpus.ArtificialCorpus import ArtificialCorpus

@@ -6,8 +6,8 @@ from typing import Tuple, List
 import numpy as np
 
 from clustering_system.clustering.ClusteringABC import ClusteringABC, CovarianceType
-from clustering_system.clustering.gmm.FullGaussianMixture import FullGaussianMixture
-from clustering_system.clustering.gmm.GaussianMixtureABC import PriorABC
+from clustering_system.clustering.mixture.FullGaussianMixture import FullGaussianMixture
+from clustering_system.clustering.mixture.GaussianMixtureABC import PriorABC
 from clustering_system.visualization.LikelihoodVisualizer import LikelihoodVisualizer
 
 

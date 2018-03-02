@@ -6,7 +6,7 @@ import scipy.misc
 
 from clustering_system.clustering.ClusteringABC import CovarianceType
 from clustering_system.clustering.GibbsClusteringABC import GibbsClusteringABC
-from clustering_system.clustering.gmm.GaussianMixtureABC import NormalInverseWishartPrior
+from clustering_system.clustering.mixture.GaussianMixtureABC import NormalInverseWishartPrior
 from clustering_system.utils import draw_indexed
 from clustering_system.visualization.LikelihoodVisualizer import LikelihoodVisualizer
 
