@@ -2,10 +2,10 @@ import random
 
 import numpy as np
 
-from clustering_system.clustering.IClustering import IClustering
+from clustering_system.clustering.ClusteringABC import ClusteringABC
 
 
-class DummyClustering(IClustering):
+class DummyClustering(ClusteringABC):
 
     def __init__(self, K: int, D: int):
         """
@@ -13,23 +13,26 @@ class DummyClustering(IClustering):
         :param K: number of clusters
         :param D: dimension of a document vector
         """
-        super().__init__()
+        super().__init__(D)
         self.K = K
         self.ids = np.empty(0, str)
         self.X = np.empty((0, D), float)
         self.z = np.empty(0, int)
 
+    def _number_of_parameters(self) -> int:
+        return 1
+
     @property
-    def log_likelihood(self) -> float:
-        """
-        Return random log likelihood of data
-        L(theta | x) = f(x | theta)
-        """
+    def parameters(self):
+        return None
+
+    @property
+    def likelihood(self) -> float:
         return random.random() * 50
 
-    def add_documents(self, ids, vectors: np.ndarray):
-        for doc_id, vector in zip(ids, vectors):
-            self.add_document(doc_id, vector)
+    def add_documents(self, vectors: np.ndarray, metadata: np.ndarray):
+        for md, vector in zip(metadata, vectors):
+            self.add_document(md[0], vector)
 
     def add_document(self, doc_id, vector: np.ndarray):
         """
