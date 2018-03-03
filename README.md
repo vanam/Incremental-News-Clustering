@@ -5,7 +5,7 @@
 
 A source code for my thesis
 
-## Instalation
+## Installation
 
 Requirements
 
