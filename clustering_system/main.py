@@ -11,10 +11,9 @@ from gensim.corpora import Dictionary, MmCorpus
 from sklearn.decomposition import IncrementalPCA
 
 from clustering_system.clustering.DummyClustering import DummyClustering
-from clustering_system.clustering.fgmm.GibbsClustering import GibbsClustering
-from clustering_system.clustering.mixture.GaussianMixtureABC import NormalInverseWishartPrior
 from clustering_system.clustering.igmm.CrpClustering import CrpClustering
 from clustering_system.clustering.igmm.DdCrpClustering import DdCrpClustering, logistic_decay
+from clustering_system.clustering.mixture.GaussianMixtureABC import NormalInverseWishartPrior
 from clustering_system.corpus.ArtificialCorpus import ArtificialCorpus
 from clustering_system.corpus.BowNewsCorpus import BowNewsCorpus
 from clustering_system.corpus.FolderAggregatedBowNewsCorpora import FolderAggregatedBowNewsCorpora
@@ -262,7 +261,7 @@ if __name__ == "__main__":
             reduced_X
         )
 
-        evaluator.evaluate(t, ids_clusters, clustering.mixture.X, clustering.likelihood)
+        evaluator.evaluate(t, ids_clusters, clustering.mixture.X, clustering.aic, clustering.bic, clustering.likelihood)
 
     # Store evaluation and visualization
     logging.info("Storing evaluation")

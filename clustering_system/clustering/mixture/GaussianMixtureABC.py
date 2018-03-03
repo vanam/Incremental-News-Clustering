@@ -54,11 +54,29 @@ class GaussianMixtureABC(ABC):
 
     @property
     @abstractmethod
+    def number_of_parameters(self) -> int:
+        """
+        :return: Return number of mixture model parameters.
+        """
+        pass
+
+    @property
+    @abstractmethod
     def parameters(self) -> Tuple[int, np.ndarray, np.ndarray, np.ndarray, List[np.ndarray]]:
         """
         Get parameters of the Gaussian components.
 
         :return: (number of components, component weights, means, covariance matrices, data for each component)
+        """
+        pass
+
+    @abstractmethod
+    def get_marginal_likelihood(self, members: frozenset) -> float:
+        """
+        Compute marginal log likelihood p(X)
+
+        :param members: set of document indices
+        :return: log likelihood
         """
         pass
 

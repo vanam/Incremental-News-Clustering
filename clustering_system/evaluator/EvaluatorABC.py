@@ -18,11 +18,11 @@ class EvaluatorABC(ABC):
     def _get_classes(self, time: int, ids: list) -> np.ndarray:
         pass
 
-    def evaluate(self, time: int, ids_clusters: list, X: np.array, likelihood: float):
+    def evaluate(self, time: int, ids_clusters: list, X: np.array, aic: float, bic: float, likelihood: float):
         ids, clusters = map(np.array, zip(*ids_clusters))
         classes = self._get_classes(time, ids)
 
-        self.evaluations[time] = SupervisedEvaluation(X, clusters, classes, likelihood)
+        self.evaluations[time] = SupervisedEvaluation(X, clusters, classes, aic, bic, likelihood)
 
     def save(self, directory):
         csv_file = os.path.join(directory, 'evaluation.csv')
@@ -30,6 +30,7 @@ class EvaluatorABC(ABC):
         chart_2_file = os.path.join(directory, 'chart_2.png')
         chart_3_file = os.path.join(directory, 'chart_3.png')
         chart_4_file = os.path.join(directory, 'chart_4.png')
+        chart_5_file = os.path.join(directory, 'chart_5.png')
 
         # Save in text file
         self._export_to_csv(csv_file)
@@ -39,6 +40,7 @@ class EvaluatorABC(ABC):
         self._chart_2(chart_2_file)
         self._chart_3(chart_3_file)
         self._chart_4(chart_4_file)
+        self._chart_5(chart_5_file)
 
     def __iter__(self):
         for t, e in self.evaluations.items():
@@ -166,6 +168,26 @@ class EvaluatorABC(ABC):
 
         plt.subplot(212)
         plt.plot(x, dissimilarity, alpha=0.5, label="dissimilarity")
+        plt.xlabel("time")
+        plt.grid()
+        plt.legend()
+        plt.tight_layout()
+
+        fig.savefig(filename)
+        plt.close()
+
+    def _chart_5(self, filename: str):
+        t = len(self.evaluations)
+
+        # x axis is time
+        x = np.arange(0, t, 1)
+
+        # y axis contains evaluation metrics
+        aic, bic = zip(*[(e.aic, e.bic) for _, e in self])
+
+        fig = plt.figure()
+        plt.plot(x, aic, alpha=0.5, label="Akaike information criterion")
+        plt.plot(x, bic, alpha=0.5, label="Bayesian information criterion")
         plt.xlabel("time")
         plt.grid()
         plt.legend()

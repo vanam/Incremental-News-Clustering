@@ -26,6 +26,16 @@ class FullGaussianMixture(GaussianMixtureABC):
         return likelihood / len(self.X)
 
     @property
+    def number_of_parameters(self) -> int:
+        cluster_numbers = np.unique(self.z)
+        K = len(cluster_numbers)
+
+        mean_parameters = self.D * K
+        cov_parameters = K * self.D * (self.D + 1) / 2
+
+        return int(mean_parameters + cov_parameters + K - 1)
+
+    @property
     def parameters(self) -> Tuple[int, np.ndarray, np.ndarray, np.ndarray, List[np.ndarray]]:
         """
         Get parameters of the Gaussian components.
@@ -53,9 +63,8 @@ class FullGaussianMixture(GaussianMixtureABC):
         """
         Compute marginal log likelihood p(X)
 
-
         :param members: set of document indices
-        :return:
+        :return: log likelihood
         """
         D = self.D
         N = len(members)

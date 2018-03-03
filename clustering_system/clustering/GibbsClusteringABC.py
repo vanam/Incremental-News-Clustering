@@ -41,6 +41,9 @@ class GibbsClusteringABC(ClusteringABC):
     def parameters(self) -> Tuple[int, np.ndarray, np.ndarray, np.ndarray, List[np.ndarray]]:
         return self.mixture.parameters
 
+    def _number_of_parameters(self) -> int:
+        return self.mixture.number_of_parameters
+
     def add_documents(self, vectors: np.ndarray, metadata: np.ndarray):
         for md, vector in zip(metadata, vectors):
             doc_id, timestamp, *_ = md

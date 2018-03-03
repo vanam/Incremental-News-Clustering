@@ -19,6 +19,13 @@ class DummyClustering(ClusteringABC):
         self.X = np.empty((0, D), float)
         self.z = np.empty(0, int)
 
+    def _number_of_parameters(self) -> int:
+        return 1
+
+    @property
+    def parameters(self):
+        return None
+
     @property
     def likelihood(self) -> float:
         return random.random() * 50
