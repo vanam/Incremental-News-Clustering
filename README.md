@@ -17,7 +17,7 @@ Requirements
 
 ```bash
 $ sudo apt-get install python3 python3-tk python3-pip
-$ pip3 install --user pipenv
+$ pip3 install pipenv
 ```
 
 ### Project dependencies
@@ -29,7 +29,6 @@ $ pipenv install --dev
 ### ~/.bashrc
 
 ```bash
-export PATH=$PATH:~/.local/bin/
 export PYTHONPATH='.'
 ```
 
@@ -38,6 +37,12 @@ export PYTHONPATH='.'
 ### Configure PyCharm
 
 * [Configure PyCharm to use virtualenv](http://exponential.io/blog/2015/02/10/configure-pycharm-to-use-virtualenv/)
+
+### Activate project's virtualenv
+
+```bash
+$ pipenv shel
+```
 
 ### Run script
 

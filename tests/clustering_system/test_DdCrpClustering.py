@@ -2,9 +2,8 @@ import random
 
 import numpy as np
 
-from clustering.infinite_gmm_gibbs_ddcrp import logistic_decay
 from clustering_system.clustering.mixture.GaussianMixtureABC import NormalInverseWishartPrior
-from clustering_system.clustering.igmm.DdCrpClustering import DdCrpClustering
+from clustering_system.clustering.igmm.DdCrpClustering import DdCrpClustering, logistic_decay
 
 
 class TestDdCrpClustering:
