@@ -7,7 +7,7 @@ python:
 install:
   - pip install --upgrade setuptools # https://github.com/labgrid-project/labgrid/pull/119/files
   - pip install pipenv
-  - pipenv install --dev --skip-lock
+  - pipenv install --three --dev --skip-lock
 
 # command to run tests
 script:
