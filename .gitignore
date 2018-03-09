@@ -1,6 +1,7 @@
 .idea/
 __pycache__/
 .cache
+.pytest_cache/
 
 # Ignore genuine data
 data/genuine/*
