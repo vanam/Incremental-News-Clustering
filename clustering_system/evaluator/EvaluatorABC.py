@@ -5,7 +5,7 @@ from abc import ABC, abstractmethod
 import matplotlib.pyplot as plt
 import numpy as np
 
-from clustering.measures import SupervisedEvaluation
+from clustering_system.evaluator.SupervisedEvaluation import SupervisedEvaluation
 
 
 class EvaluatorABC(ABC):
@@ -94,10 +94,10 @@ class EvaluatorABC(ABC):
         x = np.arange(0, t, 1)
 
         # y axis contains evaluation metrics
-        purity, rand_index, homogeneity, completeness, v_measure = zip(*[(e.purity, e.rand_index, e.homogeneity, e.completeness, e.v_measure) for _, e in self])
+        purity, rand_index, precision, recall,  f1_measure, homogeneity, completeness, v_measure = zip(*[(e.purity, e.rand_index, e.precision, e.recall, e.f1_measure, e.homogeneity, e.completeness, e.v_measure) for _, e in self])
 
         fig = plt.figure()
-        plt.subplot(211)
+        plt.subplot(311)
         plt.plot(x, purity, alpha=0.5, label="purity")
         plt.plot(x, rand_index, alpha=0.5, label="rand index")
         plt.xlabel("time")
@@ -106,7 +106,17 @@ class EvaluatorABC(ABC):
         plt.legend()
         plt.tight_layout()
 
-        plt.subplot(212)
+        plt.subplot(312)
+        plt.plot(x, precision, alpha=0.5, label="precision")
+        plt.plot(x, recall, alpha=0.5, label="recall")
+        plt.plot(x, f1_measure, alpha=0.5, label="F1-measure")
+        plt.xlabel("time")
+        plt.yticks(np.arange(0, 1.1, 0.2))
+        plt.grid()
+        plt.legend()
+        plt.tight_layout()
+
+        plt.subplot(313)
         plt.plot(x, homogeneity, alpha=0.5, label="homogeneity")
         plt.plot(x, completeness, alpha=0.5, label="completeness")
         plt.plot(x, v_measure, alpha=0.5, label="V-measure")

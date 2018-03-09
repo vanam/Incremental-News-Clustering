@@ -3,7 +3,7 @@ import random
 import numpy as np
 
 from clustering.infinite_gmm_gibbs_ddcrp import logistic_decay
-from clustering_system.clustering.gmm.GaussianMixtureABC import NormalInverseWishartPrior
+from clustering_system.clustering.mixture.GaussianMixtureABC import NormalInverseWishartPrior
 from clustering_system.clustering.igmm.DdCrpClustering import DdCrpClustering
 
 
@@ -60,7 +60,7 @@ class TestDdCrpClustering:
         clustering.add_documents(self.documents, self.metadata)
         clustering.update()
 
-        unique_cluster_numbers = np.unique(clustering.z)
+        unique_cluster_numbers = np.unique(clustering.mixture.z)
 
         assert clustering.K == len(unique_cluster_numbers)
 
@@ -74,6 +74,6 @@ class TestDdCrpClustering:
         clustering.add_documents(self.documents, self.metadata)
         clustering.update()
 
-        unique_cluster_numbers = np.unique(clustering.z)
+        unique_cluster_numbers = np.unique(clustering.mixture.z)
 
         assert clustering.K == len(unique_cluster_numbers)
