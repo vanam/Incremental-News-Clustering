@@ -41,7 +41,7 @@ export PYTHONPATH='.'
 ### Activate project's virtualenv
 
 ```bash
-$ pipenv shel
+$ pipenv shell
 ```
 
 ### Run script
