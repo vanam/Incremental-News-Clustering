@@ -261,7 +261,7 @@ if __name__ == "__main__":
             reduced_X
         )
 
-        evaluator.evaluate(t, ids_clusters, clustering.mixture.X, clustering.aic, clustering.bic, clustering.likelihood)
+        evaluator.evaluate(t, ids_clusters, clustering.aic, clustering.bic, clustering.likelihood)
 
     # Store evaluation and visualization
     logging.info("Storing evaluation")

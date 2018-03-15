@@ -18,11 +18,11 @@ class EvaluatorABC(ABC):
     def _get_classes(self, time: int, ids: list) -> np.ndarray:
         pass
 
-    def evaluate(self, time: int, ids_clusters: list, X: np.array, aic: float, bic: float, likelihood: float):
+    def evaluate(self, time: int, ids_clusters: list, aic: float, bic: float, likelihood: float):
         ids, clusters = map(np.array, zip(*ids_clusters))
         classes = self._get_classes(time, ids)
 
-        self.evaluations[time] = SupervisedEvaluation(X, clusters, classes, aic, bic, likelihood)
+        self.evaluations[time] = SupervisedEvaluation(clusters, classes, aic, bic, likelihood)
 
     def save(self, directory):
         csv_file = os.path.join(directory, 'evaluation.csv')
@@ -166,18 +166,10 @@ class EvaluatorABC(ABC):
         x = np.arange(0, t, 1)
 
         # y axis contains evaluation metrics
-        likelihood, dissimilarity = zip(*[(e.likelihood, e.dissimilarity) for _, e in self])
+        likelihood = [e.likelihood for _, e in self]
 
         fig = plt.figure()
-        plt.subplot(211)
         plt.plot(x, likelihood, alpha=0.5, label="likelihood")
-        plt.xlabel("time")
-        plt.grid()
-        plt.legend()
-        plt.tight_layout()
-
-        plt.subplot(212)
-        plt.plot(x, dissimilarity, alpha=0.5, label="dissimilarity")
         plt.xlabel("time")
         plt.grid()
         plt.legend()

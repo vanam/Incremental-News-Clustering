@@ -5,12 +5,11 @@ from clustering_system.evaluator.measures import dissimilarity, entropy
 
 class UnsupervisedEvaluation:
 
-    def __init__(self, X: np.ndarray, clusters: np.ndarray, aic: float, bic: float, likelihood: float):
+    def __init__(self, clusters: np.ndarray, aic: float, bic: float, likelihood: float):
         self.aic = aic
         self.bic = bic
         self.likelihood = likelihood
         self.K = len(np.unique(clusters))
-        self.dissimilarity = dissimilarity(X, clusters)
         self.cluster_entropy = entropy(clusters)
 
     @staticmethod
@@ -19,7 +18,6 @@ class UnsupervisedEvaluation:
             ('AIC', 'aic'),
             ('BIC', 'bic'),
             ('likelihood', 'likelihood'),
-            ('dissimilarity', 'dissimilarity'),
             ('number of clusters', 'K'),
             ('entropy (clusters)', 'cluster_entropy')
          )
@@ -32,7 +30,6 @@ class UnsupervisedEvaluation:
         string += "  AIC                = %f,\n" % self.aic
         string += "  BIC                = %f,\n" % self.bic
         string += "  likelihood         = %f,\n" % self.likelihood
-        string += "  dissimilarity      = %f,\n" % self.dissimilarity
         string += "  number of clusters = %d,\n" % self.K
         string += "  entropy (clusters) = %f \n" % self.cluster_entropy
         string += '}'
