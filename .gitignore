@@ -6,6 +6,7 @@ __pycache__/
 # Ignore genuine data
 data/genuine/*
 !data/genuine/transform.py
+!data/genuine/histogram.py
 !data/genuine/retain.py
 !data/genuine/.gitignore
 
