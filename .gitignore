@@ -5,7 +5,8 @@ __pycache__/
 
 # Ignore genuine data
 data/genuine/*
-!data/genuine/data_transform.py
+!data/genuine/transform.py
+!data/genuine/retain.py
 !data/genuine/.gitignore
 
 # Ignore temp files

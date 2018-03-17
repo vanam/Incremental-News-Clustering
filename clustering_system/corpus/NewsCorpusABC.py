@@ -14,12 +14,12 @@ def get_news_in_folder(root, language=None):
     if language is None:
         language = "[a-z]{2}"
 
-    english_filename_pattern = re.compile("[0-9]{10}.[0-9]-%s-[0-9A-Fa-f]{32}.q.job.xml" % language)
+    filename_pattern = re.compile("[0-9]{10}.[0-9]-%s-[0-9A-Fa-f]{32}.q.job.xml" % language)
     all_files = []
     for dirpath, subdirs, files in os.walk(root):
         for filename in files:
             # Check if we already did process file
-            result = english_filename_pattern.match(filename)
+            result = filename_pattern.match(filename)
             if result is None:
                 continue
 

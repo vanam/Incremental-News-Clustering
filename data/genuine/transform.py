@@ -7,9 +7,14 @@ from time import strptime, mktime
 
 from xml.dom import minidom
 
+from pyexpat import ExpatError
+
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
 if __name__ == "__main__":
+    """
+    Read all XML data files and add publication timestamp and language to their names.
+    """
     dir_path = os.path.dirname(os.path.realpath(__file__))
 
     processed_filename_pattern = re.compile('[0-9]{10}.[0-9]-[a-z]{2}-[0-9A-Fa-f]{32}.q.job.xml')
@@ -18,6 +23,8 @@ if __name__ == "__main__":
     # Add timestamp to file names
     counter = 0
     for dirpath, subdirs, files in os.walk(dir_path):
+        logging.info("Renaming files in directory '%s'" % dirpath)
+
         for filename in files:
             # Construct old file path
             file_path = os.path.join(dirpath, filename)
@@ -31,8 +38,15 @@ if __name__ == "__main__":
             elif unprocessed_result is None:
                 continue
 
+            # Parse XML
+            try:
+                xmldoc = minidom.parse(file_path)
+            except ExpatError:
+                logging.warning("Could not parse XML, deleting file '%s'." % file_path)
+                os.remove(file_path)
+                continue
+
             # Parse publication date
-            xmldoc = minidom.parse(file_path)
             pub_dates = xmldoc.getElementsByTagName('pubDate')
 
             if len(pub_dates) == 0:
@@ -61,7 +75,7 @@ if __name__ == "__main__":
             new_file_path = os.path.join(dirpath, "%s-%s" % (prefix, filename))
 
             # Rename files
-            logging.info("Renaming '%s' to '%s" % (file_path, new_file_path))
+            # logging.info("Renaming '%s' to '%s" % (file_path, new_file_path))
             os.rename(file_path, new_file_path)
             counter += 1
 
