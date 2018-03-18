@@ -9,6 +9,8 @@ from time import ctime
 
 import numpy as np
 
+from data.genuine.utils import check_dir
+
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
 if __name__ == "__main__":
@@ -17,17 +19,8 @@ if __name__ == "__main__":
     """
     dir_path = os.path.dirname(os.path.realpath(__file__))
 
-    def check_dir(value):
-        directory = os.path.join(dir_path, value)
-
-        if not os.path.isdir(directory):
-            raise argparse.ArgumentTypeError("%s directory not found" % value)
-
-        return directory
-
     parser = argparse.ArgumentParser(description='Plot data.')
-
-    parser.add_argument('dir', help='directory', type=check_dir)
+    parser.add_argument('dir', help='directory', type=lambda v: check_dir(dir_path, v))
     args = parser.parse_args()
 
     # Skip top level directory

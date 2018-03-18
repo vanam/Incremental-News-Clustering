@@ -135,9 +135,6 @@ if __name__ == "__main__":
     clustering = CrpClustering(size, 0.01, prior, 20, visualizer=likelihood_visualizer)
     # clustering = GibbsClustering(K, size, 0.1, prior, 20, visualizer=likelihood_visualizer)
 
-    # TODO CRP clustering
-    # TODO FGMM clustering
-
     if corpus_type == Corpus.artificial:
         # For artificial data initialize identity model
         training_corpus = ArtificialCorpus(input=artificial_file)

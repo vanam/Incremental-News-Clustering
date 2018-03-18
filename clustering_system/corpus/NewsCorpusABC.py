@@ -2,11 +2,13 @@ import logging
 import os
 import re
 from abc import abstractmethod
+from itertools import chain
 from xml.dom import minidom
 
 from gensim.corpora import Dictionary
 from gensim.corpora.textcorpus import lower_to_unicode, strip_multiple_whitespaces, remove_short, remove_stopwords
 from gensim.interfaces import CorpusABC
+from gensim.parsing import strip_punctuation, stem_text, PorterStemmer
 from gensim.utils import deaccent, simple_tokenize
 
 
@@ -16,7 +18,10 @@ def get_news_in_folder(root, language=None):
 
     filename_pattern = re.compile("[0-9]{10}.[0-9]-%s-[0-9A-Fa-f]{32}.q.job.xml" % language)
     all_files = []
-    for dirpath, subdirs, files in os.walk(root):
+
+    walk_iter = iter(os.walk(root)) if isinstance(root, str) else chain.from_iterable(os.walk(path) for path in root)
+
+    for dirpath, subdirs, files in walk_iter:
         for filename in files:
             # Check if we already did process file
             result = filename_pattern.match(filename)
@@ -39,7 +44,7 @@ def get_news_in_folder(root, language=None):
 class NewsCorpusABC(CorpusABC):
 
     def __init__(self, input=None, dictionary=None, metadata=False, character_filters=None,
-                 tokenizer=None, token_filters=None, language=None):
+                 tokenizer=None, token_filters=None, language=None, stem=True):
         """
         Args:
             input (str): path to top-level directory to traverse for corpus documents.
@@ -69,7 +74,7 @@ class NewsCorpusABC(CorpusABC):
 
         self.character_filters = character_filters
         if self.character_filters is None:
-            self.character_filters = [lower_to_unicode, deaccent, strip_multiple_whitespaces]
+            self.character_filters = [lower_to_unicode, deaccent, strip_punctuation, strip_multiple_whitespaces]
 
         self.tokenizer = tokenizer
         if self.tokenizer is None:
@@ -79,6 +84,7 @@ class NewsCorpusABC(CorpusABC):
         if self.token_filters is None:
             self.token_filters = [remove_short, remove_stopwords]
 
+        self.stem = stem
         self.length = None
         self.dictionary = None
         self.init_dictionary(dictionary)
@@ -154,6 +160,10 @@ class NewsCorpusABC(CorpusABC):
         tokens = self.tokenizer(text)
         for token_filter in self.token_filters:
             tokens = token_filter(tokens)
+
+        if self.stem:
+            p = PorterStemmer()
+            tokens = [p.stem(token) for token in tokens]
 
         return tokens
 

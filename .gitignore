@@ -5,9 +5,11 @@ __pycache__/
 
 # Ignore genuine data
 data/genuine/*
+!data/genuine/create_training_corpora.py
 !data/genuine/transform.py
 !data/genuine/histogram.py
 !data/genuine/retain.py
+!data/genuine/utils.py
 !data/genuine/.gitignore
 
 # Ignore temp files

@@ -5,25 +5,19 @@ import logging
 import os
 import re
 
+from data.genuine.utils import check_lang
+
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
 if __name__ == "__main__":
     """
     Retain only XML data files in specified language. Other data files will be deleted.
     """
-    def check_lang(value):
-        lang_patter = re.compile("[a-z]{2}")
-
-        if len(value) != 2 or lang_patter.match(value) is None:
-            raise argparse.ArgumentTypeError("%s is an invalid language" % value)
-
-        return value
-
     parser = argparse.ArgumentParser(description='Plot data.')
-
-    parser.add_argument('lang', help='language to retain', type=check_lang)
+    parser.add_argument('-l', '--lang', help='language to retain', type=check_lang)
     parser.add_argument('-t, --test', dest='test', action='store_true',
                         help='will not delete files')
+    parser.set_defaults(lang='en', test=False)
     args = parser.parse_args()
 
     dir_path = os.path.dirname(os.path.realpath(__file__))
