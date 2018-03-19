@@ -51,13 +51,11 @@ def is_doc2vec_corpus(obj):
 
 class Doc2vec(ModelABC):
 
-    def __init__(self, corpus, temp_directory, size: int = 200, epochs: int = 10):
+    def __init__(self, corpus, size: int = 200, epochs: int = 10, d2v_filename: str = None):
         super().__init__(size)
 
         # Check if we have already trained the doc2vec model
-        d2v_filename = self._get_d2v_filename(temp_directory)
-
-        if os.path.exists(d2v_filename):
+        if d2v_filename is not None and os.path.exists(d2v_filename):
             self.d2v = D2v.load(d2v_filename)
         else:
             class TaggedLineSentence:
@@ -79,10 +77,6 @@ class Doc2vec(ModelABC):
             self.d2v.build_vocab(sentences)
             self.d2v.train(sentences, total_examples=len(sentences), epochs=epochs)
 
-    @staticmethod
-    def _get_d2v_filename(directory):
-        return os.path.join(directory, 'model.d2v')
-
     def update(self, documents):
         """
         Does not support updating.
@@ -90,8 +84,8 @@ class Doc2vec(ModelABC):
         """
         pass
 
-    def save(self, directory):
-        self.d2v.save(self._get_d2v_filename(directory))
+    def save(self, filename: str):
+        self.d2v.save(filename)
 
     def _get_vector_representation(self, items):
         raise NotImplementedError("This method is not implemented intentionally.")

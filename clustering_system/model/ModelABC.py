@@ -14,7 +14,7 @@ class ModelABC(ABC):
         pass
 
     @abstractmethod
-    def save(self, directory):
+    def save(self, filename):
         pass
 
     @abstractmethod

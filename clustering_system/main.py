@@ -158,11 +158,18 @@ if __name__ == "__main__":
 
             # Initialize correct model
             if model_type == Model.random:
+                temp_model_file = os.path.join(temp_model_dir, 'model.rnd')
+
                 model = Random(size=size)
             elif model_type == Model.LSI:
-                model = Lsi(training_corpus, dictionary, temp_model_dir, size=size)
+                temp_model_file = os.path.join(temp_model_dir, 'model.lsi')
+                temp_tfidf_file = os.path.join(temp_model_dir, 'model.lsi.tfidf')
+
+                model = Lsi(training_corpus, dictionary, size=size, lsi_filename=temp_model_file, tfidf_filename=temp_tfidf_file)
             elif model_type == Model.LDA:
-                model = Lda(training_corpus, dictionary, temp_model_dir, size=size)
+                temp_model_file = os.path.join(temp_model_dir, 'model.lda')
+
+                model = Lda(training_corpus, dictionary, size=size, lda_filename=temp_model_file)
             else:
                 logging.error("Unknown model type '%s'" % model_type)
                 sys.exit(1)
@@ -182,10 +189,12 @@ if __name__ == "__main__":
             dictionary = Dictionary.load(temp_dictionary_file)
             training_corpus = LineCorpus(temp_training_low_corpus_file)
 
-            model = Doc2vec(training_corpus, temp_model_dir, size=size)
+            temp_model_file = os.path.join(temp_model_dir, 'model.d2v')
+
+            model = Doc2vec(training_corpus, size=size, d2v_filename=temp_model_file)
 
         # Save trained model to file(s)
-        model.save(temp_model_dir)
+        model.save(temp_model_file)
 
         # Load test corpora
         if model_type == Model.doc2vec:

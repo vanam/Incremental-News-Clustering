@@ -13,7 +13,7 @@ if __name__ == "__main__":
     """
     Retain only XML data files in specified language. Other data files will be deleted.
     """
-    parser = argparse.ArgumentParser(description='Plot data.')
+    parser = argparse.ArgumentParser(description='Retain only data with specified language.')
     parser.add_argument('-l', '--lang', help='language to retain', type=check_lang)
     parser.add_argument('-t, --test', dest='test', action='store_true',
                         help='will not delete files')

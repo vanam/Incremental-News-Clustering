@@ -21,3 +21,12 @@ def check_lang(value):
 
     return value
 
+
+def check_uint(value):
+    value = int(value)
+
+    if value < 1:
+        raise argparse.ArgumentTypeError("%d must be positive number" % value)
+
+    return value
+

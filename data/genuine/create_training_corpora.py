@@ -22,7 +22,7 @@ if __name__ == "__main__":
     bow_corpus_file = os.path.join(dir_path, 'training_corpus.mm')
     low_corpus_file = os.path.join(dir_path, 'training_corpus.line')
 
-    parser = argparse.ArgumentParser(description='Plot data.')
+    parser = argparse.ArgumentParser(description='Create training corpora.')
     parser.add_argument('dirs', nargs='+', help='directories containing data', type=lambda v: check_dir(dir_path, v))
     parser.add_argument('-l', '--lang', help='language of data', type=check_lang)
     parser.add_argument('-f, --filter', dest='filter', action='store_true',

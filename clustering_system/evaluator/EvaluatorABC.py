@@ -1,4 +1,5 @@
 import csv
+import logging
 import os
 from abc import ABC, abstractmethod
 
@@ -25,6 +26,10 @@ class EvaluatorABC(ABC):
         self.evaluations[time] = SupervisedEvaluation(clusters, classes, aic, bic, likelihood)
 
     def save(self, directory):
+        if len(self.evaluations) == 0:
+            logging.warning("No evaluations to store.")
+            return
+
         csv_file = os.path.join(directory, 'evaluation.csv')
         chart_1_file = os.path.join(directory, 'chart_1.png')
         chart_2_file = os.path.join(directory, 'chart_2.png')

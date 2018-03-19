@@ -8,13 +8,12 @@ from clustering_system.model.ModelABC import ModelABC
 
 class Lsi(ModelABC):
 
-    def __init__(self, corpus, dictionary: Dictionary, temp_directory, size: int = 200, decay: float = 1.0):
+    def __init__(self, corpus, dictionary: Dictionary, size: int = 200, decay: float = 1.0,
+                 lsi_filename: str = None, tfidf_filename: str = None):
         super().__init__(size)
 
         # Check if we have already trained the Tfidf model
-        tfidf_filename = self._get_tfidf_filename(temp_directory)
-
-        if os.path.exists(tfidf_filename):
+        if tfidf_filename is not None and os.path.exists(tfidf_filename):
             self.tfidf = TfidfModel.load(tfidf_filename)
         else:
             self.tfidf = TfidfModel(dictionary=dictionary)
@@ -23,20 +22,10 @@ class Lsi(ModelABC):
         corpus_tfidf = self.tfidf[corpus]
 
         # Check if we have already trained the Lsi model
-        lsi_filename = self._get_lsi_filename(temp_directory)
-
-        if os.path.exists(lsi_filename):
+        if lsi_filename is not None and os.path.exists(lsi_filename):
             self.lsi = LsiModel.load(lsi_filename)
         else:
             self.lsi = LsiModel(corpus=corpus_tfidf, id2word=dictionary, num_topics=size, onepass=True, decay=decay)
-
-    @staticmethod
-    def _get_tfidf_filename(directory):
-        return os.path.join(directory, 'model.tfidf')
-
-    @staticmethod
-    def _get_lsi_filename(directory):
-        return os.path.join(directory, 'model.lsi')
 
     def update(self, documents):
         """
@@ -45,9 +34,9 @@ class Lsi(ModelABC):
         """
         self.lsi.add_documents(documents)
 
-    def save(self, directory):
-        self.tfidf.save(self._get_tfidf_filename(directory))
-        self.lsi.save(self._get_lsi_filename(directory))
+    def save(self, filename: str):
+        self.lsi.save(filename)
+        self.tfidf.save(filename + '.tfidf')
 
     def _get_vector_representation(self, items):
         return self.lsi[self.tfidf[items]]
