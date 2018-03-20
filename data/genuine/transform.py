@@ -49,12 +49,12 @@ if __name__ == "__main__":
             # Parse publication date
             pub_dates = xmldoc.getElementsByTagName('pubDate')
 
-            if len(pub_dates) == 0:
+            if len(pub_dates) != 2:
                 logging.warning("Publication date not found in '%s', file skipped." % file_path)
                 continue
 
             # Convert date to integer
-            pub_date_raw = pub_dates[0].firstChild.nodeValue
+            pub_date_raw = pub_dates[1].firstChild.nodeValue
             date_format = "%Y-%m-%d %H:%M:%S %Z"
             try:
                 pub_date = strptime(pub_date_raw, date_format)

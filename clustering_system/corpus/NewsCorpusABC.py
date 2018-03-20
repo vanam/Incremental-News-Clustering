@@ -123,19 +123,19 @@ class NewsCorpusABC(CorpusABC):
             # Parse title
             title_raw = xmldoc.getElementsByTagName('title')
 
-            if len(title_raw) == 0:
+            if len(title_raw) != 2:
                 logging.warning("Title not found in '%s', file skipped." % file_path)
                 continue
 
+            title = title_raw[1].firstChild.nodeValue
+
             # Parse data
-            title_raw = xmldoc.getElementsByTagName('title')
             text_raw = xmldoc.getElementsByTagName('emm:text')
 
-            if len(title_raw) == 0 or len(text_raw) == 0:
-                logging.warning("Title or text not found in '%s', file skipped." % file_path)
+            if len(text_raw) == 0:
+                logging.warning("Text not found in '%s', file skipped." % file_path)
                 continue
 
-            title = title_raw[1].firstChild.nodeValue
             text = text_raw[0].firstChild.nodeValue
 
             # Get metadata from filename
