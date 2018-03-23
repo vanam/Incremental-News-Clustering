@@ -33,6 +33,7 @@ class DummyClustering(ClusteringABC):
     def add_documents(self, vectors: np.ndarray, metadata: np.ndarray):
         for md, vector in zip(metadata, vectors):
             self.add_document(md[0], vector)
+            self.N += 1
 
     def add_document(self, doc_id, vector: np.ndarray):
         """

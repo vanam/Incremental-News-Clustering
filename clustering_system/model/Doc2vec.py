@@ -51,13 +51,16 @@ def is_doc2vec_corpus(obj):
 
 class Doc2vec(ModelABC):
 
-    def __init__(self, corpus, size: int = 200, epochs: int = 10, d2v_filename: str = None):
+    def __init__(self, corpus=None, size: int = 200, epochs: int = 10, d2v_filename: str = None):
         super().__init__(size)
 
         # Check if we have already trained the doc2vec model
         if d2v_filename is not None and os.path.exists(d2v_filename):
             self.d2v = D2v.load(d2v_filename)
         else:
+            if corpus is None:
+                raise ValueError("Corpus must be provided to train doc2vec")
+
             class TaggedLineSentence:
                 def __init__(self, documents):
                     self.documents = documents

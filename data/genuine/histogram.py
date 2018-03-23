@@ -3,7 +3,8 @@
 import argparse
 import logging
 import os
-from collections import Counter
+import sys
+from collections import Counter, defaultdict
 from datetime import date
 from time import ctime
 
@@ -19,8 +20,9 @@ if __name__ == "__main__":
     """
     dir_path = os.path.dirname(os.path.realpath(__file__))
 
-    parser = argparse.ArgumentParser(description='Plot data.')
+    parser = argparse.ArgumentParser(description='Display histogram of news by days.')
     parser.add_argument('dir', help='directory', type=lambda v: check_dir(dir_path, v))
+    parser.add_argument('-s', '--split', dest='split', action='store_true', help='split news in a folder by days')
     args = parser.parse_args()
 
     # Skip top level directory
@@ -30,6 +32,7 @@ if __name__ == "__main__":
     for dirpath, subdirs, files in dir_iter:
         logging.info("Visualizing directory '%s'" % dirpath)
 
+        docs_by_day = defaultdict(list)
         days = []
         for filename in files:
             # Get metadata from filename
@@ -39,9 +42,40 @@ if __name__ == "__main__":
             # print(ctime(timestamp))
             # print(date.day)
             days.append(date.day)
+            docs_by_day[date.day].append(filename)
 
         print(np.bincount(days, minlength=31))
 
         counter = Counter(days)
-        print(sorted(dict(counter).items(), key=lambda x: x[0]))
+        days_counts = sorted(dict(counter).items(), key=lambda x: x[0])
+        print(days_counts)
         print("")
+
+        if args.split:
+            counter = 0
+
+            if len(days_counts) == 0:
+                logging.warning("Nothing to split")
+                continue
+
+            days, _ = zip(*days_counts)
+
+            if len(days) <= 1:
+                logging.warning("Nothing to split")
+                continue
+
+            for i, d in enumerate(days):
+                print(len(docs_by_day[d]))
+                new_dir = os.path.join(dirpath, '{:02d}'.format(i))
+                print(new_dir)
+
+                # Create directory
+                os.makedirs(new_dir, exist_ok=True)
+
+                for filename in docs_by_day[d]:
+                    old_filename = os.path.join(dirpath, filename)
+                    new_filename = os.path.join(new_dir, filename)
+                    os.rename(old_filename, new_filename)
+                    counter += 1
+
+            logging.info("Moved %d files." % counter)

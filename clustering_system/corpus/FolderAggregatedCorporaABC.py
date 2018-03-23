@@ -54,3 +54,6 @@ class FolderAggregatedCorporaABC(ABC):
         """
         for _, corpus in self.group_corpora:
             yield corpus
+
+    def __len__(self):
+        return len(self.group_corpora)

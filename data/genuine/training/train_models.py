@@ -50,15 +50,15 @@ def train(model_type: Model, dimension: int):
     if model_type == Model.LSI:
         model_file = os.path.join(dir_path, 'model_%d.lsi' % dimension)
 
-        model = Lsi(training_corpus, dictionary, size=dimension)
+        model = Lsi(dictionary, corpus=training_corpus, size=dimension)
     elif model_type == Model.LDA:
         model_file = os.path.join(dir_path, 'model_%d.lda' % dimension)
 
-        model = Lda(training_corpus, dictionary, size=dimension)
+        model = Lda(dictionary, corpus=training_corpus, size=dimension)
     elif model_type == Model.doc2vec:
         model_file = os.path.join(dir_path, 'model_%d.d2v' % dimension)
 
-        model = Doc2vec(training_corpus, size=dimension)
+        model = Doc2vec(corpus=training_corpus, size=dimension)
     else:
         logging.error("Unknown model type '%s" % model_type)
         return

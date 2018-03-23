@@ -10,6 +10,11 @@ class ArtificialCorpus(CorpusABC):
         self.data = np.load(input)
         self.length = None
 
+    @property
+    def size(self):
+        item = next(iter(self))
+        return len(item)
+
     def __iter__(self):
         data = self.getstream()
         for doc, metadata in data:

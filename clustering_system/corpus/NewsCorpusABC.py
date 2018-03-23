@@ -140,7 +140,7 @@ class NewsCorpusABC(CorpusABC):
 
             # Get metadata from filename
             metadata = filename.split("-")
-            metadata = (metadata[2][:-10], metadata[0], title)  # (docId, timestamp, title)
+            metadata = (metadata[2][:-10], float(metadata[0]), title)  # (docId, timestamp, title)
 
             yield "%s %s" % (title, text), metadata
 
