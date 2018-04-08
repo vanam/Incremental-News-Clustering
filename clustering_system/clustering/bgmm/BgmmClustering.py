@@ -8,7 +8,7 @@ from clustering_system.utils import draw
 from clustering_system.visualization.LikelihoodVisualizer import LikelihoodVisualizer
 
 
-class GibbsClustering(GibbsClusteringABC):
+class BgmmClustering(GibbsClusteringABC):
 
     def __init__(self, K: int, D: int, alpha: float, prior: PriorABC, n_iterations: int,
                  visualizer: LikelihoodVisualizer = None,

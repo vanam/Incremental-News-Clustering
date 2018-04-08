@@ -13,7 +13,7 @@ from gensim.corpora import Dictionary, MmCorpus
 from sklearn.decomposition import IncrementalPCA
 
 from clustering_system.clustering.DummyClustering import DummyClustering
-from clustering_system.clustering.fgmm.GibbsClustering import GibbsClustering
+from clustering_system.clustering.bgmm.BgmmClustering import BgmmClustering
 from clustering_system.clustering.igmm.CrpClustering import CrpClustering
 from clustering_system.clustering.igmm.DdCrpClustering import DdCrpClustering, logistic_decay
 from clustering_system.clustering.mixture.GaussianMixtureABC import NormalInverseWishartPrior
@@ -51,7 +51,7 @@ class Model(Enum):
 
 class Clustering(Enum):
     dummy = 0
-    gibbs = 1
+    BGMM = 1
     CRP = 2
     ddCRP = 3
 
@@ -209,7 +209,7 @@ if __name__ == "__main__":
     # Select clustering method
     if clustering_type == Clustering.dummy:
         clustering = DummyClustering(K, size)
-    elif clustering_type == Clustering.gibbs:
+    elif clustering_type == Clustering.BGMM:
         prior = NormalInverseWishartPrior(
             np.zeros(size),
             0.01,
@@ -217,7 +217,7 @@ if __name__ == "__main__":
             size + 1
         )
 
-        clustering = GibbsClustering(K, size, 0.1, prior, 20, visualizer=likelihood_visualizer)
+        clustering = BgmmClustering(K, size, 0.1, prior, 20, visualizer=likelihood_visualizer)
     elif clustering_type == Clustering.CRP:
         prior = NormalInverseWishartPrior(
             np.zeros(size),
