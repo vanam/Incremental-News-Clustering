@@ -18,11 +18,9 @@ from clustering_system.clustering.igmm.CrpClustering import CrpClustering
 from clustering_system.clustering.igmm.DdCrpClustering import DdCrpClustering, logistic_decay
 from clustering_system.clustering.mixture.GaussianMixtureABC import NormalInverseWishartPrior
 from clustering_system.corpus.ArtificialCorpus import ArtificialCorpus
-from clustering_system.corpus.BowNewsCorpus import BowNewsCorpus
 from clustering_system.corpus.FolderAggregatedBowNewsCorpora import FolderAggregatedBowNewsCorpora
 from clustering_system.corpus.FolderAggregatedLineNewsCorpora import FolderAggregatedLineNewsCorpora
 from clustering_system.corpus.LineCorpus import LineCorpus
-from clustering_system.corpus.LineNewsCorpus import LineNewsCorpus
 from clustering_system.corpus.SinglePassCorpusWrapper import SinglePassCorpusWrapper
 from clustering_system.corpus.SingletonCorpora import SingletonCorpora
 from clustering_system.evaluator.RandomEvaluator import RandomEvaluator
@@ -148,7 +146,7 @@ if __name__ == "__main__":
         # For artificial data initialize identity model
         training_corpus = ArtificialCorpus(input=artificial_file)
         size = training_corpus.size
-        corpora = SingletonCorpora(SinglePassCorpusWrapper(ArtificialCorpus(input=artificial_file, metadata=True)))
+        corpora = SingletonCorpora(ArtificialCorpus(input=artificial_file, metadata=True))
         model = Identity()
     else:
         if model_type in [Model.random, Model.LSI, Model.LDA]:
@@ -201,6 +199,9 @@ if __name__ == "__main__":
                 sep_t = len(corpora)
                 test_corpora = FolderAggregatedBowNewsCorpora(test_dir, temp_dir, dictionary, language=language)
                 corpora = itertools.chain(corpora, test_corpora)
+
+    # Make sure we can see data only once
+    corpora = SinglePassCorpusWrapper(corpora)
 
     # Select clustering algorithm
     likelihood_visualizer = LikelihoodVisualizer()
@@ -261,7 +262,7 @@ if __name__ == "__main__":
     # Reduce dimension for visualization
     logging.info("Initializing incremental PCA...")
     ipca = IncrementalPCA(n_components=2)
-    # ipca.fit([vec for vec in model[training_corpus]])
+    ipca.fit([vec for vec in model[training_corpus]])
 
     # Init visualizers
     graph_visualizer = GraphVisualizer()
