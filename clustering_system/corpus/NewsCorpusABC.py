@@ -16,7 +16,7 @@ def get_news_in_folder(root, language=None):
     if language is None:
         language = "[a-z]{2}"
 
-    filename_pattern = re.compile("[0-9]{10}.[0-9]-%s-[0-9A-Fa-f]{32}.q.job.xml" % language)
+    filename_pattern = re.compile("[0-9]{10}.[0-9]-%s-[0-9A-Fa-f]{32}-[0-9A-Fa-f]{32}.q.job.xml" % language)
     all_files = []
 
     walk_iter = iter(os.walk(root)) if isinstance(root, str) else chain.from_iterable(os.walk(path) for path in root)
@@ -140,7 +140,7 @@ class NewsCorpusABC(CorpusABC):
 
             # Get metadata from filename
             metadata = filename.split("-")
-            metadata = (metadata[2][:-10], float(metadata[0]), title)  # (docId, timestamp, title)
+            metadata = (metadata[2], float(metadata[0]), title)  # (docId, timestamp, title)
 
             yield "%s %s" % (title, text), metadata
 

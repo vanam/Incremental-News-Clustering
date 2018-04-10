@@ -17,7 +17,7 @@ if __name__ == "__main__":
     """
     dir_path = os.path.dirname(os.path.realpath(__file__))
 
-    processed_filename_pattern = re.compile('[0-9]{10}.[0-9]-[a-z]{2}-[0-9A-Fa-f]{32}.q.job.xml')
+    processed_filename_pattern = re.compile('[0-9]{10}.[0-9]-[a-z]{2}-[0-9A-Fa-f]{32}-[0-9A-Fa-f]{32}.q.job.xml')
     unprocessed_filename_pattern = re.compile('[0-9A-Fa-f]{32}.q.job.xml')
 
     # Add timestamp to file names
@@ -47,6 +47,15 @@ if __name__ == "__main__":
                 continue
 
             # Parse publication date
+            guids = xmldoc.getElementsByTagName('guid')
+
+            if len(guids) != 2:
+                logging.warning("GUID not found in '%s', file skipped." % file_path)
+                continue
+
+            guid = guids[1].firstChild.nodeValue
+
+            # Parse publication date
             pub_dates = xmldoc.getElementsByTagName('pubDate')
 
             if len(pub_dates) != 2:
@@ -69,7 +78,7 @@ if __name__ == "__main__":
                 logging.warning("Language not found in '%s', file skipped." % file_path)
                 continue
             language = language_raw[0].firstChild.nodeValue
-            prefix = "%s-%s" % (mktime(pub_date), language)
+            prefix = "%s-%s-%s" % (mktime(pub_date), language, guid)
 
             # Construct new file path
             new_file_path = os.path.join(dirpath, "%s-%s" % (prefix, filename))

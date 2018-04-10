@@ -2,6 +2,7 @@ import csv
 import logging
 import os
 from abc import ABC, abstractmethod
+from typing import Tuple
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -11,17 +12,16 @@ from clustering_system.evaluator.SupervisedEvaluation import SupervisedEvaluatio
 
 class EvaluatorABC(ABC):
 
-    def __init__(self, corpora):
-        self.corpora = corpora
+    def __init__(self):
         self.evaluations = {}
 
     @abstractmethod
-    def _get_classes(self, time: int, ids: list) -> np.ndarray:
+    def _get_clusters_classes(self, time: int, ids: list, clusters: list) -> Tuple[np.ndarray, np.ndarray]:
         pass
 
     def evaluate(self, time: int, ids_clusters: list, aic: float, bic: float, likelihood: float):
         ids, clusters = map(np.array, zip(*ids_clusters))
-        classes = self._get_classes(time, ids)
+        clusters, classes = self._get_clusters_classes(time, ids, clusters)
 
         self.evaluations[time] = SupervisedEvaluation(clusters, classes, aic, bic, likelihood)
 

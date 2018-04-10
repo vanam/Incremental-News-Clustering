@@ -32,6 +32,7 @@ from clustering_system.model.Random import Random
 from clustering_system.visualization.ClusterVisualizer import ClusterVisualizer
 from clustering_system.visualization.GraphVisualizer import GraphVisualizer
 from clustering_system.visualization.LikelihoodVisualizer import LikelihoodVisualizer
+from evaluator.Evaluator import Evaluator
 
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
@@ -136,6 +137,8 @@ if __name__ == "__main__":
     dictionary_file = os.path.join(training_dir, 'dictionary.dict')
     training_mm_corpus_file = os.path.join(training_dir, 'training_corpus.mm')
     training_low_corpus_file = os.path.join(training_dir, 'training_corpus.line')
+
+    ground_truth_file = os.path.join(data_dir, "genuine", '2017-10-gold.csv')
 
     ########################
     # Initialization phase #
@@ -244,11 +247,11 @@ if __name__ == "__main__":
         # Decay function for artificial data
         a = 1  # 1 day
 
-
-        # def f(d):
-        #     # Hack distance to look like time
-        #     d = np.math.hypot(d[0], d[1]) * 60 * 60 * 24
-        #     return logistic_decay(d, a)
+        if corpus_type == Corpus.artificial:
+            def f(d):
+                # Hack distance to look like time
+                d = np.math.hypot(d[0], d[1]) * 60 * 60 * 24
+                return logistic_decay(d, a)
 
 
         clustering = DdCrpClustering(size, 0.0001, prior, 20, f, visualizer=likelihood_visualizer)
@@ -270,7 +273,10 @@ if __name__ == "__main__":
 
     # Init evaluator
     logging.info("Initializing evaluator...")
-    evaluator = RandomEvaluator(K, corpora)
+    if corpus_type == Corpus.artificial:
+        evaluator = RandomEvaluator(K)
+    else:
+        evaluator = Evaluator(ground_truth_file, language=language)
 
     # Iterate over heldout/test corpora
     for t, docs_metadata in enumerate(corpora):

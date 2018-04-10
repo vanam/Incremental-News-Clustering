@@ -22,8 +22,8 @@ if __name__ == "__main__":
 
     dir_path = os.path.dirname(os.path.realpath(__file__))
 
-    filename_pattern = re.compile('[0-9]{10}.[0-9]-[a-z]{2}-[0-9A-Fa-f]{32}.q.job.xml')
-    filename_with_lang_pattern = re.compile('[0-9]{10}.[0-9]-%s-[0-9A-Fa-f]{32}.q.job.xml' % args.lang)
+    filename_pattern = re.compile('[0-9]{10}.[0-9]-[a-z]{2}-[0-9A-Fa-f]{32}-[0-9A-Fa-f]{32}.q.job.xml')
+    filename_with_lang_pattern = re.compile('[0-9]{10}.[0-9]-%s-[0-9A-Fa-f]{32}-[0-9A-Fa-f]{32}.q.job.xml' % args.lang)
 
     if args.test:
         logging.info("Running in test mode.")
