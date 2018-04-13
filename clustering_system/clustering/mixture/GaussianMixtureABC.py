@@ -11,7 +11,7 @@ class PriorABC(ABC):
 
 class NormalInverseWishartPrior(PriorABC):
 
-    def __init__(self, m_0: np.ndarray, k_0: float, S_0: np.ndarray, v_0: float):
+    def __init__(self, m_0: np.ndarray, k_0: float, S_0: np.ndarray, v_0: int):
         """
         For more information see:
         - https://www.rdocumentation.org/packages/Boom/versions/0.7/topics/normal.inverse.wishart.prior
@@ -40,9 +40,42 @@ class GaussianMixtureABC(ABC):
         self.z = np.empty((0, 1), int)  # -1 - unassigned, <0, K) assigned
         self.N_k = Counter()
 
-    def add(self, vector: np.ndarray, z: int):
+        self._cache_N = 100
+        self._cache(self._cache_N)
+
+    def new_vector(self, vector: np.ndarray, z: int):
+        i = len(self.z)
         self.X = np.vstack((self.X, np.array([vector])))
-        self.z = np.append(self.z, z)
+        self.z = np.append(self.z, -1)
+        self.update_z(i, z)
+
+        self._cache_i(vector)
+
+        # Enlarge cache if necessary
+        if len(self.X) > self._cache_N:
+            self._cache_N = int(self._cache_N * 1.5)
+            self._cache(self._cache_N)
+
+    @abstractmethod
+    def update_z(self, i: int, z: int):
+        """
+        :return: Update cluster assignments
+        """
+        pass
+
+    @abstractmethod
+    def _cache(self, N: int):
+        """
+        :return: Cache expensive calculation for N samples.
+        """
+        pass
+
+    @abstractmethod
+    def _cache_i(self, vector: np.ndarray):
+        """
+        :return: Cache expensive calculation for next sample i.
+        """
+        pass
 
     @property
     @abstractmethod

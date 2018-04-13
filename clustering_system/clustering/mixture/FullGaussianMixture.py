@@ -1,14 +1,46 @@
 import math
+from collections import defaultdict
+from functools import lru_cache
 from typing import Tuple, List
 
 import numpy as np
-from scipy.special import multigammaln, gammaln
+from scipy.special import gammaln
 from scipy.stats import multivariate_normal
 
-from clustering_system.clustering.mixture.GaussianMixtureABC import GaussianMixtureABC
+from clustering_system.clustering.mixture.GaussianMixtureABC import GaussianMixtureABC, PriorABC
 
 
 class FullGaussianMixture(GaussianMixtureABC):
+
+    def __init__(self, D: int, prior: PriorABC):
+        super().__init__(D, prior)
+
+        self.m_n = defaultdict(lambda: self.prior.k_0 * self.prior.m_0)
+        self.S_n_outer = defaultdict(lambda: self.prior.S_0 + self.prior.k_0 * self._prior_outer_m_0)
+        self.logdet_covars = defaultdict(int)
+        self.inv_covars = defaultdict(lambda: np.zeros((self.D, self.D), np.float))
+
+        # Cache outer product of X[i]
+        self._outer = np.zeros((0, self.D, self.D), np.float)
+
+    def update_z(self, i: int, z: int):
+        old_z = self.z[i]
+
+        if old_z == z:  # Nothing to change
+            return
+
+        if z == -1:  # Remove cluster assignment
+            self.m_n[old_z] -= self.X[i]
+            self.S_n_outer[old_z] -= self._outer[i]
+            self.N_k[old_z] -= 1
+
+        else:  # Set cluster assignment
+            self.m_n[z] += self.X[i]
+            self.S_n_outer[z] += self._outer[i]
+            self.N_k[z] += 1
+
+        self.z[i] = z
+        self._update_logdet_covar_and_inv_covar(z)
 
     @property
     def likelihood(self) -> float:
@@ -59,6 +91,7 @@ class FullGaussianMixture(GaussianMixtureABC):
 
         return K, alpha, mean, covariance, X
 
+    @lru_cache(maxsize=512)
     def get_marginal_likelihood(self, members: frozenset) -> float:
         """
         Compute marginal log likelihood p(X)
@@ -80,17 +113,20 @@ class FullGaussianMixture(GaussianMixtureABC):
         m_0 = self.prior.m_0
         m_n = (k_0 * m_0 + np.sum(X, axis=0)) / k_n
 
-        logdet_0 = np.linalg.slogdet(self.prior.S_0)[1]
-        S = np.sum([np.outer(_, _) for _ in X], axis=0)
-        logdet_n = np.linalg.slogdet(self.prior.S_0 + S + k_0 * np.outer(m_0, m_0) - k_n * np.outer(m_n, m_n))[1]
+        S = np.sum([self._outer[i] for i in members], axis=0)
+        logdet_n = np.linalg.slogdet(self.prior.S_0 + S + k_0 * self._prior_outer_m_0 - k_n * np.outer(m_n, m_n))[1]
+
+        i = np.arange(1, D + 1, dtype=np.int)
 
         return \
-            - N * D / 2 * math.log(math.pi) \
-            + multigammaln(v_n / 2, D) + \
-            + v_0 / 2 * logdet_0 + \
-            - multigammaln(v_0 / 2, D) \
+            - N * D / 2 * self._log_pi \
+            + v_0 / 2 * self.logdet_0 + \
             - v_n / 2 * logdet_n \
-            + D / 2 * (math.log(k_0) - math.log(k_n))
+            + D / 2 * (self._log_k_0 - math.log(k_n)) \
+            + np.sum(
+                self._gammaln_by_2[v_n + 1 - i] -
+                self._gammaln_by_2[v_0 + 1 - i]
+            )
 
     def _map(self, c: int):
         """
@@ -103,17 +139,15 @@ class FullGaussianMixture(GaussianMixtureABC):
         :param c: cluster number
         """
         N = len(self.X)
-        X_k = self.X[self.z == c]
-        N_k = len(X_k)
+        N_k = self.N_k[c]
 
         k_N = self.prior.k_0 + N_k
         v_N = self.prior.v_0 + N_k
         D = len(self.prior.m_0)
-        m_N = (self.prior.k_0 * self.prior.m_0 + np.sum(X_k, axis=0)) / k_N
+        m_N = self.m_n[c] / k_N
 
         # (4.214) in Murphy, p. 134
-        S = np.sum([np.outer(_, _) for _ in X_k], axis=0)
-        S_N = self.prior.S_0 + S + self.prior.k_0 * np.outer(self.prior.m_0, self.prior.m_0) - k_N * np.outer(m_N, m_N)
+        S_N = self.prior.S_0 + self.S_n_outer[c] + self.prior.k_0 * self._prior_outer_m_0 - k_N * np.outer(m_N, m_N)
 
         sigma = S_N / (v_N + D + 2)
         return N_k / N, m_N, sigma
@@ -134,25 +168,14 @@ class FullGaussianMixture(GaussianMixtureABC):
         return probabilities
 
     def _get_posterior_predictive_k(self, i: int, c: int) -> np.ndarray:
-
         k_N = self.prior.k_0 + self.N_k[c]
         v_N = self.prior.v_0 + self.N_k[c]
-
-        X_k = self.X[self.z == c]
-        m_N = (self.prior.k_0 * self.prior.m_0 + np.sum(X_k, axis=0)) / k_N
+        m_N = self.m_n[c] / k_N
         mu = m_N
         v = v_N - self.D + 1
+        return self._multivariate_students_t(i, mu, self.logdet_covars[c], self.inv_covars[c], v)
 
-        # (4.214) in Murphy, p. 134
-        S = np.sum([np.outer(_, _) for _ in X_k], axis=0)
-        S_N = self.prior.S_0 + S + self.prior.k_0 * np.outer(self.prior.m_0, self.prior.m_0) - k_N * np.outer(m_N, m_N)
-
-        cov = (k_N + 1.) / (k_N * (v_N - self.D + 1.)) * S_N
-        log_det_cov_k = np.linalg.slogdet(cov)[1]
-        inv_cov_k = np.linalg.inv(cov)
-
-        return self._multivariate_students_t(i, mu, log_det_cov_k, inv_cov_k, v)
-
+    @lru_cache(maxsize=512)
     def get_prior_predictive(self, i: int) -> float:
         """
         Return the probability of `X[i]` under the prior alone.
@@ -175,11 +198,33 @@ class FullGaussianMixture(GaussianMixtureABC):
 
     def _multivariate_students_t(self, i, mu, logdet_cov, inv_cov, v):
         delta = self.X[i] - mu
+
         return (
-                + gammaln((v + self.D) / 2.)
-                - gammaln(v / 2.)
-                - self.D / 2. * math.log(v)
-                - self.D / 2. * math.log(np.pi)
+                + self._gammaln_by_2[v + self.D]
+                - self._gammaln_by_2[v]
+                - self.D / 2. * self._log_v[v]
+                - self.D / 2. * self._log_pi
                 - 0.5 * logdet_cov
                 - (v + self.D) / 2. * math.log(1 + 1. / v * np.dot(np.dot(delta, inv_cov), delta))
         )
+
+    def _cache(self, N: int):
+        self._log_pi = math.log(math.pi)
+        self._log_k_0 = math.log(self.prior.k_0)
+
+        n = np.concatenate([[1], np.arange(1, self.prior.v_0 + N + 2)])  # first element is dummy for indexing
+        self._log_v = np.log(n)
+        self._gammaln_by_2 = gammaln(n / 2)
+        self._prior_outer_m_0 = np.outer(self.prior.m_0, self.prior.m_0)
+        self.logdet_0 = np.linalg.slogdet(self.prior.S_0)[1]
+
+    def _cache_i(self, vector: np.ndarray):
+        self._outer = np.vstack((self._outer, [np.outer(vector, vector)]))
+
+    def _update_logdet_covar_and_inv_covar(self, k: int):
+        k_N = self.prior.k_0 + self.N_k[k]
+        v_N = self.prior.v_0 + self.N_k[k]
+        m_N = self.m_n[k] / k_N
+        covar = (k_N + 1.) / (k_N * (v_N - self.D + 1.)) * (self.S_n_outer[k] - k_N * np.outer(m_N, m_N))
+        self.logdet_covars[k] = np.linalg.slogdet(covar)[1]
+        self.inv_covars[k] = np.linalg.inv(covar)

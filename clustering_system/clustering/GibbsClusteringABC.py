@@ -50,7 +50,7 @@ class GibbsClusteringABC(ClusteringABC):
 
             # Add document at the end of arrays
             self.ids.append(doc_id)
-            self.mixture.add(vector, -1)  # New customer waits outside of the restaurant
+            self.mixture.new_vector(vector, -1)  # New customer waits outside of the restaurant
             self.N += 1                   # Increment number of documents (customers)
 
     def update(self):
@@ -93,10 +93,10 @@ class GibbsClusteringABC(ClusteringABC):
         """
         z = self.mixture.z[i]
         if z != -1:
-            self.mixture.z[i] = -1
-            self.mixture.N_k[z] -= 1
+            self.mixture.update_z(i, -1)
 
             if self.mixture.N_k[z] == 0:
+                self.reusable_numbers.put_nowait(z)
                 self.K -= 1
 
     def _add_document(self, i: int, z: int):
@@ -106,8 +106,7 @@ class GibbsClusteringABC(ClusteringABC):
         :param i: document id
         :param z: component id
         """
-        self.mixture.z[i] = z
-        self.mixture.N_k[z] += 1
+        self.mixture.update_z(i, z)
 
         if self.mixture.N_k[z] == 1:
             self.K += 1

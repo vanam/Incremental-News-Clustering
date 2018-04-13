@@ -217,7 +217,7 @@ if __name__ == "__main__":
             np.zeros(size),
             0.01,
             0.01 * np.eye(size),
-            size + 1
+            size + 2
         )
 
         clustering = BgmmClustering(K, size, 0.1, prior, 20, visualizer=likelihood_visualizer)
@@ -225,8 +225,8 @@ if __name__ == "__main__":
         prior = NormalInverseWishartPrior(
             np.zeros(size),
             0.01,
-            0.01 * np.eye(size),
-            size + 1
+            np.eye(size),
+            size + 2
         )
 
         clustering = CrpClustering(size, 0.01, prior, 20, visualizer=likelihood_visualizer)
@@ -235,7 +235,7 @@ if __name__ == "__main__":
             np.zeros(size),
             0.01,
             0.01 * np.eye(size),
-            size + 1
+            size + 2
         )
 
         # Decay function
@@ -265,7 +265,7 @@ if __name__ == "__main__":
     # Reduce dimension for visualization
     logging.info("Initializing incremental PCA...")
     ipca = IncrementalPCA(n_components=2)
-    ipca.fit([vec for vec in model[training_corpus]])
+    # ipca.fit([vec for vec in model[training_corpus]])
 
     # Init visualizers
     graph_visualizer = GraphVisualizer()

@@ -17,12 +17,18 @@ class CrpClustering(GibbsClusteringABC):
                  covariance_type: CovarianceType = CovarianceType.full):
         super().__init__(D, alpha, prior, n_iterations, visualizer=visualizer, covariance_type=covariance_type)
 
+        # Cache
+        self.log_alpha = math.log(self.alpha)
+
     def _sample_document(self, i: int):
         # Remove component assignment for a document i
         self._remove_document(i)
 
+        cluster_numbers = np.unique(self.mixture.z)
+        cluster_numbers = cluster_numbers[cluster_numbers != -1]  # Do not consider unassigned items
+
         # Calculate component assignment probabilities for each component
-        probabilities = self.mixture.get_posterior_predictive(i, cluster_numbers=np.unique(self.mixture.z)) + self._get_mixture_probability()
+        probabilities = self.mixture.get_posterior_predictive(i, cluster_numbers) + self._get_mixture_probability(cluster_numbers)
 
         # Calculate component assignment probabilities for new component
         probabilities = np.append(
@@ -34,18 +40,18 @@ class CrpClustering(GibbsClusteringABC):
         probabilities = np.exp(probabilities - scipy.misc.logsumexp(probabilities))
 
         # Sample new component assignment
-        z = draw(probabilities)
+        z_i = draw(probabilities)
+        z = cluster_numbers[z_i] if z_i < len(cluster_numbers) else self._get_new_cluster_number()
 
         # Add document to new component
         self._add_document(i, z)
 
-    def _get_mixture_probability(self) -> np.ndarray:
+    def _get_mixture_probability(self, cluster_numbers: np.ndarray) -> np.ndarray:
         """
         Return the log mixture probability under component `k` for each component.
 
         :return: np.ndarray of K floats where K is number of non-empty components sorted by cluster number
         """
-        cluster_numbers = np.unique(self.mixture.z)
         K = len(cluster_numbers)
 
         probabilities = np.empty(K, float)
@@ -60,4 +66,4 @@ class CrpClustering(GibbsClusteringABC):
 
         :return: log probability
         """
-        return math.log(self.alpha)
+        return self.log_alpha

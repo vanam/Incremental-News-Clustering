@@ -77,7 +77,7 @@ class DdCrpClustering(GibbsClusteringABC):
             self.ids.append(doc_id)
             self.c.append(self.N)                                       # Customer is assigned to self
             self.g.append({self.N})                                     # Customer has a link to self
-            self.mixture.add(vector, self._get_new_cluster_number())    # Customer sits to his own table
+            self.mixture.new_vector(vector, self._get_new_cluster_number())    # Customer sits to his own table
             self.N += 1                                                 # Increment number of documents (customers)
             self.K += 1                                                 # Increment number of tables
 
