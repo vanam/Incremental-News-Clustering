@@ -20,7 +20,7 @@ class GraphVisualizer:
         self.documents[doc_id][3].append((int(cluster_id), t, t + 1))
 
         if linked_doc_id is not None:
-            self.documents[doc_id][5][int(linked_doc_id)].append((t, t + 1))
+            self.documents[doc_id][5][linked_doc_id].append((t, t + 1))
 
     def save(self, filename: str):
         graph = DiGraph(mode="dynamic")

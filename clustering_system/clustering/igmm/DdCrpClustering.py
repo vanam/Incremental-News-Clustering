@@ -92,21 +92,11 @@ class DdCrpClustering(GibbsClusteringABC):
         probabilities = self._get_assignment_probabilities(i)
 
         # Convert indexed log probabilities to probabilities (softmax)
-        # print("----")
-        # print(self.mixture.z)
-        # print(probabilities)
-        # print(scipy.misc.logsumexp(probabilities))
-        # probabilities = np.exp(probabilities - scipy.misc.logsumexp(probabilities))
-        # print(probabilities)
-
         ids, probabilities = zip(*probabilities)
-        # print(probabilities)
         probabilities = np.exp(probabilities - scipy.misc.logsumexp(probabilities))
-        # print(probabilities)
         probabilities = list(zip(ids, probabilities))
 
         # Sample new customer assignment
-        # c = draw(probabilities)
         c = draw_indexed(probabilities)
 
         # Link document to new customer
@@ -130,11 +120,9 @@ class DdCrpClustering(GibbsClusteringABC):
         if self.mixture.z[i] != self.mixture.z[c]:
             # Move customers to a table with smaller cluster number
             if self.mixture.z[i] > self.mixture.z[c]:
-                c_to_join = i
                 table_to_join = self.mixture.z[i]
                 table_no = self.mixture.z[c]
             else:
-                c_to_join = c
                 table_to_join = self.mixture.z[c]
                 table_no = self.mixture.z[i]
 
@@ -142,8 +130,7 @@ class DdCrpClustering(GibbsClusteringABC):
             self.K -= 1
 
             # Go through people at table with higher number and move them to the other table
-            for c_c in self._get_people_next_to(c_to_join):
-                self.mixture.z[c_c] = table_no
+            self.mixture.merge(table_no, table_to_join)
 
         # Set new customer assignment
         self.c[i] = c
@@ -179,8 +166,7 @@ class DdCrpClustering(GibbsClusteringABC):
             new_table_no = self._get_new_cluster_number()
 
             # Move customers to a new table
-            for c in self._get_people_next_to(i):
-                self.mixture.z[c] = new_table_no
+            self.mixture.split(self.mixture.z[i], new_table_no, self._get_people_next_to(i))
 
             # Increment number of tables
             self.K += 1
@@ -303,5 +289,12 @@ class DdCrpClustering(GibbsClusteringABC):
         # table_k = self._compute_marginal_likelihood(table_k_members)
         # table_l = self._compute_marginal_likelihood(table_l_members)
         # table_kl = self._compute_marginal_likelihood(table_kl_members)
+
+        # k = self.mixture.z[i]
+        # l = self.mixture.z[c]
+        #
+        # table_k = self.mixture.get_marginal_likelihood(k)
+        # table_l = self.mixture.get_marginal_likelihood(l)
+        # table_kl = self.mixture.get_marginal_likelihood_combined(k, l)
 
         return table_kl - table_k - table_l

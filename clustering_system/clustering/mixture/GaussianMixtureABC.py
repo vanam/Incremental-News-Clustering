@@ -47,9 +47,9 @@ class GaussianMixtureABC(ABC):
         i = len(self.z)
         self.X = np.vstack((self.X, np.array([vector])))
         self.z = np.append(self.z, -1)
-        self.update_z(i, z)
-
         self._cache_i(vector)
+
+        self.update_z(i, z)
 
         # Enlarge cache if necessary
         if len(self.X) > self._cache_N:
@@ -67,6 +67,20 @@ class GaussianMixtureABC(ABC):
     def _cache(self, N: int):
         """
         :return: Cache expensive calculation for N samples.
+        """
+        pass
+
+    @abstractmethod
+    def merge(self, k: int, l: int):
+        """
+        :return: Merge two clusters.
+        """
+        pass
+
+    @abstractmethod
+    def split(self, k: int, l: int, members: list):
+        """
+        :return: Move members from cluster k to cluster l.
         """
         pass
 

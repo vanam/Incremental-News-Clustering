@@ -91,6 +91,67 @@ class FullGaussianMixture(GaussianMixtureABC):
 
         return K, alpha, mean, covariance, X
 
+    # def get_marginal_likelihood(self, c: int) -> float:
+    #     """
+    #     Compute marginal log likelihood p(X)
+    #
+    #     :param c: cluster number
+    #     :return: log likelihood
+    #     """
+    #     N = len(self.X)
+    #     N_k = self.N_k[c]
+    #     v_0 = self.prior.v_0
+    #
+    #     k_N = self.prior.k_0 + N_k
+    #     v_N = self.prior.v_0 + N_k
+    #     D = len(self.prior.m_0)
+    #     m_N = self.m_n[c] / k_N
+    #
+    #     logdet_n = np.linalg.slogdet(self.S_n_outer[c] - k_N * np.outer(m_N, m_N))[1]
+    #
+    #     i = np.arange(1, D + 1, dtype=np.int)
+    #
+    #     return \
+    #         - N * D / 2 * self._log_pi \
+    #         + v_0 / 2 * self.logdet_0 + \
+    #         - v_N / 2 * logdet_n \
+    #         + D / 2 * (self._log_k_0 - math.log(k_N)) \
+    #         + np.sum(
+    #             self._gammaln_by_2[v_N + 1 - i] -
+    #             self._gammaln_by_2[v_0 + 1 - i]
+    #         )
+    #
+    # def get_marginal_likelihood_combined(self, c: int, d: int) -> float:
+    #     """
+    #     Compute marginal log likelihood p(X)
+    #
+    #     :param c: cluster number
+    #     :param d: cluster number
+    #     :return: log likelihood
+    #     """
+    #     N = len(self.X)
+    #     N_k = self.N_k[c] + self.N_k[d]
+    #     v_0 = self.prior.v_0
+    #
+    #     k_N = self.prior.k_0 + N_k
+    #     v_N = self.prior.v_0 + N_k
+    #     D = len(self.prior.m_0)
+    #     m_N = (self.m_n[c] + self.m_n[d]) / k_N
+    #
+    #     logdet_n = np.linalg.slogdet(self.S_n_outer[c] + self.S_n_outer[d] - k_N * np.outer(m_N, m_N))[1]
+    #
+    #     i = np.arange(1, D + 1, dtype=np.int)
+    #
+    #     return \
+    #         - N * D / 2 * self._log_pi \
+    #         + v_0 / 2 * self.logdet_0 + \
+    #         - v_N / 2 * logdet_n \
+    #         + D / 2 * (self._log_k_0 - math.log(k_N)) \
+    #         + np.sum(
+    #             self._gammaln_by_2[v_N + 1 - i] -
+    #             self._gammaln_by_2[v_0 + 1 - i]
+    #         )
+
     @lru_cache(maxsize=512)
     def get_marginal_likelihood(self, members: frozenset) -> float:
         """
@@ -167,7 +228,7 @@ class FullGaussianMixture(GaussianMixtureABC):
 
         return probabilities
 
-    def _get_posterior_predictive_k(self, i: int, c: int) -> np.ndarray:
+    def _get_posterior_predictive_k(self, i: int, c: int) -> float:
         k_N = self.prior.k_0 + self.N_k[c]
         v_N = self.prior.v_0 + self.N_k[c]
         m_N = self.m_n[c] / k_N
@@ -228,3 +289,42 @@ class FullGaussianMixture(GaussianMixtureABC):
         covar = (k_N + 1.) / (k_N * (v_N - self.D + 1.)) * (self.S_n_outer[k] - k_N * np.outer(m_N, m_N))
         self.logdet_covars[k] = np.linalg.slogdet(covar)[1]
         self.inv_covars[k] = np.linalg.inv(covar)
+
+    def merge(self, k: int, l: int):
+        # Destoy cluster l
+        self.N_k[l] = 0
+        self.m_n.pop(l, None)
+        self.S_n_outer.pop(l, None)
+
+        for i in np.where(self.z == l)[0]:
+            # Set new cluster assignment
+            self.z[i] = k
+            self.m_n[k] += self.X[i]
+            self.S_n_outer[k] += self._outer[i]
+            self.N_k[k] += 1
+
+        self._update_logdet_covar_and_inv_covar(k)
+        self._update_logdet_covar_and_inv_covar(l)
+
+    def split(self, k: int, l: int, members: list):
+        if k == l:
+            print("%d = %d" % (k, l))
+
+        for i in members:
+            # Remove old cluster assignment
+            self.m_n[k] -= self.X[i]
+            self.S_n_outer[k] -= self._outer[i]
+            self.N_k[k] -= 1
+
+
+            if self.N_k[k] < 0:
+                raise ValueError
+
+            # Set new cluster assignment
+            self.z[i] = l
+            self.m_n[l] += self.X[i]
+            self.S_n_outer[l] += self._outer[i]
+            self.N_k[l] += 1
+
+            self._update_logdet_covar_and_inv_covar(k)
+            self._update_logdet_covar_and_inv_covar(l)
