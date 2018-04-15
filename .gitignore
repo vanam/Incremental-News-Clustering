@@ -21,6 +21,7 @@ data/genuine/test/*
 !data/genuine/test/.gitignore
 
 !data/genuine/histogram.py
+!data/genuine/purge.py
 !data/genuine/retain.py
 !data/genuine/transform.py
 !data/genuine/utils.py
