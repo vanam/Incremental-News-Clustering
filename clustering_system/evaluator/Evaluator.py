@@ -53,6 +53,9 @@ class Evaluator(EvaluatorABC):
             clu.append(cluster)
             cla.append(self.truth[id])
 
-        logging.warning("%d files skipped during evaluation, %d files are being evaluated." % (skipped, len(clu)))
+        if skipped > 0:
+            logging.warning("%d files skipped during evaluation, %d files are being evaluated." % (skipped, len(clu)))
+        else:
+            logging.info("%d files are being evaluated." % len(clu))
 
         return np.array(clu), np.array(cla)

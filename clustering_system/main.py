@@ -62,12 +62,13 @@ if __name__ == "__main__":
     parser.add_argument('-c', '--corpus', choices=[c.name for c in Corpus], help='corpus type')
     parser.add_argument('-m', '--model', choices=[m.name for m in Model], help='document vector representation model')
     parser.add_argument('-l', '--clustering', choices=[c.name for c in Clustering], help='clustering method')
-    parser.add_argument('-K', help='a number of clusters (if applicable)')
-    parser.add_argument('-s', '--size', choices=[100, 200, 300], help='a size of a feature vector (if applicable)')
+    parser.add_argument('-K', type=int, help='the number of clusters (if applicable)')
+    parser.add_argument('-s', '--size', type=int, choices=[100, 200, 300], help='the size of a feature vector (if applicable)')
     parser.add_argument('-t', '--test', dest='test', action='store_true', help='use test data')
     parser.add_argument('-f', '--fixed-rand', dest='seed', action='store_true', help='fix random seed')
+    parser.add_argument('-i', type=int, help='i-th run')
     parser.set_defaults(corpus=Corpus.artificial.name, model=Model.identity.name, clustering=Clustering.ddCRP.name,
-                        K=2, size=100, test=False, seed=False)
+                        K=2, size=100, test=False, seed=False, i=0)
     args = parser.parse_args()
 
     def has_valid_args(args):
@@ -119,7 +120,7 @@ if __name__ == "__main__":
     # Useful directories
     data_dir = os.path.join(dir_path, "..", "data")
     temp_dir = os.path.join(dir_path, "..", "temp")
-    temp_visualization_dir = os.path.join(temp_dir, 'visualization')
+    temp_visualization_dir = os.path.join(temp_dir, 'visualization', '{:02d}'.format(args.i))
     temp_cluster_visualization_dir = os.path.join(temp_visualization_dir, 'cluster')
 
     # Make sure temp directories exist
