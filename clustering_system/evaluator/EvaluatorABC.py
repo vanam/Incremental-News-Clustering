@@ -6,6 +6,7 @@ from typing import Tuple
 
 import matplotlib.pyplot as plt
 import numpy as np
+from matplotlib import ticker
 
 from clustering_system.evaluator.SupervisedEvaluation import SupervisedEvaluation
 
@@ -74,14 +75,16 @@ class EvaluatorABC(ABC):
         observations, clusters, classes = zip(*[(e.N, e.K, e.C) for _, e in self])
 
         fig = plt.figure()
-        plt.subplot(211)
+        ax = plt.subplot(211)
+        ax.xaxis.set_major_locator(ticker.MultipleLocator(1))
         plt.plot(x, observations, alpha=0.5, label="observations")
         plt.xlabel("time")
         plt.grid()
         plt.legend()
         plt.tight_layout()
 
-        plt.subplot(212)
+        ax = plt.subplot(212)
+        ax.xaxis.set_major_locator(ticker.MultipleLocator(1))
         plt.plot(x, clusters, alpha=0.5, label="clusters")
         plt.plot(x, classes, alpha=0.5, label="classes")
         plt.xlabel("time")
@@ -102,7 +105,8 @@ class EvaluatorABC(ABC):
         purity, rand_index, precision, recall,  f1_measure, homogeneity, completeness, v_measure = zip(*[(e.purity, e.rand_index, e.precision, e.recall, e.f1_measure, e.homogeneity, e.completeness, e.v_measure) for _, e in self])
 
         fig = plt.figure()
-        plt.subplot(311)
+        ax = plt.subplot(311)
+        ax.xaxis.set_major_locator(ticker.MultipleLocator(1))
         plt.plot(x, purity, alpha=0.5, label="purity")
         plt.plot(x, rand_index, alpha=0.5, label="rand index")
         plt.xlabel("time")
@@ -111,7 +115,8 @@ class EvaluatorABC(ABC):
         plt.legend()
         plt.tight_layout()
 
-        plt.subplot(312)
+        ax = plt.subplot(312)
+        ax.xaxis.set_major_locator(ticker.MultipleLocator(1))
         plt.plot(x, precision, alpha=0.5, label="precision")
         plt.plot(x, recall, alpha=0.5, label="recall")
         plt.plot(x, f1_measure, alpha=0.5, label="F1-measure")
@@ -121,7 +126,8 @@ class EvaluatorABC(ABC):
         plt.legend()
         plt.tight_layout()
 
-        plt.subplot(313)
+        ax = plt.subplot(313)
+        ax.xaxis.set_major_locator(ticker.MultipleLocator(1))
         plt.plot(x, homogeneity, alpha=0.5, label="homogeneity")
         plt.plot(x, completeness, alpha=0.5, label="completeness")
         plt.plot(x, v_measure, alpha=0.5, label="V-measure")
@@ -144,7 +150,8 @@ class EvaluatorABC(ABC):
         cluster_entropy, class_entropy, mutual_information, normalized_mutual_information, normalized_mutual_information2 = zip(*[(e.cluster_entropy, e.class_entropy, e.mutual_information, e.normalized_mutual_information, e.normalized_mutual_information2) for _, e in self])
 
         fig = plt.figure()
-        plt.subplot(211)
+        ax = plt.subplot(211)
+        ax.xaxis.set_major_locator(ticker.MultipleLocator(1))
         plt.plot(x, cluster_entropy, alpha=0.5, label="entropy (clusters)")
         plt.plot(x, class_entropy, alpha=0.5, label="entropy (classes)")
         plt.xlabel("time")
@@ -152,7 +159,8 @@ class EvaluatorABC(ABC):
         plt.legend()
         plt.tight_layout()
 
-        plt.subplot(212)
+        ax = plt.subplot(212)
+        ax.xaxis.set_major_locator(ticker.MultipleLocator(1))
         plt.plot(x, mutual_information, alpha=0.5, label="mutual information")
         plt.plot(x, normalized_mutual_information, alpha=0.5, label="normalized mutual information")
         plt.plot(x, normalized_mutual_information2, alpha=0.5, label="normalized mutual information 2")
@@ -174,6 +182,8 @@ class EvaluatorABC(ABC):
         likelihood = [e.likelihood for _, e in self]
 
         fig = plt.figure()
+        ax = plt.subplot(111)
+        ax.xaxis.set_major_locator(ticker.MultipleLocator(1))
         plt.plot(x, likelihood, alpha=0.5, label="likelihood")
         plt.xlabel("time")
         plt.grid()
@@ -193,6 +203,8 @@ class EvaluatorABC(ABC):
         aic, bic = zip(*[(e.aic, e.bic) for _, e in self])
 
         fig = plt.figure()
+        ax = plt.subplot(111)
+        ax.xaxis.set_major_locator(ticker.MultipleLocator(1))
         plt.plot(x, aic, alpha=0.5, label="Akaike information criterion")
         plt.plot(x, bic, alpha=0.5, label="Bayesian information criterion")
         plt.xlabel("time")

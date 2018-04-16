@@ -231,7 +231,7 @@ if __name__ == "__main__":
             size + 2
         )
 
-        clustering = CrpClustering(size, 0.01, prior, args.n, visualizer=likelihood_visualizer)
+        clustering = CrpClustering(K, size, 1, prior, args.n, visualizer=likelihood_visualizer)
     elif clustering_type == Clustering.ddCRP:
         prior = NormalInverseWishartPrior(
             np.zeros(size),

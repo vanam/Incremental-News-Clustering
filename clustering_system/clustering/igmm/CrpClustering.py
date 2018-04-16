@@ -12,10 +12,10 @@ from clustering_system.visualization.LikelihoodVisualizer import LikelihoodVisua
 
 class CrpClustering(GibbsClusteringABC):
 
-    def __init__(self, D: int, alpha: float, prior: PriorABC, n_iterations: int,
+    def __init__(self, K:int, D: int, alpha: float, prior: PriorABC, n_iterations: int,
                  visualizer: LikelihoodVisualizer = None,
                  covariance_type: CovarianceType = CovarianceType.full):
-        super().__init__(D, alpha, prior, n_iterations, visualizer=visualizer, covariance_type=covariance_type)
+        super().__init__(D, alpha, prior, n_iterations, K_max=K, visualizer=visualizer, covariance_type=covariance_type)
 
         # Cache
         self.log_alpha = math.log(self.alpha)

@@ -34,31 +34,36 @@ class FullGaussianMixture(GaussianMixtureABC):
         if old_z == z:  # Nothing to change
             return
 
+        self.z[i] = z
+
         if z == -1:  # Remove cluster assignment
             self.m_n[old_z] -= self.X[i]
             self.S_n_outer[old_z] -= self._outer[i]
             self.N_k[old_z] -= 1
+            self._update_logdet_covar_and_inv_covar(old_z)
 
         else:  # Set cluster assignment
             self.m_n[z] += self.X[i]
             self.S_n_outer[z] += self._outer[i]
             self.N_k[z] += 1
-
-        self.z[i] = z
-        self._update_logdet_covar_and_inv_covar(z)
+            self._update_logdet_covar_and_inv_covar(z)
 
     @property
     def likelihood(self) -> float:
         """
         :return: Return average log likelihood of data.
         """
-        k, alpha, mean, covariance, _ = self.parameters
+        k, alpha, mean, covariance, _, cns = self.parameters
 
         rv = [None] * k
         for i in range(k):
             rv[i] = multivariate_normal(mean[i], covariance[i])
 
-        likelihood = sum(np.log([sum([alpha[j] * rv[j].pdf(d) for j in range(k)]) for d in self.X]))
+        m = max(self.z)
+        # print(cns)
+
+        # likelihood = sum(np.log([sum([alpha[j] * rv[j].pdf(d) for j in range(k)]) for d in self.X]))
+        likelihood = sum(np.log([alpha[cns[self.z[i]]] * rv[cns[self.z[i]]].pdf(d) for i, d in enumerate(self.X)]))
 
         return likelihood / len(self.X)
 
@@ -73,7 +78,7 @@ class FullGaussianMixture(GaussianMixtureABC):
         return int(mean_parameters + cov_parameters + K - 1)
 
     @property
-    def parameters(self) -> Tuple[int, np.ndarray, np.ndarray, np.ndarray, List[np.ndarray]]:
+    def parameters(self) -> Tuple[int, np.ndarray, np.ndarray, np.ndarray, List[np.ndarray], dict]:
         """
         Get parameters of the Gaussian components.
 
@@ -86,15 +91,18 @@ class FullGaussianMixture(GaussianMixtureABC):
         mean = np.empty((K, self.D), dtype=float)
         covariance = np.empty((K, self.D, self.D), dtype=float)
         X = []
+        cns = {}
 
         for i, cn in enumerate(cluster_numbers):
             a, m, c = self._map(cn)
+
             alpha[i] = a
             mean[i] = m
             covariance[i] = c
             X.append(self.X[self.z == cn])
+            cns[cn] = i
 
-        return K, alpha, mean, covariance, X
+        return K, alpha, mean, covariance, X, cns
 
     @lru_cache(maxsize=512)
     def get_marginal_likelihood(self, members: frozenset) -> float:
