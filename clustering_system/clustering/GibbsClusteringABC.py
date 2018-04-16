@@ -50,12 +50,10 @@ class GibbsClusteringABC(ClusteringABC):
 
             # Add document at the end of arrays
             self.ids.append(doc_id)
-            self.mixture.new_vector(vector, -1)  # New customer waits outside of the restaurant
+            self.mixture.new_vector(vector, random.randint(0, self.K_max - 1))  # New customer is assigned to random table
             self.N += 1                   # Increment number of documents (customers)
 
     def update(self):
-        # TODO clear cache if necessary
-
         # Repeat Gibbs sampling iterations
         for _ in range(self.n_iterations):
 
@@ -66,8 +64,6 @@ class GibbsClusteringABC(ClusteringABC):
             # Keep track of likelihood
             if self.visualizer is not None:
                 self.visualizer.add(self.likelihood, self.N)
-
-        # TODO update cluster components if necessary
 
     def __iter__(self):
         """

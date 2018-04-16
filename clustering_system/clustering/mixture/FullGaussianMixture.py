@@ -17,11 +17,16 @@ class FullGaussianMixture(GaussianMixtureABC):
 
         self.m_n = defaultdict(lambda: self.prior.k_0 * self.prior.m_0)
         self.S_n_outer = defaultdict(lambda: self.prior.S_0 + self.prior.k_0 * self._prior_outer_m_0)
-        self.logdet_covars = defaultdict(int)
+        self.logdet_covars = defaultdict(float)
         self.inv_covars = defaultdict(lambda: np.zeros((self.D, self.D), np.float))
 
         # Cache outer product of X[i]
         self._outer = np.zeros((0, self.D, self.D), np.float)
+
+        self._log_pi = math.log(math.pi)
+        self._log_k_0 = math.log(self.prior.k_0)
+        self._logdet_0 = np.linalg.slogdet(self.prior.S_0)[1]
+        self._prior_outer_m_0 = np.outer(self.prior.m_0, self.prior.m_0)
 
     def update_z(self, i: int, z: int):
         old_z = self.z[i]
@@ -91,67 +96,6 @@ class FullGaussianMixture(GaussianMixtureABC):
 
         return K, alpha, mean, covariance, X
 
-    # def get_marginal_likelihood(self, c: int) -> float:
-    #     """
-    #     Compute marginal log likelihood p(X)
-    #
-    #     :param c: cluster number
-    #     :return: log likelihood
-    #     """
-    #     N = len(self.X)
-    #     N_k = self.N_k[c]
-    #     v_0 = self.prior.v_0
-    #
-    #     k_N = self.prior.k_0 + N_k
-    #     v_N = self.prior.v_0 + N_k
-    #     D = len(self.prior.m_0)
-    #     m_N = self.m_n[c] / k_N
-    #
-    #     logdet_n = np.linalg.slogdet(self.S_n_outer[c] - k_N * np.outer(m_N, m_N))[1]
-    #
-    #     i = np.arange(1, D + 1, dtype=np.int)
-    #
-    #     return \
-    #         - N * D / 2 * self._log_pi \
-    #         + v_0 / 2 * self.logdet_0 + \
-    #         - v_N / 2 * logdet_n \
-    #         + D / 2 * (self._log_k_0 - math.log(k_N)) \
-    #         + np.sum(
-    #             self._gammaln_by_2[v_N + 1 - i] -
-    #             self._gammaln_by_2[v_0 + 1 - i]
-    #         )
-    #
-    # def get_marginal_likelihood_combined(self, c: int, d: int) -> float:
-    #     """
-    #     Compute marginal log likelihood p(X)
-    #
-    #     :param c: cluster number
-    #     :param d: cluster number
-    #     :return: log likelihood
-    #     """
-    #     N = len(self.X)
-    #     N_k = self.N_k[c] + self.N_k[d]
-    #     v_0 = self.prior.v_0
-    #
-    #     k_N = self.prior.k_0 + N_k
-    #     v_N = self.prior.v_0 + N_k
-    #     D = len(self.prior.m_0)
-    #     m_N = (self.m_n[c] + self.m_n[d]) / k_N
-    #
-    #     logdet_n = np.linalg.slogdet(self.S_n_outer[c] + self.S_n_outer[d] - k_N * np.outer(m_N, m_N))[1]
-    #
-    #     i = np.arange(1, D + 1, dtype=np.int)
-    #
-    #     return \
-    #         - N * D / 2 * self._log_pi \
-    #         + v_0 / 2 * self.logdet_0 + \
-    #         - v_N / 2 * logdet_n \
-    #         + D / 2 * (self._log_k_0 - math.log(k_N)) \
-    #         + np.sum(
-    #             self._gammaln_by_2[v_N + 1 - i] -
-    #             self._gammaln_by_2[v_0 + 1 - i]
-    #         )
-
     @lru_cache(maxsize=512)
     def get_marginal_likelihood(self, members: frozenset) -> float:
         """
@@ -181,7 +125,7 @@ class FullGaussianMixture(GaussianMixtureABC):
 
         return \
             - N * D / 2 * self._log_pi \
-            + v_0 / 2 * self.logdet_0 + \
+            + v_0 / 2 * self._logdet_0 + \
             - v_n / 2 * logdet_n \
             + D / 2 * (self._log_k_0 - math.log(k_n)) \
             + np.sum(
@@ -270,14 +214,9 @@ class FullGaussianMixture(GaussianMixtureABC):
         )
 
     def _cache(self, N: int):
-        self._log_pi = math.log(math.pi)
-        self._log_k_0 = math.log(self.prior.k_0)
-
         n = np.concatenate([[1], np.arange(1, self.prior.v_0 + N + 2)])  # first element is dummy for indexing
         self._log_v = np.log(n)
         self._gammaln_by_2 = gammaln(n / 2)
-        self._prior_outer_m_0 = np.outer(self.prior.m_0, self.prior.m_0)
-        self.logdet_0 = np.linalg.slogdet(self.prior.S_0)[1]
 
     def _cache_i(self, vector: np.ndarray):
         self._outer = np.vstack((self._outer, [np.outer(vector, vector)]))

@@ -60,15 +60,16 @@ class Clustering(Enum):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Run clustering system.')
     parser.add_argument('-c', '--corpus', choices=[c.name for c in Corpus], help='corpus type')
-    parser.add_argument('-m', '--model', choices=[m.name for m in Model], help='document vector representation model')
-    parser.add_argument('-l', '--clustering', choices=[c.name for c in Clustering], help='clustering method')
-    parser.add_argument('-K', type=int, help='the number of clusters (if applicable)')
-    parser.add_argument('-s', '--size', type=int, choices=[100, 200, 300], help='the size of a feature vector (if applicable)')
-    parser.add_argument('-t', '--test', dest='test', action='store_true', help='use test data')
     parser.add_argument('-f', '--fixed-rand', dest='seed', action='store_true', help='fix random seed')
     parser.add_argument('-i', type=int, help='i-th run')
+    parser.add_argument('-K', type=int, help='the number of clusters (if applicable)')
+    parser.add_argument('-l', '--clustering', choices=[c.name for c in Clustering], help='clustering method')
+    parser.add_argument('-m', '--model', choices=[m.name for m in Model], help='document vector representation model')
+    parser.add_argument('-n', type=int, help='the number of iterations')
+    parser.add_argument('-s', '--size', type=int, choices=[10, 100, 200, 300], help='the size of a feature vector (if applicable)')
+    parser.add_argument('-t', '--test', dest='test', action='store_true', help='use test data')
     parser.set_defaults(corpus=Corpus.artificial.name, model=Model.identity.name, clustering=Clustering.ddCRP.name,
-                        K=2, size=100, test=False, seed=False, i=0)
+                        K=2, size=100, test=False, seed=False, i=0, n=20)
     args = parser.parse_args()
 
     def has_valid_args(args):
@@ -221,7 +222,7 @@ if __name__ == "__main__":
             size + 2
         )
 
-        clustering = BgmmClustering(K, size, 0.1, prior, 20, visualizer=likelihood_visualizer)
+        clustering = BgmmClustering(K, size, 0.01, prior, args.n, visualizer=likelihood_visualizer)
     elif clustering_type == Clustering.CRP:
         prior = NormalInverseWishartPrior(
             np.zeros(size),
@@ -230,7 +231,7 @@ if __name__ == "__main__":
             size + 2
         )
 
-        clustering = CrpClustering(size, 0.01, prior, 20, visualizer=likelihood_visualizer)
+        clustering = CrpClustering(size, 0.01, prior, args.n, visualizer=likelihood_visualizer)
     elif clustering_type == Clustering.ddCRP:
         prior = NormalInverseWishartPrior(
             np.zeros(size),
@@ -255,7 +256,7 @@ if __name__ == "__main__":
                 return logistic_decay(d, a)
 
 
-        clustering = DdCrpClustering(size, 0.0001, prior, 20, f, visualizer=likelihood_visualizer)
+        clustering = DdCrpClustering(size, 0.0001, prior, args.n, f, visualizer=likelihood_visualizer)
     else:
         logging.error("Unknown clustering algorithm '%s'" % clustering_type)
         sys.exit(1)
