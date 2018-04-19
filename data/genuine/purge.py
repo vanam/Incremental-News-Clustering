@@ -36,6 +36,7 @@ if __name__ == "__main__":
         raise ValueError("File '%s' not found" % filename)
 
     ids = set()
+    cluster_ids = set()
 
     # Read valid GUIDs
     with open(filename, 'r') as csvfile:
@@ -49,6 +50,9 @@ if __name__ == "__main__":
             # Skip documents in different languages
             if language is not None and language != row[1]:
                 continue
+
+            # Keep track of cluster ids
+            cluster_ids.add(row[6])
 
             ids.add(row[0])
 
@@ -78,6 +82,9 @@ if __name__ == "__main__":
                 if not args.test:
                     os.remove(file_path)
 
-    logging.info("%d files were purged, %d files remain." % (purged, counter - purged))
+    N = counter - purged
+    K = len(cluster_ids)
+    logging.info("%d files were purged, %d files remain." % (purged, N))
+    logging.info("%d clusters found, average cluster size = %f" % (K, N / K))
 
 

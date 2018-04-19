@@ -14,9 +14,11 @@ TEST=0
 # VARIABLES                                                                    #
 ################################################################################
 
-K=5
+K=20
+ALPHA=0.01
 CLUSTERING=""
 MODEL=""
+ITERS=50
 REPETITIONS=5
 SIZE=100
 
@@ -25,19 +27,58 @@ SIZE=100
 ################################################################################
 
 function random {
-    ./run.sh clustering_system/main.py -c news -m random -l dummy -K ${K} -s ${SIZE} -i $1
+    args=()
+    args+=( "-c news" )
+    args+=( "-m random" )
+    args+=( "-l dummy" )
+    args+=( "-i $1" )
+    args+=( "-K ${K}" )
+    args+=( "-n ${ITERS}" )
+    args+=( "-s ${SIZE}" )
+    (( TEST == 1 )) && args+=( '-t' )
+    ./run.sh clustering_system/main.py ${args[@]}
 }
 
 function bgmmm {
-    ./run.sh clustering_system/main.py -c news -m ${MODEL} -l BGMM -K ${K} -s ${SIZE} -i $1
+    args=()
+    args+=( "-c news" )
+    args+=( "-m ${MODEL}" )
+    args+=( "-l BGMM" )
+    args+=( "-a ${ALPHA}" )
+    args+=( "-i $1" )
+    args+=( "-K ${K}" )
+    args+=( "-n ${ITERS}" )
+    args+=( "-s ${SIZE}" )
+    (( TEST == 1 )) && args+=( '-t' )
+    ./run.sh clustering_system/main.py ${args[@]}
 }
 
 function crp {
-    ./run.sh clustering_system/main.py -c news -m ${MODEL} -l CRP -s ${SIZE} -i $1
+    args=()
+    args+=( "-c news" )
+    args+=( "-m ${MODEL}" )
+    args+=( "-l CRP" )
+    args+=( "-a ${ALPHA}" )
+    args+=( "-i $1" )
+    args+=( "-K ${K}" )
+    args+=( "-n ${ITERS}" )
+    args+=( "-s ${SIZE}" )
+    (( TEST == 1 )) && args+=( '-t' )
+    ./run.sh clustering_system/main.py ${args[@]}
 }
 
 function ddcrp {
-    ./run.sh clustering_system/main.py -c news -m ${MODEL} -l ddCRP -s ${SIZE} -i $1
+    args=()
+    args+=( "-c news" )
+    args+=( "-m ${MODEL}" )
+    args+=( "-l ddCRP" )
+    args+=( "-a ${ALPHA}" )
+    args+=( "-i $1" )
+    args+=( "-K ${K}" )
+    args+=( "-n ${ITERS}" )
+    args+=( "-s ${SIZE}" )
+    (( TEST == 1 )) && args+=( '-t' )
+    ./run.sh clustering_system/main.py ${args[@]}
 }
 
 function help {
@@ -47,15 +88,17 @@ function help {
     echo ""
     echo "Usage: $1 [OPTIONS]"
     echo "Available options"
+    echo "  -a <alpha>                           the alpha hyperparameter"
     echo "  -c <method={r|b|c|d}>                use clustering method where:"
-    echo "                                           -r    random"
-    echo "                                           -b    BGMM"
-    echo "                                           -c    CRP"
-    echo "                                           -d    ddCRP"
+    echo "                                           r    random"
+    echo "                                           b    BGMM"
+    echo "                                           c    CRP"
+    echo "                                           d    ddCRP"
     echo "  -h                                   displays help"
-    echo "  -k <number>                          the number of clusters (if applicable)"
+    echo "  -k <integer>                         the number of clusters (if applicable)"
     echo "  -m <model={random|LSI|LDA|doc2vec}>  use specified model"
-    echo "  -n <number>                          the number of repetitions"
+    echo "  -n <integer>                         the number of sampling iterations"
+    echo "  -r <integer>                         the number of repetitions"
     echo "  -s <size>                            the size of a feature vector"
     echo "  -t                                   use test data"
 }
@@ -70,6 +113,20 @@ cd "$(dirname "$0")"
 while [ "$1" != "" ]
 do
     case $1 in
+        -a) if [ $# -lt 2 ]
+            then
+                echo "Too few arguments."
+                echo ""
+
+                help $0
+                exit 1
+            else
+                shift
+                ALPHA=$1
+                shift
+            fi
+            ;;
+
         -c) if [ $# -lt 2 ]
             then
                 echo "Too few arguments."
@@ -117,6 +174,20 @@ do
             ;;
 
         -n) if [ $# -lt 2 ]
+            then
+                echo "Too few arguments."
+                echo ""
+
+                help $0
+                exit 1
+            else
+                shift
+                ITERS=$1
+                shift
+            fi
+            ;;
+
+        -r) if [ $# -lt 2 ]
             then
                 echo "Too few arguments."
                 echo ""

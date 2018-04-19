@@ -1,4 +1,5 @@
 import math
+import random
 from typing import List, Tuple, Callable
 
 import numpy as np
@@ -54,12 +55,12 @@ def logistic_decay(d: float, a: float):
 
 class DdCrpClustering(GibbsClusteringABC):
 
-    def __init__(self, D: int, alpha: float, prior: NormalInverseWishartPrior, n_iterations: int,
+    def __init__(self, K: int, D: int, alpha: float, prior: NormalInverseWishartPrior, n_iterations: int,
                  decay_function: Callable[[float], float],
                  probability_threshold: float = 0.001,
                  visualizer: LikelihoodVisualizer = None,
                  covariance_type: CovarianceType = CovarianceType.full):
-        super().__init__(D, alpha, prior, n_iterations, visualizer=visualizer, covariance_type=covariance_type)
+        super().__init__(D, alpha, prior, n_iterations, K_max=K, visualizer=visualizer, covariance_type=covariance_type)
         self.f = decay_function
         self.threshold = probability_threshold
 
@@ -75,11 +76,16 @@ class DdCrpClustering(GibbsClusteringABC):
 
             # Add document at the end of arrays
             self.ids.append(doc_id)
-            self.c.append(self.N)                                       # Customer is assigned to self
-            self.g.append({self.N})                                     # Customer has a link to self
+            i = self.N
+            self.c.append(i)                                       # Customer is assigned to self
+            self.g.append({i})                                     # Customer has a link to self
             self.mixture.new_vector(vector, self._get_new_cluster_number())    # Customer sits to his own table
             self.N += 1                                                 # Increment number of documents (customers)
             self.K += 1                                                 # Increment number of tables
+
+            if self.N > self.K_max:
+                self._remove_assignment(i)
+                self._add_assignment(i, random.randint(0, i))
 
             # Store timestamp of document (prior information)
             self.timestamps.append(timestamp / (60*60*24))  # Timestamp in days

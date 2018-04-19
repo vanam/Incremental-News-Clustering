@@ -15,7 +15,7 @@ from sklearn.decomposition import IncrementalPCA
 from clustering_system.clustering.DummyClustering import DummyClustering
 from clustering_system.clustering.bgmm.BgmmClustering import BgmmClustering
 from clustering_system.clustering.igmm.CrpClustering import CrpClustering
-from clustering_system.clustering.igmm.DdCrpClustering import DdCrpClustering, logistic_decay
+from clustering_system.clustering.igmm.DdCrpClustering import DdCrpClustering, logistic_decay, exponential_decay
 from clustering_system.clustering.mixture.GaussianMixtureABC import NormalInverseWishartPrior
 from clustering_system.corpus.ArtificialCorpus import ArtificialCorpus
 from clustering_system.corpus.FolderAggregatedBowNewsCorpora import FolderAggregatedBowNewsCorpora
@@ -59,6 +59,7 @@ class Clustering(Enum):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Run clustering system.')
+    parser.add_argument('-a', type=float, help='the alpha hyperparameter')
     parser.add_argument('-c', '--corpus', choices=[c.name for c in Corpus], help='corpus type')
     parser.add_argument('-f', '--fixed-rand', dest='seed', action='store_true', help='fix random seed')
     parser.add_argument('-i', type=int, help='i-th run')
@@ -69,7 +70,7 @@ if __name__ == "__main__":
     parser.add_argument('-s', '--size', type=int, choices=[10, 100, 200, 300], help='the size of a feature vector (if applicable)')
     parser.add_argument('-t', '--test', dest='test', action='store_true', help='use test data')
     parser.set_defaults(corpus=Corpus.artificial.name, model=Model.identity.name, clustering=Clustering.ddCRP.name,
-                        K=2, size=100, test=False, seed=False, i=0, n=20)
+                        K=2, size=100, test=False, seed=False, i=0, n=20, a=0.01)
     args = parser.parse_args()
 
     def has_valid_args(args):
@@ -102,6 +103,9 @@ if __name__ == "__main__":
     print("size:       %d" % args.size)
     print("test:       %s" % args.test)
     print("fixed rand: %s" % args.seed)
+    print("alpha:      %f" % args.a)
+    print("i-th:       %d" % args.i)
+    print("iterations: %d" % args.n)
 
     if args.seed:
         import random
@@ -222,41 +226,41 @@ if __name__ == "__main__":
             size + 2
         )
 
-        clustering = BgmmClustering(K, size, 0.01, prior, args.n, visualizer=likelihood_visualizer)
+        clustering = BgmmClustering(K, size, args.a, prior, args.n, visualizer=likelihood_visualizer)
     elif clustering_type == Clustering.CRP:
         prior = NormalInverseWishartPrior(
             np.zeros(size),
             0.01,
-            np.eye(size),
+            .45 * np.eye(size),
             size + 2
         )
 
-        clustering = CrpClustering(K, size, 1, prior, args.n, visualizer=likelihood_visualizer)
+        clustering = CrpClustering(K, size, args.a, prior, args.n, visualizer=likelihood_visualizer)
     elif clustering_type == Clustering.ddCRP:
         prior = NormalInverseWishartPrior(
             np.zeros(size),
             0.01,
-            0.01 * np.eye(size),
+            1 * np.eye(size),
             size + 2
         )
 
         # Decay function
-        a = 3  # 3 days
-
-        def f(d: float):
-            return logistic_decay(d, a)
-
-        # Decay function for artificial data
         a = 1  # 1 day
 
+        def f(d: float):
+            # return exponential_decay(d, a)
+            return logistic_decay(d, a)
+
         if corpus_type == Corpus.artificial:
+            # Decay function for artificial data
+            a = 5  # 5 days
+
             def f(d):
                 # Hack distance to look like time
                 d = np.math.hypot(d[0], d[1]) * 60 * 60 * 24
                 return logistic_decay(d, a)
 
-
-        clustering = DdCrpClustering(size, 0.0001, prior, args.n, f, visualizer=likelihood_visualizer)
+        clustering = DdCrpClustering(K, size, args.a, prior, args.n, f, visualizer=likelihood_visualizer)
     else:
         logging.error("Unknown clustering algorithm '%s'" % clustering_type)
         sys.exit(1)

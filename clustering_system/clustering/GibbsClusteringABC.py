@@ -50,7 +50,8 @@ class GibbsClusteringABC(ClusteringABC):
 
             # Add document at the end of arrays
             self.ids.append(doc_id)
-            self.mixture.new_vector(vector, random.randint(0, self.K_max - 1))  # New customer is assigned to random table
+            clusters = range(0, self.K_max) if self.K < self.K_max else np.unique(self.mixture.z)
+            self.mixture.new_vector(vector, random.choice(clusters))  # New customer is assigned to random table
             self.N += 1                   # Increment number of documents (customers)
 
     def update(self):

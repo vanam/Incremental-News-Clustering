@@ -59,9 +59,6 @@ class FullGaussianMixture(GaussianMixtureABC):
         for i in range(k):
             rv[i] = multivariate_normal(mean[i], covariance[i])
 
-        m = max(self.z)
-        # print(cns)
-
         # likelihood = sum(np.log([sum([alpha[j] * rv[j].pdf(d) for j in range(k)]) for d in self.X]))
         likelihood = sum(np.log([alpha[cns[self.z[i]]] * rv[cns[self.z[i]]].pdf(d) for i, d in enumerate(self.X)]))
 
@@ -238,7 +235,7 @@ class FullGaussianMixture(GaussianMixtureABC):
         self.inv_covars[k] = np.linalg.inv(covar)
 
     def merge(self, k: int, l: int):
-        # Destoy cluster l
+        # Destroy cluster l
         self.N_k[l] = 0
         self.m_n.pop(l, None)
         self.S_n_outer.pop(l, None)
@@ -254,18 +251,11 @@ class FullGaussianMixture(GaussianMixtureABC):
         self._update_logdet_covar_and_inv_covar(l)
 
     def split(self, k: int, l: int, members: list):
-        if k == l:
-            print("%d = %d" % (k, l))
-
         for i in members:
             # Remove old cluster assignment
             self.m_n[k] -= self.X[i]
             self.S_n_outer[k] -= self._outer[i]
             self.N_k[k] -= 1
-
-
-            if self.N_k[k] < 0:
-                raise ValueError
 
             # Set new cluster assignment
             self.z[i] = l
