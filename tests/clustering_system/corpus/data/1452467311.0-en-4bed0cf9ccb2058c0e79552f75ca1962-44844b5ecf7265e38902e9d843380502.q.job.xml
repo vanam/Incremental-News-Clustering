@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:emm="http://emm.jrc.it" xmlns:iso="http://www.iso.org/3166">
+    <channel>
+        <title>Newspaper</title>
+        <language>en</language>
+        <guid>newspaper.com</guid>
+        <pubDate>2016-01-13 00:25:43 CET</pubDate>
+        <item emm:id="4bed0cf9ccb2058c0e79552f75ca1962">
+            <title>Human computer</title>
+            <link>http://xxx.com</link>
+            <description>
+                Human computer steals
+            </description>
+            <pubDate>2016-01-11 00:08:31 CET</pubDate>
+            <iso:language>en</iso:language>
+            <guid>4bed0cf9ccb2058c0e79552f75ca1962</guid>
+            <commentSummary comments="3">
+                Human computer steals
+            </commentSummary>
+            <emm:text wordCount="5">
+                Human computer steals jobs .
+            </emm:text>
+        </item>
+    </channel>
+</rss>

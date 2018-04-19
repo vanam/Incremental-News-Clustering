@@ -7,21 +7,25 @@ from smart_open import smart_open
 
 
 class LineCorpus(CorpusABC):
+    """A class for storing corpus as text."""
 
     def __init__(self, input):
         self.input = input
         self.length = sum(1 for _ in file_or_filename(self.input))
 
     def __iter__(self):
+        """Yield each document as list of words separated by space."""
         with file_or_filename(self.input) as file:
             for line in file.read().splitlines():
                 yield [str(byte_word, 'utf-8') for byte_word in line.split()]
 
     def __len__(self):
+        """Return the number of documents in corpus."""
         return self.length
 
     @staticmethod
     def save_corpus(fname, corpus, id2word=None, progress_cnt=1000, metadata=False):
+        """Store documents one on each line as plain text words."""
         logging.info("storing corpus in Line format to %s", fname)
 
         def word_id2word(word_id):
@@ -51,7 +55,7 @@ class LineCorpus(CorpusABC):
 
     @classmethod
     def serialize(serializer, fname, corpus, id2word, progress_cnt=None, metadata=False):
-
+        """Serialize corpus in Line format"""
         kwargs = {'metadata': metadata}
         if progress_cnt is not None:
             kwargs['progress_cnt'] = progress_cnt

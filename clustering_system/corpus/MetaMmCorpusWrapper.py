@@ -3,6 +3,7 @@ from gensim.utils import unpickle
 
 
 class MetaMmCorpusWrapper:
+    """Wrapper which loads MM corpus with metadata."""
 
     def __init__(self, filename):
         self.corpus = MmCorpus(filename)

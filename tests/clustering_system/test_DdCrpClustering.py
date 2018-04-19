@@ -49,8 +49,8 @@ class TestDdCrpClustering:
         def f(d: float):
             return logistic_decay(d, a)
 
-        # return DdCrpClustering(size, 0.01, prior, 70, f)
-        return DdCrpClustering(size, 0.01, prior, n, f)
+        # return DdCrpClustering(2, size, 0.01, prior, 70, f)
+        return DdCrpClustering(2, size, 0.01, prior, n, f)
 
     def test_number_of_components(self):
         random.seed(0)

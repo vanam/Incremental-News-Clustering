@@ -4,6 +4,7 @@ from clustering_system.corpus.LineCorpus import LineCorpus
 
 
 class MetaLineCorpusWrapper:
+    """Wrapper which loads Line corpus with metadata."""
 
     def __init__(self, filename):
         self.corpus = LineCorpus(filename)

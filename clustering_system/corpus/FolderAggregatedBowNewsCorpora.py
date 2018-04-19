@@ -8,8 +8,12 @@ from clustering_system.corpus.MetaMmCorpusWrapper import MetaMmCorpusWrapper
 
 
 class FolderAggregatedBowNewsCorpora(FolderAggregatedCorporaABC):
+    """
+    Groups multiple news documents by folder using MM corpus with metadata
+    """
 
     def _get_group_corpus(self, group_name, group_path):
+        """Return MM corpus for a group."""
         temp_corpus_file = os.path.join(self.temp_directory, group_name + '.mm')
         # Check if we have already pre-processed the corpus
         if not os.path.exists(temp_corpus_file):

@@ -8,40 +8,12 @@ from xml.dom import minidom
 from gensim.corpora import Dictionary
 from gensim.corpora.textcorpus import lower_to_unicode, strip_multiple_whitespaces, remove_short, remove_stopwords
 from gensim.interfaces import CorpusABC
-from gensim.parsing import strip_punctuation, stem_text, PorterStemmer
+from gensim.parsing import strip_punctuation, PorterStemmer
 from gensim.utils import deaccent, simple_tokenize
 
 
-def get_news_in_folder(root, language=None):
-    if language is None:
-        language = "[a-z]{2}"
-
-    filename_pattern = re.compile("[0-9]{10}.[0-9]-%s-[0-9A-Fa-f]{32}-[0-9A-Fa-f]{32}.q.job.xml" % language)
-    all_files = []
-
-    walk_iter = iter(os.walk(root)) if isinstance(root, str) else chain.from_iterable(os.walk(path) for path in root)
-
-    for dirpath, subdirs, files in walk_iter:
-        for filename in files:
-            # Check if we already did process file
-            result = filename_pattern.match(filename)
-            if result is None:
-                continue
-
-            # Construct file path
-            file_path = os.path.join(dirpath, filename)
-
-            # Store filename and file path
-            all_files.append((filename, file_path))
-
-    # Sort by filename
-    all_files.sort(key=lambda x: x[0])
-    logging.info("Found %d files." % len(all_files))
-
-    return all_files
-
-
 class NewsCorpusABC(CorpusABC):
+    """An abstract class representing a news corpus"""
 
     def __init__(self, input=None, dictionary=None, metadata=False, character_filters=None,
                  tokenizer=None, token_filters=None, language=None, stem=True):
@@ -70,7 +42,7 @@ class NewsCorpusABC(CorpusABC):
         self.input = input
         self.metadata = metadata
         self.language = language
-        self.documents = get_news_in_folder(input, language) if input is not None else []
+        self.documents = self.get_news_in_folder(input, language) if input is not None else []
 
         self.character_filters = character_filters
         if self.character_filters is None:
@@ -107,7 +79,39 @@ class NewsCorpusABC(CorpusABC):
         else:
             logging.warning("No input document stream provided; assuming dictionary will be initialized some other way.")
 
+    @staticmethod
+    def get_news_in_folder(root, language=None):
+        """Find all news articles in a folder."""
+        if language is None:
+            language = "[a-z]{2}"
+
+        filename_pattern = re.compile("[0-9]{10}.[0-9]-%s-[0-9A-Fa-f]{32}-[0-9A-Fa-f]{32}.q.job.xml" % language)
+        all_files = []
+
+        walk_iter = iter(os.walk(root)) if isinstance(root, str) else chain.from_iterable(
+            os.walk(path) for path in root)
+
+        for dirpath, subdirs, files in walk_iter:
+            for filename in files:
+                # Check if we already did process file
+                result = filename_pattern.match(filename)
+                if result is None:
+                    continue
+
+                # Construct file path
+                file_path = os.path.join(dirpath, filename)
+
+                # Store filename and file path
+                all_files.append((filename, file_path))
+
+        # Sort by filename
+        all_files.sort(key=lambda x: x[0])
+        logging.info("Found %d files." % len(all_files))
+
+        return all_files
+
     def get_texts(self):
+        """Yield preprocessed documents and its metadata if desired"""
         data = self.getstream()
         for line, metadata in data:
             if self.metadata:

@@ -12,6 +12,12 @@ class FolderAggregatedCorporaABC(ABC):
     """
 
     def __init__(self, directory, temp_directory, dictionary: Dictionary, language=None):
+        """
+        :param directory: A root directory containing group folders
+        :param temp_directory: A temp directory for files speeding up repeating execution
+        :param dictionary: A dictionary
+        :param language: A language of corpora
+        """
         self.directory = directory
         self.temp_directory = os.path.join(temp_directory, 'folder-aggregated-corpora')
         Path(self.temp_directory).mkdir(parents=True, exist_ok=True)
@@ -21,6 +27,7 @@ class FolderAggregatedCorporaABC(ABC):
 
     @abstractmethod
     def _get_group_corpus(self, name, path):
+        """Return corpus for a group."""
         pass
 
     def get_group_corpora(self):
@@ -28,6 +35,10 @@ class FolderAggregatedCorporaABC(ABC):
 
         groups = []
         for item in os.listdir(root):
+            # Skip __pycache__ folder
+            if item == "__pycache__":
+                continue
+
             dirpath = os.path.join(root, item)
 
             # Each directory is a group
