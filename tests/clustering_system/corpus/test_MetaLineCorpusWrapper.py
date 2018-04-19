@@ -13,7 +13,7 @@ class TestMetaLineCorpusWrapper:
         corpus_file = os.path.join(dir_path, "data", "data.line")
         # dictionary_file = os.path.join(dir_path, "data", "dictionary.dict")
         #
-        # corpus = LineNewsCorpus(input=os.path.join(dir_path, "data"), language="en", metadata=True)
+        # corpus = LineNewsCorpus(input=os.path.join(dir_path, "..", "data", "genuine"), language="en", metadata=True)
         # corpus.dictionary.save(dictionary_file)
         #
         # # Serialize pre-processed corpus to temp files

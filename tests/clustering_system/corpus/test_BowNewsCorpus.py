@@ -17,7 +17,7 @@ class TestBowNewsCorpus:
         # Current directory
         dir_path = os.path.dirname(os.path.realpath(__file__))
 
-        corpus = BowNewsCorpus(input=os.path.join(dir_path, "data"), language="en")
+        corpus = BowNewsCorpus(input=os.path.join(dir_path, "..", "data", "genuine"), language="en")
 
         i = 0
         for _ in corpus:
@@ -30,7 +30,7 @@ class TestBowNewsCorpus:
         # Current directory
         dir_path = os.path.dirname(os.path.realpath(__file__))
 
-        corpus = BowNewsCorpus(input=os.path.join(dir_path, "data"), language="en")
+        corpus = BowNewsCorpus(input=os.path.join(dir_path, "..", "data", "genuine"), language="en")
         dictionary = corpus.dictionary
 
         texts = []

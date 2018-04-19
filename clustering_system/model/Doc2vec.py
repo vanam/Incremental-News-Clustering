@@ -50,8 +50,15 @@ def is_doc2vec_corpus(obj):
 
 
 class Doc2vec(ModelABC):
+    """Represent news articles as vectors using doc2vec."""
 
-    def __init__(self, corpus=None, size: int = 200, epochs: int = 10, d2v_filename: str = None):
+    def __init__(self, corpus=None, size: int = 200, epochs: int = 10, d2v_filename: str = None, min_count: int =5):
+        """
+        :param corpus: A corpus for training
+        :param size: The length of feature vector
+        :param epochs: Number of training epochs
+        :param d2v_filename: File name of a previously trained model
+        """
         super().__init__(size)
 
         # Check if we have already trained the doc2vec model
@@ -76,18 +83,25 @@ class Doc2vec(ModelABC):
             # One sentence is a document
             sentences = TaggedLineSentence(corpus)
 
-            self.d2v = D2v(vector_size=size)
+            self.d2v = D2v(vector_size=size, min_count=min_count)
             self.d2v.build_vocab(sentences)
             self.d2v.train(sentences, total_examples=len(sentences), epochs=epochs)
 
     def update(self, documents):
         """
+        Update model using documents.
         Does not support updating.
-        :param documents:
+
+        :param documents: The new documents used for update
         """
         pass
 
     def save(self, filename: str):
+        """
+        Save model to a file.
+
+        :param filename: A model file name
+        """
         self.d2v.save(filename)
 
     def _get_vector_representation(self, items):

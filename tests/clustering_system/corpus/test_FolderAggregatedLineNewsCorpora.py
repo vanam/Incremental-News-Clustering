@@ -11,12 +11,13 @@ class TestFolderAggregatedLineNewsCorpora:
     def test_create(self):
         # Current directory
         dir_path = os.path.dirname(os.path.realpath(__file__))
+        data_path = os.path.join(dir_path, "..", "data")
         dictionary_file = os.path.join(dir_path, "data", "dictionary.dict")
         dictionary = Dictionary.load(dictionary_file)
 
         temp_dir = tempfile.TemporaryDirectory()
 
-        corpora = FolderAggregatedLineNewsCorpora(dir_path, temp_dir.name, dictionary, language="en")
+        corpora = FolderAggregatedLineNewsCorpora(data_path, temp_dir.name, dictionary, language="en")
 
         i = 0
         for c in corpora:

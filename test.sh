@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-pipenv run pytest "$@"
+pipenv run pytest "$@" --ignore=data

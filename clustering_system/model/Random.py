@@ -5,20 +5,26 @@ from clustering_system.model.ModelABC import ModelABC
 
 
 class Random(ModelABC):
+    """Represent news articles as random vectors."""
 
     def update(self, documents):
         """
-        There is nothing to update.
-        :param documents:
+        Update model using documents.
+        Does not support updating.
+
+        :param documents: The new documents used for update
         """
+        # There is nothing to update.
         pass
 
-    def save(self, directory):
+    def save(self, filename: str):
         """
-        There is nothing to save
-        :param directory:
-        :return:
+        Save model to a file.
+        Does not support saving.
+
+        :param filename: A model file name
         """
+        # There is nothing to save
         pass
 
     def _get_vector_representation(self, items):
@@ -26,7 +32,7 @@ class Random(ModelABC):
 
     def __getitem__(self, items):
         """
-        Return item without any change.
+        Return random vector(s).
         :param items:
         :return:
         """

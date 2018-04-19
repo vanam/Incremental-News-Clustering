@@ -5,11 +5,14 @@ import numpy as np
 
 from clustering_system.corpus.LineCorpus import LineCorpus
 from clustering_system.corpus.LineNewsCorpus import LineNewsCorpus
+from clustering_system.model.Doc2vec import Doc2vec
 
 
-class TestLineCorpus:
+class TestDoc2vec:
 
-    def test_serialize_load(self):
+    def test_model(self):
+        size = 10
+
         # Current directory
         dir_path = os.path.dirname(os.path.realpath(__file__))
 
@@ -21,11 +24,14 @@ class TestLineCorpus:
         LineCorpus.serialize(temp_corpus_file, corpus, corpus.dictionary)
 
         loaded_corpus = LineCorpus(temp_corpus_file.name)
-        docs = []
-        for d in loaded_corpus:
-            docs.append(d)
+        # assert list(loaded_corpus) == []
+
+        model = Doc2vec(loaded_corpus, size, min_count=1)
+        it = iter(loaded_corpus)
+        vector = model[next(it)]
 
         # Remove temp file
         os.remove(temp_corpus_file.name)
 
-        np.testing.assert_array_equal([['human', 'human', 'steal', 'job'], ['human', 'human', 'steal', 'dog', 'cat']], docs)
+        assert isinstance(vector, np.ndarray)
+        assert size == len(vector)

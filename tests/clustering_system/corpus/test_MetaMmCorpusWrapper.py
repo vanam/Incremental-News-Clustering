@@ -13,7 +13,7 @@ class TestMetaMmCorpusWrapper:
         dir_path = os.path.dirname(os.path.realpath(__file__))
         corpus_file = os.path.join(dir_path, "data", "data.mm")
 
-        # corpus = BowNewsCorpus(input=os.path.join(dir_path, "data"), language="en", metadata=True)
+        # corpus = BowNewsCorpus(input=os.path.join(dir_path, "..", "data", "genuine"), language="en", metadata=True)
         #
         # # Serialize pre-processed corpus to temp files
         # MmCorpus.serialize(corpus_file, corpus, metadata=True)
