@@ -4,7 +4,7 @@ import scipy.stats
 import sklearn.metrics
 from numpy.testing import assert_almost_equal
 
-import clustering.measures as cm
+import clustering_system.evaluator.measures as cm
 
 
 class TestEntropy:

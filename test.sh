@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-pipenv run pytest "$@" --ignore=data
+pipenv run pytest "$@" --ignore=data --ignore=clustering_system
