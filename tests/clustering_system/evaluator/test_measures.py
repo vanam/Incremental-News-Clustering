@@ -2,7 +2,7 @@ import numpy as np
 import scipy.spatial.distance
 import scipy.stats
 import sklearn.metrics
-from numpy.testing import assert_almost_equal
+from numpy.testing import assert_almost_equal, assert_array_almost_equal
 
 import clustering_system.evaluator.measures as cm
 
@@ -33,19 +33,19 @@ class TestEntropy:
 
     def test_entropy_empty_set(self):
         labels = []
-        assert cm.entropy(labels) == scipy.stats.entropy([])
+        assert_almost_equal(cm.entropy(labels), scipy.stats.entropy([]))
 
     def test_entropy_one_item(self):
         labels = [50]
-        assert cm.entropy(labels) == scipy.stats.entropy([1])
+        assert_almost_equal(cm.entropy(labels), scipy.stats.entropy([1]))
 
     def test_entropy_two_item(self):
         labels = [1, 2]
-        assert cm.entropy(labels) == scipy.stats.entropy([0.5, 0.5])
+        assert_almost_equal(cm.entropy(labels), scipy.stats.entropy([0.5, 0.5]))
 
     def test_entropy_multiple_items(self):
         labels = [1, 2, 3, 1]
-        assert cm.entropy(labels) == scipy.stats.entropy([0.5, 0.25, 0.25])
+        assert_almost_equal(cm.entropy(labels), scipy.stats.entropy([0.5, 0.25, 0.25]))
 
 
 class TestRandIndex:
@@ -65,16 +65,19 @@ class TestFMeasure:
         assert_almost_equal(cm.recall(clusters, classes),
                             20/44, decimal=10)
 
-    def test_f_measure(self):
+    def test_f1_measure(self):
         assert_almost_equal(cm.f1_measure(clusters, classes),
                             10/21, decimal=10)
 
 
 class TestPurity:
 
-    def test_rand_index(self):
+    def test_purity(self):
         assert_almost_equal(cm.purity(clusters, classes),
                             12/17, decimal=10)
+
+    def test_purity2(self):
+        assert_array_almost_equal(cm.purity2(clusters, classes), np.array([[5/6, 6], [4/6, 6], [3/5, 5]]), decimal=10)
 
 
 class TestMutualInformation:
