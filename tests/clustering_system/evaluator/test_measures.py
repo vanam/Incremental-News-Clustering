@@ -6,6 +6,28 @@ from numpy.testing import assert_almost_equal
 
 import clustering_system.evaluator.measures as cm
 
+classes = np.array([
+    11, 11, 11,
+    11, 11, 22,
+
+    11, 22, 22,
+    22, 22, 33,
+
+    11, 11,
+    33, 33, 33,
+])
+
+clusters = np.array([
+    1, 1, 1,
+    1, 1, 1,
+
+    2, 2, 2,
+    2, 2, 2,
+
+    3, 3,
+    3, 3, 3,
+])
+
 
 class TestEntropy:
 
@@ -26,31 +48,38 @@ class TestEntropy:
         assert cm.entropy(labels) == scipy.stats.entropy([0.5, 0.25, 0.25])
 
 
+class TestRandIndex:
+
+    def test_rand_index(self):
+        assert_almost_equal(cm.rand_index(clusters, classes),
+                            23/34, decimal=10)
+
+
+class TestFMeasure:
+
+    def test_precision(self):
+        assert_almost_equal(cm.precision(clusters, classes),
+                            0.5, decimal=10)
+
+    def test_recall(self):
+        assert_almost_equal(cm.recall(clusters, classes),
+                            20/44, decimal=10)
+
+    def test_f_measure(self):
+        assert_almost_equal(cm.f1_measure(clusters, classes),
+                            10/21, decimal=10)
+
+
+class TestPurity:
+
+    def test_rand_index(self):
+        assert_almost_equal(cm.purity(clusters, classes),
+                            12/17, decimal=10)
+
+
 class TestMutualInformation:
 
     def test_normalized_mutual_information(self):
-        classes = np.array([
-            11, 11, 11,
-            11, 11, 22,
-
-            11, 22, 22,
-            22, 22, 33,
-
-            11, 11,
-            33, 33, 33,
-        ])
-
-        clusters = np.array([
-            1, 1, 1,
-            1, 1, 1,
-
-            2, 2, 2,
-            2, 2, 2,
-
-            3, 3,
-            3, 3, 3,
-        ])
-
         assert_almost_equal(cm.normalized_mutual_information(clusters, classes), sklearn.metrics.normalized_mutual_info_score(classes, clusters), decimal=10)
 
 

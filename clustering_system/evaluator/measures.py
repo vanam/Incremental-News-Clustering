@@ -7,16 +7,6 @@ from scipy.spatial.distance import cdist
 from scipy.special import comb
 
 
-def variability(X: np.ndarray) -> float:
-    centroid = np.mean(X, axis=0)
-
-    return sum(np.square(cdist(np.array([centroid]), X, metric='euclidean'))[0])
-
-
-def dissimilarity(X: np.ndarray, clusters: np.ndarray) -> float:
-    return sum(map(lambda i: variability(X[clusters == i]), np.unique(clusters)))
-
-
 def purity(clusters, classes) -> float:
     """
     The purity ranges between 0 (bad) and 1 (good). However, we can trivially achieve a purity of 1

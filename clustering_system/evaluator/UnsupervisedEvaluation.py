@@ -1,6 +1,6 @@
 import numpy as np
 
-from clustering_system.evaluator.measures import dissimilarity, entropy
+from clustering_system.evaluator.measures import entropy
 
 
 class UnsupervisedEvaluation:
