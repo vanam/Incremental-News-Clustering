@@ -6,10 +6,12 @@ import numpy as np
 
 
 class PriorABC(ABC):
+    """Abstract mixture prior class"""
     pass
 
 
 class NormalInverseWishartPrior(PriorABC):
+    """The fully conjugate prior for the MVN"""
 
     def __init__(self, m_0: np.ndarray, k_0: float, S_0: np.ndarray, v_0: int):
         """
@@ -31,8 +33,13 @@ class NormalInverseWishartPrior(PriorABC):
 
 
 class GaussianMixtureABC(ABC):
+    """Abstract class for Gaussian mixtures"""
 
     def __init__(self, D: int, prior: PriorABC):
+        """
+        :param D: the dimension
+        :param prior: the set of prior parameters
+        """
         self.D = D
         self.prior = prior
 
@@ -44,6 +51,12 @@ class GaussianMixtureABC(ABC):
         self._cache(self._cache_N)
 
     def new_vector(self, vector: np.ndarray, z: int):
+        """
+        Add new vector to the mixture.
+
+        :param vector: A vector
+        :param z: A vector assignment
+        """
         i = len(self.z)
         self.X = np.vstack((self.X, np.array([vector])))
         self.z = np.append(self.z, -1)
@@ -59,35 +72,35 @@ class GaussianMixtureABC(ABC):
     @abstractmethod
     def update_z(self, i: int, z: int):
         """
-        :return: Update cluster assignments
+        Update cluster assignment for vector i.
         """
         pass
 
     @abstractmethod
     def _cache(self, N: int):
         """
-        :return: Cache expensive calculation for N samples.
+        Cache expensive calculation for N samples.
         """
         pass
 
     @abstractmethod
     def merge(self, k: int, l: int):
         """
-        :return: Merge two clusters.
+        Merge two clusters.
         """
         pass
 
     @abstractmethod
     def split(self, k: int, l: int, members: list):
         """
-        :return: Move members from cluster k to cluster l.
+        Move members from cluster k to cluster l.
         """
         pass
 
     @abstractmethod
     def _cache_i(self, vector: np.ndarray):
         """
-        :return: Cache expensive calculation for next sample i.
+        Cache expensive calculation for next sample i.
         """
         pass
 
@@ -122,7 +135,7 @@ class GaussianMixtureABC(ABC):
         """
         Compute marginal log likelihood p(X)
 
-        :param members: set of document indices
+        :param members: set of vector indices
         :return: log likelihood
         """
         pass
@@ -132,7 +145,7 @@ class GaussianMixtureABC(ABC):
         """
         Return the log posterior predictive probability of `X[i]` under component `k` for each component.
 
-        :param i: document index
+        :param i: vector index
         :param cluster_numbers: list of component numbers
         :return: np.ndarray of K floats where K is number of components
         """
@@ -143,7 +156,7 @@ class GaussianMixtureABC(ABC):
         """
         Return the probability of `X[i]` under the prior alone.
 
-        :param i: document id
-        :return:
+        :param i: vector id
+        :return: log prior
         """
         pass

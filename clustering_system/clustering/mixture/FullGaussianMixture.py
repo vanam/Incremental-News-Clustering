@@ -4,15 +4,20 @@ from functools import lru_cache
 from typing import Tuple, List
 
 import numpy as np
-from scipy.special import gammaln
+from scipy.special.cython_special import gammaln
 from scipy.stats import multivariate_normal
 
 from clustering_system.clustering.mixture.GaussianMixtureABC import GaussianMixtureABC, PriorABC
 
 
 class FullGaussianMixture(GaussianMixtureABC):
+    """A Gaussian mixture with unconstrained covariance matrix."""
 
     def __init__(self, D: int, prior: PriorABC):
+        """
+        :param D: the dimension
+        :param prior: the set of prior parameters
+        """
         super().__init__(D, prior)
 
         self.m_n = defaultdict(lambda: self.prior.k_0 * self.prior.m_0)
@@ -28,7 +33,14 @@ class FullGaussianMixture(GaussianMixtureABC):
         self._logdet_0 = np.linalg.slogdet(self.prior.S_0)[1]
         self._prior_outer_m_0 = np.outer(self.prior.m_0, self.prior.m_0)
 
+        cov = (self.prior.k_0 + 1) / (self.prior.k_0 * (self.prior.v_0 - self.D + 1)) * self.prior.S_0
+        self._prior_predictive_logdet_cov = np.linalg.slogdet(cov)[1]
+        self._prior_predictive_inv_cov = np.linalg.inv(cov)
+
     def update_z(self, i: int, z: int):
+        """
+        Update cluster assignment for vector i.
+        """
         old_z = self.z[i]
 
         if old_z == z:  # Nothing to change
@@ -66,6 +78,9 @@ class FullGaussianMixture(GaussianMixtureABC):
 
     @property
     def number_of_parameters(self) -> int:
+        """
+        :return: Return number of mixture model parameters.
+        """
         cluster_numbers = np.unique(self.z)
         K = len(cluster_numbers)
 
@@ -106,7 +121,7 @@ class FullGaussianMixture(GaussianMixtureABC):
         """
         Compute marginal log likelihood p(X)
 
-        :param members: set of document indices
+        :param members: set of vector indices
         :return: log likelihood
         """
         D = self.D
@@ -157,7 +172,7 @@ class FullGaussianMixture(GaussianMixtureABC):
         m_N = self.m_n[c] / k_N
 
         # (4.214) in Murphy, p. 134
-        S_N = self.prior.S_0 + self.S_n_outer[c] + self.prior.k_0 * self._prior_outer_m_0 - k_N * np.outer(m_N, m_N)
+        S_N = self.S_n_outer[c] - k_N * np.outer(m_N, m_N)
 
         sigma = S_N / (v_N + D + 2)
         return N_k / N, m_N, sigma
@@ -166,7 +181,7 @@ class FullGaussianMixture(GaussianMixtureABC):
         """
         Return the log posterior predictive probability of `X[i]` under component `k` for each component.
 
-        :param i: document index
+        :param i: vector index
         :return: np.ndarray of K floats where K is number of components
         """
         K = len(cluster_numbers)
@@ -178,6 +193,13 @@ class FullGaussianMixture(GaussianMixtureABC):
         return probabilities
 
     def _get_posterior_predictive_k(self, i: int, c: int) -> float:
+        """
+        Return the log posterior predictive probability of `X[i]` under component `k`
+        
+        :param i: vector id 
+        :param c: component id
+        :return: log posterior
+        """
         k_N = self.prior.k_0 + self.N_k[c]
         v_N = self.prior.v_0 + self.N_k[c]
         m_N = self.m_n[c] / k_N
@@ -190,23 +212,30 @@ class FullGaussianMixture(GaussianMixtureABC):
         """
         Return the probability of `X[i]` under the prior alone.
 
-        :param i: document id
-        :return:
+        :param i: vector id
+        :return: log prior
         """
-        mu = self.prior.m_0
-        v = self.prior.v_0 - self.D + 1
-
         # Special case of _log_posterior_predictive with no data
         # (4.214) in Murphy, p. 134
-        S_N = self.prior.S_0
-
-        cov = (self.prior.k_0 + 1) / (self.prior.k_0 * (self.prior.v_0 - self.D + 1)) * S_N
-        logdet_cov = np.linalg.slogdet(cov)[1]
-        inv_cov = np.linalg.inv(cov)
-
-        return self._multivariate_students_t(i, mu, logdet_cov, inv_cov, v)
+        return self._multivariate_students_t(
+            i,
+            self.prior.m_0,
+            self._prior_predictive_logdet_cov,
+            self._prior_predictive_inv_cov,
+            self.prior.v_0 - self.D + 1
+        )
 
     def _multivariate_students_t(self, i, mu, logdet_cov, inv_cov, v):
+        """
+        Calculate log multivariate Students-t distribution for vector i given the parameters.
+
+        :param i: vector id
+        :param mu: mean
+        :param logdet_cov: the logarithm of determinant of covariance matrix
+        :param inv_cov: the inverse of covariance matrix
+        :param v: the degrees of freedom
+        :return: log probability
+        """
         delta = self.X[i] - mu
 
         return (
@@ -219,14 +248,17 @@ class FullGaussianMixture(GaussianMixtureABC):
         )
 
     def _cache(self, N: int):
+        """Execute pre-calculations"""
         n = np.concatenate([[1], np.arange(1, self.prior.v_0 + N + 2)])  # first element is dummy for indexing
         self._log_v = np.log(n)
-        self._gammaln_by_2 = gammaln(n / 2)
+        self._gammaln_by_2 = np.array([gammaln(n_i / 2) for n_i in n])
 
     def _cache_i(self, vector: np.ndarray):
+        """Cache stuff related to the given vector."""
         self._outer = np.vstack((self._outer, [np.outer(vector, vector)]))
 
     def _update_logdet_covar_and_inv_covar(self, k: int):
+        """Update cached covariances."""
         k_N = self.prior.k_0 + self.N_k[k]
         v_N = self.prior.v_0 + self.N_k[k]
         m_N = self.m_n[k] / k_N
@@ -235,6 +267,7 @@ class FullGaussianMixture(GaussianMixtureABC):
         self.inv_covars[k] = np.linalg.inv(covar)
 
     def merge(self, k: int, l: int):
+        """Merge two components k and l"""
         # Destroy cluster l
         self.N_k[l] = 0
         self.m_n.pop(l, None)
@@ -251,6 +284,7 @@ class FullGaussianMixture(GaussianMixtureABC):
         self._update_logdet_covar_and_inv_covar(l)
 
     def split(self, k: int, l: int, members: list):
+        """Move vectors given by member list from component k to new component l."""
         for i in members:
             # Remove old cluster assignment
             self.m_n[k] -= self.X[i]
