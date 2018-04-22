@@ -96,7 +96,7 @@ function help {
     echo "                                           d    ddCRP"
     echo "  -h                                   displays help"
     echo "  -k <integer>                         the number of clusters (if applicable)"
-    echo "  -m <model={random|LSI|LDA|doc2vec}>  use specified model"
+    echo "  -m <model={random|LSA|LDA|doc2vec}>  use specified model"
     echo "  -n <integer>                         the number of sampling iterations"
     echo "  -r <integer>                         the number of repetitions"
     echo "  -s <size>                            the size of a feature vector"

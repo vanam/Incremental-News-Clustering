@@ -1,3 +1,4 @@
+import logging
 import os
 
 from gensim.corpora import Dictionary
@@ -22,6 +23,7 @@ class Lda(ModelABC):
         # Check if we have already trained the Lda model
         if lda_filename is not None and os.path.exists(lda_filename):
             self.lda = LdaModel.load(lda_filename)
+            logging.info("LDA model loaded")
         else:
             if corpus is None:
                 raise ValueError("Corpus must be provided to train LDA")

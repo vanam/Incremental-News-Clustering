@@ -27,7 +27,7 @@ from clustering_system.evaluator.RandomEvaluator import RandomEvaluator
 from clustering_system.model.Doc2vec import Doc2vec
 from clustering_system.model.Identity import Identity
 from clustering_system.model.Lda import Lda
-from clustering_system.model.Lsi import Lsi
+from clustering_system.model.Lsa import Lsa
 from clustering_system.model.Random import Random
 from clustering_system.visualization.ClusterVisualizer import ClusterVisualizer
 from clustering_system.visualization.GraphVisualizer import GraphVisualizer
@@ -45,7 +45,7 @@ class Corpus(Enum):
 class Model(Enum):
     identity = 0
     random = 1
-    LSI = 2
+    LSA = 2
     LDA = 3
     doc2vec = 4
 
@@ -158,7 +158,7 @@ if __name__ == "__main__":
         corpora = SingletonCorpora(ArtificialCorpus(input=artificial_file, metadata=True))
         model = Identity()
     else:
-        if model_type in [Model.random, Model.LSI, Model.LDA]:
+        if model_type in [Model.random, Model.LSA, Model.LDA]:
             # Load BoW corpus and dictionary from temp files
             dictionary = Dictionary.load(dictionary_file)
             training_corpus = MmCorpus(training_mm_corpus_file)
@@ -166,11 +166,11 @@ if __name__ == "__main__":
             # Initialize correct model
             if model_type == Model.random:
                 model = Random(size=size)
-            elif model_type == Model.LSI:
-                model_file = os.path.join(training_dir, 'model_%d.lsi' % size)
-                tfidf_file = os.path.join(training_dir, 'model_%d.lsi.tfidf' % size)
+            elif model_type == Model.LSA:
+                model_file = os.path.join(training_dir, 'model_%d.lsa' % size)
+                tfidf_file = os.path.join(training_dir, 'model_%d.lsa.tfidf' % size)
 
-                model = Lsi(dictionary, size=size, lsi_filename=model_file, tfidf_filename=tfidf_file)
+                model = Lsa(dictionary, size=size, lsa_filename=model_file, tfidf_filename=tfidf_file)
             elif model_type == Model.LDA:
                 model_file = os.path.join(training_dir, 'model_%d.lda' % size)
 

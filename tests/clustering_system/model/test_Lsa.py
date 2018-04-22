@@ -3,10 +3,10 @@ import os
 import numpy as np
 
 from clustering_system.corpus.BowNewsCorpus import BowNewsCorpus
-from clustering_system.model.Lsi import Lsi
+from clustering_system.model.Lsa import Lsa
 
 
-class TestLsi:
+class TestLsa:
 
     def test_model(self):
         size = 10
@@ -16,7 +16,7 @@ class TestLsi:
 
         corpus = BowNewsCorpus(input=os.path.join(dir_path, "..", "data", "genuine"), language="en")
 
-        model = Lsi(corpus.dictionary, corpus, size)
+        model = Lsa(corpus.dictionary, corpus, size)
         it = iter(corpus)
         vector = model[next(it)]
 

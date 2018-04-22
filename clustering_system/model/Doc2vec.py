@@ -1,4 +1,5 @@
 import itertools
+import logging
 import os
 
 from gensim.models import Doc2Vec as D2v
@@ -64,6 +65,7 @@ class Doc2vec(ModelABC):
         # Check if we have already trained the doc2vec model
         if d2v_filename is not None and os.path.exists(d2v_filename):
             self.d2v = D2v.load(d2v_filename)
+            logging.info("doc2vec model loaded")
         else:
             if corpus is None:
                 raise ValueError("Corpus must be provided to train doc2vec")
