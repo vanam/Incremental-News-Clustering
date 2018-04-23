@@ -11,6 +11,7 @@ from evaluator.SupervisedEvaluation import SupervisedEvaluation
 
 
 class EvaluationSummary:
+    """A multiple clustering run summarizer"""
 
     colors = ['royalblue', 'darkorange', 'forestgreen']
 
@@ -20,6 +21,11 @@ class EvaluationSummary:
         self.N = 0
 
     def add(self, filename: str):
+        """
+        Add supervised evaluations stored in CSV files.
+
+        :param filename: A CSV filename
+        """
         _, attributes = zip(*SupervisedEvaluation.get_attribute_names())
 
         if not os.path.exists(filename):
@@ -43,6 +49,11 @@ class EvaluationSummary:
             self.t = max(self.t, i)
 
     def save(self, directory):
+        """
+        Save evaluation summary in a directory.
+
+        :param directory: The directory
+        """
         chart_1_file = os.path.join(directory, 'chart_1.png')
         chart_2_file = os.path.join(directory, 'chart_2.png')
         chart_3_file = os.path.join(directory, 'chart_3.png')

@@ -4,8 +4,15 @@ from clustering_system.evaluator.measures import entropy
 
 
 class UnsupervisedEvaluation:
+    """A class containing unsupervised clustering metrics."""
 
     def __init__(self, clusters: np.ndarray, aic: float, bic: float, likelihood: float):
+        """
+        :param clusters: The cluster assignments
+        :param aic: The Akaike information criterion
+        :param bic: The Bayesian information criterion
+        :param likelihood: The log likelihood
+        """
         self.aic = aic
         self.bic = bic
         self.likelihood = likelihood
@@ -14,13 +21,18 @@ class UnsupervisedEvaluation:
 
     @staticmethod
     def get_attribute_names():
-        return (
+        """
+        Return class attribute names.
+
+        :return: A list of tuples (attribute name, attribute)
+        """
+        return [
             ('AIC', 'aic'),
             ('BIC', 'bic'),
             ('likelihood', 'likelihood'),
             ('number of clusters', 'K'),
             ('entropy (clusters)', 'cluster_entropy')
-         )
+        ]
 
     def __repr__(self) -> str:
         return self.__str__()

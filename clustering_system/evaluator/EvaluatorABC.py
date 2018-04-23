@@ -12,21 +12,44 @@ from clustering_system.evaluator.SupervisedEvaluation import SupervisedEvaluatio
 
 
 class EvaluatorABC(ABC):
+    """An abstract evaluator class"""
 
     def __init__(self):
         self.evaluations = {}
 
     @abstractmethod
     def _get_clusters_classes(self, time: int, ids: list, clusters: list) -> Tuple[np.ndarray, np.ndarray]:
+        """
+        Return the true class labels and cluster labels only for ids mentioned in ground truth.
+
+        :param time: The time of evaluation
+        :param ids: The list of ids
+        :param clusters: The cluster assignments
+        :return: (clusters, classes)
+        """
         pass
 
     def evaluate(self, time: int, ids_clusters: list, aic: float, bic: float, likelihood: float):
+        """
+        Evaluate clustering at given time
+
+        :param time: The time of evaluation
+        :param ids_clusters: The list of tuples (doc_id, cluster_id)
+        :param aic: The Akaike information criterion
+        :param bic: The Bayesian information criterion
+        :param likelihood: The log likelihood
+        """
         ids, clusters = map(np.array, zip(*ids_clusters))
         clusters, classes = self._get_clusters_classes(time, ids, clusters)
 
         self.evaluations[time] = SupervisedEvaluation(clusters, classes, aic, bic, likelihood)
 
     def save(self, directory):
+        """
+        Save evaluation in a directory.
+
+        :param directory: The directory
+        """
         if len(self.evaluations) == 0:
             logging.warning("No evaluations to store.")
             return
@@ -49,10 +72,20 @@ class EvaluatorABC(ABC):
         self._chart_5(chart_5_file)
 
     def __iter__(self):
+        """
+        Iterate over evaluations.
+
+        :return: (time, evaluation)
+        """
         for t, e in self.evaluations.items():
             yield t, e
 
     def _export_to_csv(self, csv_file):
+        """
+        Export evaluation to CSV file.
+
+        :param csv_file: The filename
+        """
         attribute_names, attributes = zip(*SupervisedEvaluation.get_attribute_names())
 
         with open(csv_file, 'w', newline='') as csvfile:
@@ -66,6 +99,12 @@ class EvaluatorABC(ABC):
                 writer.writerow([getattr(e, attribute) for attribute in attributes])
 
     def _chart_1(self, filename: str):
+        """
+        Save chart containing the number of observations, the number of clusters
+        and the number of classes over time.
+
+        :param filename: The filename
+        """
         t = len(self.evaluations)
 
         # x axis is time
@@ -96,6 +135,11 @@ class EvaluatorABC(ABC):
         plt.close()
 
     def _chart_2(self, filename: str):
+        """
+        Save chart containing the purity, rand index, precision, recall, F1-measure over time.
+
+        :param filename: The filename
+        """
         t = len(self.evaluations)
 
         # x axis is time
@@ -141,6 +185,11 @@ class EvaluatorABC(ABC):
         plt.close()
 
     def _chart_3(self, filename: str):
+        """
+        Save chart containing the entropy, mutual information and normalized mutual information over time.
+
+        :param filename: The filename
+        """
         t = len(self.evaluations)
 
         # x axis is time
@@ -173,6 +222,11 @@ class EvaluatorABC(ABC):
         plt.close()
 
     def _chart_4(self, filename: str):
+        """
+        Save chart containing the likelihood over time.
+
+        :param filename: The filename
+        """
         t = len(self.evaluations)
 
         # x axis is time
@@ -194,6 +248,11 @@ class EvaluatorABC(ABC):
         plt.close()
 
     def _chart_5(self, filename: str):
+        """
+        Save chart containing AIC and BIC over time.
+
+        :param filename: The filename
+        """
         t = len(self.evaluations)
 
         # x axis is time

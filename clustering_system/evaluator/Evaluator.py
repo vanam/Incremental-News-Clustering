@@ -9,8 +9,13 @@ from clustering_system.evaluator.EvaluatorABC import EvaluatorABC
 
 
 class Evaluator(EvaluatorABC):
+    """A ground truth evaluator class"""
 
     def __init__(self, filename: str, language=None):
+        """
+        :param filename: The ground truth filename
+        :param language: The language
+        """
         super().__init__()
 
         self.truth = {}
@@ -41,6 +46,14 @@ class Evaluator(EvaluatorABC):
                 self.truth[row[0]] = cluster_to_id_mapper[row[6]]
 
     def _get_clusters_classes(self, time, ids: list, clusters: np.ndarray) -> Tuple[np.ndarray, np.ndarray]:
+        """
+        Return the true class labels and cluster labels only for ids mentioned in ground truth.
+
+        :param time: The time of evaluation
+        :param ids: The list of ids
+        :param clusters: The cluster assignments
+        :return: (clusters, classes)
+        """
         clu = []
         cla = []
         skipped = 0

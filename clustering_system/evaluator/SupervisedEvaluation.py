@@ -7,8 +7,16 @@ from clustering_system.evaluator.measures import purity, purity2, rand_index, en
 
 
 class SupervisedEvaluation(UnsupervisedEvaluation):
+    """A class containing supervised clustering metrics."""
 
     def __init__(self, clusters: np.ndarray, classes: np.ndarray, aic: float, bic: float, likelihood: float):
+        """
+        :param clusters: The cluster assignments
+        :param classes: The class assignments
+        :param aic: The Akaike information criterion
+        :param bic: The Bayesian information criterion
+        :param likelihood: The log likelihood
+        """
         super().__init__(clusters, aic, bic, likelihood)
 
         self.N = len(classes)
@@ -29,6 +37,11 @@ class SupervisedEvaluation(UnsupervisedEvaluation):
 
     @staticmethod
     def get_attribute_names():
+        """
+        Return class attribute names.
+
+        :return: A list of tuples (attribute name, attribute)
+        """
         return [
             ('AIC', 'aic'),
             ('BIC', 'bic'),
