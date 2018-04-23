@@ -284,7 +284,7 @@ class DdCrpClustering(GibbsClusteringABC):
             table_l = self.likelihood_cache[table_l_members]
         else:
             table_l = self.mixture.get_marginal_likelihood(table_l_members)
-            self.likelihood_cache[table_k_members] = table_l
+            self.likelihood_cache[table_l_members] = table_l
 
         if table_kl_members in self.likelihood_cache:
             table_kl = self.likelihood_cache[table_kl_members]

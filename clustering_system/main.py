@@ -240,25 +240,25 @@ if __name__ == "__main__":
         prior = NormalInverseWishartPrior(
             np.zeros(size),
             0.01,
-            1 * np.eye(size),
+            0.1 * np.eye(size),
             size + 2
         )
 
         # Decay function
-        a = 1  # 1 day
+        b = -120
 
         def f(d: float):
             # return exponential_decay(d, a)
-            return logistic_decay(d, a)
+            return logistic_decay(d, b)
 
         if corpus_type == Corpus.artificial:
             # Decay function for artificial data
-            a = 5  # 5 days
+            b = 5  # 5 days
 
             def f(d):
                 # Hack distance to look like time
                 d = np.math.hypot(d[0], d[1]) * 60 * 60 * 24
-                return logistic_decay(d, a)
+                return logistic_decay(d, b)
 
         clustering = DdCrpClustering(K, size, args.a, prior, args.n, f, visualizer=likelihood_visualizer)
     else:
