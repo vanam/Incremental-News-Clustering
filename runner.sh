@@ -233,7 +233,7 @@ then
 fi
 
 # Run clustering several times
-for ((i = 0; i <= $REPETITIONS; i++))
+for ((i = 0; i < $REPETITIONS; i++))
 do
     case ${CLUSTERING} in
         r)  random ${i}
@@ -255,4 +255,5 @@ do
 done
 
 # Summarize evaluation
+REPETITIONS=$((REPETITIONS - 1))
 ./run.sh clustering_system/summary.py `seq 0 ${REPETITIONS}`

@@ -16,6 +16,7 @@ class EvaluatorABC(ABC):
 
     def __init__(self):
         self.evaluations = {}
+        self.clusters = {}
 
     @abstractmethod
     def _get_clusters_classes(self, time: int, ids: list, clusters: list) -> Tuple[np.ndarray, np.ndarray]:
@@ -43,6 +44,7 @@ class EvaluatorABC(ABC):
         clusters, classes = self._get_clusters_classes(time, ids, clusters)
 
         self.evaluations[time] = SupervisedEvaluation(clusters, classes, aic, bic, likelihood)
+        self.clusters[time] = clusters
 
     def save(self, directory):
         """
@@ -60,6 +62,7 @@ class EvaluatorABC(ABC):
         chart_3_file = os.path.join(directory, 'chart_3.png')
         chart_4_file = os.path.join(directory, 'chart_4.png')
         chart_5_file = os.path.join(directory, 'chart_5.png')
+        chart_6_file = os.path.join(directory, 'chart_6.png')
 
         # Save in text file
         self._export_to_csv(csv_file)
@@ -70,6 +73,7 @@ class EvaluatorABC(ABC):
         self._chart_3(chart_3_file)
         self._chart_4(chart_4_file)
         self._chart_5(chart_5_file)
+        self._chart_6(chart_6_file)
 
     def __iter__(self):
         """
@@ -270,6 +274,23 @@ class EvaluatorABC(ABC):
         plt.grid()
         plt.legend()
         plt.tight_layout()
+
+        fig.savefig(filename)
+        plt.close()
+
+    def _chart_6(self, filename: str):
+        """
+        Save chart containing cluster size histogram at the end.
+
+        :param filename: The filename
+        """
+        fig = plt.figure()
+        ax = plt.subplot(111)
+        ax.xaxis.set_major_locator(ticker.MultipleLocator(1))
+
+        data = self.clusters[len(self.clusters) - 1]
+        bins = np.unique(data)
+        plt.hist(data, bins=bins, label="Cluster size histogram")
 
         fig.savefig(filename)
         plt.close()

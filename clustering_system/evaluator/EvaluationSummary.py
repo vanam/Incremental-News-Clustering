@@ -54,11 +54,15 @@ class EvaluationSummary:
 
         :param directory: The directory
         """
+        csv_file = os.path.join(directory, 'evaluation.csv')
         chart_1_file = os.path.join(directory, 'chart_1.png')
         chart_2_file = os.path.join(directory, 'chart_2.png')
         chart_3_file = os.path.join(directory, 'chart_3.png')
         chart_4_file = os.path.join(directory, 'chart_4.png')
         chart_5_file = os.path.join(directory, 'chart_5.png')
+
+        # Save in text file
+        self._export_to_csv(csv_file)
 
         # Generate charts
         self._chart_1(chart_1_file)
@@ -66,6 +70,20 @@ class EvaluationSummary:
         self._chart_3(chart_3_file)
         self._chart_4(chart_4_file)
         self._chart_5(chart_5_file)
+
+    def _export_to_csv(self, csv_file):
+        """
+        Export evaluation to CSV file.
+
+        :param csv_file: The filename
+        """
+        with open(csv_file, 'w', newline='') as csvfile:
+            writer = csv.writer(csvfile, quoting=csv.QUOTE_MINIMAL)
+
+            for name, attribute in SupervisedEvaluation.get_attribute_names():
+                if attribute == "purity2":
+                    continue
+                writer.writerow([name, median(list(map(float, self.stats[attribute][self.t - 1])))])
 
     def _chart_1(self, filename: str):
         # x axis is time
