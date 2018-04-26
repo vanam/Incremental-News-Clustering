@@ -245,6 +245,15 @@ def _homogeneity_completeness_v_measure(clusters, classes):
     return homogeneity, completeness, v_measure
 
 
+def nv_measure(clusters, classes, p=1):
+    K = len(np.unique(clusters))
+    C = len(np.unique(classes))
+
+    x = min(K, C) / max(K, C)
+
+    return (1 - (1 - x**p)**(1 / p)) * v_measure(clusters, classes)
+
+
 def entropy(labels) -> float:
     """
     Calculate entropy using maximum likelihood estimates for label probabilities.
@@ -282,6 +291,7 @@ def _evaluate(clusters, classes):
     print("Homogeneity:                     %f" % homogeneity(clusters, classes))
     print("Completeness:                    %f" % completeness(clusters, classes))
     print("V-Measure:                       %f" % v_measure(clusters, classes))
+    print("NV-Measure:                      %f" % nv_measure(clusters, classes))
     print("Precision:                       %f" % precision(clusters, classes))
     print("Recall:                          %f" % recall(clusters, classes))
     print("F1-Measure:                      %f" % f1_measure(clusters, classes))

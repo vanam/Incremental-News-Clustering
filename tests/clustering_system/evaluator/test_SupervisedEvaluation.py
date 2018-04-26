@@ -50,6 +50,7 @@ class TestSupervisedEvaluation:
         homogeneity = sklearn.metrics.homogeneity_score(classes, clusters)
         completeness = sklearn.metrics.completeness_score(classes, clusters)
         v_measure = sklearn.metrics.v_measure_score(classes, clusters)
+        nv_measure = v_measure
         mutual_information = cm.mutual_information(clusters, classes)
         normalized_mutual_information = sklearn.metrics.normalized_mutual_info_score(classes, clusters)
         normalized_mutual_information2 = cm.normalized_mutual_information2(clusters, classes)
@@ -73,7 +74,8 @@ class TestSupervisedEvaluation:
         assert_almost_equal(evaluation.homogeneity, homogeneity)
         assert_almost_equal(evaluation.completeness, completeness, )
         assert_almost_equal(evaluation.v_measure, v_measure)
+        assert_almost_equal(evaluation.nv_measure, nv_measure)
         assert_almost_equal(evaluation.mutual_information, mutual_information)
         assert_almost_equal(evaluation.normalized_mutual_information, normalized_mutual_information)
         assert_almost_equal(evaluation.normalized_mutual_information2, normalized_mutual_information2)
-        assert len(evaluation.get_attribute_names()) == 15 + 5  # Assert the number of attributes
+        assert len(evaluation.get_attribute_names()) == 16 + 5  # Assert the number of attributes

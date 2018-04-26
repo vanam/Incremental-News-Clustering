@@ -128,7 +128,7 @@ class EvaluationSummary:
         x = np.arange(0, self.t, 1)
 
         fig = plt.figure()
-        ax = plt.subplot(311)
+        ax = plt.subplot(221)
         ax.xaxis.set_major_locator(ticker.MultipleLocator(1))
 
         for n in range(self.N):
@@ -148,7 +148,7 @@ class EvaluationSummary:
         plt.legend()
         plt.tight_layout()
 
-        ax = plt.subplot(312)
+        ax = plt.subplot(222)
         ax.xaxis.set_major_locator(ticker.MultipleLocator(1))
 
         for n in range(self.N):
@@ -169,7 +169,7 @@ class EvaluationSummary:
         plt.legend()
         plt.tight_layout()
 
-        ax = plt.subplot(313)
+        ax = plt.subplot(223)
         ax.xaxis.set_major_locator(ticker.MultipleLocator(1))
 
         for n in range(self.N):
@@ -184,6 +184,24 @@ class EvaluationSummary:
         plt.plot(x, homogeneity, alpha=1, label="homogeneity", color=self.colors[0], marker='.')
         plt.plot(x, completeness, alpha=1, label="completeness", color=self.colors[1], marker='.')
         plt.plot(x, v_measure, alpha=1, label="V-measure", color=self.colors[2], marker='.')
+
+        plt.xlabel("time")
+        plt.yticks(np.arange(0, 1.1, 0.2))
+        plt.grid()
+        plt.legend()
+        plt.tight_layout()
+
+        ax = plt.subplot(224)
+        ax.xaxis.set_major_locator(ticker.MultipleLocator(1))
+
+        for n in range(self.N):
+            nv_measure = [float(self.stats['nv_measure'][t][n]) for t in range(self.t)]
+
+            plt.plot(x, nv_measure, alpha=0.25, color=self.colors[2])
+
+        nv_measure = [median(list(map(float, self.stats['nv_measure'][t]))) for t in range(self.t)]
+
+        plt.plot(x, nv_measure, alpha=1, label="NV-measure", color=self.colors[2], marker='.')
 
         plt.xlabel("time")
         plt.yticks(np.arange(0, 1.1, 0.2))

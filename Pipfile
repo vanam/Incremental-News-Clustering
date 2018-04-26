@@ -18,3 +18,4 @@ gensim = "*"
 nltk = "*"
 networkx = { git = "https://github.com/vanam/networkx.git", ref = "issue-1797" }
 smart-open = "*"
+nose = ">=1.0.0"

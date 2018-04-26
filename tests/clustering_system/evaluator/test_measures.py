@@ -2,7 +2,7 @@ import numpy as np
 import scipy.spatial.distance
 import scipy.stats
 import sklearn.metrics
-from numpy.testing import assert_almost_equal, assert_array_almost_equal
+from numpy.testing import assert_almost_equal, assert_array_almost_equal, assert_raises
 
 import clustering_system.evaluator.measures as cm
 
@@ -106,6 +106,7 @@ class TestVMeasure:
 
         assert round(cm.v_measure(clusters, classes), 2) == 0.14
         assert_almost_equal(cm.v_measure(clusters, classes), sklearn.metrics.v_measure_score(classes, clusters), decimal=10)
+        assert_almost_equal(cm.v_measure(clusters, classes), cm.nv_measure(clusters, classes), decimal=10)
 
     def test_b(self):
         clusters = np.array([
@@ -122,6 +123,7 @@ class TestVMeasure:
 
         assert round(cm.v_measure(clusters, classes), 2) == 0.39
         assert_almost_equal(cm.v_measure(clusters, classes), sklearn.metrics.v_measure_score(classes, clusters), decimal=10)
+        assert_almost_equal(cm.v_measure(clusters, classes), cm.nv_measure(clusters, classes), decimal=10)
 
     def test_c(self):
         clusters = np.array([
@@ -166,3 +168,4 @@ class TestVMeasure:
 
         assert round(cm.v_measure(clusters, classes), 2) == 0.41
         assert_almost_equal(cm.v_measure(clusters, classes), sklearn.metrics.v_measure_score(classes, clusters), decimal=10)
+        assert_raises(AssertionError, assert_almost_equal, cm.v_measure(clusters, classes), cm.nv_measure(clusters, classes), decimal=10)

@@ -16,6 +16,7 @@ class EvaluatorABC(ABC):
 
     def __init__(self):
         self.evaluations = {}
+        self.classes = {}
         self.clusters = {}
 
     @abstractmethod
@@ -44,6 +45,7 @@ class EvaluatorABC(ABC):
         clusters, classes = self._get_clusters_classes(time, ids, clusters)
 
         self.evaluations[time] = SupervisedEvaluation(clusters, classes, aic, bic, likelihood)
+        self.classes[time] = classes
         self.clusters[time] = clusters
 
     def save(self, directory):
@@ -150,10 +152,10 @@ class EvaluatorABC(ABC):
         x = np.arange(0, t, 1)
 
         # y axis contains evaluation metrics
-        purity, rand_index, precision, recall,  f1_measure, homogeneity, completeness, v_measure = zip(*[(e.purity, e.rand_index, e.precision, e.recall, e.f1_measure, e.homogeneity, e.completeness, e.v_measure) for _, e in self])
+        purity, rand_index, precision, recall,  f1_measure, homogeneity, completeness, v_measure, nv_measure = zip(*[(e.purity, e.rand_index, e.precision, e.recall, e.f1_measure, e.homogeneity, e.completeness, e.v_measure, e.nv_measure) for _, e in self])
 
         fig = plt.figure()
-        ax = plt.subplot(311)
+        ax = plt.subplot(221)
         ax.xaxis.set_major_locator(ticker.MultipleLocator(1))
         plt.plot(x, purity, alpha=0.5, label="purity")
         plt.plot(x, rand_index, alpha=0.5, label="rand index")
@@ -163,7 +165,7 @@ class EvaluatorABC(ABC):
         plt.legend()
         plt.tight_layout()
 
-        ax = plt.subplot(312)
+        ax = plt.subplot(222)
         ax.xaxis.set_major_locator(ticker.MultipleLocator(1))
         plt.plot(x, precision, alpha=0.5, label="precision")
         plt.plot(x, recall, alpha=0.5, label="recall")
@@ -174,11 +176,20 @@ class EvaluatorABC(ABC):
         plt.legend()
         plt.tight_layout()
 
-        ax = plt.subplot(313)
+        ax = plt.subplot(223)
         ax.xaxis.set_major_locator(ticker.MultipleLocator(1))
         plt.plot(x, homogeneity, alpha=0.5, label="homogeneity")
         plt.plot(x, completeness, alpha=0.5, label="completeness")
         plt.plot(x, v_measure, alpha=0.5, label="V-measure")
+        plt.xlabel("time")
+        plt.yticks(np.arange(0, 1.1, 0.2))
+        plt.grid()
+        plt.legend()
+        plt.tight_layout()
+
+        ax = plt.subplot(224)
+        ax.xaxis.set_major_locator(ticker.MultipleLocator(1))
+        plt.plot(x, nv_measure, alpha=0.5, label="NV-measure")
         plt.xlabel("time")
         plt.yticks(np.arange(0, 1.1, 0.2))
         plt.grid()
@@ -285,12 +296,19 @@ class EvaluatorABC(ABC):
         :param filename: The filename
         """
         fig = plt.figure()
-        ax = plt.subplot(111)
+        ax = plt.subplot(211)
         ax.xaxis.set_major_locator(ticker.MultipleLocator(1))
 
         data = self.clusters[len(self.clusters) - 1]
         bins = np.unique(data)
         plt.hist(data, bins=bins, label="Cluster size histogram")
+
+        ax = plt.subplot(212)
+        ax.xaxis.set_major_locator(ticker.MultipleLocator(1))
+
+        data = self.classes[len(self.classes) - 1]
+        bins = np.unique(data)
+        plt.hist(data, bins=bins, label="Classes size histogram")
 
         fig.savefig(filename)
         plt.close()

@@ -3,7 +3,7 @@ import numpy as np
 from clustering_system.evaluator.UnsupervisedEvaluation import UnsupervisedEvaluation
 from clustering_system.evaluator.measures import purity, purity2, rand_index, entropy, homogeneity, completeness, \
     v_measure, mutual_information, normalized_mutual_information, normalized_mutual_information2, f1_measure, recall, \
-    precision
+    precision, nv_measure
 
 
 class SupervisedEvaluation(UnsupervisedEvaluation):
@@ -31,6 +31,7 @@ class SupervisedEvaluation(UnsupervisedEvaluation):
         self.homogeneity = homogeneity(clusters, classes)
         self.completeness = completeness(clusters, classes)
         self.v_measure = v_measure(clusters, classes)
+        self.nv_measure = nv_measure(clusters, classes)
         self.mutual_information = mutual_information(clusters, classes)
         self.normalized_mutual_information = normalized_mutual_information(clusters, classes)
         self.normalized_mutual_information2 = normalized_mutual_information2(clusters, classes)
@@ -60,6 +61,7 @@ class SupervisedEvaluation(UnsupervisedEvaluation):
             ('homogeneity', 'homogeneity'),
             ('completeness', 'completeness'),
             ('V-Measure', 'v_measure'),
+            ('NV-Measure', 'nv_measure'),
             ('mutual information', 'mutual_information'),
             ('normalized mutual information', 'normalized_mutual_information'),
             ('normalized mutual information 2', 'normalized_mutual_information2')
@@ -84,6 +86,7 @@ class SupervisedEvaluation(UnsupervisedEvaluation):
         string += "  homogeneity                     = %f,\n" % self.homogeneity
         string += "  completeness                    = %f,\n" % self.completeness
         string += "  V-Measure                       = %f,\n" % self.v_measure
+        string += "  NV-Measure                      = %f,\n" % self.nv_measure
         string += "  mutual information              = %f,\n" % self.mutual_information
         string += "  normalized mutual information   = %f,\n" % self.normalized_mutual_information
         string += "  normalized mutual information 2 = %f \n" % self.normalized_mutual_information2
