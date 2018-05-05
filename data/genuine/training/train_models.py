@@ -74,7 +74,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Train LSA, LDA and doc2vec models.')
     parser.add_argument('dim', nargs='*', help='trained vector dimension', type=check_uint)
     parser.add_argument('-p', '--proc', help='number of processes', type=check_uint)
-    parser.set_defaults(dim=[100, 200, 300], proc=4)
+    parser.set_defaults(dim=[50, 100], proc=4)
     args = parser.parse_args()
 
     with Pool(processes=args.proc) as pool:

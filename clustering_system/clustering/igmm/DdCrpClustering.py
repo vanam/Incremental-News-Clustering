@@ -54,15 +54,24 @@ def logistic_decay(d: float, a: float):
 
 
 class DdCrpClustering(GibbsClusteringABC):
+    """Clustering based on the Distance Dependent Chinese Restaurant Process"""
 
     def __init__(self, K: int, D: int, alpha: float, prior: NormalInverseWishartPrior, n_iterations: int,
                  decay_function: Callable[[float], float],
-                 probability_threshold: float = 0.001,
                  visualizer: LikelihoodVisualizer = None,
                  covariance_type: CovarianceType = CovarianceType.full):
+        """
+        :param K: Init number of clusters
+        :param D: The length of a feature vector
+        :param alpha: Hyperparameter of self assignment
+        :param prior: Prior
+        :param n_iterations: The number of iterations to perform each update
+        :param decay_function: Decay function
+        :param visualizer: Likelihood visualizer
+        :param covariance_type: Covariance type
+        """
         super().__init__(D, alpha, prior, n_iterations, K_max=K, visualizer=visualizer, covariance_type=covariance_type)
         self.f = decay_function
-        self.threshold = probability_threshold
 
         self.g = []  # undirected graph
         self.c = []  # customer assignments
@@ -71,17 +80,23 @@ class DdCrpClustering(GibbsClusteringABC):
         self.likelihood_cache = {}
 
     def add_documents(self, vectors: np.ndarray, metadata: np.ndarray):
+        """
+        Add documents represented by a list of vectors.
+
+        :param vectors: A list of vectors
+        :param metadata: A list of metadata
+        """
         for md, vector in zip(metadata, vectors):
             doc_id, timestamp, *_ = md
 
             # Add document at the end of arrays
             self.ids.append(doc_id)
             i = self.N
-            self.c.append(i)                                       # Customer is assigned to self
-            self.g.append({i})                                     # Customer has a link to self
-            self.mixture.new_vector(vector, self._get_new_cluster_number())    # Customer sits to his own table
-            self.N += 1                                                 # Increment number of documents (customers)
-            self.K += 1                                                 # Increment number of tables
+            self.c.append(i)                                                 # Customer is assigned to self
+            self.g.append({i})                                               # Customer has a link to self
+            self.mixture.new_vector(vector, self._get_new_cluster_number())  # Customer sits to his own table
+            self.N += 1                                                      # Increment number of documents (customers)
+            self.K += 1                                                      # Increment number of tables
 
             if self.N > self.K_max:
                 self._remove_assignment(i)
@@ -91,6 +106,11 @@ class DdCrpClustering(GibbsClusteringABC):
             self.timestamps.append(timestamp / (60*60*24))  # Timestamp in days
 
     def _sample_document(self, i: int):
+        """
+        Sample document i
+
+        :param i: document id
+        """
         # Remove customer assignment for a document i
         self._remove_assignment(i)
 
@@ -183,19 +203,14 @@ class DdCrpClustering(GibbsClusteringABC):
         Probabilities lower than the threshold are not returned.
         Always at least one probability (self assignment) is returned.
 
-        :param i: document index
+        :param i: customer index
         :return: list of tuples (document index, log assignment probability)
         """
         probabilities = []
 
         for c in range(self.N):
             prob = self._assignment_probability(i, c)
-
-            # if prob < self.threshold:
-            #     continue
-
             probabilities.append((c, prob))
-            # probabilities.append(prob)
 
         return probabilities
 
@@ -225,7 +240,7 @@ class DdCrpClustering(GibbsClusteringABC):
         """
         Does removal of c_i splits one table to two?
 
-        :param i:
+        :param i: customer index
         :return: Return False if c_i is on a cycle, True otherwise
         """
         c = self.c[i]
@@ -255,8 +270,8 @@ class DdCrpClustering(GibbsClusteringABC):
         """
         Get indices of customers siting with customer c at the same table
 
-        :param c:
-        :return:
+        :param c: customer index
+        :return: Set of people transitively sitting next to customer c
         """
         # Traverse undirected graph from customer i
         visited = set()
@@ -270,6 +285,13 @@ class DdCrpClustering(GibbsClusteringABC):
         return visited
 
     def _likelihood_under_z(self, i: int, c: int):
+        """
+        The likelihood of the observations under the partition given by z(c)
+
+        :param i: customer index
+        :param c: customer assignment index
+        :return: The likelihood of the observations
+        """
         table_k_members = frozenset(self._get_people_next_to(i))
         table_l_members = frozenset(self._get_people_next_to(c))
         table_kl_members = frozenset(table_k_members.union(table_l_members))
@@ -291,16 +313,5 @@ class DdCrpClustering(GibbsClusteringABC):
         else:
             table_kl = self.mixture.get_marginal_likelihood(table_kl_members)
             self.likelihood_cache[table_kl_members] = table_kl
-
-        # table_k = self._compute_marginal_likelihood(table_k_members)
-        # table_l = self._compute_marginal_likelihood(table_l_members)
-        # table_kl = self._compute_marginal_likelihood(table_kl_members)
-
-        # k = self.mixture.z[i]
-        # l = self.mixture.z[c]
-        #
-        # table_k = self.mixture.get_marginal_likelihood(k)
-        # table_l = self.mixture.get_marginal_likelihood(l)
-        # table_kl = self.mixture.get_marginal_likelihood_combined(k, l)
 
         return table_kl - table_k - table_l

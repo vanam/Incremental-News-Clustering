@@ -65,14 +65,13 @@ class FullGaussianMixture(GaussianMixtureABC):
         """
         :return: Return average log likelihood of data.
         """
-        k, alpha, mean, covariance, _, cns = self.parameters
+        k, alpha, mean, covariance, *_ = self.parameters
 
         rv = [None] * k
         for i in range(k):
             rv[i] = multivariate_normal(mean[i], covariance[i])
 
-        # likelihood = sum(np.log([sum([alpha[j] * rv[j].pdf(d) for j in range(k)]) for d in self.X]))
-        likelihood = sum(np.log([alpha[cns[self.z[i]]] * rv[cns[self.z[i]]].pdf(d) for i, d in enumerate(self.X)]))
+        likelihood = sum(np.log([sum([alpha[j] * rv[j].pdf(d) for j in range(k)]) for d in self.X]))
 
         return likelihood / len(self.X)
 
@@ -90,7 +89,7 @@ class FullGaussianMixture(GaussianMixtureABC):
         return int(mean_parameters + cov_parameters + K - 1)
 
     @property
-    def parameters(self) -> Tuple[int, np.ndarray, np.ndarray, np.ndarray, List[np.ndarray], dict]:
+    def parameters(self) -> Tuple[int, np.ndarray, np.ndarray, np.ndarray, List[np.ndarray]]:
         """
         Get parameters of the Gaussian components.
 
@@ -103,7 +102,6 @@ class FullGaussianMixture(GaussianMixtureABC):
         mean = np.empty((K, self.D), dtype=float)
         covariance = np.empty((K, self.D, self.D), dtype=float)
         X = []
-        cns = {}
 
         for i, cn in enumerate(cluster_numbers):
             a, m, c = self._map(cn)
@@ -112,9 +110,8 @@ class FullGaussianMixture(GaussianMixtureABC):
             mean[i] = m
             covariance[i] = c
             X.append(self.X[self.z == cn])
-            cns[cn] = i
 
-        return K, alpha, mean, covariance, X, cns
+        return K, alpha, mean, covariance, X
 
     @lru_cache(maxsize=512)
     def get_marginal_likelihood(self, members: frozenset) -> float:

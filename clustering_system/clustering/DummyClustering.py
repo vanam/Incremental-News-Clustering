@@ -6,36 +6,56 @@ from clustering_system.clustering.ClusteringABC import ClusteringABC
 
 
 class DummyClustering(ClusteringABC):
+    """Randomly cluster observations."""
 
-    def __init__(self, K: int, D: int):
+    def __init__(self, K: int, D: int, error: float = 0.2):
         """
         Dummy clustering which assigns new document to random cluster
-        :param K: number of clusters
-        :param D: dimension of a document vector
+        :param K: The number of clusters
+        :param D: The length of a feature vector
+        :param error: The number of clusters error
         """
         super().__init__(D)
-        self.K = K
+        e = int(K * error)
+
+        self.K = K + random.randint(-e, e)
         self.ids = np.empty(0, str)
         self.X = np.empty((0, D), float)
         self.z = np.empty(0, int)
 
     def _number_of_parameters(self) -> int:
+        """
+        Return the number of parameters.
+
+        :return: Return one
+        """
         return 1
 
     @property
     def parameters(self):
+        """
+        Return model parameters.
+
+        :return: None
+        """
         return None
 
     @property
     def likelihood(self) -> float:
+        """
+        :return: Return random likelihood
+        """
         return random.random() * 50
 
     def add_documents(self, vectors: np.ndarray, metadata: np.ndarray):
+        """
+        Add documents represented by a list of vectors.
+        """
         for md, vector in zip(metadata, vectors):
-            self.add_document(md[0], vector)
+            self._add_document(md[0], vector)
             self.N += 1
 
-    def add_document(self, doc_id, vector: np.ndarray):
+    def _add_document(self, doc_id, vector: np.ndarray):
         """
         Add document represented by a vector.
         """
@@ -49,17 +69,6 @@ class DummyClustering(ClusteringABC):
         :return:
         """
         pass
-
-    # def remove_document(self, vector: np.ndarray):
-    #     """
-    #     Remove document represented by a vector.
-    #
-    #     Note: All occurences of the document are deleted
-    #     """
-    #     vector_position = np.all(self.X != np.array(vector), axis=1)
-    #
-    #     self.X = self.X[vector_position]
-    #     self.z = self.z[vector_position]
 
     def __iter__(self):
         """

@@ -9,13 +9,28 @@ from clustering_system.visualization.LikelihoodVisualizer import LikelihoodVisua
 
 
 class BgmmClustering(GibbsClusteringABC):
+    """Clustering based on the Bayesian Gaussian Mixture model"""
 
     def __init__(self, K: int, D: int, alpha: float, prior: PriorABC, n_iterations: int,
                  visualizer: LikelihoodVisualizer = None,
                  covariance_type: CovarianceType = CovarianceType.full):
+        """
+        :param K: Maximum number of clusters
+        :param D: The length of a feature vector
+        :param alpha: Hyperparameter
+        :param prior: Prior
+        :param n_iterations: The number of iterations to perform each update
+        :param visualizer: Likelihood visualizer
+        :param covariance_type: Covariance type
+        """
         super().__init__(D, alpha, prior, n_iterations, K_max=K, visualizer=visualizer, covariance_type=covariance_type)
 
     def _sample_document(self, i: int):
+        """
+        Sample document i
+
+        :param i: document id
+        """
         # Remove component assignment for a document i
         self._remove_document(i)
 

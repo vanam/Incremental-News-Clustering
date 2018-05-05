@@ -6,15 +6,20 @@ import numpy as np
 
 
 class CovarianceType(Enum):
+    """Covariance matrix type"""
     full = 0       # each component has its own general covariance matrix
-    tied = 1       # all components share the same general covariance matrix
-    diag = 2       # each component has its own diagonal covariance matrix
-    spherical = 3  # each component has its own single variance
+    # tied = 1       # all components share the same general covariance matrix
+    # diagonal = 2   # each component has its own diagonal covariance matrix
+    # spherical = 3  # each component has its own single variance
 
 
 class ClusteringABC(ABC):
+    """Abstract class of clustering based on statistical model"""
 
     def __init__(self, D: int):
+        """
+        :param D: The length of a feature vector
+        """
         self.D = D  # Length of a feature vector
 
         self.N = 0  # Number of documents
@@ -41,7 +46,7 @@ class ClusteringABC(ABC):
     @abstractmethod
     def _number_of_parameters(self) -> int:
         """
-        :return: Number of model parameters.
+        :return: The number of model parameters.
         """
         pass
 
@@ -66,6 +71,9 @@ class ClusteringABC(ABC):
     def add_documents(self, vectors: np.ndarray, metadata: np.ndarray):
         """
         Add documents represented by a list of vectors.
+
+        :param vectors: A list of vectors
+        :param metadata: A list of metadata
         """
         pass
 
