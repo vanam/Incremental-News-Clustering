@@ -1,0 +1,2996 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gexf xmlns:viz="http://www.gexf.net/1.2draft/viz" version="1.2" xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.w3.org/2001/XMLSchema-instance">
+  <graph defaultedgetype="directed" mode="dynamic" name="">
+    <attributes class="node" mode="dynamic">
+      <attribute id="1" title="cluster" type="long" />
+    </attributes>
+    <attributes class="node" mode="static">
+      <attribute id="0" title="title" type="string" />
+    </attributes>
+    <meta>
+      <creator>NetworkX 2.2rc1.dev_20180426183351</creator>
+      <lastmodified>26/04/2018</lastmodified>
+    </meta>
+    <nodes>
+      <node end="7" id="9e764396ed6a4dfbb157dacf10851d49" label="9e76439" start="2">
+        <viz:position x="2.0479338" y="-0.1256761" z="0" />
+        <attvalues>
+          <attvalue for="0" value="France's rightwing scandals leave Socialists struggling to be heard" />
+          <attvalue end="3" for="1" start="2" value="15" />
+          <attvalue end="4" for="1" start="3" value="15" />
+          <attvalue end="5" for="1" start="4" value="34" />
+          <attvalue end="6" for="1" start="5" value="39" />
+          <attvalue end="7" for="1" start="6" value="10" />
+        </attvalues>
+      </node>
+      <node end="7" id="33c9680a85d771c28f5ae8331977aaf8" label="33c9680" start="0">
+        <viz:position x="0.13629872" y="0.585116" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Bird flu outbreak at Tennessee poultry farm confirmed after chicken deaths" />
+          <attvalue end="1" for="1" start="0" value="16" />
+          <attvalue end="2" for="1" start="1" value="5" />
+          <attvalue end="3" for="1" start="2" value="9" />
+          <attvalue end="4" for="1" start="3" value="38" />
+          <attvalue end="5" for="1" start="4" value="22" />
+          <attvalue end="6" for="1" start="5" value="41" />
+          <attvalue end="7" for="1" start="6" value="24" />
+        </attvalues>
+      </node>
+      <node end="7" id="d96b2ce8054b78fc3c45445ad688c10a" label="d96b2ce" start="2">
+        <viz:position x="2.6267152" y="1.845408" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Manchester City 0-0 Stoke City: Premier League – as it happened" />
+          <attvalue end="3" for="1" start="2" value="13" />
+          <attvalue end="4" for="1" start="3" value="52" />
+          <attvalue end="5" for="1" start="4" value="11" />
+          <attvalue end="6" for="1" start="5" value="51" />
+          <attvalue end="7" for="1" start="6" value="21" />
+        </attvalues>
+      </node>
+      <node end="7" id="29d95be6826106187e6796562aaf0055" label="29d95be" start="5">
+        <viz:position x="2.372102" y="1.2564695" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Jeremy Corbyn 'absolutely fine' with second Scottish vote" />
+          <attvalue end="6" for="1" start="5" value="56" />
+          <attvalue end="7" for="1" start="6" value="48" />
+        </attvalues>
+      </node>
+      <node end="7" id="69c0ed68f5f9a16dcb05e491672594c7" label="69c0ed6" start="2">
+        <viz:position x="0.97457194" y="1.0830579" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Facebook to face MPs over failure to remove problem images" />
+          <attvalue end="3" for="1" start="2" value="25" />
+          <attvalue end="4" for="1" start="3" value="53" />
+          <attvalue end="5" for="1" start="4" value="28" />
+          <attvalue end="6" for="1" start="5" value="19" />
+          <attvalue end="7" for="1" start="6" value="58" />
+        </attvalues>
+      </node>
+      <node end="7" id="457be57a36201ff8d1fc1d28f5632dcf" label="457be57" start="3">
+        <viz:position x="-1.3092335" y="-0.35377452" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Luis Suárez’s dive exposes Barcelona’s cheating, amid the celebrations" />
+          <attvalue end="4" for="1" start="3" value="55" />
+          <attvalue end="5" for="1" start="4" value="9" />
+          <attvalue end="6" for="1" start="5" value="48" />
+          <attvalue end="7" for="1" start="6" value="35" />
+        </attvalues>
+      </node>
+      <node end="7" id="2bb958ce1f0ec5afde4a7b05cdfbf606" label="2bb958c" start="0">
+        <viz:position x="1.8746672" y="0.6912671" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Senator Lindsey Graham on healthcare: 'I don’t know what the GOP plan is'" />
+          <attvalue end="1" for="1" start="0" value="8" />
+          <attvalue end="2" for="1" start="1" value="22" />
+          <attvalue end="3" for="1" start="2" value="35" />
+          <attvalue end="4" for="1" start="3" value="41" />
+          <attvalue end="5" for="1" start="4" value="47" />
+          <attvalue end="6" for="1" start="5" value="39" />
+          <attvalue end="7" for="1" start="6" value="40" />
+        </attvalues>
+      </node>
+      <node end="7" id="48aa06d36239f26f32fc186b0c16ae5c" label="48aa06d" start="4">
+        <viz:position x="-2.020139" y="-0.69066566" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Google's self-driving car group tries to block Uber from using allegedly stolen tech" />
+          <attvalue end="5" for="1" start="4" value="58" />
+          <attvalue end="6" for="1" start="5" value="47" />
+          <attvalue end="7" for="1" start="6" value="31" />
+        </attvalues>
+      </node>
+      <node end="7" id="ea787274598ff2ac1dff97257700dd01" label="ea78727" start="3">
+        <viz:position x="0.38079748" y="-0.98807514" z="0" />
+        <attvalues>
+          <attvalue for="0" value="FBI's James Comey: 'There is no such thing as absolute privacy in America'" />
+          <attvalue end="4" for="1" start="3" value="14" />
+          <attvalue end="5" for="1" start="4" value="11" />
+          <attvalue end="6" for="1" start="5" value="20" />
+          <attvalue end="7" for="1" start="6" value="59" />
+        </attvalues>
+      </node>
+      <node end="7" id="b7d8f3567e6d639876d1d9570d0761df" label="b7d8f35" start="1">
+        <viz:position x="1.2911307" y="0.2508331" z="0" />
+        <attvalues>
+          <attvalue for="0" value="House Republicans reveal bill to repeal and replace Obama's healthcare law" />
+          <attvalue end="2" for="1" start="1" value="24" />
+          <attvalue end="3" for="1" start="2" value="34" />
+          <attvalue end="4" for="1" start="3" value="40" />
+          <attvalue end="5" for="1" start="4" value="51" />
+          <attvalue end="6" for="1" start="5" value="39" />
+          <attvalue end="7" for="1" start="6" value="42" />
+        </attvalues>
+      </node>
+      <node end="7" id="1246778bd018c7d638525e1e3d2bdc28" label="1246778" start="4">
+        <viz:position x="0.8475303" y="1.5879736" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Biosecurity and bird flu: what it means for back garden poultry keepers" />
+          <attvalue end="5" for="1" start="4" value="45" />
+          <attvalue end="6" for="1" start="5" value="44" />
+          <attvalue end="7" for="1" start="6" value="7" />
+        </attvalues>
+      </node>
+      <node end="7" id="b73113927fcc729a6ed3d2a6a1bdc551" label="b731139" start="3">
+        <viz:position x="0.76249343" y="-0.4243906" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Australian report finds disturbing evidence of gender inequality" />
+          <attvalue end="4" for="1" start="3" value="30" />
+          <attvalue end="5" for="1" start="4" value="16" />
+          <attvalue end="6" for="1" start="5" value="20" />
+          <attvalue end="7" for="1" start="6" value="19" />
+        </attvalues>
+      </node>
+      <node end="7" id="25cbd012068c129d803257a49064fec8" label="25cbd01" start="2">
+        <viz:position x="1.5449744" y="-1.2282678" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Climate change impacts are already hitting us, say Europeans" />
+          <attvalue end="3" for="1" start="2" value="24" />
+          <attvalue end="4" for="1" start="3" value="3" />
+          <attvalue end="5" for="1" start="4" value="39" />
+          <attvalue end="6" for="1" start="5" value="10" />
+          <attvalue end="7" for="1" start="6" value="45" />
+        </attvalues>
+      </node>
+      <node end="7" id="57024517fa84cb5a972c8226edfa675b" label="5702451" start="1">
+        <viz:position x="0.79770625" y="0.46464875" z="0" />
+        <attvalues>
+          <attvalue for="0" value="In the Vauxhall towns, workers view PSA takeover with unease" />
+          <attvalue end="2" for="1" start="1" value="15" />
+          <attvalue end="3" for="1" start="2" value="25" />
+          <attvalue end="4" for="1" start="3" value="3" />
+          <attvalue end="5" for="1" start="4" value="13" />
+          <attvalue end="6" for="1" start="5" value="23" />
+          <attvalue end="7" for="1" start="6" value="67" />
+        </attvalues>
+      </node>
+      <node end="7" id="0b37fc20b2a01140b15f9e26c348e468" label="0b37fc2" start="1">
+        <viz:position x="0.452453" y="1.9411525" z="0" />
+        <attvalues>
+          <attvalue for="0" value="The marines' 'slut pages' are no surprise to your average high school student" />
+          <attvalue end="2" for="1" start="1" value="17" />
+          <attvalue end="3" for="1" start="2" value="1" />
+          <attvalue end="4" for="1" start="3" value="44" />
+          <attvalue end="5" for="1" start="4" value="28" />
+          <attvalue end="6" for="1" start="5" value="44" />
+          <attvalue end="7" for="1" start="6" value="28" />
+        </attvalues>
+      </node>
+      <node end="7" id="35c888329d870c92b9592b69ac5062ee" label="35c8883" start="0">
+        <viz:position x="1.2126716" y="0.9871723" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Vauxhall sold: Peugeot plays down job cuts and Brexit fears - as it happened" />
+          <attvalue end="1" for="1" start="0" value="16" />
+          <attvalue end="2" for="1" start="1" value="14" />
+          <attvalue end="3" for="1" start="2" value="25" />
+          <attvalue end="4" for="1" start="3" value="55" />
+          <attvalue end="5" for="1" start="4" value="13" />
+          <attvalue end="6" for="1" start="5" value="23" />
+          <attvalue end="7" for="1" start="6" value="67" />
+        </attvalues>
+      </node>
+      <node end="7" id="dc5a58a1a98bded50e6de95a2b1b6e3a" label="dc5a58a" start="1">
+        <viz:position x="3.532879" y="0.46715316" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Up to 30 Tory MPs could vote against ministers over Dubs refugee scheme" />
+          <attvalue end="2" for="1" start="1" value="18" />
+          <attvalue end="3" for="1" start="2" value="31" />
+          <attvalue end="4" for="1" start="3" value="19" />
+          <attvalue end="5" for="1" start="4" value="36" />
+          <attvalue end="6" for="1" start="5" value="25" />
+          <attvalue end="7" for="1" start="6" value="14" />
+        </attvalues>
+      </node>
+      <node end="7" id="5f684fe052fb4891a9384b7ced2d4f0a" label="5f684fe" start="6">
+        <viz:position x="1.0528013" y="0.4535948" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Irresistible England turn open Six Nations into comfortable canter" />
+          <attvalue end="7" for="1" start="6" value="52" />
+        </attvalues>
+      </node>
+      <node end="7" id="b53fdaa3a6e8c02a61397492c97a4202" label="b53fdaa" start="1">
+        <viz:position x="-0.4499704" y="0.44959798" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Kim Jong-nam death: North Korea and Malaysia in tit-for-tat travel bans" />
+          <attvalue end="2" for="1" start="1" value="28" />
+          <attvalue end="3" for="1" start="2" value="1" />
+          <attvalue end="4" for="1" start="3" value="45" />
+          <attvalue end="5" for="1" start="4" value="26" />
+          <attvalue end="6" for="1" start="5" value="37" />
+          <attvalue end="7" for="1" start="6" value="23" />
+        </attvalues>
+      </node>
+      <node end="7" id="d943edd2bf87ad74192b01997ec1d490" label="d943edd" start="4">
+        <viz:position x="0.12865815" y="-0.770305" z="0" />
+        <attvalues>
+          <attvalue for="0" value="The Guardian view on the South Korean impeachment: right thing to do" />
+          <attvalue end="5" for="1" start="4" value="18" />
+          <attvalue end="6" for="1" start="5" value="46" />
+          <attvalue end="7" for="1" start="6" value="16" />
+        </attvalues>
+      </node>
+      <node end="7" id="d7d3cef22c3a52f6ba1544843aeab0ad" label="d7d3cef" start="0">
+        <viz:position x="1.4979147" y="0.17121334" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Theresa May must give Vauxhall assurances over Brexit, says Labour" />
+          <attvalue end="1" for="1" start="0" value="11" />
+          <attvalue end="2" for="1" start="1" value="14" />
+          <attvalue end="3" for="1" start="2" value="25" />
+          <attvalue end="4" for="1" start="3" value="55" />
+          <attvalue end="5" for="1" start="4" value="13" />
+          <attvalue end="6" for="1" start="5" value="26" />
+          <attvalue end="7" for="1" start="6" value="67" />
+        </attvalues>
+      </node>
+      <node end="7" id="bf2c36fe918346231df1dadebbbf80c6" label="bf2c36f" start="2">
+        <viz:position x="-1.7090992" y="-1.2316607" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Uber's 'hustle-oriented' culture becomes a black mark on employees' résumés" />
+          <attvalue end="3" for="1" start="2" value="23" />
+          <attvalue end="4" for="1" start="3" value="21" />
+          <attvalue end="5" for="1" start="4" value="2" />
+          <attvalue end="6" for="1" start="5" value="46" />
+          <attvalue end="7" for="1" start="6" value="32" />
+        </attvalues>
+      </node>
+      <node end="7" id="6130fb40fa61758a49bdaf7ef82e5cef" label="6130fb4" start="1">
+        <viz:position x="-0.42303008" y="0.49833772" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Don't be fooled. This travel ban is as bad as the last one – it must be fought" />
+          <attvalue end="2" for="1" start="1" value="7" />
+          <attvalue end="3" for="1" start="2" value="20" />
+          <attvalue end="4" for="1" start="3" value="30" />
+          <attvalue end="5" for="1" start="4" value="24" />
+          <attvalue end="6" for="1" start="5" value="25" />
+          <attvalue end="7" for="1" start="6" value="25" />
+        </attvalues>
+      </node>
+      <node end="7" id="07d50e0cb4d3356f26c186b92e36ca23" label="07d50e0" start="1">
+        <viz:position x="-0.8593272" y="0.7031788" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Brother-in-law admits murdering missing family of four in France" />
+          <attvalue end="2" for="1" start="1" value="28" />
+          <attvalue end="3" for="1" start="2" value="1" />
+          <attvalue end="4" for="1" start="3" value="42" />
+          <attvalue end="5" for="1" start="4" value="12" />
+          <attvalue end="6" for="1" start="5" value="44" />
+          <attvalue end="7" for="1" start="6" value="37" />
+        </attvalues>
+      </node>
+      <node end="7" id="80c9e554c13498971be4b7d6f5734fc7" label="80c9e55" start="4">
+        <viz:position x="1.0488455" y="-0.26535425" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Turkish diaspora in Germany divided on powers for Erdoğan" />
+          <attvalue end="5" for="1" start="4" value="32" />
+          <attvalue end="6" for="1" start="5" value="7" />
+          <attvalue end="7" for="1" start="6" value="39" />
+        </attvalues>
+      </node>
+      <node end="7" id="3d7831f13adb8baf526305fd80f4c8ab" label="3d7831f" start="4">
+        <viz:position x="0.9621957" y="-1.5988815" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Silicon Valley shrugs off Julian Assange's help – and questions his motives" />
+          <attvalue end="5" for="1" start="4" value="24" />
+          <attvalue end="6" for="1" start="5" value="21" />
+          <attvalue end="7" for="1" start="6" value="60" />
+        </attvalues>
+      </node>
+      <node end="7" id="95342f2f4a725a30b8c8e14a675f1dcd" label="95342f2" start="5">
+        <viz:position x="0.7237527" y="0.8317837" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Damascus bombings leave dozens dead" />
+          <attvalue end="6" for="1" start="5" value="43" />
+          <attvalue end="7" for="1" start="6" value="67" />
+        </attvalues>
+      </node>
+      <node end="7" id="211a87526ffe8103124067546a937323" label="211a875" start="3">
+        <viz:position x="3.2936974" y="-0.7352738" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Refugee women and children 'beaten, raped and starved in Libyan hellholes'" />
+          <attvalue end="4" for="1" start="3" value="19" />
+          <attvalue end="5" for="1" start="4" value="42" />
+          <attvalue end="6" for="1" start="5" value="7" />
+          <attvalue end="7" for="1" start="6" value="13" />
+        </attvalues>
+      </node>
+      <node end="7" id="f1dc3df0231e8172916ee17bac553ab3" label="f1dc3df" start="3">
+        <viz:position x="0.6354194" y="0.9324308" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Arsenal’s illusion of a comeback against Bayern gives way to latest collapse" />
+          <attvalue end="4" for="1" start="3" value="49" />
+          <attvalue end="5" for="1" start="4" value="9" />
+          <attvalue end="6" for="1" start="5" value="51" />
+          <attvalue end="7" for="1" start="6" value="35" />
+        </attvalues>
+      </node>
+      <node end="7" id="c465b74e110b3854592f85f34d39ec00" label="c465b74" start="2">
+        <viz:position x="0.42793462" y="-0.77327055" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Spicer muddles answer when pressed on Trump and Russia investigation" />
+          <attvalue end="3" for="1" start="2" value="17" />
+          <attvalue end="4" for="1" start="3" value="36" />
+          <attvalue end="5" for="1" start="4" value="10" />
+          <attvalue end="6" for="1" start="5" value="28" />
+          <attvalue end="7" for="1" start="6" value="53" />
+        </attvalues>
+      </node>
+      <node end="7" id="efa606098d96357c27e1ed0f16ab3a1c" label="efa6060" start="6">
+        <viz:position x="0.7302734" y="-0.18684801" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Trump supporters in the heartland fear being left behind by GOP health plan" />
+          <attvalue end="7" for="1" start="6" value="44" />
+        </attvalues>
+      </node>
+      <node end="7" id="d868a0a9a5a87ecb29e001e28d22a36e" label="d868a0a" start="2">
+        <viz:position x="1.0398235" y="-0.9129707" z="0" />
+        <attvalues>
+          <attvalue for="0" value="To security establishment, WikiLeaks' CIA dump is part of US-Russia battle" />
+          <attvalue end="3" for="1" start="2" value="16" />
+          <attvalue end="4" for="1" start="3" value="13" />
+          <attvalue end="5" for="1" start="4" value="12" />
+          <attvalue end="6" for="1" start="5" value="20" />
+          <attvalue end="7" for="1" start="6" value="60" />
+        </attvalues>
+      </node>
+      <node end="7" id="5a11b24f342dfc7ad3cb2bb6b3a044fe" label="5a11b24" start="5">
+        <viz:position x="1.5458615" y="-0.5937319" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Million Women Rise: thousands march through central London" />
+          <attvalue end="6" for="1" start="5" value="33" />
+          <attvalue end="7" for="1" start="6" value="7" />
+        </attvalues>
+      </node>
+      <node end="7" id="4ab417fc3f9f2406ffb7e9985f49b711" label="4ab417f" start="3">
+        <viz:position x="0.8220864" y="-0.8648101" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Replacement healthcare plan would cost poor and older people the most" />
+          <attvalue end="4" for="1" start="3" value="40" />
+          <attvalue end="5" for="1" start="4" value="47" />
+          <attvalue end="6" for="1" start="5" value="41" />
+          <attvalue end="7" for="1" start="6" value="43" />
+        </attvalues>
+      </node>
+      <node end="7" id="a9c702ea34157bd2d8a2016a1252249f" label="a9c702e" start="3">
+        <viz:position x="1.0261966" y="-2.4761806" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Sadiq Khan: ‘We’re in danger of gender equality being reversed’" />
+          <attvalue end="4" for="1" start="3" value="30" />
+          <attvalue end="5" for="1" start="4" value="16" />
+          <attvalue end="6" for="1" start="5" value="19" />
+          <attvalue end="7" for="1" start="6" value="17" />
+        </attvalues>
+      </node>
+      <node end="7" id="43f6239257f7ac3d70c1047e91d4b880" label="43f6239" start="3">
+        <viz:position x="0.94098973" y="0.18554547" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Republican healthcare plan approved by two House panels, clearing major hurdle" />
+          <attvalue end="4" for="1" start="3" value="38" />
+          <attvalue end="5" for="1" start="4" value="47" />
+          <attvalue end="6" for="1" start="5" value="38" />
+          <attvalue end="7" for="1" start="6" value="42" />
+        </attvalues>
+      </node>
+      <node end="7" id="984f6e6b99634749662772206d57c485" label="984f6e6" start="1">
+        <viz:position x="0.58827657" y="1.0749313" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Billy Vunipola returns? Has Eddie Jones accidentally revealed his England team?" />
+          <attvalue end="2" for="1" start="1" value="12" />
+          <attvalue end="3" for="1" start="2" value="19" />
+          <attvalue end="4" for="1" start="3" value="42" />
+          <attvalue end="5" for="1" start="4" value="6" />
+          <attvalue end="6" for="1" start="5" value="15" />
+          <attvalue end="7" for="1" start="6" value="56" />
+        </attvalues>
+      </node>
+      <node end="7" id="378e862455a75d187cae20b3bba4ba54" label="378e862" start="2">
+        <viz:position x="0.5914754" y="0.37672684" z="0" />
+        <attvalues>
+          <attvalue for="0" value="What do you make of the Nintendo Switch?" />
+          <attvalue end="3" for="1" start="2" value="34" />
+          <attvalue end="4" for="1" start="3" value="11" />
+          <attvalue end="5" for="1" start="4" value="17" />
+          <attvalue end="6" for="1" start="5" value="48" />
+          <attvalue end="7" for="1" start="6" value="31" />
+        </attvalues>
+      </node>
+      <node end="7" id="223fb2125d7aeadeccf792a18162f02a" label="223fb21" start="3">
+        <viz:position x="3.612529" y="-0.1940032" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Extra £20m pledged in budget for battle against domestic violence" />
+          <attvalue end="4" for="1" start="3" value="23" />
+          <attvalue end="5" for="1" start="4" value="18" />
+          <attvalue end="6" for="1" start="5" value="19" />
+          <attvalue end="7" for="1" start="6" value="17" />
+        </attvalues>
+      </node>
+      <node end="7" id="c1c43df6935882d78fc1dd9afa6bf53d" label="c1c43df" start="1">
+        <viz:position x="-0.22176963" y="-0.050420195" z="0" />
+        <attvalues>
+          <attvalue for="0" value="US travel ban questions answered: what has changed and what's next?" />
+          <attvalue end="2" for="1" start="1" value="6" />
+          <attvalue end="3" for="1" start="2" value="19" />
+          <attvalue end="4" for="1" start="3" value="31" />
+          <attvalue end="5" for="1" start="4" value="23" />
+          <attvalue end="6" for="1" start="5" value="29" />
+          <attvalue end="7" for="1" start="6" value="24" />
+        </attvalues>
+      </node>
+      <node end="7" id="67ccf777b7719e99eaf4cc9de521d250" label="67ccf77" start="2">
+        <viz:position x="-1.7181748" y="-1.3892438" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Lewis Hamilton questions F1’s new regulations before first test session" />
+          <attvalue end="3" for="1" start="2" value="10" />
+          <attvalue end="4" for="1" start="3" value="53" />
+          <attvalue end="5" for="1" start="4" value="5" />
+          <attvalue end="6" for="1" start="5" value="11" />
+          <attvalue end="7" for="1" start="6" value="39" />
+        </attvalues>
+      </node>
+      <node end="7" id="179c68ef5015efe5708beb358c316455" label="179c68e" start="4">
+        <viz:position x="0.017416347" y="-0.10428968" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Sports quiz of the week: Barcelona, England v Scotland and 'lovemaking'" />
+          <attvalue end="5" for="1" start="4" value="18" />
+          <attvalue end="6" for="1" start="5" value="47" />
+          <attvalue end="7" for="1" start="6" value="9" />
+        </attvalues>
+      </node>
+      <node end="7" id="770c8c8bbddfb1c215c9bc668f18c932" label="770c8c8" start="0">
+        <viz:position x="0.42737204" y="-1.5112888" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Women have better orgasms and other things I learnt at the All About Women festival" />
+          <attvalue end="1" for="1" start="0" value="6" />
+          <attvalue end="2" for="1" start="1" value="15" />
+          <attvalue end="3" for="1" start="2" value="29" />
+          <attvalue end="4" for="1" start="3" value="26" />
+          <attvalue end="5" for="1" start="4" value="16" />
+          <attvalue end="6" for="1" start="5" value="9" />
+          <attvalue end="7" for="1" start="6" value="19" />
+        </attvalues>
+      </node>
+      <node end="7" id="b475f305cee2630e5bd8865caf215b86" label="b475f30" start="1">
+        <viz:position x="1.2595932" y="0.4745085" z="0" />
+        <attvalues>
+          <attvalue for="0" value="The Guardian view on the Lords and Brexit: this is not the peers versus the people" />
+          <attvalue end="2" for="1" start="1" value="1" />
+          <attvalue end="3" for="1" start="2" value="8" />
+          <attvalue end="4" for="1" start="3" value="6" />
+          <attvalue end="5" for="1" start="4" value="43" />
+          <attvalue end="6" for="1" start="5" value="9" />
+          <attvalue end="7" for="1" start="6" value="47" />
+        </attvalues>
+      </node>
+      <node end="7" id="b80c88dc7dccb20b3e703c35d07233de" label="b80c88d" start="2">
+        <viz:position x="0.51844704" y="0.48725387" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Sex bans, strength and solidarity: women’s strikes through the ages" />
+          <attvalue end="3" for="1" start="2" value="32" />
+          <attvalue end="4" for="1" start="3" value="26" />
+          <attvalue end="5" for="1" start="4" value="14" />
+          <attvalue end="6" for="1" start="5" value="32" />
+          <attvalue end="7" for="1" start="6" value="7" />
+        </attvalues>
+      </node>
+      <node end="7" id="39aba75c329575cb6c10d057b8a30773" label="39aba75" start="0">
+        <viz:position x="0.45373467" y="0.79600775" z="0" />
+        <attvalues>
+          <attvalue for="0" value="England confirm Billy Vunipola is in line to return against Scotland" />
+          <attvalue end="1" for="1" start="0" value="9" />
+          <attvalue end="2" for="1" start="1" value="12" />
+          <attvalue end="3" for="1" start="2" value="20" />
+          <attvalue end="4" for="1" start="3" value="42" />
+          <attvalue end="5" for="1" start="4" value="2" />
+          <attvalue end="6" for="1" start="5" value="15" />
+          <attvalue end="7" for="1" start="6" value="55" />
+        </attvalues>
+      </node>
+      <node end="7" id="440ea77af4382a034f672e54a5cdac64" label="440ea77" start="1">
+        <viz:position x="-0.2126575" y="1.2436383" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Donald Trump says nuclear threat from North Korea has entered 'new phase'" />
+          <attvalue end="2" for="1" start="1" value="26" />
+          <attvalue end="3" for="1" start="2" value="9" />
+          <attvalue end="4" for="1" start="3" value="47" />
+          <attvalue end="5" for="1" start="4" value="35" />
+          <attvalue end="6" for="1" start="5" value="56" />
+          <attvalue end="7" for="1" start="6" value="21" />
+        </attvalues>
+      </node>
+      <node end="7" id="2e7e4a45d0c09e54fc4a047d7bca103e" label="2e7e4a4" start="3">
+        <viz:position x="2.2077823" y="-0.09947323" z="0" />
+        <attvalues>
+          <attvalue for="0" value="The Guardian view on refugees: don’t set them up to fail" />
+          <attvalue end="4" for="1" start="3" value="17" />
+          <attvalue end="5" for="1" start="4" value="38" />
+          <attvalue end="6" for="1" start="5" value="4" />
+          <attvalue end="7" for="1" start="6" value="13" />
+        </attvalues>
+      </node>
+      <node end="7" id="10c6c4c91f2450eb9b6bc9054a047c11" label="10c6c4c" start="6">
+        <viz:position x="0.8949488" y="0.16806318" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Jonathan Joseph’s turnaround matches England’s change of attitude" />
+          <attvalue end="7" for="1" start="6" value="50" />
+        </attvalues>
+      </node>
+      <node end="7" id="428eb40a5b7e29f27d085b501a627d32" label="428eb40" start="1">
+        <viz:position x="-0.069293424" y="1.7179008" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Kim Jong-nam killing: the arrested, the wanted, and people of interest" />
+          <attvalue end="2" for="1" start="1" value="27" />
+          <attvalue end="3" for="1" start="2" value="2" />
+          <attvalue end="4" for="1" start="3" value="46" />
+          <attvalue end="5" for="1" start="4" value="27" />
+          <attvalue end="6" for="1" start="5" value="36" />
+          <attvalue end="7" for="1" start="6" value="24" />
+        </attvalues>
+      </node>
+      <node end="7" id="302917f06823cf2db516f444ad7a17d7" label="302917f" start="0">
+        <viz:position x="1.5541975" y="0.5516842" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Peugeot-Citroën chief vows to save jobs in Vauxhall/Opel takeover" />
+          <attvalue end="1" for="1" start="0" value="13" />
+          <attvalue end="2" for="1" start="1" value="15" />
+          <attvalue end="3" for="1" start="2" value="24" />
+          <attvalue end="4" for="1" start="3" value="0" />
+          <attvalue end="5" for="1" start="4" value="12" />
+          <attvalue end="6" for="1" start="5" value="25" />
+          <attvalue end="7" for="1" start="6" value="64" />
+        </attvalues>
+      </node>
+      <node end="7" id="cc009e661c187dcad014d18e03c6d9bb" label="cc009e6" start="0">
+        <viz:position x="-0.6135711" y="-0.4778224" z="0" />
+        <attvalues>
+          <attvalue for="0" value="State of the Environment report: bright spots, but much more to do" />
+          <attvalue end="1" for="1" start="0" value="16" />
+          <attvalue end="2" for="1" start="1" value="11" />
+          <attvalue end="3" for="1" start="2" value="23" />
+          <attvalue end="4" for="1" start="3" value="36" />
+          <attvalue end="5" for="1" start="4" value="20" />
+          <attvalue end="6" for="1" start="5" value="35" />
+          <attvalue end="7" for="1" start="6" value="67" />
+        </attvalues>
+      </node>
+      <node end="7" id="9efd7cb2da580a48711d935794903cba" label="9efd7cb" start="0">
+        <viz:position x="1.796233" y="0.6047017" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Juppé says he will not replace Fillon in French presidential race" />
+          <attvalue end="1" for="1" start="0" value="5" />
+          <attvalue end="2" for="1" start="1" value="1" />
+          <attvalue end="3" for="1" start="2" value="14" />
+          <attvalue end="4" for="1" start="3" value="15" />
+          <attvalue end="5" for="1" start="4" value="34" />
+          <attvalue end="6" for="1" start="5" value="40" />
+          <attvalue end="7" for="1" start="6" value="68" />
+        </attvalues>
+      </node>
+      <node end="7" id="b776a3c0796eec2b78a83272abec3b4c" label="b776a3c" start="0">
+        <viz:position x="2.8024411" y="-0.9624483" z="0" />
+        <attvalues>
+          <attvalue for="0" value="The New Arrivals project – why we are reporting on asylum seekers in the UK" />
+          <attvalue end="1" for="1" start="0" value="0" />
+          <attvalue end="2" for="1" start="1" value="17" />
+          <attvalue end="3" for="1" start="2" value="30" />
+          <attvalue end="4" for="1" start="3" value="3" />
+          <attvalue end="5" for="1" start="4" value="37" />
+          <attvalue end="6" for="1" start="5" value="23" />
+          <attvalue end="7" for="1" start="6" value="13" />
+        </attvalues>
+      </node>
+      <node end="7" id="122cceb3f9fea46241c103b44077b11d" label="122cceb" start="0">
+        <viz:position x="-1.2908546" y="-0.9896833" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Great Wall of China's troubled history offers lessons for Trump, scholars say" />
+          <attvalue end="1" for="1" start="0" value="11" />
+          <attvalue end="2" for="1" start="1" value="27" />
+          <attvalue end="3" for="1" start="2" value="10" />
+          <attvalue end="4" for="1" start="3" value="49" />
+          <attvalue end="5" for="1" start="4" value="36" />
+          <attvalue end="6" for="1" start="5" value="59" />
+          <attvalue end="7" for="1" start="6" value="3" />
+        </attvalues>
+      </node>
+      <node end="7" id="89c0e1a7ed83e57167c8493a626a5dfb" label="89c0e1a" start="0">
+        <viz:position x="1.4822881" y="0.95050406" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Who is exempt from Donald Trump's revised travel ban?" />
+          <attvalue end="1" for="1" start="0" value="7" />
+          <attvalue end="2" for="1" start="1" value="4" />
+          <attvalue end="3" for="1" start="2" value="21" />
+          <attvalue end="4" for="1" start="3" value="31" />
+          <attvalue end="5" for="1" start="4" value="23" />
+          <attvalue end="6" for="1" start="5" value="25" />
+          <attvalue end="7" for="1" start="6" value="28" />
+        </attvalues>
+      </node>
+      <node end="7" id="3f655e1d46b1725c7f1e96daffda5b2f" label="3f655e1" start="3">
+        <viz:position x="2.335378" y="1.6021646" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Cuts to Sunderland's homeless services: a bitter taste of things to come" />
+          <attvalue end="4" for="1" start="3" value="23" />
+          <attvalue end="5" for="1" start="4" value="37" />
+          <attvalue end="6" for="1" start="5" value="23" />
+          <attvalue end="7" for="1" start="6" value="13" />
+        </attvalues>
+      </node>
+      <node end="7" id="8c43b6a68c4fcaca22cc71eb2bdcf3fa" label="8c43b6a" start="6">
+        <viz:position x="1.17594" y="0.8404664" z="0" />
+        <attvalues>
+          <attvalue for="0" value="England and Jonathan Joseph thump Scotland to seal Six Nations title" />
+          <attvalue end="7" for="1" start="6" value="50" />
+        </attvalues>
+      </node>
+      <node end="7" id="53e41ae9787e651b5f3b814c11f9cd6d" label="53e41ae" start="4">
+        <viz:position x="1.738021" y="0.4813057" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Four victories since 1911 and 34 winless years: will Scotland end Twickenham hoodoo?" />
+          <attvalue end="5" for="1" start="4" value="6" />
+          <attvalue end="6" for="1" start="5" value="15" />
+          <attvalue end="7" for="1" start="6" value="50" />
+        </attvalues>
+      </node>
+      <node end="7" id="7c44631e5a8f7183be2e516674603266" label="7c44631" start="1">
+        <viz:position x="3.0482454" y="-0.22238542" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Arsenal 1-5 Bayern Munich (agg 2-10): Champions League last 16, second leg – as it happened" />
+          <attvalue end="2" for="1" start="1" value="17" />
+          <attvalue end="3" for="1" start="2" value="11" />
+          <attvalue end="4" for="1" start="3" value="51" />
+          <attvalue end="5" for="1" start="4" value="13" />
+          <attvalue end="6" for="1" start="5" value="50" />
+          <attvalue end="7" for="1" start="6" value="22" />
+        </attvalues>
+      </node>
+      <node end="7" id="238f6c5ef1fffbb5787ced856f6a272a" label="238f6c5" start="3">
+        <viz:position x="1.8785201" y="0.12777369" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Poland reacts with fury to re-election of Donald Tusk" />
+          <attvalue end="4" for="1" start="3" value="16" />
+          <attvalue end="5" for="1" start="4" value="33" />
+          <attvalue end="6" for="1" start="5" value="12" />
+          <attvalue end="7" for="1" start="6" value="45" />
+        </attvalues>
+      </node>
+      <node end="7" id="2f6482ae076795286e22a08ac092c62a" label="2f6482a" start="6">
+        <viz:position x="1.6756681" y="0.5396952" z="0" />
+        <attvalues>
+          <attvalue for="0" value="England’s Kay Wilson scores magnificent seven to crush Scotland" />
+          <attvalue end="7" for="1" start="6" value="55" />
+        </attvalues>
+      </node>
+      <node end="7" id="23a4f968445e99895a88c085c7a6544b" label="23a4f96" start="4">
+        <viz:position x="0.6173376" y="-1.0043833" z="0" />
+        <attvalues>
+          <attvalue for="0" value="WikiLeaks says it will help Silicon Valley defend against CIA hacking" />
+          <attvalue end="5" for="1" start="4" value="24" />
+          <attvalue end="6" for="1" start="5" value="20" />
+          <attvalue end="7" for="1" start="6" value="62" />
+        </attvalues>
+      </node>
+      <node end="7" id="e6ecff84fcae3836b29ee535b9160f8b" label="e6ecff8" start="4">
+        <viz:position x="1.2863812" y="0.25628206" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Six Nations: seven things to look out for this weekend" />
+          <attvalue end="5" for="1" start="4" value="6" />
+          <attvalue end="6" for="1" start="5" value="14" />
+          <attvalue end="7" for="1" start="6" value="50" />
+        </attvalues>
+      </node>
+      <node end="7" id="c5faa37a827af44101ba8f01dc08200e" label="c5faa37" start="4">
+        <viz:position x="2.546684" y="-0.5855162" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Wales 22-9 Ireland: Six Nations – as it happened" />
+          <attvalue end="5" for="1" start="4" value="6" />
+          <attvalue end="6" for="1" start="5" value="29" />
+          <attvalue end="7" for="1" start="6" value="54" />
+        </attvalues>
+      </node>
+      <node end="7" id="7f2d2fe4fabd5943656fc52cb7b017df" label="7f2d2fe" start="3">
+        <viz:position x="-0.8540844" y="-2.3081312" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Samuel L Jackson hit out at black British actors in Hollywood. Was he right?" />
+          <attvalue end="4" for="1" start="3" value="11" />
+          <attvalue end="5" for="1" start="4" value="6" />
+          <attvalue end="6" for="1" start="5" value="34" />
+          <attvalue end="7" for="1" start="6" value="34" />
+        </attvalues>
+      </node>
+      <node end="7" id="115dd2b62f0d37e1193a01063f022730" label="115dd2b" start="1">
+        <viz:position x="3.58205" y="0.6464856" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Peers vote to give parliament veto over final Brexit outcome by majority of 98 – as it happened" />
+          <attvalue end="2" for="1" start="1" value="1" />
+          <attvalue end="3" for="1" start="2" value="37" />
+          <attvalue end="4" for="1" start="3" value="8" />
+          <attvalue end="5" for="1" start="4" value="45" />
+          <attvalue end="6" for="1" start="5" value="8" />
+          <attvalue end="7" for="1" start="6" value="49" />
+        </attvalues>
+      </node>
+      <node end="7" id="5c85dcd476f5f294634b52672c454d83" label="5c85dcd" start="6">
+        <viz:position x="2.1237075" y="-0.6084292" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Davis: MPs must choose between May's deal and crashing out of EU" />
+          <attvalue end="7" for="1" start="6" value="7" />
+        </attvalues>
+      </node>
+      <node end="7" id="97b8a6f0601497544d1213c3d7c940d6" label="97b8a6f" start="3">
+        <viz:position x="3.5439892" y="-0.27432945" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Thousands of refugees left in cold, as UN and EU accused of mismanagement" />
+          <attvalue end="4" for="1" start="3" value="15" />
+          <attvalue end="5" for="1" start="4" value="43" />
+          <attvalue end="6" for="1" start="5" value="5" />
+          <attvalue end="7" for="1" start="6" value="42" />
+        </attvalues>
+      </node>
+      <node end="7" id="53719024f89ad7ee83a279b2356b0fd6" label="5371902" start="4">
+        <viz:position x="3.0577722" y="-0.42305306" z="0" />
+        <attvalues>
+          <attvalue for="0" value="European parliament Brexit chief: 'Let Britons keep freedom of movement'" />
+          <attvalue end="5" for="1" start="4" value="45" />
+          <attvalue end="6" for="1" start="5" value="12" />
+          <attvalue end="7" for="1" start="6" value="10" />
+        </attvalues>
+      </node>
+      <node end="7" id="d4f08b8c05f61d49963a4c3974afd7df" label="d4f08b8" start="3">
+        <viz:position x="-0.6877963" y="-0.25700253" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Hawaii becomes first state to sue over Trump's revised travel ban" />
+          <attvalue end="4" for="1" start="3" value="30" />
+          <attvalue end="5" for="1" start="4" value="24" />
+          <attvalue end="6" for="1" start="5" value="26" />
+          <attvalue end="7" for="1" start="6" value="25" />
+        </attvalues>
+      </node>
+      <node end="7" id="5a2203c0175f12d7ffdf0ed7128fa2e2" label="5a2203c" start="0">
+        <viz:position x="0.12538058" y="-1.998387" z="0" />
+        <attvalues>
+          <attvalue for="0" value="How Geena Davis became a champion for women on screen" />
+          <attvalue end="1" for="1" start="0" value="5" />
+          <attvalue end="2" for="1" start="1" value="15" />
+          <attvalue end="3" for="1" start="2" value="29" />
+          <attvalue end="4" for="1" start="3" value="11" />
+          <attvalue end="5" for="1" start="4" value="16" />
+          <attvalue end="6" for="1" start="5" value="32" />
+          <attvalue end="7" for="1" start="6" value="34" />
+        </attvalues>
+      </node>
+      <node end="7" id="de3eb3dbaf68f6b04f5af2712be8e98b" label="de3eb3d" start="2">
+        <viz:position x="0.34063816" y="0.12230813" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Heather Watson and Johanna Konta set for all-British match at Indian Wells" />
+          <attvalue end="3" for="1" start="2" value="25" />
+          <attvalue end="4" for="1" start="3" value="42" />
+          <attvalue end="5" for="1" start="4" value="3" />
+          <attvalue end="6" for="1" start="5" value="37" />
+          <attvalue end="7" for="1" start="6" value="56" />
+        </attvalues>
+      </node>
+      <node end="7" id="2a24e8dfb5b8fbd56e851fca7676f3e3" label="2a24e8d" start="3">
+        <viz:position x="1.1406541" y="-0.5492983" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Scotland’s Tim Visser says England players ‘pretending to be confident’" />
+          <attvalue end="4" for="1" start="3" value="40" />
+          <attvalue end="5" for="1" start="4" value="6" />
+          <attvalue end="6" for="1" start="5" value="15" />
+          <attvalue end="7" for="1" start="6" value="54" />
+        </attvalues>
+      </node>
+      <node end="7" id="169a3d9ac9a7e29874766497aebf84b7" label="169a3d9" start="3">
+        <viz:position x="4.6645093" y="-0.31047598" z="0" />
+        <attvalues>
+          <attvalue for="0" value="We want more Syrian refugees: council offers exceed official UK pledge of 20,000" />
+          <attvalue end="4" for="1" start="3" value="4" />
+          <attvalue end="5" for="1" start="4" value="38" />
+          <attvalue end="6" for="1" start="5" value="25" />
+          <attvalue end="7" for="1" start="6" value="15" />
+        </attvalues>
+      </node>
+      <node end="7" id="49c05920a9fa29b235e362f15ef422d6" label="49c0592" start="4">
+        <viz:position x="-0.9104138" y="1.0377889" z="0" />
+        <attvalues>
+          <attvalue for="0" value="South Koreans feel like chicken tonight after president's removal" />
+          <attvalue end="5" for="1" start="4" value="18" />
+          <attvalue end="6" for="1" start="5" value="46" />
+          <attvalue end="7" for="1" start="6" value="25" />
+        </attvalues>
+      </node>
+      <node end="7" id="31fedfca1b3d305a25349320ae470404" label="31fedfc" start="3">
+        <viz:position x="1.0252885" y="0.22594674" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Arsène Wenger blames ‘unexplainable and scandalous’ decisions for collapse" />
+          <attvalue end="4" for="1" start="3" value="53" />
+          <attvalue end="5" for="1" start="4" value="8" />
+          <attvalue end="6" for="1" start="5" value="54" />
+          <attvalue end="7" for="1" start="6" value="35" />
+        </attvalues>
+      </node>
+      <node end="7" id="1c72a32cf9f7bc22f7bf7cc8d115cfc4" label="1c72a32" start="2">
+        <viz:position x="1.230488" y="-0.8818999" z="0" />
+        <attvalues>
+          <attvalue for="0" value="WikiLeaks says the CIA can use your TV to spy on you. But there's good news" />
+          <attvalue end="3" for="1" start="2" value="17" />
+          <attvalue end="4" for="1" start="3" value="14" />
+          <attvalue end="5" for="1" start="4" value="24" />
+          <attvalue end="6" for="1" start="5" value="20" />
+          <attvalue end="7" for="1" start="6" value="60" />
+        </attvalues>
+      </node>
+      <node end="7" id="0dfd1a3b09b4eb408f57139173f228aa" label="0dfd1a3" start="6">
+        <viz:position x="2.2839565" y="-0.63791907" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Scotland is heading for a second independence poll. Is a Yes vote any more likely?" />
+          <attvalue end="7" for="1" start="6" value="45" />
+        </attvalues>
+      </node>
+      <node end="7" id="5612cf124a3501e44bd03c3b73eaac48" label="5612cf1" start="0">
+        <viz:position x="1.2566528" y="1.4390048" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Full text: Trump's revised ban on travel from Muslim-majority countries" />
+          <attvalue end="1" for="1" start="0" value="8" />
+          <attvalue end="2" for="1" start="1" value="7" />
+          <attvalue end="3" for="1" start="2" value="17" />
+          <attvalue end="4" for="1" start="3" value="30" />
+          <attvalue end="5" for="1" start="4" value="22" />
+          <attvalue end="6" for="1" start="5" value="30" />
+          <attvalue end="7" for="1" start="6" value="27" />
+        </attvalues>
+      </node>
+      <node end="7" id="67eeb755251accda2a3409b1c028b3c9" label="67eeb75" start="2">
+        <viz:position x="0.017231477" y="-1.1009934" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Trump’s wiretap paranoia and the reality of modern surveillance" />
+          <attvalue end="3" for="1" start="2" value="15" />
+          <attvalue end="4" for="1" start="3" value="13" />
+          <attvalue end="5" for="1" start="4" value="24" />
+          <attvalue end="6" for="1" start="5" value="20" />
+          <attvalue end="7" for="1" start="6" value="60" />
+        </attvalues>
+      </node>
+      <node end="7" id="0462f6826e69e188d7dac2c68959b32e" label="0462f68" start="3">
+        <viz:position x="2.1225305" y="1.3343251" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Where did the money go? How Greece fumbled the refugee crisis" />
+          <attvalue end="4" for="1" start="3" value="16" />
+          <attvalue end="5" for="1" start="4" value="42" />
+          <attvalue end="6" for="1" start="5" value="6" />
+          <attvalue end="7" for="1" start="6" value="41" />
+        </attvalues>
+      </node>
+      <node end="7" id="b1c2594a1a22cff7b24f8bc4f106323b" label="b1c2594" start="6">
+        <viz:position x="0.6849649" y="0.47442862" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Gregor Townsend will need to address Scotland’s lack of physicality" />
+          <attvalue end="7" for="1" start="6" value="53" />
+        </attvalues>
+      </node>
+      <node end="7" id="1728b27e8e97d19a7022fda21a7d433a" label="1728b27" start="1">
+        <viz:position x="1.5195615" y="0.8348521" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Facebook's response over sexualised child images is 'extraordinary'" />
+          <attvalue end="2" for="1" start="1" value="17" />
+          <attvalue end="3" for="1" start="2" value="24" />
+          <attvalue end="4" for="1" start="3" value="52" />
+          <attvalue end="5" for="1" start="4" value="27" />
+          <attvalue end="6" for="1" start="5" value="18" />
+          <attvalue end="7" for="1" start="6" value="57" />
+        </attvalues>
+      </node>
+      <node end="7" id="7c5863d54179f2b88c169c22864847ee" label="7c5863d" start="2">
+        <viz:position x="-1.5343101" y="-0.66834635" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Lewis Hamilton warns new F1 rules will make overtaking more difficult" />
+          <attvalue end="3" for="1" start="2" value="11" />
+          <attvalue end="4" for="1" start="3" value="52" />
+          <attvalue end="5" for="1" start="4" value="4" />
+          <attvalue end="6" for="1" start="5" value="12" />
+          <attvalue end="7" for="1" start="6" value="38" />
+        </attvalues>
+      </node>
+      <node end="7" id="ca074d35b85a7ace5f8c2d123f575e2a" label="ca074d3" start="3">
+        <viz:position x="0.37987345" y="0.43923965" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Burst your bubble: what conservative media is saying about 'Trumpcare'" />
+          <attvalue end="4" for="1" start="3" value="38" />
+          <attvalue end="5" for="1" start="4" value="47" />
+          <attvalue end="6" for="1" start="5" value="39" />
+          <attvalue end="7" for="1" start="6" value="42" />
+        </attvalues>
+      </node>
+      <node end="7" id="2b660dedd99ca3b3b7bb11b302d94355" label="2b660de" start="3">
+        <viz:position x="0.3027446" y="-1.3516788" z="0" />
+        <attvalues>
+          <attvalue for="0" value="With the latest WikiLeaks revelations about the CIA – is privacy really dead?" />
+          <attvalue end="4" for="1" start="3" value="14" />
+          <attvalue end="5" for="1" start="4" value="26" />
+          <attvalue end="6" for="1" start="5" value="20" />
+          <attvalue end="7" for="1" start="6" value="60" />
+        </attvalues>
+      </node>
+      <node end="7" id="fa4c967faad6b0a6321e77f201b79039" label="fa4c967" start="2">
+        <viz:position x="1.070481" y="-0.73205084" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Why universities can't see woman as leaders" />
+          <attvalue end="3" for="1" start="2" value="30" />
+          <attvalue end="4" for="1" start="3" value="30" />
+          <attvalue end="5" for="1" start="4" value="16" />
+          <attvalue end="6" for="1" start="5" value="19" />
+          <attvalue end="7" for="1" start="6" value="17" />
+        </attvalues>
+      </node>
+      <node end="7" id="2f38b1950db7806f23c553447f9cad6b" label="2f38b19" start="1">
+        <viz:position x="0.82317287" y="-1.44659" z="0" />
+        <attvalues>
+          <attvalue for="0" value="White House does not know if alleged surveillance of Trump was by wiretap" />
+          <attvalue end="2" for="1" start="1" value="10" />
+          <attvalue end="3" for="1" start="2" value="17" />
+          <attvalue end="4" for="1" start="3" value="37" />
+          <attvalue end="5" for="1" start="4" value="11" />
+          <attvalue end="6" for="1" start="5" value="29" />
+          <attvalue end="7" for="1" start="6" value="53" />
+        </attvalues>
+      </node>
+      <node end="7" id="7db4fb17458599b170e0e1ea28cdb85d" label="7db4fb1" start="0">
+        <viz:position x="1.977191" y="1.0576214" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Premier League: 10 talking points from the weekend’s action" />
+          <attvalue end="1" for="1" start="0" value="3" />
+          <attvalue end="2" for="1" start="1" value="19" />
+          <attvalue end="3" for="1" start="2" value="10" />
+          <attvalue end="4" for="1" start="3" value="55" />
+          <attvalue end="5" for="1" start="4" value="9" />
+          <attvalue end="6" for="1" start="5" value="50" />
+          <attvalue end="7" for="1" start="6" value="21" />
+        </attvalues>
+      </node>
+      <node end="7" id="0425461c6dbe0eafbf326933285c709e" label="0425461" start="3">
+        <viz:position x="-0.91187274" y="0.6230787" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Body parts of French family of four found at farm of accused" />
+          <attvalue end="4" for="1" start="3" value="43" />
+          <attvalue end="5" for="1" start="4" value="13" />
+          <attvalue end="6" for="1" start="5" value="43" />
+          <attvalue end="7" for="1" start="6" value="38" />
+        </attvalues>
+      </node>
+      <node end="7" id="9b215ea6e679e279106b5b7d21b1d1ee" label="9b215ea" start="5">
+        <viz:position x="1.2434623" y="0.44152513" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Erdoğan brands Dutch 'Nazi remnants' for barring Turkish MP" />
+          <attvalue end="6" for="1" start="5" value="8" />
+          <attvalue end="7" for="1" start="6" value="23" />
+        </attvalues>
+      </node>
+      <node end="7" id="238f85b8c22a08898b1ac46f739ea558" label="238f85b" start="2">
+        <viz:position x="0.44692695" y="-1.8013284" z="0" />
+        <attvalues>
+          <attvalue for="0" value="What’s next for the women’s movement?" />
+          <attvalue end="3" for="1" start="2" value="29" />
+          <attvalue end="4" for="1" start="3" value="24" />
+          <attvalue end="5" for="1" start="4" value="15" />
+          <attvalue end="6" for="1" start="5" value="16" />
+          <attvalue end="7" for="1" start="6" value="17" />
+        </attvalues>
+      </node>
+      <node end="7" id="d0d66049cf14363e40acddf095c927ca" label="d0d6604" start="0">
+        <viz:position x="-0.3222651" y="-0.15491846" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Calls for 'porno chic' Saint Laurent ad campaign to be banned" />
+          <attvalue end="1" for="1" start="0" value="3" />
+          <attvalue end="2" for="1" start="1" value="24" />
+          <attvalue end="3" for="1" start="2" value="37" />
+          <attvalue end="4" for="1" start="3" value="26" />
+          <attvalue end="5" for="1" start="4" value="58" />
+          <attvalue end="6" for="1" start="5" value="48" />
+          <attvalue end="7" for="1" start="6" value="30" />
+        </attvalues>
+      </node>
+      <node end="7" id="9451536e12469701a1a29daccb798d13" label="9451536" start="1">
+        <viz:position x="0.12724029" y="0.12772942" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Republicans call new travel ban 'a good overhaul' that will 'stand legal scrutiny'" />
+          <attvalue end="2" for="1" start="1" value="7" />
+          <attvalue end="3" for="1" start="2" value="19" />
+          <attvalue end="4" for="1" start="3" value="30" />
+          <attvalue end="5" for="1" start="4" value="24" />
+          <attvalue end="6" for="1" start="5" value="28" />
+          <attvalue end="7" for="1" start="6" value="24" />
+        </attvalues>
+      </node>
+      <node end="7" id="8c6d8328fd99fa354e4669da291c9404" label="8c6d832" start="3">
+        <viz:position x="3.4360929" y="1.0936656" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Late 2018 could be best time for new Scottish referendum, says Sturgeon" />
+          <attvalue end="4" for="1" start="3" value="5" />
+          <attvalue end="5" for="1" start="4" value="24" />
+          <attvalue end="6" for="1" start="5" value="55" />
+          <attvalue end="7" for="1" start="6" value="47" />
+        </attvalues>
+      </node>
+      <node end="7" id="12b298e8f22356029e5f9d2572d7ca99" label="12b298e" start="4">
+        <viz:position x="1.3405426" y="-0.006827116" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Brexit stage left: how theatre became the best way to understand today’s Britain" />
+          <attvalue end="5" for="1" start="4" value="24" />
+          <attvalue end="6" for="1" start="5" value="59" />
+          <attvalue end="7" for="1" start="6" value="47" />
+        </attvalues>
+      </node>
+      <node end="7" id="e7992876e3e995102117db101bb3b341" label="e799287" start="3">
+        <viz:position x="0.19827463" y="-0.76513636" z="0" />
+        <attvalues>
+          <attvalue for="0" value="'Am I at risk of being hacked?' What you need to know about the 'Vault 7' documents" />
+          <attvalue end="4" for="1" start="3" value="14" />
+          <attvalue end="5" for="1" start="4" value="26" />
+          <attvalue end="6" for="1" start="5" value="22" />
+          <attvalue end="7" for="1" start="6" value="62" />
+        </attvalues>
+      </node>
+      <node end="7" id="f1472c9220998aaac0e3f5c52111b6bb" label="f1472c9" start="3">
+        <viz:position x="0.017220782" y="-0.75153226" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Jon Huntsman accepts Trump's offer to be US ambassador to Russia – sources" />
+          <attvalue end="4" for="1" start="3" value="38" />
+          <attvalue end="5" for="1" start="4" value="11" />
+          <attvalue end="6" for="1" start="5" value="30" />
+          <attvalue end="7" for="1" start="6" value="2" />
+        </attvalues>
+      </node>
+      <node end="7" id="2ef0cb5f35b1179bf1bc02441b8e1d12" label="2ef0cb5" start="4">
+        <viz:position x="2.6672957" y="1.0706767" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Women bearing 86% of austerity burden, Commons figures reveal" />
+          <attvalue end="5" for="1" start="4" value="16" />
+          <attvalue end="6" for="1" start="5" value="19" />
+          <attvalue end="7" for="1" start="6" value="18" />
+        </attvalues>
+      </node>
+      <node end="7" id="e580a855c08222fb2480ccc884735f57" label="e580a85" start="6">
+        <viz:position x="1.5925248" y="0.054980144" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Netherlands bars Turkish ministers as 'Nazi remnant' dispute escalates" />
+          <attvalue end="7" for="1" start="6" value="25" />
+        </attvalues>
+      </node>
+      <node end="7" id="de2b53bcac179a95c4ef40ce7b09bfb8" label="de2b53b" start="3">
+        <viz:position x="2.8018513" y="1.0216815" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Arrival of US troops intensifies struggle for influence in Syria" />
+          <attvalue end="4" for="1" start="3" value="47" />
+          <attvalue end="5" for="1" start="4" value="34" />
+          <attvalue end="6" for="1" start="5" value="41" />
+          <attvalue end="7" for="1" start="6" value="17" />
+        </attvalues>
+      </node>
+      <node end="7" id="c785cc0c653deaf8fa90268beb79f0b4" label="c785cc0" start="1">
+        <viz:position x="0.52909523" y="-2.212204" z="0" />
+        <attvalues>
+          <attvalue for="0" value="The Snapchat affair raises the question: how to make the digital giants play fair?" />
+          <attvalue end="2" for="1" start="1" value="24" />
+          <attvalue end="3" for="1" start="2" value="23" />
+          <attvalue end="4" for="1" start="3" value="51" />
+          <attvalue end="5" for="1" start="4" value="27" />
+          <attvalue end="6" for="1" start="5" value="20" />
+          <attvalue end="7" for="1" start="6" value="58" />
+        </attvalues>
+      </node>
+      <node end="7" id="c8f7adeb318f9da0e46b7fbcb123e934" label="c8f7ade" start="2">
+        <viz:position x="1.3896546" y="-0.092317544" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Adults are having less sex than 20 years ago, finds study" />
+          <attvalue end="3" for="1" start="2" value="20" />
+          <attvalue end="4" for="1" start="3" value="11" />
+          <attvalue end="5" for="1" start="4" value="18" />
+          <attvalue end="6" for="1" start="5" value="41" />
+          <attvalue end="7" for="1" start="6" value="9" />
+        </attvalues>
+      </node>
+      <node end="7" id="127dc096364e6c4a038ba9ea0816b98b" label="127dc09" start="2">
+        <viz:position x="0.18437514" y="-0.7338496" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Apple to 'rapidly address' any security holes as companies respond to CIA leak" />
+          <attvalue end="3" for="1" start="2" value="16" />
+          <attvalue end="4" for="1" start="3" value="13" />
+          <attvalue end="5" for="1" start="4" value="25" />
+          <attvalue end="6" for="1" start="5" value="20" />
+          <attvalue end="7" for="1" start="6" value="60" />
+        </attvalues>
+      </node>
+      <node end="7" id="89d40c71e80c48cb28e833571da10a55" label="89d40c7" start="0">
+        <viz:position x="2.3083305" y="0.042927913" z="0" />
+        <attvalues>
+          <attvalue for="0" value="May believes EU could scupper Brexit if MPs given proper veto" />
+          <attvalue end="1" for="1" start="0" value="11" />
+          <attvalue end="2" for="1" start="1" value="0" />
+          <attvalue end="3" for="1" start="2" value="36" />
+          <attvalue end="4" for="1" start="3" value="6" />
+          <attvalue end="5" for="1" start="4" value="45" />
+          <attvalue end="6" for="1" start="5" value="9" />
+          <attvalue end="7" for="1" start="6" value="47" />
+        </attvalues>
+      </node>
+      <node end="7" id="16fa47596abc92ee69c52e0234965264" label="16fa475" start="2">
+        <viz:position x="0.4619585" y="0.44388834" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Michael Heseltine: this isn’t the last we’ll hear of the Tory Aslan" />
+          <attvalue end="3" for="1" start="2" value="30" />
+          <attvalue end="4" for="1" start="3" value="6" />
+          <attvalue end="5" for="1" start="4" value="42" />
+          <attvalue end="6" for="1" start="5" value="34" />
+          <attvalue end="7" for="1" start="6" value="48" />
+        </attvalues>
+      </node>
+      <node end="7" id="8a0c40ca8e70f11192fb8978f546998d" label="8a0c40c" start="4">
+        <viz:position x="1.6777598" y="-0.5954175" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Polish PM ridicules François Hollande's 4% poll rating in Tusk row" />
+          <attvalue end="5" for="1" start="4" value="32" />
+          <attvalue end="6" for="1" start="5" value="11" />
+          <attvalue end="7" for="1" start="6" value="44" />
+        </attvalues>
+      </node>
+      <node end="7" id="c2bdb8a971499b50c80215c078a38920" label="c2bdb8a" start="2">
+        <viz:position x="0.12552929" y="1.4416926" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Anger at Bournemouth as Tyrone Mings gets five-match ban for violent conduct" />
+          <attvalue end="3" for="1" start="2" value="15" />
+          <attvalue end="4" for="1" start="3" value="26" />
+          <attvalue end="5" for="1" start="4" value="39" />
+          <attvalue end="6" for="1" start="5" value="31" />
+          <attvalue end="7" for="1" start="6" value="29" />
+        </attvalues>
+      </node>
+      <node end="7" id="eb95a5e6a802a448bce96581b7da6ad9" label="eb95a5e" start="0">
+        <viz:position x="0.40576136" y="-1.555249" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Rod Rosenstein: 'honorable' US attorney poised to be next Russia investigator" />
+          <attvalue end="1" for="1" start="0" value="8" />
+          <attvalue end="2" for="1" start="1" value="10" />
+          <attvalue end="3" for="1" start="2" value="4" />
+          <attvalue end="4" for="1" start="3" value="30" />
+          <attvalue end="5" for="1" start="4" value="45" />
+          <attvalue end="6" for="1" start="5" value="30" />
+          <attvalue end="7" for="1" start="6" value="3" />
+        </attvalues>
+      </node>
+      <node end="7" id="75d65b840d125a67669954fee27c2d9b" label="75d65b8" start="4">
+        <viz:position x="-0.087340645" y="0.37925667" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Late-night TV hosts on healthcare reform: 'Don't call it Trumpcare'" />
+          <attvalue end="5" for="1" start="4" value="46" />
+          <attvalue end="6" for="1" start="5" value="38" />
+          <attvalue end="7" for="1" start="6" value="24" />
+        </attvalues>
+      </node>
+      <node end="7" id="5e1b358f7822dc75f139111c0e31396e" label="5e1b358" start="6">
+        <viz:position x="1.2726367" y="0.36726162" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Danny Cowley revels in Lincoln’s brush with big time and praises Arsène Wenger" />
+          <attvalue end="7" for="1" start="6" value="37" />
+        </attvalues>
+      </node>
+      <node end="7" id="45937231d0827089f0a6b998654b92fc" label="4593723" start="0">
+        <viz:position x="0.7277503" y="1.9780321" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Iraqi forces push into deadliest areas of Mosul as civilian exodus accelerates" />
+          <attvalue end="1" for="1" start="0" value="16" />
+          <attvalue end="2" for="1" start="1" value="18" />
+          <attvalue end="3" for="1" start="2" value="10" />
+          <attvalue end="4" for="1" start="3" value="48" />
+          <attvalue end="5" for="1" start="4" value="42" />
+          <attvalue end="6" for="1" start="5" value="44" />
+          <attvalue end="7" for="1" start="6" value="68" />
+        </attvalues>
+      </node>
+      <node end="7" id="caae95eb9cee0c2f277f6bda8c762ea6" label="caae95e" start="2">
+        <viz:position x="0.8010036" y="-0.26765516" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Never mind watching the TV – if WikiLeaks is right, the TV is watching you" />
+          <attvalue end="3" for="1" start="2" value="16" />
+          <attvalue end="4" for="1" start="3" value="15" />
+          <attvalue end="5" for="1" start="4" value="28" />
+          <attvalue end="6" for="1" start="5" value="21" />
+          <attvalue end="7" for="1" start="6" value="60" />
+        </attvalues>
+      </node>
+      <node end="7" id="c925b79dbc1c0c262b2c5de3646d1357" label="c925b79" start="6">
+        <viz:position x="0.7872324" y="-0.2100916" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Elon Musk and Malcolm Turnbull talk battery solutions for energy problems" />
+          <attvalue end="7" for="1" start="6" value="5" />
+        </attvalues>
+      </node>
+      <node end="7" id="678b1b12a6fc1a054ee14cd089c62e70" label="678b1b1" start="4">
+        <viz:position x="0.62986064" y="1.6270369" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Defense secretary condemns nude photos on Marines Facebook page" />
+          <attvalue end="5" for="1" start="4" value="29" />
+          <attvalue end="6" for="1" start="5" value="43" />
+          <attvalue end="7" for="1" start="6" value="26" />
+        </attvalues>
+      </node>
+      <node end="7" id="a9eb4be8a432fbba5f649eed31262d69" label="a9eb4be" start="3">
+        <viz:position x="0.7215565" y="-2.0175586" z="0" />
+        <attvalues>
+          <attvalue for="0" value="The closure of the Climate Institute comes just as we're building consensus on action" />
+          <attvalue end="4" for="1" start="3" value="36" />
+          <attvalue end="5" for="1" start="4" value="58" />
+          <attvalue end="6" for="1" start="5" value="36" />
+          <attvalue end="7" for="1" start="6" value="45" />
+        </attvalues>
+      </node>
+      <node end="7" id="bd2fa4b1203e1ef18b9e0a4b5d400bd3" label="bd2fa4b" start="2">
+        <viz:position x="-1.9640436" y="-0.77737504" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Lewis Hamilton fastest on first day of testing as Mercedes deliver on speed" />
+          <attvalue end="3" for="1" start="2" value="9" />
+          <attvalue end="4" for="1" start="3" value="52" />
+          <attvalue end="5" for="1" start="4" value="5" />
+          <attvalue end="6" for="1" start="5" value="4" />
+          <attvalue end="7" for="1" start="6" value="38" />
+        </attvalues>
+      </node>
+      <node end="7" id="ec85d3fcdc842891632b8a8c54889f97" label="ec85d3f" start="3">
+        <viz:position x="2.6040103" y="-0.99580634" z="0" />
+        <attvalues>
+          <attvalue for="0" value="'We don't have a life here': refugees find scant solace in hardline Hungary" />
+          <attvalue end="4" for="1" start="3" value="17" />
+          <attvalue end="5" for="1" start="4" value="38" />
+          <attvalue end="6" for="1" start="5" value="5" />
+          <attvalue end="7" for="1" start="6" value="29" />
+        </attvalues>
+      </node>
+      <node end="7" id="e1368a34b0dc3b6f05aa3c8a411466ea" label="e1368a3" start="0">
+        <viz:position x="1.6134455" y="0.65773755" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Wales warn George North to cut out defensive mistakes in Six Nations" />
+          <attvalue end="1" for="1" start="0" value="8" />
+          <attvalue end="2" for="1" start="1" value="11" />
+          <attvalue end="3" for="1" start="2" value="19" />
+          <attvalue end="4" for="1" start="3" value="41" />
+          <attvalue end="5" for="1" start="4" value="5" />
+          <attvalue end="6" for="1" start="5" value="15" />
+          <attvalue end="7" for="1" start="6" value="52" />
+        </attvalues>
+      </node>
+      <node end="7" id="48053456a362545623eee912c9e276b0" label="4805345" start="4">
+        <viz:position x="0.35729074" y="-0.6742957" z="0" />
+        <attvalues>
+          <attvalue for="0" value="The week in patriarchy: International Women's Day was a rare bright spot" />
+          <attvalue end="5" for="1" start="4" value="18" />
+          <attvalue end="6" for="1" start="5" value="32" />
+          <attvalue end="7" for="1" start="6" value="7" />
+        </attvalues>
+      </node>
+      <node end="7" id="4427f94b013aa81df238c9b6ea975432" label="4427f94" start="3">
+        <viz:position x="1.3385943" y="0.6959472" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Facebook's stance on sexualised images of children is hypocritical" />
+          <attvalue end="4" for="1" start="3" value="51" />
+          <attvalue end="5" for="1" start="4" value="28" />
+          <attvalue end="6" for="1" start="5" value="19" />
+          <attvalue end="7" for="1" start="6" value="58" />
+        </attvalues>
+      </node>
+      <node end="7" id="441f2cc9966a933ec47ed535345f7832" label="441f2cc" start="6">
+        <viz:position x="0.4103292" y="-0.08894052" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Kong climbs to top of the box office as Logan claws way to second place" />
+          <attvalue end="7" for="1" start="6" value="34" />
+        </attvalues>
+      </node>
+      <node end="7" id="7c50920df28e4da39bc989010987ce6a" label="7c50920" start="6">
+        <viz:position x="0.356006" y="-0.86845887" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Emma Watson: feminist to the core or a carefully polished brand?" />
+          <attvalue end="7" for="1" start="6" value="33" />
+        </attvalues>
+      </node>
+      <node end="7" id="d004d468d6476bab2f410a8f0616e909" label="d004d46" start="2">
+        <viz:position x="0.59170914" y="-1.5067574" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Don't let feminism get hijacked for racist ends" />
+          <attvalue end="3" for="1" start="2" value="32" />
+          <attvalue end="4" for="1" start="3" value="44" />
+          <attvalue end="5" for="1" start="4" value="18" />
+          <attvalue end="6" for="1" start="5" value="32" />
+          <attvalue end="7" for="1" start="6" value="9" />
+        </attvalues>
+      </node>
+      <node end="7" id="82304962dbaa0b455349017c1e93940d" label="8230496" start="3">
+        <viz:position x="2.2531312" y="0.36150467" z="0" />
+        <attvalues>
+          <attvalue for="0" value="UK's ‘chaotic system’ leaving refugees homeless, says charity" />
+          <attvalue end="4" for="1" start="3" value="4" />
+          <attvalue end="5" for="1" start="4" value="38" />
+          <attvalue end="6" for="1" start="5" value="22" />
+          <attvalue end="7" for="1" start="6" value="14" />
+        </attvalues>
+      </node>
+      <node end="7" id="c1df450535c98ffb61b1af84c04a39ce" label="c1df450" start="3">
+        <viz:position x="1.5158484" y="0.69767267" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Six Nations: Upbeat Ireland refuse to let roof lower expectations" />
+          <attvalue end="4" for="1" start="3" value="41" />
+          <attvalue end="5" for="1" start="4" value="5" />
+          <attvalue end="6" for="1" start="5" value="14" />
+          <attvalue end="7" for="1" start="6" value="53" />
+        </attvalues>
+      </node>
+      <node end="7" id="23769f1fdaef26f66ce6f1a2610280d1" label="23769f1" start="0">
+        <viz:position x="2.4336445" y="-0.33630452" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Housing is a women's issue: the facts" />
+          <attvalue end="1" for="1" start="0" value="3" />
+          <attvalue end="2" for="1" start="1" value="15" />
+          <attvalue end="3" for="1" start="2" value="31" />
+          <attvalue end="4" for="1" start="3" value="21" />
+          <attvalue end="5" for="1" start="4" value="16" />
+          <attvalue end="6" for="1" start="5" value="19" />
+          <attvalue end="7" for="1" start="6" value="19" />
+        </attvalues>
+      </node>
+      <node end="7" id="6f304b2fb682a0775af89a72378ca18a" label="6f304b2" start="2">
+        <viz:position x="1.1835948" y="0.6066593" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Wales and Ireland unchanged as Rob Howley keeps faith with George North" />
+          <attvalue end="3" for="1" start="2" value="21" />
+          <attvalue end="4" for="1" start="3" value="42" />
+          <attvalue end="5" for="1" start="4" value="6" />
+          <attvalue end="6" for="1" start="5" value="16" />
+          <attvalue end="7" for="1" start="6" value="53" />
+        </attvalues>
+      </node>
+      <node end="7" id="3b2479f054cffa01575150cb697d7825" label="3b2479f" start="4">
+        <viz:position x="2.2644906" y="-0.061768416" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Brexit diaries: 'We should take care of our own'" />
+          <attvalue end="5" for="1" start="4" value="3" />
+          <attvalue end="6" for="1" start="5" value="37" />
+          <attvalue end="7" for="1" start="6" value="44" />
+        </attvalues>
+      </node>
+      <node end="7" id="60a625658c889b163d904a053e5674af" label="60a6256" start="0">
+        <viz:position x="-0.35913426" y="-0.2853551" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Climate change impact on Australia may be irreversible, five-yearly report says" />
+          <attvalue end="1" for="1" start="0" value="1" />
+          <attvalue end="2" for="1" start="1" value="12" />
+          <attvalue end="3" for="1" start="2" value="24" />
+          <attvalue end="4" for="1" start="3" value="34" />
+          <attvalue end="5" for="1" start="4" value="58" />
+          <attvalue end="6" for="1" start="5" value="36" />
+          <attvalue end="7" for="1" start="6" value="68" />
+        </attvalues>
+      </node>
+      <node end="7" id="2612c62cc449161cd71343f8fe47c8d7" label="2612c62" start="6">
+        <viz:position x="2.3713446" y="0.21921535" z="0" />
+        <attvalues>
+          <attvalue for="0" value="UK sending Syrians back to countries where they were beaten and abused" />
+          <attvalue end="7" for="1" start="6" value="30" />
+        </attvalues>
+      </node>
+      <node end="7" id="984d7feb63cbb1ae6c5a74122c2c3249" label="984d7fe" start="3">
+        <viz:position x="1.302404" y="-0.7614406" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Republican healthcare plan battered by left and right: 'Dumpster fire of a bill'" />
+          <attvalue end="4" for="1" start="3" value="41" />
+          <attvalue end="5" for="1" start="4" value="47" />
+          <attvalue end="6" for="1" start="5" value="38" />
+          <attvalue end="7" for="1" start="6" value="42" />
+        </attvalues>
+      </node>
+      <node end="7" id="86f24ca3b44d39e80333b626bf2d1590" label="86f24ca" start="2">
+        <viz:position x="1.3497238" y="0.47332007" z="0" />
+        <attvalues>
+          <attvalue for="0" value="How are you marking International Women's Day?" />
+          <attvalue end="3" for="1" start="2" value="29" />
+          <attvalue end="4" for="1" start="3" value="43" />
+          <attvalue end="5" for="1" start="4" value="20" />
+          <attvalue end="6" for="1" start="5" value="31" />
+          <attvalue end="7" for="1" start="6" value="8" />
+        </attvalues>
+      </node>
+      <node end="7" id="51d0038c15ca6082de76bf36e837f103" label="51d0038" start="2">
+        <viz:position x="0.99607086" y="-0.05666335" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Climate Institute to shut down, citing lack of funds for independent research" />
+          <attvalue end="3" for="1" start="2" value="23" />
+          <attvalue end="4" for="1" start="3" value="34" />
+          <attvalue end="5" for="1" start="4" value="51" />
+          <attvalue end="6" for="1" start="5" value="35" />
+          <attvalue end="7" for="1" start="6" value="46" />
+        </attvalues>
+      </node>
+      <node end="7" id="aa7263618fc08552f65a8c478dbc5a02" label="aa72636" start="0">
+        <viz:position x="0.29163575" y="-0.17147568" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Emma Watson on Vanity Fair cover: 'Feminism is about giving women choice'" />
+          <attvalue end="1" for="1" start="0" value="2" />
+          <attvalue end="2" for="1" start="1" value="25" />
+          <attvalue end="3" for="1" start="2" value="0" />
+          <attvalue end="4" for="1" start="3" value="44" />
+          <attvalue end="5" for="1" start="4" value="22" />
+          <attvalue end="6" for="1" start="5" value="34" />
+          <attvalue end="7" for="1" start="6" value="32" />
+        </attvalues>
+      </node>
+      <node end="7" id="6f03a77d38d8d7ee57515fcab7c93adf" label="6f03a77" start="2">
+        <viz:position x="-0.22061953" y="-1.199993" z="0" />
+        <attvalues>
+          <attvalue for="0" value="China warns Trump he is facing a 'head-on collision' with North Korea" />
+          <attvalue end="3" for="1" start="2" value="5" />
+          <attvalue end="4" for="1" start="3" value="48" />
+          <attvalue end="5" for="1" start="4" value="34" />
+          <attvalue end="6" for="1" start="5" value="55" />
+          <attvalue end="7" for="1" start="6" value="21" />
+        </attvalues>
+      </node>
+      <node end="7" id="98685c46413bc54159ff5dc3cd8f75a2" label="98685c4" start="0">
+        <viz:position x="0.8853493" y="0.8595016" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Twelve people treated for possible chemical weapons exposure in Iraq" />
+          <attvalue end="1" for="1" start="0" value="4" />
+          <attvalue end="2" for="1" start="1" value="19" />
+          <attvalue end="3" for="1" start="2" value="9" />
+          <attvalue end="4" for="1" start="3" value="47" />
+          <attvalue end="5" for="1" start="4" value="43" />
+          <attvalue end="6" for="1" start="5" value="44" />
+          <attvalue end="7" for="1" start="6" value="68" />
+        </attvalues>
+      </node>
+      <node end="7" id="741c050e15883b30bf623bc17b028dc8" label="741c050" start="3">
+        <viz:position x="0.2100664" y="-0.02415567" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Neymar stands apart to make the impossible possible for Barcelona" />
+          <attvalue end="4" for="1" start="3" value="55" />
+          <attvalue end="5" for="1" start="4" value="10" />
+          <attvalue end="6" for="1" start="5" value="49" />
+          <attvalue end="7" for="1" start="6" value="36" />
+        </attvalues>
+      </node>
+      <node end="7" id="0275485d260763b962edf0676b805d0b" label="0275485" start="2">
+        <viz:position x="0.105028294" y="-0.053812467" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Barcelona 6-1 PSG (Agg: 6-5): Champions League last 16, second leg – as it happened" />
+          <attvalue end="3" for="1" start="2" value="13" />
+          <attvalue end="4" for="1" start="3" value="49" />
+          <attvalue end="5" for="1" start="4" value="9" />
+          <attvalue end="6" for="1" start="5" value="48" />
+          <attvalue end="7" for="1" start="6" value="37" />
+        </attvalues>
+      </node>
+      <node end="7" id="3170e4029c8a2eec91b7b2b8092f4d30" label="3170e40" start="6">
+        <viz:position x="0.61614895" y="1.1608822" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Turkish PM threatens sanctions against Dutch over minister's expulsion" />
+          <attvalue end="7" for="1" start="6" value="26" />
+        </attvalues>
+      </node>
+      <node end="7" id="d729e59c1629464280b0d0bcd74a69c9" label="d729e59" start="3">
+        <viz:position x="-0.2913758" y="-1.1411241" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Ex-Trump adviser says phone may have been tapped, without offering evidence" />
+          <attvalue end="4" for="1" start="3" value="37" />
+          <attvalue end="5" for="1" start="4" value="11" />
+          <attvalue end="6" for="1" start="5" value="26" />
+          <attvalue end="7" for="1" start="6" value="60" />
+        </attvalues>
+      </node>
+      <node end="7" id="1ac55223495774a1d353ebbf7416dd2e" label="1ac5522" start="3">
+        <viz:position x="1.5267711" y="-0.2193756" z="0" />
+        <attvalues>
+          <attvalue for="0" value="International Women's Day 2017: protests, activism and a strike – as it happened" />
+          <attvalue end="4" for="1" start="3" value="44" />
+          <attvalue end="5" for="1" start="4" value="29" />
+          <attvalue end="6" for="1" start="5" value="22" />
+          <attvalue end="7" for="1" start="6" value="15" />
+        </attvalues>
+      </node>
+      <node end="7" id="d62f0f4dd93e88c519f87bb5b53acfb2" label="d62f0f4" start="5">
+        <viz:position x="2.4185135" y="0.3878172" z="0" />
+        <attvalues>
+          <attvalue for="0" value="England beat Scotland 61-21 to retain Six Nations – as it happened" />
+          <attvalue end="6" for="1" start="5" value="30" />
+          <attvalue end="7" for="1" start="6" value="55" />
+        </attvalues>
+      </node>
+      <node end="7" id="c67d9f318663ca177946ef050d2fa39a" label="c67d9f3" start="0">
+        <viz:position x="0.017439919" y="0.028801542" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Trump travel ban: new order targeting six Muslim-majority countries signed" />
+          <attvalue end="1" for="1" start="0" value="8" />
+          <attvalue end="2" for="1" start="1" value="7" />
+          <attvalue end="3" for="1" start="2" value="20" />
+          <attvalue end="4" for="1" start="3" value="30" />
+          <attvalue end="5" for="1" start="4" value="24" />
+          <attvalue end="6" for="1" start="5" value="28" />
+          <attvalue end="7" for="1" start="6" value="25" />
+        </attvalues>
+      </node>
+      <node end="7" id="0ad172bdfe122c471c134e23bafbf6c1" label="0ad172b" start="5">
+        <viz:position x="1.8358387" y="-2.318974" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Democrats question Trump 'conflict of interest' with Deutsche Bank investigation" />
+          <attvalue end="6" for="1" start="5" value="28" />
+          <attvalue end="7" for="1" start="6" value="2" />
+        </attvalues>
+      </node>
+      <node end="7" id="bfbe3348da8cea20e01e8287eb681a74" label="bfbe334" start="5">
+        <viz:position x="2.263838" y="0.8830267" z="0" />
+        <attvalues>
+          <attvalue for="0" value="George North’s two tries drive Wales past Ireland in thundering win" />
+          <attvalue end="6" for="1" start="5" value="15" />
+          <attvalue end="7" for="1" start="6" value="53" />
+        </attvalues>
+      </node>
+      <node end="7" id="e2820c521c1c82d52e5aa9e627409853" label="e2820c5" start="2">
+        <viz:position x="0.28954476" y="-0.48700437" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Don’t be complacent about the risk of President Le Pen" />
+          <attvalue end="3" for="1" start="2" value="12" />
+          <attvalue end="4" for="1" start="3" value="17" />
+          <attvalue end="5" for="1" start="4" value="34" />
+          <attvalue end="6" for="1" start="5" value="5" />
+          <attvalue end="7" for="1" start="6" value="5" />
+        </attvalues>
+      </node>
+      <node end="7" id="e780c3aad546ac0beb08b1b2d5b4d59d" label="e780c3a" start="4">
+        <viz:position x="0.8314374" y="-0.50596493" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Park Geun-hye: South Korean court removes president over scandal" />
+          <attvalue end="5" for="1" start="4" value="20" />
+          <attvalue end="6" for="1" start="5" value="44" />
+          <attvalue end="7" for="1" start="6" value="15" />
+        </attvalues>
+      </node>
+      <node end="7" id="26e08c0a3976e085e51362f75101a945" label="26e08c0" start="3">
+        <viz:position x="1.0897635" y="1.0841752" z="0" />
+        <attvalues>
+          <attvalue for="0" value="What the All Blacks will have learned about Lions from this Six Nations so far" />
+          <attvalue end="4" for="1" start="3" value="42" />
+          <attvalue end="5" for="1" start="4" value="6" />
+          <attvalue end="6" for="1" start="5" value="15" />
+          <attvalue end="7" for="1" start="6" value="52" />
+        </attvalues>
+      </node>
+      <node end="7" id="c82fb78fd12c5eba170a651feac87478" label="c82fb78" start="3">
+        <viz:position x="1.4508246" y="0.17739777" z="0" />
+        <attvalues>
+          <attvalue for="0" value="UN says Trump's revised travel ban will worsen plight of refugees" />
+          <attvalue end="4" for="1" start="3" value="34" />
+          <attvalue end="5" for="1" start="4" value="22" />
+          <attvalue end="6" for="1" start="5" value="30" />
+          <attvalue end="7" for="1" start="6" value="25" />
+        </attvalues>
+      </node>
+      <node end="7" id="51bc644a64013bf25ed0610e16f3d892" label="51bc644" start="6">
+        <viz:position x="2.1038969" y="0.90316284" z="0" />
+        <attvalues>
+          <attvalue for="0" value="François Fillon offers modicum of contrition in defiant rally address" />
+          <attvalue end="7" for="1" start="6" value="0" />
+        </attvalues>
+      </node>
+      <node end="7" id="4fb26c18e5ca5541425bda5b1dbbf771" label="4fb26c1" start="2">
+        <viz:position x="1.206962" y="-1.1802267" z="0" />
+        <attvalues>
+          <attvalue for="0" value="US businesses warn the UK over loss of access to EU single market" />
+          <attvalue end="3" for="1" start="2" value="4" />
+          <attvalue end="4" for="1" start="3" value="13" />
+          <attvalue end="5" for="1" start="4" value="44" />
+          <attvalue end="6" for="1" start="5" value="11" />
+          <attvalue end="7" for="1" start="6" value="7" />
+        </attvalues>
+      </node>
+      <node end="7" id="5ae2d2ef8b071a2c4e693bc949650e8b" label="5ae2d2e" start="1">
+        <viz:position x="0.6955215" y="-0.9803072" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Senators seek Rod Rosenstein pledge to name a special prosecutor on Russia ties" />
+          <attvalue end="2" for="1" start="1" value="9" />
+          <attvalue end="3" for="1" start="2" value="5" />
+          <attvalue end="4" for="1" start="3" value="29" />
+          <attvalue end="5" for="1" start="4" value="44" />
+          <attvalue end="6" for="1" start="5" value="31" />
+          <attvalue end="7" for="1" start="6" value="2" />
+        </attvalues>
+      </node>
+      <node end="7" id="f4f16ca6180ec1daf7676033a0dbbf1b" label="f4f16ca" start="5">
+        <viz:position x="2.8545308" y="1.6689631" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Bournemouth 3-2 West Ham, Hull 2-1 Swansea and more: clockwatch – as it happened" />
+          <attvalue end="6" for="1" start="5" value="51" />
+          <attvalue end="7" for="1" start="6" value="24" />
+        </attvalues>
+      </node>
+      <node end="7" id="082e2f2338ea91b4b2572e7979bf87d9" label="082e2f2" start="3">
+        <viz:position x="-0.6181805" y="-1.1449018" z="0" />
+        <attvalues>
+          <attvalue for="0" value="EPA head Scott Pruitt denies that carbon dioxide causes global warming" />
+          <attvalue end="4" for="1" start="3" value="36" />
+          <attvalue end="5" for="1" start="4" value="58" />
+          <attvalue end="6" for="1" start="5" value="34" />
+          <attvalue end="7" for="1" start="6" value="56" />
+        </attvalues>
+      </node>
+      <node end="7" id="34d4312112f965813f95f3e9a06a48d9" label="34d4312" start="4">
+        <viz:position x="-0.604956" y="0.30030432" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Washington state to challenge Trump travel ban as legal opposition mounts" />
+          <attvalue end="5" for="1" start="4" value="24" />
+          <attvalue end="6" for="1" start="5" value="30" />
+          <attvalue end="7" for="1" start="6" value="24" />
+        </attvalues>
+      </node>
+      <node end="7" id="bb85e925b94296cb2248e0ab8ba2df14" label="bb85e92" start="5">
+        <viz:position x="0.059448034" y="-0.121875" z="0" />
+        <attvalues>
+          <attvalue for="0" value="US attorney Preet Bharara fired after refusing Jeff Sessions' order to resign" />
+          <attvalue end="6" for="1" start="5" value="28" />
+          <attvalue end="7" for="1" start="6" value="67" />
+        </attvalues>
+      </node>
+      <node end="7" id="7dd5aa51911cc09d8497a1a05f0df807" label="7dd5aa5" start="2">
+        <viz:position x="1.0895352" y="-0.6297425" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Strike for women’s rights – sexual, racial and economic justice are at stake" />
+          <attvalue end="3" for="1" start="2" value="33" />
+          <attvalue end="4" for="1" start="3" value="44" />
+          <attvalue end="5" for="1" start="4" value="29" />
+          <attvalue end="6" for="1" start="5" value="33" />
+          <attvalue end="7" for="1" start="6" value="15" />
+        </attvalues>
+      </node>
+      <node end="7" id="7993bcbd8b1f9358663cdf89b546fe0e" label="7993bcb" start="1">
+        <viz:position x="0.17484136" y="1.5104306" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Bournemouth to appeal against longer ban for Mings in Ibrahimovic incident" />
+          <attvalue end="2" for="1" start="1" value="21" />
+          <attvalue end="3" for="1" start="2" value="17" />
+          <attvalue end="4" for="1" start="3" value="26" />
+          <attvalue end="5" for="1" start="4" value="38" />
+          <attvalue end="6" for="1" start="5" value="32" />
+          <attvalue end="7" for="1" start="6" value="68" />
+        </attvalues>
+      </node>
+      <node end="7" id="7831f63b90b5677f43144977b216a3d6" label="7831f63" start="3">
+        <viz:position x="-0.4013794" y="-0.43708658" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Barcelona 6-1 PSG: the internet reacts to an absurd football game" />
+          <attvalue end="4" for="1" start="3" value="53" />
+          <attvalue end="5" for="1" start="4" value="11" />
+          <attvalue end="6" for="1" start="5" value="48" />
+          <attvalue end="7" for="1" start="6" value="37" />
+        </attvalues>
+      </node>
+      <node end="7" id="d3f1cfb3e265e34e50b4cd1bbcaa9501" label="d3f1cfb" start="0">
+        <viz:position x="-1.0717937" y="-0.58206767" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Every time we take an Uber we’re spreading its social poison" />
+          <attvalue end="1" for="1" start="0" value="5" />
+          <attvalue end="2" for="1" start="1" value="22" />
+          <attvalue end="3" for="1" start="2" value="22" />
+          <attvalue end="4" for="1" start="3" value="23" />
+          <attvalue end="5" for="1" start="4" value="47" />
+          <attvalue end="6" for="1" start="5" value="47" />
+          <attvalue end="7" for="1" start="6" value="57" />
+        </attvalues>
+      </node>
+      <node end="7" id="759e4fe4db87423a0d2269d47473ceb4" label="759e4fe" start="6">
+        <viz:position x="1.455362" y="-0.55511594" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Geert Wilders suspends election campaign over alleged security leak" />
+          <attvalue end="7" for="1" start="6" value="5" />
+        </attvalues>
+      </node>
+      <node end="7" id="376a3b9306e409d99fea51baf35e2f0a" label="376a3b9" start="5">
+        <viz:position x="-0.07272537" y="0.27965146" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Jeff Sessions asks dozens of US attorneys appointed by Obama to resign" />
+          <attvalue end="6" for="1" start="5" value="26" />
+          <attvalue end="7" for="1" start="6" value="68" />
+        </attvalues>
+      </node>
+      <node end="7" id="cfc0b026dc0429b00749287364d0985f" label="cfc0b02" start="0">
+        <viz:position x="3.2461984" y="0.2434192" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Home Office decision to end Dubs scheme 'not backed by evidence'" />
+          <attvalue end="1" for="1" start="0" value="16" />
+          <attvalue end="2" for="1" start="1" value="16" />
+          <attvalue end="3" for="1" start="2" value="31" />
+          <attvalue end="4" for="1" start="3" value="21" />
+          <attvalue end="5" for="1" start="4" value="36" />
+          <attvalue end="6" for="1" start="5" value="28" />
+          <attvalue end="7" for="1" start="6" value="15" />
+        </attvalues>
+      </node>
+      <node end="7" id="9c81a95e831a9744d3d5972b5ef4638b" label="9c81a95" start="1">
+        <viz:position x="0.10940539" y="-1.9839007" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Six surveillance films to make Trump paranoid" />
+          <attvalue end="2" for="1" start="1" value="10" />
+          <attvalue end="3" for="1" start="2" value="17" />
+          <attvalue end="4" for="1" start="3" value="10" />
+          <attvalue end="5" for="1" start="4" value="24" />
+          <attvalue end="6" for="1" start="5" value="39" />
+          <attvalue end="7" for="1" start="6" value="60" />
+        </attvalues>
+      </node>
+      <node end="7" id="536fa46bc7db37002b1f521b64072de4" label="536fa46" start="6">
+        <viz:position x="1.8020898" y="1.1108024" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Will article 50 be triggered on Tuesday – or later in the month?" />
+          <attvalue end="7" for="1" start="6" value="10" />
+        </attvalues>
+      </node>
+      <node end="7" id="22a2ca771ecd62feecfa7ecb004df0a1" label="22a2ca7" start="2">
+        <viz:position x="1.0688592" y="0.72212327" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Kim Jong-nam death: man claiming to be son appears in video" />
+          <attvalue end="3" for="1" start="2" value="1" />
+          <attvalue end="4" for="1" start="3" value="44" />
+          <attvalue end="5" for="1" start="4" value="26" />
+          <attvalue end="6" for="1" start="5" value="37" />
+          <attvalue end="7" for="1" start="6" value="24" />
+        </attvalues>
+      </node>
+      <node end="7" id="00de75f5292bd9f46cfe5eec2f3f15ac" label="00de75f" start="4">
+        <viz:position x="0.9873825" y="1.2129395" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Eddie Jones’s prickliness highlights England’s edginess as Scotland loom" />
+          <attvalue end="5" for="1" start="4" value="5" />
+          <attvalue end="6" for="1" start="5" value="15" />
+          <attvalue end="7" for="1" start="6" value="53" />
+        </attvalues>
+      </node>
+      <node end="7" id="2f86467486ba1cefcdeba3666c7ee0d7" label="2f86467" start="6">
+        <viz:position x="0.21701509" y="1.1851283" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Fillon to discipline party workers over antisemitic caricature of Macron" />
+          <attvalue end="7" for="1" start="6" value="10" />
+        </attvalues>
+      </node>
+      <node end="7" id="b9ff1d8ef0040c97a4d5b15d6f62e332" label="b9ff1d8" start="0">
+        <viz:position x="0.4715479" y="0.4969517" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Malaysia expels North Korea ambassador over Kim Jong-nam killing" />
+          <attvalue end="1" for="1" start="0" value="11" />
+          <attvalue end="2" for="1" start="1" value="27" />
+          <attvalue end="3" for="1" start="2" value="1" />
+          <attvalue end="4" for="1" start="3" value="46" />
+          <attvalue end="5" for="1" start="4" value="27" />
+          <attvalue end="6" for="1" start="5" value="37" />
+          <attvalue end="7" for="1" start="6" value="24" />
+        </attvalues>
+      </node>
+      <node end="7" id="fc18621b597cddf08dd57b022a363369" label="fc18621" start="3">
+        <viz:position x="1.1377004" y="0.944417" z="0" />
+        <attvalues>
+          <attvalue for="0" value="US sends hundreds of marines to Syria to support fight against Isis" />
+          <attvalue end="4" for="1" start="3" value="49" />
+          <attvalue end="5" for="1" start="4" value="36" />
+          <attvalue end="6" for="1" start="5" value="41" />
+          <attvalue end="7" for="1" start="6" value="17" />
+        </attvalues>
+      </node>
+      <node end="7" id="2f78cc77d8ada563a3323792388075b4" label="2f78cc7" start="2">
+        <viz:position x="1.0413363" y="0.32144764" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Michael Heseltine says Brexit is 'man-sized' task for Theresa May" />
+          <attvalue end="3" for="1" start="2" value="29" />
+          <attvalue end="4" for="1" start="3" value="5" />
+          <attvalue end="5" for="1" start="4" value="43" />
+          <attvalue end="6" for="1" start="5" value="33" />
+          <attvalue end="7" for="1" start="6" value="47" />
+        </attvalues>
+      </node>
+      <node end="7" id="c653c20289b042dc30110a7fb24346a7" label="c653c20" start="0">
+        <viz:position x="0.7913198" y="1.2187511" z="0" />
+        <attvalues>
+          <attvalue for="0" value="North Korea fires four missiles into sea near Japan" />
+          <attvalue end="1" for="1" start="0" value="11" />
+          <attvalue end="2" for="1" start="1" value="25" />
+          <attvalue end="3" for="1" start="2" value="10" />
+          <attvalue end="4" for="1" start="3" value="48" />
+          <attvalue end="5" for="1" start="4" value="36" />
+          <attvalue end="6" for="1" start="5" value="59" />
+          <attvalue end="7" for="1" start="6" value="20" />
+        </attvalues>
+      </node>
+      <node end="7" id="bf7a39fa3ec8cd2affdefd1b8f3f210b" label="bf7a39f" start="3">
+        <viz:position x="0.9526248" y="0.7555428" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Obamacare-lite? Republicans' bill to replace Affordable Care Act explained" />
+          <attvalue end="4" for="1" start="3" value="38" />
+          <attvalue end="5" for="1" start="4" value="47" />
+          <attvalue end="6" for="1" start="5" value="40" />
+          <attvalue end="7" for="1" start="6" value="41" />
+        </attvalues>
+      </node>
+      <node end="7" id="aba3489d127bb2af51f6dae272fdddf5" label="aba3489" start="6">
+        <viz:position x="1.2722243" y="-0.1933263" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Republicans scramble to defend healthcare reform despite party divide" />
+          <attvalue end="7" for="1" start="6" value="41" />
+        </attvalues>
+      </node>
+      <node end="7" id="7a79add56ed359a5f8df399e699a960f" label="7a79add" start="3">
+        <viz:position x="0.19530348" y="1.6503596" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Former female marines: Facebook page only the latest instance of sexual abuse" />
+          <attvalue end="4" for="1" start="3" value="40" />
+          <attvalue end="5" for="1" start="4" value="29" />
+          <attvalue end="6" for="1" start="5" value="41" />
+          <attvalue end="7" for="1" start="6" value="27" />
+        </attvalues>
+      </node>
+      <node end="7" id="ae031a0b801a0c94ae1124f4ce7d0516" label="ae031a0" start="1">
+        <viz:position x="1.298963" y="1.0224538" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Brexit briefing: a tale of two bills and a 'bull in a china shop'" />
+          <attvalue end="2" for="1" start="1" value="3" />
+          <attvalue end="3" for="1" start="2" value="3" />
+          <attvalue end="4" for="1" start="3" value="6" />
+          <attvalue end="5" for="1" start="4" value="45" />
+          <attvalue end="6" for="1" start="5" value="9" />
+          <attvalue end="7" for="1" start="6" value="10" />
+        </attvalues>
+      </node>
+      <node end="7" id="e43c32e7a2c90f291af626a7585e6053" label="e43c32e" start="0">
+        <viz:position x="1.635897" y="-0.50130874" z="0" />
+        <attvalues>
+          <attvalue for="0" value="International Women's Day: the women leading local government – video" />
+          <attvalue end="1" for="1" start="0" value="2" />
+          <attvalue end="2" for="1" start="1" value="14" />
+          <attvalue end="3" for="1" start="2" value="29" />
+          <attvalue end="4" for="1" start="3" value="29" />
+          <attvalue end="5" for="1" start="4" value="17" />
+          <attvalue end="6" for="1" start="5" value="19" />
+          <attvalue end="7" for="1" start="6" value="16" />
+        </attvalues>
+      </node>
+      <node end="7" id="25bceca188e01ab2acc06805280b9a34" label="25bceca" start="6">
+        <viz:position x="2.9527512" y="-0.2694781" z="0" />
+        <attvalues>
+          <attvalue for="0" value="MPs slam Theresa May over lack of a plan if Brexit talks collapse" />
+          <attvalue end="7" for="1" start="6" value="7" />
+        </attvalues>
+      </node>
+      <node end="7" id="f3e258fe6804a53a5525a11b91324258" label="f3e258f" start="3">
+        <viz:position x="1.8279319" y="-0.19825101" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Arsène Wenger confident he can win back faith of Arsenal fans" />
+          <attvalue end="4" for="1" start="3" value="55" />
+          <attvalue end="5" for="1" start="4" value="9" />
+          <attvalue end="6" for="1" start="5" value="51" />
+          <attvalue end="7" for="1" start="6" value="36" />
+        </attvalues>
+      </node>
+      <node end="7" id="bb047d8c61765f5083c6c47170e11bc0" label="bb047d8" start="2">
+        <viz:position x="0.8405066" y="0.47900352" z="0" />
+        <attvalues>
+          <attvalue for="0" value="François Fillon faces fresh allegation over undeclared €50,000 loan" />
+          <attvalue end="3" for="1" start="2" value="15" />
+          <attvalue end="4" for="1" start="3" value="15" />
+          <attvalue end="5" for="1" start="4" value="32" />
+          <attvalue end="6" for="1" start="5" value="39" />
+          <attvalue end="7" for="1" start="6" value="5" />
+        </attvalues>
+      </node>
+      <node end="7" id="16689ab2383987ab3f6e10b40a06282f" label="16689ab" start="5">
+        <viz:position x="1.7902648" y="-0.24372548" z="0" />
+        <attvalues>
+          <attvalue for="0" value="UK will rejoin the EU one day, suggests Jean-Claude Juncker" />
+          <attvalue end="6" for="1" start="5" value="12" />
+          <attvalue end="7" for="1" start="6" value="46" />
+        </attvalues>
+      </node>
+      <node end="7" id="145d4a47662eaf6c7de07016f8ed7e30" label="145d4a4" start="1">
+        <viz:position x="1.825781" y="-0.110659264" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Despite her assurances, Theresa May doesn’t care about EU-based expats" />
+          <attvalue end="2" for="1" start="1" value="3" />
+          <attvalue end="3" for="1" start="2" value="29" />
+          <attvalue end="4" for="1" start="3" value="7" />
+          <attvalue end="5" for="1" start="4" value="24" />
+          <attvalue end="6" for="1" start="5" value="12" />
+          <attvalue end="7" for="1" start="6" value="9" />
+        </attvalues>
+      </node>
+      <node end="7" id="b6c1b5d5fa24c748417e153c0476e02d" label="b6c1b5d" start="2">
+        <viz:position x="0.2181482" y="-2.3337681" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Finance sector could face climate-risk testing, says Australian watchdog" />
+          <attvalue end="3" for="1" start="2" value="23" />
+          <attvalue end="4" for="1" start="3" value="34" />
+          <attvalue end="5" for="1" start="4" value="58" />
+          <attvalue end="6" for="1" start="5" value="35" />
+          <attvalue end="7" for="1" start="6" value="44" />
+        </attvalues>
+      </node>
+      <node end="7" id="9dcb2490b16e1fac62abd25fd6a93a5b" label="9dcb249" start="2">
+        <viz:position x="0.94118077" y="-0.42247704" z="0" />
+        <attvalues>
+          <attvalue for="0" value="I went to jail for handing out feminist stickers in China" />
+          <attvalue end="3" for="1" start="2" value="1" />
+          <attvalue end="4" for="1" start="3" value="26" />
+          <attvalue end="5" for="1" start="4" value="18" />
+          <attvalue end="6" for="1" start="5" value="0" />
+          <attvalue end="7" for="1" start="6" value="7" />
+        </attvalues>
+      </node>
+      <node end="7" id="78991c56049152547501d4e62eb3099f" label="78991c5" start="2">
+        <viz:position x="0.3457363" y="-1.0819414" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Why are Americans having less sex? Blame eggplant emojis – or Paul Ryan" />
+          <attvalue end="3" for="1" start="2" value="21" />
+          <attvalue end="4" for="1" start="3" value="46" />
+          <attvalue end="5" for="1" start="4" value="8" />
+          <attvalue end="6" for="1" start="5" value="48" />
+          <attvalue end="7" for="1" start="6" value="8" />
+        </attvalues>
+      </node>
+      <node end="7" id="decbfffa2722a515149f23d9cde6e2e6" label="decbfff" start="3">
+        <viz:position x="1.524111" y="-0.023396334" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Austria threatens EU funding cuts over Hungary's hard line on refugees" />
+          <attvalue end="4" for="1" start="3" value="19" />
+          <attvalue end="5" for="1" start="4" value="32" />
+          <attvalue end="6" for="1" start="5" value="5" />
+          <attvalue end="7" for="1" start="6" value="28" />
+        </attvalues>
+      </node>
+      <node end="7" id="f93070ed9530dd066f5b06471af0f88d" label="f93070e" start="3">
+        <viz:position x="1.912653" y="1.1125724" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Who will blink first, Theresa May or Nicola Sturgeon?" />
+          <attvalue end="4" for="1" start="3" value="4" />
+          <attvalue end="5" for="1" start="4" value="23" />
+          <attvalue end="6" for="1" start="5" value="59" />
+          <attvalue end="7" for="1" start="6" value="49" />
+        </attvalues>
+      </node>
+      <node end="7" id="aee687db429b75210756b9e8fcb786fe" label="aee687d" start="1">
+        <viz:position x="1.0329609" y="-0.0013210197" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Who does Trump think he's helping with the travel ban? It sure isn't Americans" />
+          <attvalue end="2" for="1" start="1" value="8" />
+          <attvalue end="3" for="1" start="2" value="19" />
+          <attvalue end="4" for="1" start="3" value="31" />
+          <attvalue end="5" for="1" start="4" value="24" />
+          <attvalue end="6" for="1" start="5" value="26" />
+          <attvalue end="7" for="1" start="6" value="25" />
+        </attvalues>
+      </node>
+      <node end="7" id="56eac16d5d79ac8d8aefa1e13db594e8" label="56eac16" start="1">
+        <viz:position x="5.4471674" y="-0.0062753726" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Government defeats attempt to restart Dubs scheme" />
+          <attvalue end="2" for="1" start="1" value="17" />
+          <attvalue end="3" for="1" start="2" value="30" />
+          <attvalue end="4" for="1" start="3" value="21" />
+          <attvalue end="5" for="1" start="4" value="37" />
+          <attvalue end="6" for="1" start="5" value="26" />
+          <attvalue end="7" for="1" start="6" value="15" />
+        </attvalues>
+      </node>
+      <node end="7" id="79ae4fa6c097273945fd0298c11123d2" label="79ae4fa" start="1">
+        <viz:position x="0.47115183" y="1.1441514" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Zlatan Ibrahimovic and Tyrone Mings charged with violent conduct by FA" />
+          <attvalue end="2" for="1" start="1" value="20" />
+          <attvalue end="3" for="1" start="2" value="16" />
+          <attvalue end="4" for="1" start="3" value="24" />
+          <attvalue end="5" for="1" start="4" value="38" />
+          <attvalue end="6" for="1" start="5" value="32" />
+          <attvalue end="7" for="1" start="6" value="30" />
+        </attvalues>
+      </node>
+      <node end="7" id="bcb49a1fa629508189a9bdc4c2509f31" label="bcb49a1" start="3">
+        <viz:position x="4.2903285" y="-0.14119753" z="0" />
+        <attvalues>
+          <attvalue for="0" value="How you can help refugees and asylum seekers in Britain" />
+          <attvalue end="4" for="1" start="3" value="3" />
+          <attvalue end="5" for="1" start="4" value="38" />
+          <attvalue end="6" for="1" start="5" value="23" />
+          <attvalue end="7" for="1" start="6" value="13" />
+        </attvalues>
+      </node>
+      <node end="7" id="5412a936fa76ca73c60b5dc162e6b55d" label="5412a93" start="1">
+        <viz:position x="0.66476715" y="-0.1772841" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Obamacare repeal: tell us what you can't afford to lose from your health coverage" />
+          <attvalue end="2" for="1" start="1" value="22" />
+          <attvalue end="3" for="1" start="2" value="35" />
+          <attvalue end="4" for="1" start="3" value="41" />
+          <attvalue end="5" for="1" start="4" value="47" />
+          <attvalue end="6" for="1" start="5" value="38" />
+          <attvalue end="7" for="1" start="6" value="10" />
+        </attvalues>
+      </node>
+      <node end="7" id="b15f9f41f06550967669c475f916e0c2" label="b15f9f4" start="4">
+        <viz:position x="0.09276762" y="-0.008213745" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Fukushima disaster evacuees told to return to abandoned homes" />
+          <attvalue end="5" for="1" start="4" value="45" />
+          <attvalue end="6" for="1" start="5" value="22" />
+          <attvalue end="7" for="1" start="6" value="31" />
+        </attvalues>
+      </node>
+      <node end="7" id="507a5c541b8b86afe8c4fd7e0a7b9bde" label="507a5c5" start="2">
+        <viz:position x="0.9445978" y="-0.17138997" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Why not all women can strike on International Women's Day" />
+          <attvalue end="3" for="1" start="2" value="32" />
+          <attvalue end="4" for="1" start="3" value="44" />
+          <attvalue end="5" for="1" start="4" value="18" />
+          <attvalue end="6" for="1" start="5" value="32" />
+          <attvalue end="7" for="1" start="6" value="17" />
+        </attvalues>
+      </node>
+      <node end="7" id="efe09ab6337b73494d2e641e8b10c9a8" label="efe09ab" start="6">
+        <viz:position x="-0.9092923" y="-1.1310424" z="0" />
+        <attvalues>
+          <attvalue for="0" value="John Surtees obituary" />
+          <attvalue end="7" for="1" start="6" value="36" />
+        </attvalues>
+      </node>
+      <node end="7" id="96a6a430434a16af95627db44d685fb7" label="96a6a43" start="4">
+        <viz:position x="1.0412718" y="0.5798374" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Arsène Wenger has been living on borrowed time at Arsenal for too long" />
+          <attvalue end="5" for="1" start="4" value="8" />
+          <attvalue end="6" for="1" start="5" value="50" />
+          <attvalue end="7" for="1" start="6" value="37" />
+        </attvalues>
+      </node>
+      <node end="7" id="e285e24848db59410019f92d3b40d214" label="e285e24" start="5">
+        <viz:position x="0.51025546" y="-0.112886585" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Johanna Konta beats team-mate Heather Watson at Indian Wells" />
+          <attvalue end="6" for="1" start="5" value="36" />
+          <attvalue end="7" for="1" start="6" value="55" />
+        </attvalues>
+      </node>
+      <node end="7" id="5df31c7dd5f424fa55f485ca0f7c1dff" label="5df31c7" start="1">
+        <viz:position x="0.09507772" y="0.3339419" z="0" />
+        <attvalues>
+          <attvalue for="0" value="How do you solve a problem like North Korea?" />
+          <attvalue end="2" for="1" start="1" value="25" />
+          <attvalue end="3" for="1" start="2" value="6" />
+          <attvalue end="4" for="1" start="3" value="47" />
+          <attvalue end="5" for="1" start="4" value="33" />
+          <attvalue end="6" for="1" start="5" value="54" />
+          <attvalue end="7" for="1" start="6" value="22" />
+        </attvalues>
+      </node>
+      <node end="7" id="cbd54f7bfd14e8f72f3123c3a9336f1a" label="cbd54f7" start="3">
+        <viz:position x="1.1396179" y="-0.3959148" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Emmanuel Macron leads in French presidential election poll for first time" />
+          <attvalue end="4" for="1" start="3" value="16" />
+          <attvalue end="5" for="1" start="4" value="33" />
+          <attvalue end="6" for="1" start="5" value="38" />
+          <attvalue end="7" for="1" start="6" value="11" />
+        </attvalues>
+      </node>
+      <node end="7" id="e1e76c46a80ebbb62e84a32c441431e4" label="e1e76c4" start="4">
+        <viz:position x="1.2858472" y="-1.0721236" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Park Geun-hye impeachment: what next for South Korea?" />
+          <attvalue end="5" for="1" start="4" value="18" />
+          <attvalue end="6" for="1" start="5" value="46" />
+          <attvalue end="7" for="1" start="6" value="16" />
+        </attvalues>
+      </node>
+      <node end="7" id="96af10001fa205e4f2c74b2e53a15678" label="96af100" start="1">
+        <viz:position x="1.5856395" y="0.030034037" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Iraqi forces seize key Mosul sites from Isis" />
+          <attvalue end="2" for="1" start="1" value="19" />
+          <attvalue end="3" for="1" start="2" value="6" />
+          <attvalue end="4" for="1" start="3" value="45" />
+          <attvalue end="5" for="1" start="4" value="43" />
+          <attvalue end="6" for="1" start="5" value="44" />
+          <attvalue end="7" for="1" start="6" value="17" />
+        </attvalues>
+      </node>
+      <node end="7" id="0a68577d105855dd5c28ce1f4787be37" label="0a68577" start="2">
+        <viz:position x="-0.84592384" y="0.060121384" z="0" />
+        <attvalues>
+          <attvalue for="0" value="French regulator tells Saint Laurent to remove degrading posters" />
+          <attvalue end="3" for="1" start="2" value="36" />
+          <attvalue end="4" for="1" start="3" value="24" />
+          <attvalue end="5" for="1" start="4" value="51" />
+          <attvalue end="6" for="1" start="5" value="49" />
+          <attvalue end="7" for="1" start="6" value="28" />
+        </attvalues>
+      </node>
+      <node end="7" id="4d09c9afc467d43cfd0bafc69ab97d31" label="4d09c9a" start="5">
+        <viz:position x="1.1605043" y="0.68044746" z="0" />
+        <attvalues>
+          <attvalue for="0" value="England to make 11th-hour call on Owen Farrell’s fitness to face Scotland" />
+          <attvalue end="6" for="1" start="5" value="16" />
+          <attvalue end="7" for="1" start="6" value="53" />
+        </attvalues>
+      </node>
+      <node end="7" id="8ca15ba2b7b908f6bea1a09098d462c2" label="8ca15ba" start="2">
+        <viz:position x="0.8639347" y="-0.8238225" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Can Geert Wilders be more than the Netherlands' agitator-in-chief?" />
+          <attvalue end="3" for="1" start="2" value="13" />
+          <attvalue end="4" for="1" start="3" value="18" />
+          <attvalue end="5" for="1" start="4" value="32" />
+          <attvalue end="6" for="1" start="5" value="6" />
+          <attvalue end="7" for="1" start="6" value="6" />
+        </attvalues>
+      </node>
+      <node end="7" id="754ae9d4f9f8528c6374f9befd0a54ac" label="754ae9d" start="3">
+        <viz:position x="0.9352157" y="-0.4560819" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Healthcare hearing: Democrats try to stall bill as Ted Cruz voices pessimism" />
+          <attvalue end="4" for="1" start="3" value="40" />
+          <attvalue end="5" for="1" start="4" value="46" />
+          <attvalue end="6" for="1" start="5" value="39" />
+          <attvalue end="7" for="1" start="6" value="41" />
+        </attvalues>
+      </node>
+      <node end="7" id="64b978effa2e3398a108ac86605b3120" label="64b978e" start="6">
+        <viz:position x="1.9756701" y="0.23198177" z="0" />
+        <attvalues>
+          <attvalue for="0" value="No-deal Brexit 'would put UK in worst trading position of rich nations'" />
+          <attvalue end="7" for="1" start="6" value="6" />
+        </attvalues>
+      </node>
+      <node end="7" id="ff36bbfbbc14ba9801402fc05409cb80" label="ff36bbf" start="3">
+        <viz:position x="-0.4827065" y="-0.40224087" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Dan Stevens goes into fourth-wave feminist Beast mode" />
+          <attvalue end="4" for="1" start="3" value="45" />
+          <attvalue end="5" for="1" start="4" value="18" />
+          <attvalue end="6" for="1" start="5" value="33" />
+          <attvalue end="7" for="1" start="6" value="33" />
+        </attvalues>
+      </node>
+      <node end="7" id="7b8cbf417bbe446c7f81fa3f86e6c791" label="7b8cbf4" start="4">
+        <viz:position x="-0.116284765" y="0.54544944" z="0" />
+        <attvalues>
+          <attvalue for="0" value="How many Snapchat clones does it take for Facebook to lose its self-respect?" />
+          <attvalue end="5" for="1" start="4" value="16" />
+          <attvalue end="6" for="1" start="5" value="46" />
+          <attvalue end="7" for="1" start="6" value="32" />
+        </attvalues>
+      </node>
+      <node end="7" id="1cd6949021aad10307ecef481bf63078" label="1cd6949" start="3">
+        <viz:position x="1.0311061" y="0.8187316" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Owen Farrell set to face Scotland in Six Nations despite injury scare" />
+          <attvalue end="4" for="1" start="3" value="41" />
+          <attvalue end="5" for="1" start="4" value="3" />
+          <attvalue end="6" for="1" start="5" value="16" />
+          <attvalue end="7" for="1" start="6" value="54" />
+        </attvalues>
+      </node>
+      <node end="7" id="e6282baac8e9ca5e1300270fcb4b3abe" label="e6282ba" start="6">
+        <viz:position x="2.2574694" y="0.35232243" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Labour MPs demand Corbyn backs fight to stay in single market" />
+          <attvalue end="7" for="1" start="6" value="7" />
+        </attvalues>
+      </node>
+      <node end="7" id="c00187185d23e20944ad3ea518d5364f" label="c001871" start="2">
+        <viz:position x="1.0970013" y="0.13660608" z="0" />
+        <attvalues>
+          <attvalue for="0" value="The Guardian view on Michael Heseltine: he was right to rebel" />
+          <attvalue end="3" for="1" start="2" value="37" />
+          <attvalue end="4" for="1" start="3" value="6" />
+          <attvalue end="5" for="1" start="4" value="22" />
+          <attvalue end="6" for="1" start="5" value="55" />
+          <attvalue end="7" for="1" start="6" value="49" />
+        </attvalues>
+      </node>
+      <node end="7" id="0fb0f722a94b28a7edbd0fbf715a07c3" label="0fb0f72" start="0">
+        <viz:position x="-0.25971726" y="0.9025852" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Nintendo tells Switch users dead pixels are their problem" />
+          <attvalue end="1" for="1" start="0" value="8" />
+          <attvalue end="2" for="1" start="1" value="22" />
+          <attvalue end="3" for="1" start="2" value="15" />
+          <attvalue end="4" for="1" start="3" value="10" />
+          <attvalue end="5" for="1" start="4" value="18" />
+          <attvalue end="6" for="1" start="5" value="47" />
+          <attvalue end="7" for="1" start="6" value="32" />
+        </attvalues>
+      </node>
+      <node end="7" id="d2289ef2ee3ebfe367f869ad4bf62fb5" label="d2289ef" start="5">
+        <viz:position x="-0.27745566" y="-0.9795964" z="0" />
+        <attvalues>
+          <attvalue for="0" value="John Surtees, former F1 and motorcycle world champion, dies aged 83" />
+          <attvalue end="6" for="1" start="5" value="2" />
+          <attvalue end="7" for="1" start="6" value="35" />
+        </attvalues>
+      </node>
+      <node end="7" id="7d132b6704313396cd7f177bae727f7b" label="7d132b6" start="3">
+        <viz:position x="-1.6310036" y="-0.78315216" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Dark horses of Red Bull can turn F1 season into a much-needed thriller" />
+          <attvalue end="4" for="1" start="3" value="54" />
+          <attvalue end="5" for="1" start="4" value="5" />
+          <attvalue end="6" for="1" start="5" value="2" />
+          <attvalue end="7" for="1" start="6" value="39" />
+        </attvalues>
+      </node>
+      <node end="7" id="bffe2ebb1d931d53f43e485f6d0ab4e4" label="bffe2eb" start="5">
+        <viz:position x="0.6092258" y="0.051724322" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Stockpiles of nuclear weapons around the world – in data" />
+          <attvalue end="6" for="1" start="5" value="1" />
+          <attvalue end="7" for="1" start="6" value="21" />
+        </attvalues>
+      </node>
+      <node end="7" id="21b26d6cb214a3cdb6a3f82d1e5bb716" label="21b26d6" start="5">
+        <viz:position x="0.87980354" y="0.1914702" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Ireland’s Joe Schmidt concedes Six Nations title after defeat in Wales" />
+          <attvalue end="6" for="1" start="5" value="14" />
+          <attvalue end="7" for="1" start="6" value="50" />
+        </attvalues>
+      </node>
+      <node end="7" id="15ce69ad08a8719c6c37a1297ae20b7b" label="15ce69a" start="0">
+        <viz:position x="0.07283537" y="-3.1456099" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Americans are confused on climate, but support cutting carbon pollution" />
+          <attvalue end="1" for="1" start="0" value="16" />
+          <attvalue end="2" for="1" start="1" value="10" />
+          <attvalue end="3" for="1" start="2" value="4" />
+          <attvalue end="4" for="1" start="3" value="34" />
+          <attvalue end="5" for="1" start="4" value="22" />
+          <attvalue end="6" for="1" start="5" value="35" />
+          <attvalue end="7" for="1" start="6" value="55" />
+        </attvalues>
+      </node>
+      <node end="7" id="fd72131a3d38e0bf2824f9b97b083c76" label="fd72131" start="5">
+        <viz:position x="1.2111986" y="-0.47647193" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Italy 18-40 France: Six Nations – as it happened" />
+          <attvalue end="6" for="1" start="5" value="28" />
+          <attvalue end="7" for="1" start="6" value="55" />
+        </attvalues>
+      </node>
+      <node end="7" id="513be0ec012cc94e9e264cba72c66461" label="513be0e" start="6">
+        <viz:position x="1.6158776" y="1.1129652" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Netherlands 'will pay the price' for blocking Turkish visit – Erdoğan" />
+          <attvalue end="7" for="1" start="6" value="25" />
+        </attvalues>
+      </node>
+      <node end="7" id="06fc00ad65282ac6ec71cf3c6fb84603" label="06fc00a" start="5">
+        <viz:position x="0.6928211" y="0.69422036" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Judge blocks Trump administration from banning Syrian family" />
+          <attvalue end="6" for="1" start="5" value="30" />
+          <attvalue end="7" for="1" start="6" value="24" />
+        </attvalues>
+      </node>
+      <node end="7" id="b963ff9d6ec8f4caa79c5afe49c113d1" label="b963ff9" start="2">
+        <viz:position x="1.0395823" y="-0.3942458" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Arsenal still believe Arsène Wenger can arrest slump but uncertainty lingers" />
+          <attvalue end="3" for="1" start="2" value="11" />
+          <attvalue end="4" for="1" start="3" value="54" />
+          <attvalue end="5" for="1" start="4" value="8" />
+          <attvalue end="6" for="1" start="5" value="51" />
+          <attvalue end="7" for="1" start="6" value="37" />
+        </attvalues>
+      </node>
+      <node end="7" id="5fbdcfc819b57952cfd13d1f26497ef0" label="5fbdcfc" start="6">
+        <viz:position x="0.47662938" y="0.071702555" z="0" />
+        <attvalues>
+          <attvalue for="0" value="South Korea presidential frontrunner stresses need to 'embrace' North" />
+          <attvalue end="7" for="1" start="6" value="15" />
+        </attvalues>
+      </node>
+      <node end="7" id="257a70e5e2424a528927d29eb5663b9c" label="257a70e" start="3">
+        <viz:position x="-0.4589886" y="-0.4403689" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Whether trans or cis, let women be what they want to be" />
+          <attvalue end="4" for="1" start="3" value="26" />
+          <attvalue end="5" for="1" start="4" value="14" />
+          <attvalue end="6" for="1" start="5" value="17" />
+          <attvalue end="7" for="1" start="6" value="33" />
+        </attvalues>
+      </node>
+      <node end="7" id="8d5740c0d9ab6f06c0e1c5550ed01280" label="8d5740c" start="5">
+        <viz:position x="-0.8606933" y="-2.5300817" z="0" />
+        <attvalues>
+          <attvalue for="0" value="One in 10 firms bidding for Trump's Mexico wall project are Hispanic-owned" />
+          <attvalue end="6" for="1" start="5" value="11" />
+          <attvalue end="7" for="1" start="6" value="4" />
+        </attvalues>
+      </node>
+      <node end="7" id="70e39b33e440adf08aacbb79c475d356" label="70e39b3" start="5">
+        <viz:position x="3.9008777" y="1.4619098" z="0" />
+        <attvalues>
+          <attvalue for="0" value="UK could have taken 100 child refugees a week, says charity" />
+          <attvalue end="6" for="1" start="5" value="25" />
+          <attvalue end="7" for="1" start="6" value="13" />
+        </attvalues>
+      </node>
+      <node end="7" id="bbb2f9828302577f68753887c148d55b" label="bbb2f98" start="0">
+        <viz:position x="1.0507324" y="1.1032754" z="0" />
+        <attvalues>
+          <attvalue for="0" value="May’s speech shows how little Scotland means in her dangerous game of Brexit" />
+          <attvalue end="1" for="1" start="0" value="11" />
+          <attvalue end="2" for="1" start="1" value="4" />
+          <attvalue end="3" for="1" start="2" value="4" />
+          <attvalue end="4" for="1" start="3" value="5" />
+          <attvalue end="5" for="1" start="4" value="22" />
+          <attvalue end="6" for="1" start="5" value="55" />
+          <attvalue end="7" for="1" start="6" value="47" />
+        </attvalues>
+      </node>
+      <node end="7" id="d12e88bf7969fd05fda8489336ad2499" label="d12e88b" start="3">
+        <viz:position x="2.4260736" y="0.60311335" z="0" />
+        <attvalues>
+          <attvalue for="0" value="'This is breaking people': visa deadline stress strains asylum services" />
+          <attvalue end="4" for="1" start="3" value="24" />
+          <attvalue end="5" for="1" start="4" value="58" />
+          <attvalue end="6" for="1" start="5" value="5" />
+          <attvalue end="7" for="1" start="6" value="13" />
+        </attvalues>
+      </node>
+      <node end="7" id="c1bf00cad7e9a32422c0eb2cb995cf01" label="c1bf00c" start="6">
+        <viz:position x="0.27122355" y="0.2092468" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Media ought to discover motives of WikiLeaks’ Vault 7 whistleblower" />
+          <attvalue end="7" for="1" start="6" value="60" />
+        </attvalues>
+      </node>
+      <node end="7" id="e344aec073f66541f1a2454dc2fa620a" label="e344aec" start="3">
+        <viz:position x="2.610859" y="-0.84616446" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Help Refugees: 'We will never abandon them'" />
+          <attvalue end="4" for="1" start="3" value="18" />
+          <attvalue end="5" for="1" start="4" value="38" />
+          <attvalue end="6" for="1" start="5" value="6" />
+          <attvalue end="7" for="1" start="6" value="30" />
+        </attvalues>
+      </node>
+      <node end="7" id="0e2fc74bd8d2fa79fc6a84d1adc0f05f" label="0e2fc74" start="6">
+        <viz:position x="0.46191716" y="-0.88155776" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Elizabeth Warren says Trump pushed out prosecutors to install 'cronies'" />
+          <attvalue end="7" for="1" start="6" value="4" />
+        </attvalues>
+      </node>
+      <node end="7" id="5f034afa0b584f603df4e93da5d38bbc" label="5f034af" start="2">
+        <viz:position x="0.6515623" y="0.104995705" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Smartphones, PCs and TVs: the everyday devices targeted by the CIA" />
+          <attvalue end="3" for="1" start="2" value="15" />
+          <attvalue end="4" for="1" start="3" value="14" />
+          <attvalue end="5" for="1" start="4" value="24" />
+          <attvalue end="6" for="1" start="5" value="22" />
+          <attvalue end="7" for="1" start="6" value="60" />
+        </attvalues>
+      </node>
+      <node end="7" id="f05738292bd4cd9dbddaf24a9967f07f" label="f057382" start="1">
+        <viz:position x="0.7615292" y="-0.66542435" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Jeff Sessions' Russia ties in spotlight at confirmation hearing for deputy pick" />
+          <attvalue end="2" for="1" start="1" value="10" />
+          <attvalue end="3" for="1" start="2" value="4" />
+          <attvalue end="4" for="1" start="3" value="27" />
+          <attvalue end="5" for="1" start="4" value="43" />
+          <attvalue end="6" for="1" start="5" value="30" />
+          <attvalue end="7" for="1" start="6" value="1" />
+        </attvalues>
+      </node>
+      <node end="7" id="9b1bdc78b9f3f9a46f3f9919ed7b7fc1" label="9b1bdc7" start="3">
+        <viz:position x="1.633453" y="-0.54316556" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Boris Johnson urges Theresa May to resist £50bn EU bill" />
+          <attvalue end="4" for="1" start="3" value="7" />
+          <attvalue end="5" for="1" start="4" value="45" />
+          <attvalue end="6" for="1" start="5" value="10" />
+          <attvalue end="7" for="1" start="6" value="10" />
+        </attvalues>
+      </node>
+      <node end="7" id="69974ea2c02890c3901db2330d90bd41" label="69974ea" start="5">
+        <viz:position x="-1.9317977" y="-1.6549007" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Conservatives cheer EPA cuts that activists fear 'will be borne by lungs'" />
+          <attvalue end="6" for="1" start="5" value="35" />
+          <attvalue end="7" for="1" start="6" value="55" />
+        </attvalues>
+      </node>
+      <node end="7" id="9b832de06b451de09281063d04932384" label="9b832de" start="6">
+        <viz:position x="1.8926334" y="0.40913245" z="0" />
+        <attvalues>
+          <attvalue for="0" value="The Observer view on sending US troops to Syria" />
+          <attvalue end="7" for="1" start="6" value="18" />
+        </attvalues>
+      </node>
+      <node end="7" id="aeb5f3c2c0a66bc4406761199fcdbed0" label="aeb5f3c" start="6">
+        <viz:position x="1.5518227" y="-1.5684583" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Geert Wilders out in the cold in Dutch election scrum" />
+          <attvalue end="7" for="1" start="6" value="5" />
+        </attvalues>
+      </node>
+      <node end="7" id="d6806c55d5a421a1380df75958071a89" label="d6806c5" start="4">
+        <viz:position x="0.6282295" y="-0.02665193" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Elon Musk: I can fix South Australia power network in 100 days or it's free" />
+          <attvalue end="5" for="1" start="4" value="58" />
+          <attvalue end="6" for="1" start="5" value="59" />
+          <attvalue end="7" for="1" start="6" value="6" />
+        </attvalues>
+      </node>
+      <node end="7" id="60f48b0a75c4c486c6750a5272961533" label="60f48b0" start="6">
+        <viz:position x="0.84523565" y="0.84044135" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Erdoğan accuses Germany of 'Nazi practices' over blocked political rallies" />
+          <attvalue end="7" for="1" start="6" value="39" />
+        </attvalues>
+      </node>
+      <node end="7" id="b6dd312140861ed870efdfda43bac5fb" label="b6dd312" start="6">
+        <viz:position x="1.6815262" y="-0.19462295" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Eddie Jones challenges his England players to achieve greatness in Dublin" />
+          <attvalue end="7" for="1" start="6" value="52" />
+        </attvalues>
+      </node>
+      <node end="7" id="ad2b158c23da979f5f29478c482a13ba" label="ad2b158" start="5">
+        <viz:position x="1.5689602" y="0.1674623" z="0" />
+        <attvalues>
+          <attvalue for="0" value="England need to make their familiar strengths pay against Scotland" />
+          <attvalue end="6" for="1" start="5" value="14" />
+          <attvalue end="7" for="1" start="6" value="53" />
+        </attvalues>
+      </node>
+      <node end="7" id="b1b004f3f505f37811302ab18a1b58cf" label="b1b004f" start="1">
+        <viz:position x="2.9757152" y="-0.30481914" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Lords vote against second Brexit referendum" />
+          <attvalue end="2" for="1" start="1" value="1" />
+          <attvalue end="3" for="1" start="2" value="36" />
+          <attvalue end="4" for="1" start="3" value="8" />
+          <attvalue end="5" for="1" start="4" value="44" />
+          <attvalue end="6" for="1" start="5" value="8" />
+          <attvalue end="7" for="1" start="6" value="48" />
+        </attvalues>
+      </node>
+      <node end="7" id="1591af41b3cf6200ab3aa3857473d522" label="1591af4" start="2">
+        <viz:position x="-0.01843706" y="-0.6676996" z="0" />
+        <attvalues>
+          <attvalue for="0" value="WikiLeaks publishes 'biggest ever leak of secret CIA documents'" />
+          <attvalue end="3" for="1" start="2" value="17" />
+          <attvalue end="4" for="1" start="3" value="13" />
+          <attvalue end="5" for="1" start="4" value="24" />
+          <attvalue end="6" for="1" start="5" value="22" />
+          <attvalue end="7" for="1" start="6" value="60" />
+        </attvalues>
+      </node>
+      <node end="7" id="7f3341d34373193ab13cbad8aa8bb8ea" label="7f3341d" start="6">
+        <viz:position x="1.7023392" y="0.048526462" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Ireland fail to set up showdown while Wales must convince against France" />
+          <attvalue end="7" for="1" start="6" value="53" />
+        </attvalues>
+      </node>
+      <node end="7" id="7122143b6b3d4ab38630d6b0d287b4a2" label="7122143" start="2">
+        <viz:position x="1.0502305" y="0.9522374" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Six Nations: England say boards that appeared to show team ‘not significant’" />
+          <attvalue end="3" for="1" start="2" value="19" />
+          <attvalue end="4" for="1" start="3" value="43" />
+          <attvalue end="5" for="1" start="4" value="6" />
+          <attvalue end="6" for="1" start="5" value="16" />
+          <attvalue end="7" for="1" start="6" value="50" />
+        </attvalues>
+      </node>
+      <node end="7" id="0b7cba599eda96822fb68f51ac827a21" label="0b7cba5" start="0">
+        <viz:position x="2.7633138" y="0.4954755" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Syrian children suffering staggering levels of trauma, report warns" />
+          <attvalue end="1" for="1" start="0" value="5" />
+          <attvalue end="2" for="1" start="1" value="19" />
+          <attvalue end="3" for="1" start="2" value="7" />
+          <attvalue end="4" for="1" start="3" value="46" />
+          <attvalue end="5" for="1" start="4" value="42" />
+          <attvalue end="6" for="1" start="5" value="41" />
+          <attvalue end="7" for="1" start="6" value="67" />
+        </attvalues>
+      </node>
+      <node end="7" id="7823db1052c4ba4859bfe14c3a8fa66e" label="7823db1" start="5">
+        <viz:position x="2.4366443" y="0.62731737" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Article 50 'could be triggered on Tuesday' if Brexit bill passes" />
+          <attvalue end="6" for="1" start="5" value="10" />
+          <attvalue end="7" for="1" start="6" value="9" />
+        </attvalues>
+      </node>
+      <node end="7" id="caebd28a9ad3f8a28e726c6f071d71e2" label="caebd28" start="3">
+        <viz:position x="4.2347083" y="1.7757436" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Councils ask why offer to house child migrants was turned down" />
+          <attvalue end="4" for="1" start="3" value="21" />
+          <attvalue end="5" for="1" start="4" value="37" />
+          <attvalue end="6" for="1" start="5" value="23" />
+          <attvalue end="7" for="1" start="6" value="14" />
+        </attvalues>
+      </node>
+      <node end="7" id="7db3caef8418f20ff038f6f652a2b011" label="7db3cae" start="3">
+        <viz:position x="0.7581716" y="-0.07072098" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Late-night TV hosts on Trump's Russian contacts: 'Under the shirt, over the constitution'" />
+          <attvalue end="4" for="1" start="3" value="38" />
+          <attvalue end="5" for="1" start="4" value="47" />
+          <attvalue end="6" for="1" start="5" value="39" />
+          <attvalue end="7" for="1" start="6" value="25" />
+        </attvalues>
+      </node>
+      <node end="7" id="974d9c87c22d357a7b6e101262755e23" label="974d9c8" start="0">
+        <viz:position x="1.5496497" y="0.18595332" z="0" />
+        <attvalues>
+          <attvalue for="0" value="West Ham United 1-2 Chelsea: Premier League – as it happened" />
+          <attvalue end="1" for="1" start="0" value="2" />
+          <attvalue end="2" for="1" start="1" value="18" />
+          <attvalue end="3" for="1" start="2" value="12" />
+          <attvalue end="4" for="1" start="3" value="51" />
+          <attvalue end="5" for="1" start="4" value="12" />
+          <attvalue end="6" for="1" start="5" value="54" />
+          <attvalue end="7" for="1" start="6" value="22" />
+        </attvalues>
+      </node>
+      <node end="7" id="e5bbad52ea30d532c91be0d3a0a01cf2" label="e5bbad5" start="4">
+        <viz:position x="-0.51702046" y="-1.0392543" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Kong: Skull Island – Vietnam, giant spiders and Godzilla. Discuss with spoilers" />
+          <attvalue end="5" for="1" start="4" value="8" />
+          <attvalue end="6" for="1" start="5" value="34" />
+          <attvalue end="7" for="1" start="6" value="32" />
+        </attvalues>
+      </node>
+      <node end="7" id="e9396191b94eea65577396cd94aa1f8d" label="e939619" start="6">
+        <viz:position x="1.2945247" y="0.66005445" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Dozens dead in twin Damascus bombings, says rights monitor" />
+          <attvalue end="7" for="1" start="6" value="68" />
+        </attvalues>
+      </node>
+      <node end="7" id="75054fb6504b848b0d2bbb51bc72019b" label="75054fb" start="4">
+        <viz:position x="2.1421711" y="-0.6220119" z="0" />
+        <attvalues>
+          <attvalue for="0" value="We’ve been offered an olive branch on EU citizenship. Don’t let them swat it aside" />
+          <attvalue end="5" for="1" start="4" value="45" />
+          <attvalue end="6" for="1" start="5" value="11" />
+          <attvalue end="7" for="1" start="6" value="47" />
+        </attvalues>
+      </node>
+      <node end="7" id="96d6d4f4068a838157355de8bc95e6d4" label="96d6d4f" start="0">
+        <viz:position x="0.023467187" y="1.2238083" z="0" />
+        <attvalues>
+          <attvalue for="0" value="World leaders condemn North Korea over missile launches" />
+          <attvalue end="1" for="1" start="0" value="13" />
+          <attvalue end="2" for="1" start="1" value="25" />
+          <attvalue end="3" for="1" start="2" value="10" />
+          <attvalue end="4" for="1" start="3" value="47" />
+          <attvalue end="5" for="1" start="4" value="36" />
+          <attvalue end="6" for="1" start="5" value="59" />
+          <attvalue end="7" for="1" start="6" value="21" />
+        </attvalues>
+      </node>
+      <node end="7" id="c3b8eb41d01c425675584897743ab48d" label="c3b8eb4" start="2">
+        <viz:position x="1.4580781" y="-0.3206555" z="0" />
+        <attvalues>
+          <attvalue for="0" value="'We are international, we are everywhere': women unite in global strike" />
+          <attvalue end="3" for="1" start="2" value="32" />
+          <attvalue end="4" for="1" start="3" value="43" />
+          <attvalue end="5" for="1" start="4" value="30" />
+          <attvalue end="6" for="1" start="5" value="22" />
+          <attvalue end="7" for="1" start="6" value="16" />
+        </attvalues>
+      </node>
+      <node end="7" id="462af1afbd2ee38dd6d11fa4284dfc60" label="462af1a" start="3">
+        <viz:position x="1.6321257" y="-0.18724033" z="0" />
+        <attvalues>
+          <attvalue for="0" value="When will MPs do their jobs and protect our privacy?" />
+          <attvalue end="4" for="1" start="3" value="14" />
+          <attvalue end="5" for="1" start="4" value="27" />
+          <attvalue end="6" for="1" start="5" value="22" />
+          <attvalue end="7" for="1" start="6" value="60" />
+        </attvalues>
+      </node>
+      <node end="7" id="4f05a183dd7969cc2526b3eaf15b75f9" label="4f05a18" start="2">
+        <viz:position x="0.45792612" y="-0.5875279" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Fake news inquiry to review social networks' complaints procedures" />
+          <attvalue end="3" for="1" start="2" value="25" />
+          <attvalue end="4" for="1" start="3" value="52" />
+          <attvalue end="5" for="1" start="4" value="28" />
+          <attvalue end="6" for="1" start="5" value="19" />
+          <attvalue end="7" for="1" start="6" value="57" />
+        </attvalues>
+      </node>
+      <node end="7" id="55fc9871602d6b3cf8f3915933ef3676" label="55fc987" start="6">
+        <viz:position x="1.7787343" y="-1.6990018" z="0" />
+        <attvalues>
+          <attvalue for="0" value="The 'Jessiah': the Dutch progressive trying to turn back the populist tide" />
+          <attvalue end="7" for="1" start="6" value="6" />
+        </attvalues>
+      </node>
+      <node end="7" id="0f974b09ae397fc584c934a7112857d6" label="0f974b0" start="6">
+        <viz:position x="1.7866104" y="-0.16116412" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Angela Merkel urged to ban Erdoğan over jailed German journalist" />
+          <attvalue end="7" for="1" start="6" value="40" />
+        </attvalues>
+      </node>
+      <node end="7" id="ed9857077237421bf859013509ca30a2" label="ed98570" start="3">
+        <viz:position x="4.7645607" y="-0.10809237" z="0" />
+        <attvalues>
+          <attvalue for="0" value="PM accused of closing door on child refugees as 'Dubs' scheme ends" />
+          <attvalue end="4" for="1" start="3" value="19" />
+          <attvalue end="5" for="1" start="4" value="36" />
+          <attvalue end="6" for="1" start="5" value="22" />
+          <attvalue end="7" for="1" start="6" value="13" />
+        </attvalues>
+      </node>
+      <node end="7" id="76b8b0778340e799fb6fe57b24c2123c" label="76b8b07" start="3">
+        <viz:position x="-1.2268091" y="-1.0907794" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Samuel L Jackson criticises casting of black British actors in American films" />
+          <attvalue end="4" for="1" start="3" value="10" />
+          <attvalue end="5" for="1" start="4" value="7" />
+          <attvalue end="6" for="1" start="5" value="33" />
+          <attvalue end="7" for="1" start="6" value="33" />
+        </attvalues>
+      </node>
+      <node end="7" id="3e04f34411503ef57d758894506459dc" label="3e04f34" start="6">
+        <viz:position x="0.029391605" y="-1.0797257" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Prisoners of the Paula Principle: why women work below their abilities" />
+          <attvalue end="7" for="1" start="6" value="34" />
+        </attvalues>
+      </node>
+      <node end="7" id="e7305b162cd3e24a30015b3490fa9f1a" label="e7305b1" start="2">
+        <viz:position x="0.5378404" y="-0.19119321" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Late-night hosts on Trump's healthcare plan: 'We're all going to die'" />
+          <attvalue end="3" for="1" start="2" value="20" />
+          <attvalue end="4" for="1" start="3" value="41" />
+          <attvalue end="5" for="1" start="4" value="47" />
+          <attvalue end="6" for="1" start="5" value="39" />
+          <attvalue end="7" for="1" start="6" value="25" />
+        </attvalues>
+      </node>
+      <node end="7" id="2eb4e186848c1ddc9c366b3dca2ad9a9" label="2eb4e18" start="3">
+        <viz:position x="-2.2984111" y="0.18595295" z="0" />
+        <attvalues>
+          <attvalue for="0" value="In U-turn, Uber will stop using 'Greyball' secret tool to evade law enforcement" />
+          <attvalue end="4" for="1" start="3" value="23" />
+          <attvalue end="5" for="1" start="4" value="0" />
+          <attvalue end="6" for="1" start="5" value="46" />
+          <attvalue end="7" for="1" start="6" value="32" />
+        </attvalues>
+      </node>
+      <node end="7" id="8fed303a97ed48a7f257efbdee4a464e" label="8fed303" start="6">
+        <viz:position x="1.4816078" y="-1.6658977" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Why Dutch voters are about to set the stage for Europe’s elections" />
+          <attvalue end="7" for="1" start="6" value="5" />
+        </attvalues>
+      </node>
+      <node end="7" id="88eac16ef58c86a2d6dbc80325293519" label="88eac16" start="3">
+        <viz:position x="1.6577796" y="-0.79996765" z="0" />
+        <attvalues>
+          <attvalue for="0" value="How Republican opposition to healthcare reform is taking shape" />
+          <attvalue end="4" for="1" start="3" value="40" />
+          <attvalue end="5" for="1" start="4" value="47" />
+          <attvalue end="6" for="1" start="5" value="39" />
+          <attvalue end="7" for="1" start="6" value="42" />
+        </attvalues>
+      </node>
+      <node end="7" id="bdb563b2edb0058503e9cc6bb0059a46" label="bdb563b" start="0">
+        <viz:position x="0.61254424" y="-0.28998178" z="0" />
+        <attvalues>
+          <attvalue for="0" value="International Women's Day: tell us about a battle you've won" />
+          <attvalue end="1" for="1" start="0" value="3" />
+          <attvalue end="2" for="1" start="1" value="24" />
+          <attvalue end="3" for="1" start="2" value="30" />
+          <attvalue end="4" for="1" start="3" value="42" />
+          <attvalue end="5" for="1" start="4" value="18" />
+          <attvalue end="6" for="1" start="5" value="32" />
+          <attvalue end="7" for="1" start="6" value="7" />
+        </attvalues>
+      </node>
+      <node end="7" id="2ca357bf1887132410b863a687a700db" label="2ca357b" start="0">
+        <viz:position x="1.5921671" y="-1.9327503" z="0" />
+        <attvalues>
+          <attvalue for="0" value="‘Something’s happening ...’ How the Women’s March inspired a new era of resistance" />
+          <attvalue end="1" for="1" start="0" value="8" />
+          <attvalue end="2" for="1" start="1" value="25" />
+          <attvalue end="3" for="1" start="2" value="33" />
+          <attvalue end="4" for="1" start="3" value="44" />
+          <attvalue end="5" for="1" start="4" value="32" />
+          <attvalue end="6" for="1" start="5" value="34" />
+          <attvalue end="7" for="1" start="6" value="8" />
+        </attvalues>
+      </node>
+      <node end="7" id="ca1104563476b046d63e32aa25267b68" label="ca11045" start="1">
+        <viz:position x="1.1318985" y="1.1661313" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Zlatan Ibrahimovic to serve three-match ban after Tyrone Mings elbow incident" />
+          <attvalue end="2" for="1" start="1" value="19" />
+          <attvalue end="3" for="1" start="2" value="17" />
+          <attvalue end="4" for="1" start="3" value="26" />
+          <attvalue end="5" for="1" start="4" value="39" />
+          <attvalue end="6" for="1" start="5" value="30" />
+          <attvalue end="7" for="1" start="6" value="68" />
+        </attvalues>
+      </node>
+      <node end="7" id="0c0bef3fda93d3b69ddabc3836aca8ec" label="0c0bef3" start="6">
+        <viz:position x="1.20689" y="0.5036321" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Arsène Wenger still obsessed with Bayern despite high five against Lincoln" />
+          <attvalue end="7" for="1" start="6" value="34" />
+        </attvalues>
+      </node>
+      <node end="7" id="0c8c0d23bc59fc12ba35b9b0ad35e231" label="0c8c0d2" start="6">
+        <viz:position x="-1.0756834" y="0.9945888" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Is Snapchat the sign of a post-literary future?" />
+          <attvalue end="7" for="1" start="6" value="59" />
+        </attvalues>
+      </node>
+      <node end="7" id="c81c03a67f011097b8276be5b571a352" label="c81c03a" start="2">
+        <viz:position x="-1.1459845" y="-0.81218135" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Lewis Hamilton not missing Rosberg as he looks ahead to new F1 season" />
+          <attvalue end="3" for="1" start="2" value="7" />
+          <attvalue end="4" for="1" start="3" value="53" />
+          <attvalue end="5" for="1" start="4" value="4" />
+          <attvalue end="6" for="1" start="5" value="5" />
+          <attvalue end="7" for="1" start="6" value="37" />
+        </attvalues>
+      </node>
+      <node end="7" id="88b508e1a24d0cd5687996357476fce2" label="88b508e" start="6">
+        <viz:position x="1.3891056" y="0.14456539" z="0" />
+        <attvalues>
+          <attvalue for="0" value="England 61-21 Scotland: how the Six Nations players rated at Twickenham" />
+          <attvalue end="7" for="1" start="6" value="52" />
+        </attvalues>
+      </node>
+      <node end="7" id="986b356cebe3e2d4ac5e44801e098e60" label="986b356" start="1">
+        <viz:position x="1.4655416" y="-1.4124348" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Apprenticeship pay gap: gender stereotypes are holding women back" />
+          <attvalue end="2" for="1" start="1" value="15" />
+          <attvalue end="3" for="1" start="2" value="30" />
+          <attvalue end="4" for="1" start="3" value="30" />
+          <attvalue end="5" for="1" start="4" value="16" />
+          <attvalue end="6" for="1" start="5" value="18" />
+          <attvalue end="7" for="1" start="6" value="17" />
+        </attvalues>
+      </node>
+      <node end="7" id="86740d25eed3b87e8cd43a65c2d7e8b8" label="86740d2" start="6">
+        <viz:position x="1.3211085" y="0.4152374" z="0" />
+        <attvalues>
+          <attvalue for="0" value="The Guardian view on the Brexit negotiations: no deal is not an option" />
+          <attvalue end="7" for="1" start="6" value="10" />
+        </attvalues>
+      </node>
+      <node end="7" id="72694f8349b230c13f292a931143ae28" label="72694f8" start="6">
+        <viz:position x="1.8290753" y="0.52511543" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Liverpool 2-1 Burnley: Premier League – as it happened" />
+          <attvalue end="7" for="1" start="6" value="23" />
+        </attvalues>
+      </node>
+      <node end="7" id="cdee8116c845ea41479b0454aeab6c6e" label="cdee811" start="2">
+        <viz:position x="1.3022476" y="-0.049587425" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Borussia Dortmund 4-0 Benfica (4-1 agg): Champions League – as it happened" />
+          <attvalue end="3" for="1" start="2" value="12" />
+          <attvalue end="4" for="1" start="3" value="49" />
+          <attvalue end="5" for="1" start="4" value="11" />
+          <attvalue end="6" for="1" start="5" value="51" />
+          <attvalue end="7" for="1" start="6" value="21" />
+        </attvalues>
+      </node>
+      <node end="7" id="864e7e3dd6d68b27bb4d7eaf8953b357" label="864e7e3" start="6">
+        <viz:position x="1.283875" y="0.53095776" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Angela Merkel hits back at Turkish claims of 'Nazi-style practices'" />
+          <attvalue end="7" for="1" start="6" value="39" />
+        </attvalues>
+      </node>
+      <node end="7" id="f2994764f77d56d70bb122aaad3a346e" label="f299476" start="0">
+        <viz:position x="0.32763335" y="0.14004375" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Vauxhall's Luton and Ellesmere Port factories will face battle after 2021" />
+          <attvalue end="1" for="1" start="0" value="11" />
+          <attvalue end="2" for="1" start="1" value="14" />
+          <attvalue end="3" for="1" start="2" value="25" />
+          <attvalue end="4" for="1" start="3" value="55" />
+          <attvalue end="5" for="1" start="4" value="13" />
+          <attvalue end="6" for="1" start="5" value="23" />
+          <attvalue end="7" for="1" start="6" value="67" />
+        </attvalues>
+      </node>
+      <node end="7" id="ab872380ed04784e700356274a347c1c" label="ab87238" start="2">
+        <viz:position x="2.824285" y="-0.38407087" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Theresa May heads for battle with Tory MPs over Brexit bill" />
+          <attvalue end="3" for="1" start="2" value="35" />
+          <attvalue end="4" for="1" start="3" value="6" />
+          <attvalue end="5" for="1" start="4" value="43" />
+          <attvalue end="6" for="1" start="5" value="8" />
+          <attvalue end="7" for="1" start="6" value="49" />
+        </attvalues>
+      </node>
+      <node end="7" id="96135383b22d278c0721d2cd42f60f61" label="9613538" start="1">
+        <viz:position x="2.918575" y="0.514957" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Peers warn No 10 against 'sidelining scrutiny' when scrapping EU laws" />
+          <attvalue end="2" for="1" start="1" value="4" />
+          <attvalue end="3" for="1" start="2" value="37" />
+          <attvalue end="4" for="1" start="3" value="7" />
+          <attvalue end="5" for="1" start="4" value="45" />
+          <attvalue end="6" for="1" start="5" value="11" />
+          <attvalue end="7" for="1" start="6" value="10" />
+        </attvalues>
+      </node>
+      <node end="7" id="103e2c6b02632acd87965bc8f172200f" label="103e2c6" start="1">
+        <viz:position x="1.3228354" y="0.60988486" z="0" />
+        <attvalues>
+          <attvalue for="0" value="​Hungary to detain all asylum seekers in container camps" />
+          <attvalue end="2" for="1" start="1" value="5" />
+          <attvalue end="3" for="1" start="2" value="31" />
+          <attvalue end="4" for="1" start="3" value="18" />
+          <attvalue end="5" for="1" start="4" value="30" />
+          <attvalue end="6" for="1" start="5" value="4" />
+          <attvalue end="7" for="1" start="6" value="30" />
+        </attvalues>
+      </node>
+      <node end="7" id="82f802b5aba5d185c122b16ecc7cea1d" label="82f802b" start="0">
+        <viz:position x="0.8350489" y="1.394892" z="0" />
+        <attvalues>
+          <attvalue for="0" value="US military investigates secret, 'distasteful' Facebook page of naked female Marines" />
+          <attvalue end="1" for="1" start="0" value="6" />
+          <attvalue end="2" for="1" start="1" value="18" />
+          <attvalue end="3" for="1" start="2" value="23" />
+          <attvalue end="4" for="1" start="3" value="38" />
+          <attvalue end="5" for="1" start="4" value="28" />
+          <attvalue end="6" for="1" start="5" value="41" />
+          <attvalue end="7" for="1" start="6" value="27" />
+        </attvalues>
+      </node>
+      <node end="7" id="eb2e3e65d927133a7341bf3409bf704f" label="eb2e3e6" start="3">
+        <viz:position x="-0.3751629" y="-1.8186504" z="0" />
+        <attvalues>
+          <attvalue for="0" value="How climate change battles are increasingly being fought, and won, in court" />
+          <attvalue end="4" for="1" start="3" value="34" />
+          <attvalue end="5" for="1" start="4" value="24" />
+          <attvalue end="6" for="1" start="5" value="35" />
+          <attvalue end="7" for="1" start="6" value="55" />
+        </attvalues>
+      </node>
+      <node end="7" id="78c96b5109be3c7bdbac0ce477d3f686" label="78c96b5" start="3">
+        <viz:position x="0.47130746" y="-0.4514261" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Brexit, airlines' worst fear, has become their preoccupation" />
+          <attvalue end="4" for="1" start="3" value="11" />
+          <attvalue end="5" for="1" start="4" value="45" />
+          <attvalue end="6" for="1" start="5" value="4" />
+          <attvalue end="7" for="1" start="6" value="7" />
+        </attvalues>
+      </node>
+      <node end="7" id="8924763320b31a0076e7e41b368354a2" label="8924763" start="2">
+        <viz:position x="-2.2332773" y="-1.8024888" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Nico Rosberg praises F1 cars as monstrous but looks can be deceiving" />
+          <attvalue end="3" for="1" start="2" value="7" />
+          <attvalue end="4" for="1" start="3" value="53" />
+          <attvalue end="5" for="1" start="4" value="4" />
+          <attvalue end="6" for="1" start="5" value="3" />
+          <attvalue end="7" for="1" start="6" value="38" />
+        </attvalues>
+      </node>
+      <node end="7" id="58827517557a6bebf74df3df255beaad" label="5882751" start="2">
+        <viz:position x="0.60933614" y="-0.5789323" z="0" />
+        <attvalues>
+          <attvalue for="0" value="'A Day Without a Woman' faces a pivotal question – what woman is it for?" />
+          <attvalue end="3" for="1" start="2" value="32" />
+          <attvalue end="4" for="1" start="3" value="43" />
+          <attvalue end="5" for="1" start="4" value="30" />
+          <attvalue end="6" for="1" start="5" value="32" />
+          <attvalue end="7" for="1" start="6" value="9" />
+        </attvalues>
+      </node>
+      <node end="7" id="eefbd23d33affb403832a5b22bfacf47" label="eefbd23" start="3">
+        <viz:position x="0.86170197" y="-0.30135345" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Luis Enrique: It was a crazy night that no kid in Barcelona will ever forget" />
+          <attvalue end="4" for="1" start="3" value="54" />
+          <attvalue end="5" for="1" start="4" value="9" />
+          <attvalue end="6" for="1" start="5" value="48" />
+          <attvalue end="7" for="1" start="6" value="35" />
+        </attvalues>
+      </node>
+      <node end="7" id="5068e084a564bc865486dcde067bd8c4" label="5068e08" start="3">
+        <viz:position x="2.559606" y="-0.07133087" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Poland threatens to derail EU summit over Donald Tusk re-election" />
+          <attvalue end="4" for="1" start="3" value="17" />
+          <attvalue end="5" for="1" start="4" value="32" />
+          <attvalue end="6" for="1" start="5" value="11" />
+          <attvalue end="7" for="1" start="6" value="44" />
+        </attvalues>
+      </node>
+      <node end="7" id="3a4d7310310627c42bab48305c67da3d" label="3a4d731" start="1">
+        <viz:position x="1.5727539" y="0.26998475" z="0" />
+        <attvalues>
+          <attvalue for="0" value="House of Lords defeats government for second time on article 50 bill" />
+          <attvalue end="2" for="1" start="1" value="3" />
+          <attvalue end="3" for="1" start="2" value="36" />
+          <attvalue end="4" for="1" start="3" value="7" />
+          <attvalue end="5" for="1" start="4" value="44" />
+          <attvalue end="6" for="1" start="5" value="9" />
+          <attvalue end="7" for="1" start="6" value="47" />
+        </attvalues>
+      </node>
+      <node end="7" id="23c1fb79b5f59338e9b98246a15cf687" label="23c1fb7" start="3">
+        <viz:position x="1.5476854" y="-0.443248" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Replacement healthcare bill clears first big hurdle in House of Representatives" />
+          <attvalue end="4" for="1" start="3" value="41" />
+          <attvalue end="5" for="1" start="4" value="47" />
+          <attvalue end="6" for="1" start="5" value="39" />
+          <attvalue end="7" for="1" start="6" value="41" />
+        </attvalues>
+      </node>
+      <node end="7" id="5cb75cd423c9fc820078bd963bdbb8c0" label="5cb75cd" start="2">
+        <viz:position x="-0.12533851" y="-0.8862453" z="0" />
+        <attvalues>
+          <attvalue for="0" value="Top Republicans refuse to back up Trump's unproven wiretapping claim" />
+          <attvalue end="3" for="1" start="2" value="18" />
+          <attvalue end="4" for="1" start="3" value="38" />
+          <attvalue end="5" for="1" start="4" value="10" />
+          <attvalue end="6" for="1" start="5" value="30" />
+          <attvalue end="7" for="1" start="6" value="2" />
+        </attvalues>
+      </node>
+      <node end="7" id="ac5f73388a05b8a9f173542f5c9c8724" label="ac5f733" start="4">
+        <viz:position x="2.02995" y="-0.9906323" z="0" />
+        <attvalues>
+          <attvalue for="0" value="International Women's Day: women close schools, occupy farms and go on strike" />
+          <attvalue end="5" for="1" start="4" value="29" />
+          <attvalue end="6" for="1" start="5" value="21" />
+          <attvalue end="7" for="1" start="6" value="15" />
+        </attvalues>
+      </node>
+    </nodes>
+    <edges />
+  </graph>
+</gexf>

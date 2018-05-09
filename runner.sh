@@ -16,6 +16,9 @@ TEST=0
 
 K=20
 ALPHA=0.01
+B=0
+KAPPA=0.01
+S=1
 CLUSTERING=""
 MODEL=""
 ITERS=50
@@ -44,11 +47,14 @@ function bgmmm {
     args+=( "-c news" )
     args+=( "-m ${MODEL}" )
     args+=( "-l BGMM" )
-    args+=( "-a ${ALPHA}" )
     args+=( "-i $1" )
     args+=( "-K ${K}" )
     args+=( "-n ${ITERS}" )
     args+=( "-s ${SIZE}" )
+    args+=( "-a ${ALPHA}" )
+    args+=( "-b ${B}" )
+    args+=( "-k ${KAPPA}" )
+    args+=( "-S ${S}" )
     (( TEST == 1 )) && args+=( '-t' )
     ./run.sh clustering_system/main.py ${args[@]}
 }
@@ -58,11 +64,14 @@ function crp {
     args+=( "-c news" )
     args+=( "-m ${MODEL}" )
     args+=( "-l CRP" )
-    args+=( "-a ${ALPHA}" )
     args+=( "-i $1" )
     args+=( "-K ${K}" )
     args+=( "-n ${ITERS}" )
     args+=( "-s ${SIZE}" )
+    args+=( "-a ${ALPHA}" )
+    args+=( "-b ${B}" )
+    args+=( "-k ${KAPPA}" )
+    args+=( "-S ${S}" )
     (( TEST == 1 )) && args+=( '-t' )
     ./run.sh clustering_system/main.py ${args[@]}
 }
@@ -72,11 +81,14 @@ function ddcrp {
     args+=( "-c news" )
     args+=( "-m ${MODEL}" )
     args+=( "-l ddCRP" )
-    args+=( "-a ${ALPHA}" )
     args+=( "-i $1" )
     args+=( "-K ${K}" )
     args+=( "-n ${ITERS}" )
     args+=( "-s ${SIZE}" )
+    args+=( "-a ${ALPHA}" )
+    args+=( "-b ${B}" )
+    args+=( "-k ${KAPPA}" )
+    args+=( "-S ${S}" )
     (( TEST == 1 )) && args+=( '-t' )
     ./run.sh clustering_system/main.py ${args[@]}
 }
@@ -89,17 +101,20 @@ function help {
     echo "Usage: $1 [OPTIONS]"
     echo "Available options"
     echo "  -a <alpha>                           the alpha hyperparameter"
+    echo "  -b <float>                           the decay function parameter"
     echo "  -c <method={r|b|c|d}>                use clustering method where:"
     echo "                                           r    random"
     echo "                                           b    BGMM"
     echo "                                           c    CRP"
     echo "                                           d    ddCRP"
     echo "  -h                                   displays help"
-    echo "  -k <integer>                         the number of clusters (if applicable)"
+    echo "  -k <float>                           kappa_0 exhibits how strongly we believe the prior m_0"
+    echo "  -K <integer>                         the number of clusters (if applicable)"
     echo "  -m <model={random|LSA|LDA|doc2vec}>  use specified model"
     echo "  -n <integer>                         the number of sampling iterations"
     echo "  -r <integer>                         the number of repetitions"
     echo "  -s <size>                            the size of a feature vector"
+    echo "  -S <float>                           the scale of the diagonal prior S_0"
     echo "  -t                                   use test data"
 }
 
@@ -127,6 +142,20 @@ do
             fi
             ;;
 
+        -b) if [ $# -lt 2 ]
+            then
+                echo "Too few arguments."
+                echo ""
+
+                help $0
+                exit 1
+            else
+                shift
+                B=$1
+                shift
+            fi
+            ;;
+
         -c) if [ $# -lt 2 ]
             then
                 echo "Too few arguments."
@@ -146,6 +175,20 @@ do
             ;;
 
         -k) if [ $# -lt 2 ]
+            then
+                echo "Too few arguments."
+                echo ""
+
+                help $0
+                exit 1
+            else
+                shift
+                KAPPA=$1
+                shift
+            fi
+            ;;
+
+        -K) if [ $# -lt 2 ]
             then
                 echo "Too few arguments."
                 echo ""
@@ -211,6 +254,20 @@ do
             else
                 shift
                 SIZE=$1
+                shift
+            fi
+            ;;
+
+        -S) if [ $# -lt 2 ]
+            then
+                echo "Too few arguments."
+                echo ""
+
+                help $0
+                exit 1
+            else
+                shift
+                S=$1
                 shift
             fi
             ;;

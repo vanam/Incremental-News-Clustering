@@ -60,17 +60,20 @@ class Clustering(Enum):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Run clustering system.')
     parser.add_argument('-a', type=float, help='the alpha hyperparameter')
+    parser.add_argument('-b', type=float, help='the decay function parameter')
     parser.add_argument('-c', '--corpus', choices=[c.name for c in Corpus], help='corpus type')
     parser.add_argument('-f', '--fixed-rand', dest='seed', action='store_true', help='fix random seed')
     parser.add_argument('-i', type=int, help='i-th run')
+    parser.add_argument('-k', type=float, help='kappa_0 exhibits how strongly we believe the prior m_0')
     parser.add_argument('-K', type=int, help='the number of clusters (if applicable)')
     parser.add_argument('-l', '--clustering', choices=[c.name for c in Clustering], help='clustering method')
     parser.add_argument('-m', '--model', choices=[m.name for m in Model], help='document vector representation model')
     parser.add_argument('-n', type=int, help='the number of iterations')
-    parser.add_argument('-s', '--size', type=int, choices=[10, 100, 200, 300], help='the size of a feature vector (if applicable)')
+    parser.add_argument('-s', '--size', type=int, choices=[10, 50, 100], help='the size of a feature vector (if applicable)')
+    parser.add_argument('-S', type=float, help='the scale of the diagonal prior S_0')
     parser.add_argument('-t', '--test', dest='test', action='store_true', help='use test data')
     parser.set_defaults(corpus=Corpus.artificial.name, model=Model.identity.name, clustering=Clustering.ddCRP.name,
-                        K=2, size=100, test=False, seed=False, i=0, n=20, a=0.01)
+                        K=2, size=100, test=False, seed=False, i=0, n=20, a=0.01, b=0, k=0.01, S=1)
     args = parser.parse_args()
 
     def has_valid_args(args):
@@ -103,9 +106,12 @@ if __name__ == "__main__":
     print("size:       %d" % args.size)
     print("test:       %s" % args.test)
     print("fixed rand: %s" % args.seed)
-    print("alpha:      %f" % args.a)
     print("i-th:       %d" % args.i)
     print("iterations: %d" % args.n)
+    print("alpha:      %f" % args.a)
+    print("b:          %f" % args.b)
+    print("k_0:        %f" % args.k)
+    print("S:          %f" % args.S)
 
     if args.seed:
         import random
@@ -126,11 +132,9 @@ if __name__ == "__main__":
     data_dir = os.path.join(dir_path, "..", "data")
     temp_dir = os.path.join(dir_path, "..", "temp")
     temp_visualization_dir = os.path.join(temp_dir, 'visualization', '{:02d}'.format(args.i))
-    temp_cluster_visualization_dir = os.path.join(temp_visualization_dir, 'cluster')
 
     # Make sure temp directories exist
     Path(temp_visualization_dir).mkdir(parents=True, exist_ok=True)
-    Path(temp_cluster_visualization_dir).mkdir(parents=True, exist_ok=True)
 
     # Paths to data
     training_dir = os.path.join(data_dir, "genuine", "training")
@@ -215,55 +219,39 @@ if __name__ == "__main__":
     # Select clustering algorithm
     likelihood_visualizer = LikelihoodVisualizer()
 
+    prior = NormalInverseWishartPrior(
+        np.zeros(size),
+        args.k,
+        args.S * np.eye(size),
+        size + 2
+    )
+
     # Select clustering method
     if clustering_type == Clustering.dummy:
         clustering = DummyClustering(K, size)
     elif clustering_type == Clustering.BGMM:
-        prior = NormalInverseWishartPrior(
-            np.zeros(size),
-            0.01,
-            0.01 * np.eye(size),
-            size + 2
-        )
-
         clustering = BgmmClustering(K, size, args.a, prior, args.n, visualizer=likelihood_visualizer)
     elif clustering_type == Clustering.CRP:
-        prior = NormalInverseWishartPrior(
-            np.zeros(size),
-            0.01,
-            .45 * np.eye(size),
-            size + 2
-        )
-
         clustering = CrpClustering(K, size, args.a, prior, args.n, visualizer=likelihood_visualizer)
     elif clustering_type == Clustering.ddCRP:
-        prior = NormalInverseWishartPrior(
-            np.zeros(size),
-            0.01,
-            0.1 * np.eye(size),
-            size + 2
-        )
-
         # Decay function
-        b = -120
-
         def f(d: float):
-            # return exponential_decay(d, a)
-            return logistic_decay(d, b)
+            return logistic_decay(d, args.b)
 
         if corpus_type == Corpus.artificial:
             # Decay function for artificial data
-            b = 5  # 5 days
+            b = 5
 
             def f(d):
                 # Hack distance to look like time
                 d = np.math.hypot(d[0], d[1]) * 60 * 60 * 24
-                return logistic_decay(d, b)
+                return logistic_decay(d, args.b)
 
         clustering = DdCrpClustering(K, size, args.a, prior, args.n, f, visualizer=likelihood_visualizer)
     else:
         logging.error("Unknown clustering algorithm '%s'" % clustering_type)
         sys.exit(1)
+
     ##############################
     # Online document clustering #
     ##############################
@@ -271,11 +259,9 @@ if __name__ == "__main__":
     # Reduce dimension for visualization
     logging.info("Initializing incremental PCA...")
     ipca = IncrementalPCA(n_components=2)
-    # ipca.fit([vec for vec in model[training_corpus]])
 
     # Init visualizers
     graph_visualizer = GraphVisualizer()
-    cluster_visualizer = ClusterVisualizer()
 
     # Init evaluator
     logging.info("Initializing evaluator...")
@@ -298,6 +284,10 @@ if __name__ == "__main__":
 
         # Cluster new data
         clustering.add_documents(docs, metadata)
+        if t == 0:
+            # Burn-in
+            clustering.update()
+
         clustering.update()
 
         # Reduce vector dimension for visualization
@@ -315,24 +305,6 @@ if __name__ == "__main__":
 
             linked_doc_id = rest[0] if rest else None
             graph_visualizer.set_cluster_for_doc(t, doc_id, cluster_id, linked_doc_id=linked_doc_id)
-
-        # Visualize clusters
-        # k, _, mean, covariance, X = clustering.parameters
-        #
-        # # Reduce vector dimension for visualization
-        # # TODO mean and cov should be reduced as well
-        # reduced_X = []
-        # for i in range(k):
-        #     reduced_X_k = ipca.transform(X[i]) if corpus_type != Corpus.artificial else X[i]
-        #     reduced_X.append(reduced_X_k)
-        #
-        # cluster_visualizer.save(
-        #     os.path.join(temp_cluster_visualization_dir, '{:05d}.png'.format(t)),
-        #     k,
-        #     mean,
-        #     covariance,
-        #     reduced_X
-        # )
 
         evaluator.evaluate(t, ids_clusters, clustering.aic, clustering.bic, clustering.likelihood)
 
