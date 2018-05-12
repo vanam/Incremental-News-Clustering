@@ -3,7 +3,16 @@
 [![Build Status](https://travis-ci.org/vanam/clustering.svg?branch=master)](https://travis-ci.org/vanam/clustering)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
 
-A source code of my master's thesis.
+The goal was to research model-based clustering methods, notably the
+Distance Dependent Chinese Restaurant Process (ddCRP), and propose an incremental
+clustering system which would be capable of maintaining the growing number
+of topic clusters of news articles coming online from a crawler.
+LDA, LSA, and doc2vec methods were used to represent a document as a fixed-length numeric vector.
+Cluster assignments given by a proof-of-concept implementation of such a system were
+evaluated using various metrics, notably purity, F-measure and V-measure.
+A modification of V-measure -- NV-measure -- was introduced
+in order to penalize an excessive or insufficient number of clusters.
+The best results were achieved with doc2vec and ddCRP.
 
 > Due to copyright, news articles used for experiments are only available at the university library.
 
