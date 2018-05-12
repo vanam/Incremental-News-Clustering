@@ -37,6 +37,8 @@ $ pip3 install pipenv
 $ pipenv install --dev
 ```
 
+> If it fails for some reason try `pipenv install --dev --skip-lock`
+
 ### ~/.bashrc
 
 ```bash
