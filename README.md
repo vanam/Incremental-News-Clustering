@@ -17,6 +17,7 @@ The best results were achieved with doc2vec and ddCRP.
 > Due to copyright, news articles used for experiments are only available at the university library.
 
 Full thesis text: [thesis.pdf](thesis.pdf)
+Poster: [Vana_Martin_2018.pdf](Vana_Martin_2018.pdf)
 
 BibTeX citation:
 
