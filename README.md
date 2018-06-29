@@ -1,6 +1,6 @@
 # Incremental News Clustering
 
-[![Build Status](https://travis-ci.org/vanam/clustering.svg?branch=master)](https://travis-ci.org/vanam/clustering)
+[![Build Status](https://travis-ci.org/vanam/Incremental-News-Clustering.svg?branch=master)](https://travis-ci.org/vanam/Incremental-News-Clustering)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
 
 The goal was to research model-based clustering methods, notably the
