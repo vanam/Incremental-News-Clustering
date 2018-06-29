@@ -16,6 +16,22 @@ The best results were achieved with doc2vec and ddCRP.
 
 > Due to copyright, news articles used for experiments are only available at the university library.
 
+Full thesis text: [thesis.pdf](thesis.pdf)
+
+BibTeX citation:
+
+```
+@MASTERSTHESIS {martinvana2018,
+    author  = "Martin Váňa",
+    title   = "Incremental News Clustering",
+    school  = "University of West Bohemia",
+    year    = "2018",
+    address = "Pilsen",
+    month   = "may"
+}
+```
+
+
 ## Installation
 
 Requirements
